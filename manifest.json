@@ -5,7 +5,7 @@
 	"lang": "es",
 	"description": "Pequén 9",
 	"start_url": "/P8/",
-	"scope": "/P8/",
+    "scope":"/P8/",
 	"background_color": "#FFFFFF",
 	"theme_color": "#FFFFFF",
 	"dir": "auto",
