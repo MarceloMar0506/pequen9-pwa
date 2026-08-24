@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Lista de Lecciones de Dactilografía</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<link rel="icon" type="image/png" href="../../ResB/favico.png" sizes="32x32"/>
+
+<link href="../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../ResB/MotoresEs.js"></script>
+<script src="../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="../../ResB/Habla.js"></script>
+<script type="text/javascript" src="../../ResB/Lista.js"></script>
+<script type="text/javascript" src="../../ResB/AnimP.js"></script>
+<script type="text/javascript" src="../../F1/Generales.js"></script> 
+
+<style type="text/css">
+.auto-style1 {
+	text-align: center;	
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="contenedor" style="height:100%">
+  <div id="titulo3" style="text-align: center;">
+    <div ></div> 
+    <div></div> 
+    <div ></div>
+    </div> 
+  <div  id="myList" style="width:100%; height:60vh;float:left;top:0.1vw;overflow:auto;overflow-x: hidden;font-size: 4vw;text-align: left;margin-left: 2vw;">
+ </div>
+
+	<!-- globo -->
+ <div  class="label"  style="bottom: 12%;margin-left: 15%"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+
+<!-- <h3 id="Pie"><b><a  style="text-transform: uppercase;" onclick="LeeCGB(F1Lista)">F1 AYUDA</a></b></h3> -->
+
+</div>
+
+<script>
+$(document).ready(function() {	
+    KEY ="UsuarioActual";
+    get().then(function (value) {       
+	  UsuarioActual = value;	  
+	  ListaDeDactilografia();
+	});
+
+});
+     
+function ListaDeDactilografia()
+{    
+   KEY = UsuarioActual + 'Dactilografia';
+
+                     var brna = document.createElement("p");                                           
+                      document.getElementById("myList").appendChild(brna);
+                      var nprac = 0;
+      
+      for (var iL = 1; iL < 7 ; iL++) {
+      nprac++;
+         (function(num){
+         setTimeout(function(){
+                  get().then(function (value) {
+               try {
+                  valBase = eval("value.Practica"  + num);
+                  //console.log(valBase);
+                  if (valBase == undefined){valBase = "Sin Realizar"}
+
+                  var btn = document.createElement("A");
+                  var br = document.createElement("br");
+                  //var t = document.createTextNode("Práctica " + num + ", " + valBase);
+                  if (num == 1){ var t = document.createTextNode("Línea del medio, " + valBase);}                  
+                  if (num == 2){ var t = document.createTextNode("Dedo índice, " + valBase);}
+                  if (num == 3){ var t = document.createTextNode("Dedo medio, " + valBase);}
+                  if (num == 4){ var t = document.createTextNode("Dedo anular, " + valBase);}
+                  if (num == 5){ var t = document.createTextNode("Dedo meñique, " + valBase);}
+                  if (num == 6){ var t = document.createTextNode("Acentos, " + valBase);}
+
+                   btn.setAttribute("onkeypress", " AbrirPractica(" + num + ");"); 
+                   btn.setAttribute("onclick", " AbrirQwerty();"); 
+                   btn.setAttribute("ontouchend", " AbrirQwerty();");
+                   btn.setAttribute('tabindex', num);
+                   btn.setAttribute('id','L'+ num);
+                   btn.setAttribute("class", "Lista" );
+                   btn.appendChild(t);                       
+                  document.getElementById("myList").appendChild(btn);
+                  document.getElementById("myList").appendChild(br);                                         
+              
+               } catch (error) {
+                //console.log(error)
+                  valBase = "Sin Realizar";
+                   var btn = document.createElement("A");
+                   var br = document.createElement("br");
+                   //var t = document.createTextNode("Práctica, " + num + ", " + valBase);
+                  if (num == 1){ var t = document.createTextNode("Línea del medio, " + valBase);}
+                  if (num == 2){ var t = document.createTextNode("Dedo índice, " + valBase);}                 
+                  if (num == 3){ var t = document.createTextNode("Dedo medio, " + valBase);}
+                  if (num == 4){ var t = document.createTextNode("Dedo anular, " + valBase);}
+                  if (num == 5){ var t = document.createTextNode("Dedo meñique, " + valBase);}
+                  if (num == 6){ var t = document.createTextNode("Acentos, " + valBase);}
+                    btn.setAttribute("onkeypress", " AbrirPractica(" + num + ");"); 
+                    btn.setAttribute("onclick", " AbrirQwerty();");
+                    btn.setAttribute("ontouchend", " AbrirQwerty();");  
+                    btn.setAttribute('tabindex', num);
+                    btn.setAttribute('id','L'+ num);
+                    btn.setAttribute("class", "Lista" );
+                    btn.appendChild(t);                       
+                   document.getElementById("myList").appendChild(btn);
+                   document.getElementById("myList").appendChild(br);
+               }               
+            }, 1000);
+            }); 
+          //  var Nleccion = iL ;
+       })(iL);  
+        
+      }
+// $("#Lecc").text("SELECCIONAR UNA PRÁCTICA");
+DeterminaMotor(Gres.MenuPractica);
+document.getElementById("myList").focus();
+} 
+function  AbrirQwerty()
+{
+  Lee(Gres.qwerty);
+}
+
+
+$(document).keyup(function(e) {
+    
+    
+    e.preventDefault();
+    if (e.keyCode == 27)
+    {
+      Regresar();
+    }
+    if (e.keyCode == 112)
+    {
+      Ayuda();
+    }
+  });
+
+  function Ayuda(){
+    LeeCGB(Gres.MenuPractica + ". " + Gres.qwerty);
+  }
+
+  function Regresar(){
+    var miVar3 = setTimeout(function(){ 
+      window.open("../index.html","_self");
+    },1000);         
+
+
+  
+}
+
+</script> 
+
+</body>
+
+</html>

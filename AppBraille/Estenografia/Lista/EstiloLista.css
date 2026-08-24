@@ -1,0 +1,291 @@
+html, body {
+	-moz-user-select: none; 
+	   -webkit-user-select: none;
+	   -ms-user-select: none;
+		user-select: none; 
+		touch-action: none;
+	  height: 100%;
+	  margin: 0px; 
+	  overflow: hidden;
+	
+	}
+.Lista:hover { 
+    background-color:black;
+    color:red; 
+  } 
+  .Lista {
+	width:95%;
+	margin-left:2%;
+	margin-right:0;
+	/* margin-bottom:0.3vw; */
+	padding-left:0;
+	padding-right:0;
+	display:block;
+	background-color:transparent;
+	text-indent:0;
+	  
+	  color:#777777;
+	  font-family:Arial;
+	  font-size:2vw;
+	  font-weight:bold;
+	  font-style:normal;
+	  height:3vw;
+	  line-height:2vw;
+  	  text-decoration:none;
+	  text-align:left;
+	  opacity:0.5; 	 
+  }
+  
+  .Lista:focus{
+	font-size: 3vw;
+	opacity:1.0; 
+	-webkit-filter: none;
+	filter: none;
+  }
+
+  #grillaLista{    
+    display: grid;
+    justify-items:center; 
+    grid-template-columns:  1fr 1fr 1fr; 
+    /* grid-template-rows: 50% 50% 50%;
+    grid-column-gap: 1vw;
+    grid-row-gap: 2vw;   */
+    justify-content: center;
+    align-items: center; 
+  }
+  .esc{
+	background-color:cornflowerblue; 
+	font-size: 2vw; 
+	margin-top: 5px; 
+	margin-left: 5px;
+  }
+  .f1{
+	background-color:cornflowerblue; 
+	font-size: 2vw; 
+	margin-top: 5px; 
+	margin-right: 5px;
+	float: right;
+	
+  }
+  
+  #Ingresa{
+	background-color:cornflowerblue; 
+	font-size: 2vw;
+	padding: 1vw; 
+	border: 3px solid; 
+    border-color: rgb(61, 42, 165);	
+  }
+
+  @media (orientation: landscape) {
+	.gridPlantilla {
+        width: 100%;
+		float: left;
+	  display: grid; 
+	  justify-items: center; 
+	  grid-template-columns: 1fr 1fr; 
+	  /* grid-template-rows: 100%;  */
+	  grid-column-gap: 0px;
+	  grid-row-gap: 0px;
+	  /* height: 100%;     */
+	  justify-content: center; 
+      align-items: center; 
+      /* margin-left: 2%; */
+	  }
+  
+	  .teclas{
+		margin: 0 auto; 
+		display: grid;
+		justify-items:center; 
+		grid-template-columns:  150% 150%; 
+		grid-template-rows: 60% 60% 60%;
+		grid-column-gap: 1vw;
+		grid-row-gap: 2vw;  
+		justify-content: center;
+		align-items: center; 
+	  }
+  
+	  .box{
+		width: 100%; 
+		height: 100%; 
+		border: 4px solid black;
+		border-radius: 50%;
+		background-color: white;
+		font-size: 4vw;
+		line-height: 4vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.esc{
+	  background-color:cornflowerblue; 
+	  font-size: 2vw; 
+	  margin-top: 5px; 
+	  margin-left: 5px;
+	  }
+	  .f1{
+	  background-color:cornflowerblue; 
+	  font-size: 2vw; 
+	  margin-top: 5px; 
+	  margin-right: 5px;
+	  float: right;
+	  
+	  }
+  
+	  #Info{
+		right: 0;
+		left: 0;
+		margin-right: auto;
+		margin-left: auto;
+		margin-bottom:0;
+		width: 40%;
+		text-align: center;
+		background-color:cornflowerblue; 
+		font-size: 2vw;
+		padding: 0.3vw; 
+		border: 3px solid; 
+		border-color: rgb(61, 42, 165);	
+		}
+		#EtiquetaUnoTexto {
+	  
+		  width:100%;
+		   float:left; 
+		   text-align:center;
+		   margin-right: auto;
+		   margin-left: auto;
+		   margin-bottom:0;
+		  font-size:6vw;	
+		  white-space: pre; 
+	   }
+		#EtiquetaDosTexto {
+	  
+		  width:100%;
+		   float:left;		  
+		   text-align:center;
+		   margin-right: auto;
+		   margin-left: auto;
+		   margin-bottom:0;
+		  font-size:3vw;	
+		  white-space: pre; 
+		}
+		.label
+		{
+		  font-size:3vw;
+		}
+  
+  
+  
+  }
+  
+  @media (orientation: portrait) {
+	.gridPlantilla {
+		float: left;
+	  display: grid; 
+	  /* justify-items: stretch;   */
+	  grid-template-columns: 1fr; 
+	  grid-template-rows: 20% 110% 20%; 
+	  grid-column-gap: 0px;
+	  grid-row-gap: 0px;
+	  /* height: 40%;     */
+	  justify-content: center;
+	  margin: 0;  
+	  align-items: baseline;  
+	  }
+  
+	  .teclas{
+		/* position:fixed; */
+		/* top: 20%; */
+		display: grid;
+		justify-items: center; 
+		grid-template-columns: 30% 30%;
+		grid-template-rows: 60% 60% 60%; 
+		/* grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr; */
+		grid-column-gap: 3vw;
+		grid-row-gap: 3vw;
+		justify-content: center;      
+		/* vertical-align: bottom;  */
+		padding: 3vw;        
+	  }
+	  .esc{
+		background-color:cornflowerblue; 
+		font-size: 4vw; 
+		margin-top: 5px; 
+		margin-left: 5px;
+		}
+		.f1{
+		background-color:cornflowerblue; 
+		font-size: 4vw; 
+		margin-top: 5px; 
+		margin-right: 5px;
+		float: right;
+		
+		}
+  
+	  .box{
+		width: 100%; 
+		height: 100%; 
+		border: 6px solid black;
+		border-radius: 50%;
+		background-color: white;
+		font-size: 9vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#Info{
+	  right: 0;
+	  left: 0;
+	  margin-right: auto;
+	  margin-left: auto;
+	  margin-bottom:0;
+	  width: 20%;
+	  text-align: center;
+	  background-color:cornflowerblue; 
+	  font-size: 4vw;
+	  padding: 1vw; 
+	  border: 3px solid; 
+	  border-color: rgb(61, 42, 165);	
+	  }
+	  #EtiquetaUnoTexto {
+	  
+		width:100%;
+		 float:left; 
+		 text-align:center;
+		 margin-right: auto;
+		 margin-left: auto;
+		 margin-bottom:0;
+		font-size:6vw;	
+		white-space: pre; 
+	 }
+	  #EtiquetaDosTexto {
+	  
+		width:100%;
+		 float:left;		
+		 text-align:center;
+		 margin-right: auto;
+		 margin-left: auto;
+		 margin-bottom:0;
+		font-size:3vw;	
+		white-space: pre; 
+	  }
+	  .label
+	  {
+		font-size:6vw;
+	  }  
+  }
+  .tituloPA
+  {
+	  /* float: left; */
+	  width: 100%;
+	  text-align: center;
+	  font-size: 2vw;
+	  /* padding: 2vw; */
+  }
+  #Primera{visibility: hidden}
+  #Segunda{visibility: hidden}
+  
+  .myClass{
+	  color:white;
+	  background-color:blue;
+  }
+  

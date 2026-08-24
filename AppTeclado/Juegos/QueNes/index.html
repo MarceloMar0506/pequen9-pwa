@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>¿Qué Número Es?</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="Estilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<!-- <script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script> -->
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+  var xN = 0;
+</script>
+
+</head>
+
+<body style="background-image: url('./../../../ResB/FondoEsc.jpg'); background-repeat: no-repeat;  background-position: center;">
+
+<div id="contenedor">
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+    </div>
+    
+<div class="grid">
+<div id="izquierdaG">
+<!-- Letra Imprenta Mayúscula -->
+<label class="Netiqueta" id="EtiquetaUno" style="font-size: 30vh;">&zwnj;</label>
+</div>
+<!-- Imagen central-->
+<div id="Amanda">
+  <img  class="img" id="imgLimonero" src="./../../../ResB/limonero.gif" ></img> 
+  <img  class="img" id="Canasta" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="img" id="imgA" src="./../../../ResB/AmandaA2.png" ></img> 
+</div>
+
+<div id="derechaG">
+<!-- Letra Imprenta Minúscula -->
+<label class="Netiqueta" id="EtiquetaDos" style="font-size: 30vh;">&zwnj;</label></div>
+</div>
+
+
+
+
+</div>
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 2%;margin-left: 10%;width:85vw"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+
+ <!-- <div id="ayudaF1">
+  <ul  style="float:left" id="myList">
+  
+</ul> -->
+
+ </div>
+
+ <audio id="myAudio" >
+</audio>
+ 
+<script>
+
+  
+var numeros = [1, 2, 3, 4, 5, 6, 7, 8 ,9];
+  shuffle(numeros);
+  var numeroRandom = numeros[xN];
+
+  //var numeroRandom = (getRandomInt(9) + 1);
+ // var numeroRandomN = 0;
+  var audio = document.createElement('audio');
+
+$(document).ready(function() {
+var x = 0;
+var arrayOfImages = ['./../../../ResB/AmandaA1.png', './../../../ResB/AmandaA2.png']; //where do the images come from
+ // DeterminaMotor("");  
+
+var miVar3 = setTimeout(function(){ 
+//console.log(Gres.MenuActividad) 
+animar();             
+},3000);
+
+
+function animar(){ 
+  window.setInterval(function(){
+      $('#imgA').attr("src", arrayOfImages[x]); //change the image to 1 from the array with index x
+      x++;
+      if (x > 1 ) {x = 0;}      
+  }, 1000);
+}
+
+DeterminaMotor("Amanda va a cosechar limones de su árbol. adivina y escribe cuántos limones se llevará en la canasta ");
+
+});
+
+document.body.addEventListener('keyup', function(e) {
+  if (e.keyCode == 112){
+     Ayuda();
+      return;
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+  if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}
+
+//blq num
+var active = event.getModifierState('NumLock');
+  var keyCode = e.keyCode;
+
+  if (keyCode == 144)
+  {
+  if (active == false){LeeCGB(Gres.TnNh );return;}
+  if (active == true){LeeCGB(Gres.TnH );return;}
+  }
+  
+  
+  
+  //Blq num no bloqueado
+  if (keyCode >= 33 && keyCode <= 40)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+  
+  if (keyCode ==  12 || keyCode == 45)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+ 
+
+
+  if (e.keyCode == 32){
+    // numeroRandomN = (getRandomInt(9) + 1);   
+    // if  (numeroRandomN.toString != numeroRandom){
+    //       numeroRandom = numeroRandomN;
+    //       audio.pause();          
+    //  }else{
+    // while (numeroRandomN == numeroRandom){
+    //   numeroRandomN = (getRandomInt(9) + 1);   
+    //       if  (numeroRandomN != numeroRandom){
+    //             numeroRandom = numeroRandomN;
+    //             audio.pause();                
+    //       }
+    //    }   
+    //  }
+    xN++;
+    audio.pause();  
+    if (xN == 9){
+      xN = 0;    
+
+    }//vuelve a empezar
+    numeroRandom =numeros[xN]
+    console.log(numeroRandom + " >>>>>>  " + numeros)
+
+     $('#Canasta').attr("src", "./../../../ResB/CanastaLimon0.gif"  );
+     LeeCGB("Amanda va a cosechar limones de su árbol. adivina y escribe cuántos limones se llevará en la canasta");
+     return;
+    
+  }
+//console.log('keyup:' + e.keyCode + " " + e.key + " " + numeroRandom.toString());
+if  ($.isNumeric(e.key) == false) {
+  LeeCGB("No es un número");
+  return;
+}
+if (numeroRandom == e.key){
+  if (numeroRandom > 1){
+   LeeCGB("¡Muy bien! Amanda puso " + numeroRandom + " limones en la canasta. Pulsa barra espaciadora para volver a jugar o escape para salir.");   
+  }
+  else if (numeroRandom == 1){
+   LeeCGB("¡Muy bien! Amanda puso un limón en la canasta. Pulsa barra espaciadora para volver a jugar o escape para salir.");
+  }
+  $('#Canasta').attr("src", "./../../../ResB/CanastaLimon" + numeroRandom + ".gif"  );
+          rutaAudio = "./../../../ResB/Amanda.mp3";
+          audio.volume=Volumen;
+          audio.src =  rutaAudio;
+          audio.load();
+             
+   audio.play();
+          
+}
+else{
+  let par = "";
+    if(numeroRandom % 2 == 0 ){par =" par, "}
+    else if(numeroRandom % 2 != 0 ){par =" impar, "}
+
+  if (numeroRandom > e.key){    
+    LeeCGB("es un número" + par + "mayor que " + e.key )
+  }else if (numeroRandom < e.key){
+    LeeCGB("es un número" + par + "menor que " + e.key );
+  }
+
+}
+Tpulsada = e.key.toString().toUpperCase();
+//console.log(Tpulsada)
+//EvaluaLetra(Tpulsada);
+});
+
+
+
+var comments = document.getElementsByClassName('Lt');
+var numComments = comments.length;
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+
+aud = document.getElementById("myAudio");
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+ 
+  LeeCGB( "Escribe el número de limones que cosechará Amanda y pondrá en la canasta " );  
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+
+
+	</script>
+
+
+  </script>
+
+</body>
+
+</html>

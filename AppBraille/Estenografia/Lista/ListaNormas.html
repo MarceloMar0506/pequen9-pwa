@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista de Normas</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./PTC.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="../../../F1/Generales.js"></script>
+<script src="./../../../pulsador.js"></script>
+<!-- <script src="./LeeUnS.js"></script> -->
+<style>
+	.Tl {width: 15vw;}
+</style>
+<style>
+	#Primera{
+		padding: 0;
+	}
+	#Segunda{
+		padding: 0;
+		margin-left: 12vw;
+		/* display: grid; */
+	}
+	.gridPlantillaE{
+		grid-template-columns: 1fr 1fr 1fr;
+		column-gap: 0vw;
+	}
+	bo{
+		font-weight: bold;
+	}
+
+
+	</style>
+
+</head>
+
+<body>	
+<div id="contenedor">
+	<div id="titulo3">
+	   <div></div> 
+	   <div id="EtiquetaUnoTexto" style="font-size: 5vh;margin-top: 0.02vh;word-wrap: break-word;white-space: pre-wrap;"></div>	
+	   <div "></div>
+	 </div>
+</div>
+
+<div id="grillaListaE">
+<div id="Fiz"><img class="animated flash2" src="./../../../ResB/Fiz.png" onclick="atras()" alt=""></div> 	
+
+<div id="textoSec" style="font-size: 5vh;"></div>	
+
+<div id="Fder"><img class="animated flash2" src="./../../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+
+
+</div>  
+
+
+
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1vh;margin-left: 15vw;width: 80%;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div> 
+<script>
+var nlec=0;
+function adelante(){
+	
+	$("#pequenG").css("display","block");
+	$(".label").css("display","none");		
+	nlec++;	
+	if (nlec > 19) {nlec = 1}
+	var MLec = eval("norma"+ (nlec) );	
+	var cadena = MLec;
+	var DiceL = MLec;
+	var vecP = eval("norma" + nlec )[0];//.split(',');
+	var vecP1 = eval("norma" + nlec )[1];
+	//console.log(nlec + ">>>>> " + vecP);
+	var muestraVecp1 = vecP1.replace(/\./g , '<br>');
+
+	 var vecEjP1 = eval("normaEje" + nlec )[0];
+	 var muestraEjVecp1 = vecEjP1.replace(/\./g , '<br>');
+
+	$("#textoSec").html(muestraEjVecp1) ;
+	$("#EtiquetaUnoTexto").html(vecP);
+	vecP = vecP.replace("[ble]","[blé]");
+	vecP = vecP.replace("[bre]","[bré]");
+	vecP = vecP.replace("[gue]","[gúe]");	
+	LeeCGB(vecP + ". " + vecP1);
+
+}
+function atras(){
+	$(".label").css("display","none");
+	$("#pequenG").css("display","block");
+	$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	nlec--;
+	if (nlec < 1){
+	 nlec = 19
+	}
+	if (nlec > 0){
+		var MLec = eval("norma"+ (nlec) );	
+		var MLec = eval("norma"+ (nlec) );	
+	var cadena = MLec;
+	var DiceL = MLec;
+	var vecP = eval("norma" + nlec )[0];//.split(',');
+	var vecP1 = eval("norma" + nlec )[1];
+	var muestraVecp1 = vecP1.replace(/\./g , '<br>');	
+
+	var vecEjP1 = eval("normaEje" + nlec )[0];
+	var muestraEjVecp1 = vecEjP1.replace(/\./g , '<br>');
+
+	$("#textoSec").html(muestraEjVecp1) ;
+	$("#EtiquetaUnoTexto").html(vecP);
+	vecP = vecP.replace("[ble]","[blé]");
+	vecP = vecP.replace("[bre]","[bré]");
+	vecP = vecP.replace("[gue]","[gúe]");
+	LeeCGB(vecP + ". " + vecP1);
+
+
+	}
+	
+}
+function ingresa()
+{
+	//AbrirLeccion(nlec - 1);
+	var NumLec = parseInt(nlec) - 1;
+	NumLec= NumLec.toString();
+	//alert(nlec);
+	sayTimeout = setTimeout(function () {		
+		if (nlec == 0)
+		{
+			Lee(Gres.MenuPractica);
+			return;
+	    }else{
+			var miVar3 = setTimeout(function(){
+				window.speechSynthesis.cancel();
+				KEY = 'Practica';VALUE = NumLec;
+				set();
+			},10)
+			var miVar4 = setTimeout(function(){
+				window.open("indexBPalabras.html","_self");
+			},200);	
+	    }
+	}, 500); 
+	
+
+}
+</script>
+
+<script>
+	$(document).ready(function() {
+
+$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");	
+$("#Primera").css("display","grid");
+ 
+if (movil == 0){
+			$("#Pie").css("display","none");
+		}
+    //DeterminaMotor("Lista de Normas de estenografía. usar las teclas de dirección para recorrerlas. pulsar escape para salir");
+	
+var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 = Gres.ListaNormasP;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje= Gres.ListaNormas;            
+            DeterminaMotor(mensaje);  
+     }
+
+ 
+	});
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+ //console.log(e.keyCode);
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+if (e.keyCode == 17)
+{
+	Lee("callar");
+}
+
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+if (e.keyCode == 112) {
+   // $.getScript("../../F1/Generales.js", function(){
+      movil = 0;
+	  //TecladoQ();      
+      Ayuda();
+   // });
+  }
+
+
+return;
+}
+
+function Ayuda()
+    {
+	  $(".label").css("display","block");
+	  $("#pequenG").css("display","block");
+      LeeCGB(Gres.Listasecuenciaes);
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

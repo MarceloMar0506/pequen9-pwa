@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista de Notas</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../ResB/Idb-Keyval.js"></script>
+
+
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script>
+<!-- <script src="./TeclasP.js"></script> -->
+<script src="./piano.js"></script>
+<script src="./../pulsador.js"></script>
+<script src="./../ResB/Tone.js"></script> 
+<style>
+	#Primera{
+		padding: 0;
+	}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .key {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
+
+        .white {
+            width: 9%;
+            min-width: 60px;
+            height: 70%;
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #000;
+        }
+
+        .black {
+            width: 8%;
+            height: 45%;
+            margin-left: -4%;
+            margin-right: -4%;
+            z-index: 2;
+            background-color: black;
+            color: #fff;
+        }
+
+        .white.active {
+            background-color: #ccc;
+        }
+
+        .black.active {
+            background-color: #333;
+        }
+    </style>
+    <script>
+        var audio = document.createElement('audio');
+        var notas = [["C4","145"],["D4","15"],["E4","124"],["F4","1245"],["G4","125"],["A4","24"],["B4","245"]];
+        var nlec=-1;
+        var notaV = "";
+        var numeroP = "";
+    </script>
+   
+</head>
+
+<body onkeyup="Npulsado(event)"></body>
+<div id="contenedor" style="height:90%">
+    <div id="titulo3">
+       <div></div>       
+       <span2 id="nota" style="font-size: 2.5vw;">_</span2>	
+       <div></div>      
+       </div>
+ 
+    <div id="grillaLista" style="grid-auto-columns: 1fr 1fr 1fr;">
+        <div id="Fiz"><img class="animated flash" src="./../ResB/Fiz.png" onclick="atras()" alt=""></div>     
+<!-- Teclado Pulsado -->
+<div class="gridPlantilla" style="grid-template-columns: 1fr;">
+    
+    <!--  <div id="Sgenerador"> -->
+    <div id="Primera" class="teclas">
+     <elem class="box" id="box1">1</elem>	
+     <elem class="box" id="box4">4</elem> 
+     <elem class="box" id="box2">2</elem>
+     <elem class="box" id="box5">5</elem>
+     <elem class="box" id="box3">3</elem>
+     <elem class="box" id="box6">6</elem>
+     </div>
+ 
+     <div style="padding-right: 20vw;" id="Segunda" class="teclas" style="visibility: hidden;" >
+     <elem class="box" id="box01">1</elem>	
+     <elem class="box" id="box04">4</elem> 
+     <elem class="box" id="box02">2</elem>
+     <elem class="box" id="box05">5</elem>
+     <elem class="box" id="box03">3</elem>
+     <elem class="box" id="box06">6</elem>
+     </div>
+ 
+  
+ </div>
+  <div id="Fder"><img class="animated flash" src="./../ResB/Fder.png" onclick="adelante()" alt=""></div>
+ </div> 
+ <div><label id="info">S</label></div>
+ 
+
+ <!-- <button onclick="SonMp3();">Son</button> -->
+
+ <div id="superior">  
+   <div class="etq" id="d"></div>
+   <h2 class="etq" id="statusdiv"></h2>
+   <h2 class="etq" id="statusdiv2"></h2>
+   <h2 class="etq" id="statusdiv3"></h2>
+   <h2 class="etq" id="statusdiv4"></h2>
+   <h2 class="etq" id="statusdiv5"></h2>
+   <h2 class="etq" id="statusdiv6"></h2>
+    </div>
+ 
+ 
+  <!-- Pequen -->
+  <div id="pequenG" class="esperaG"></div>
+  
+  <!-- globo -->
+  <div  class="label" ></div> 
+  
+
+    </div>
+    <script>
+	$(document).ready(function() {
+
+    $("#info").html("NOTAS REPRESENTADAS EN <br> CORCHEAS O GARRAPATEA");
+		
+	// Gres.MenuNotas);
+    var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){      
+            DeterminaMotor(Gres.MenuNotasP);  
+          }
+          else{
+            var mensaje= document.title + " representadas en corcheas o garrapateas. "  + Gres.MenuNotas;            
+            DeterminaMotor(mensaje);  
+          }
+
+
+        t=1;		 
+		$("#Primera").css("display","inline-grid");
+	    $("#EtiquetaDosTexto").text("");	
+        var nota ="";
+        var timeSound=0;
+		
+       
+	});
+
+
+    function Ayuda()
+    {
+	  Lee(Gres.MenuNotas);		
+    }
+    function AyudaM()
+    {
+	  Lee("Notas. pulsar las flechas para recorrer la representación de las notas ");		
+    }
+
+	function Regresar()
+      {
+        window.open("./index.html","_self");
+      }
+	
+	
+
+function Npulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+  if (keyCode == 27) {
+    Regresar();
+  }
+  //Ayuda
+  if (keyCode == 112) {    
+      movil = 0;
+      Ayuda();
+      TecladoQ();
+  }
+
+ if (event.keyCode == 37 || event.keyCode == 40 )
+{
+    atras();
+    return;
+}
+if (event.keyCode == 39 || event.keyCode == 38)
+{
+    adelante();
+    return;
+} 
+
+
+
+     }
+
+
+    var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+$(document).on("touchstart mousedown", function( e ) {		
+  xPosVie = 0;
+  yPosVie = 0;
+    var touchstart = e.type === 'touchstart',
+    e = touchstart ? e.originalEvent : e,
+    pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+    pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+    xPosVie = pageX;
+yPosVie = pageY;
+});    
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+ 
+});
+
+$(document).on("touchend", function(e) {
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return}     
+      DifX =  xPosNew  - xPosVie ;
+      //console.log(DifX);
+  		if (DifX > 200){        
+	 		adelante();        
+    	}
+        if (DifX < -200){      		
+			atras();      
+        }
+        if (DifY > 100){
+                      //  ////console.log(" Baja #L"+ Quien + Opcion);                
+          return;
+        }
+        if (DifY < -100){
+         ////console.log(DifY + " Sube #L"+ Quien + Opcion);          
+          return;
+        }
+    return;
+
+});
+
+function Suena(){
+  if (controlAudio == "con" ) {
+  Tone.Transport.stop();    
+  console.log(notaV);
+  const synth = new Tone.Synth().toDestination();   
+  synth.triggerAttackRelease( notaV + "4", 0.5);
+  }
+}
+
+
+  function adelante(){                
+    nlec++;
+    
+   
+
+    var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){      
+            if (nlec  > 6 ) {nlec = 0 }  
+          }
+          else{
+            if (nlec  > 6 ) {nlec = 6 }  
+         }
+
+
+
+
+    $(".box").css("background-color","white");
+    $(".box").css("color","black");
+    notaV =  nota_keys[nlec];//   eval("notas"[0].toString();
+    nota = notaV;
+  
+
+   timeSound =  notasP.get(nota_keys[nlec]).toString();
+   var numeros =  braiNota.get(nota_keys[nlec]).toString()
+   numeroP = numeros.split(''); 
+     for (let index = 0; index < numeroP.length; index++) {        
+         $("#box" + numeroP[index] ).css("color","white");
+         $("#box" + numeroP[index] ).css("background-color","black");        
+     } 
+
+    $("#nota").text(notaV);
+    numeroP = numeroP.toString().replace(/,/g , ", ")
+    LeeF(notaV + ", " + numeroP );
+    notaV = notasAm[nlec];       
+   // Suena();    
+    
+    
+
+    }
+
+function atras(){
+    nlec--;
+    if (nlec < 1 ) {nlec = 0 }
+    $(".box").css("background-color","white");
+    $(".box").css("color","black");
+    notaV =  nota_keys[nlec];//   eval("notas"[0].toString();
+    nota = notaV;
+  
+
+   timeSound =  notasP.get(nota_keys[nlec]).toString();
+   var numeros =  braiNota.get(nota_keys[nlec]).toString()
+   numeroP = numeros.split(''); 
+     for (let index = 0; index < numeroP.length; index++) {        
+         $("#box" + numeroP[index] ).css("color","white");
+         $("#box" + numeroP[index] ).css("background-color","black");        
+     } 
+
+    $("#nota").text(notaV);
+    numeroP = numeroP.toString().replace(/,/g , ", ")
+    LeeF(notaV + ", " + numeroP );
+    notaV = notasAm[nlec];
+    //Suena();
+   
+    }
+
+  function LeeF(texto)
+ { 
+ window.speechSynthesis.cancel();
+ msgNo = new SpeechSynthesisUtterance(texto);
+ msgNo.voice = speechSynthesis.getVoices()[Voz];
+ msgNo.rate =Veloz;	
+ msgNo.pitch = Tono;
+ msgNo.volume = Volumen;
+ msgNo.onend = function(event) {
+ EsperaAnim();
+ primerEnter =false;
+ }
+		   
+ HablaAnim();
+ window.speechSynthesis.speak(msgNo);
+ msgNo.onend = function(event) {    
+    Suena();
+ }
+     
+ } 
+ 
+
+
+
+
+</script>
+
+
+</body></html>

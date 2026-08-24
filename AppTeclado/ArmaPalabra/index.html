@@ -1,0 +1,482 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Arma Palabras</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+<link rel="icon" type="image/png" href="../../ResB/favico.png" sizes="32x32"/>
+<link href="../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../../ResB/jquery-3.3.1.min.js"></script>
+<script src="../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="VariableDicta.js"></script>
+<script type="text/javascript" src="jQuery v1.7.2.js"></script>
+<script type="text/javascript" src="jQuery UI 1.8.17.js"></script>
+<script type="text/javascript" src="jquery.ui.touch-punch.js"></script>
+<script type="text/javascript" src="../../ResB/Habla.js"></script>
+<script type="text/javascript" src="../../ResB/AnimP.js"></script>
+<script src="../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo = false;
+  var n1;
+  var n2;
+  var ndrag;
+  var seleccionada = false;
+  var indiceS = 1;
+  var desordenado = [];
+  var letra = "";
+  var palabra = "";
+  var completo ="";
+  var estado ="";
+  var cuantas = 0;
+  var posH= 0;
+  var indiceLetra =0;
+</script>
+
+<style type="text/css">
+.label{
+  display: block;
+}
+#mimg{
+  position: fixed;
+  top: 15vh;
+  width: 30vw;
+  left: 35vw;
+}
+
+.fichas{
+  position: fixed;
+  top: 15vh;
+  width:30vw;
+  left: 35vw;
+  visibility: hidden;
+}
+
+#grillaTapa{
+  width: 40vw;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  font-size: 15vh;
+}
+
+#Palabra{
+  position: fixed;
+  bottom: 5vh;
+  left: 0;
+  display: grid;
+  justify-content: center;
+  margin: 0 auto;
+  grid-template-rows:    repeat(1, 5vw);
+  grid-template-columns: repeat(4, 5vw);
+  grid-column-gap: 2vw;
+  grid-row-gap: 2vw;
+  font-size:3vw;
+  justify-content: center;
+  align-items: center;
+  text-align:center;
+  line-height: 5vw;
+  width: 100%;
+}
+#Palabra div{
+  font-size: 15vh;
+}
+
+#grillaTapa div{
+  background-color: white;
+  opacity: 0.95;
+  }
+#cut1, #cut2, #cut3, #cut4 {
+   line-height: 31vh;
+   font-size: 12vh;
+   background-color: white;
+   opacity: 0.95;
+   width: 100%;
+   height: 100%;
+}
+#grillaTablero {
+    position: fixed;
+    top:15vh;
+    left: 5%;
+    width: 90%;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 90vh;
+    justify-items: normal;
+    font-size: 15vh;
+}
+#L1, #L2, #L3, #L4 {
+  font-size: 12vh;
+  width: 12vw;
+  height: 60%;
+  z-index: 1000;
+}
+.label{
+  bottom: auto;
+  margin-left: 0;
+  width: auto;
+  max-width: 100%;
+  }
+</style>
+</head>
+<body>
+ <script type="text/javascript" src="BDicta.js"></script>
+ <script type="text/javascript" src="L.js"></script>
+
+<div id="contenedor">
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div class="esc" ontouchend="Regresar()"onmouseup="Regresar()"><img src="../../ResB/Fiz.png" alt="regresar"></div>
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"> <!-- globo -->
+      <div class="label"></div></span2>
+		<div class="f1"  onclick="Ayuda()"><img  class="f1" src="../../ResB/Ayuda.png" alt="Ayuda"></div>
+    </div>
+<!-- ontouchend="Ayuda()" onmouseup="Ayuda()" -->
+
+
+<img  id="mimg" src="../../ResB/imgsnd/QE.png"></img>
+
+<div id="grillaTablero">
+
+  <div class="lleva" data-id="" id="L1"></div>
+  <div></div>
+
+    <div id="cut1" class="reciben" data-id="1"></div>
+    <div id="cut2" class="reciben" data-id="2"></div>
+    <div></div>
+    <div class="lleva" data-id="" id="L3"></div>
+    <div class="lleva" data-id="" id="L4"></div>
+    <div></div>
+    <div id="cut3" class="reciben" data-id="3"></div>
+
+    <div id="cut4" class="reciben" data-id="4"></div>
+    <div></div>
+    <div class="lleva" data-id="" id="L2"></div>
+
+    <!-- fila palabra -->
+    <div></div>
+    <div id="A1"data-id="" class="recibe">_</div>
+    <div id="A2"data-id="" class="recibe">_</div>
+    <div id="A3"data-id="" class="recibe">_</div>
+    <div id="A4"data-id="" class="recibe">_</div>
+    <div></div>
+
+  </div>
+
+
+  </div>
+
+<audio id="myAudio" >
+</audio>
+
+
+
+</div>
+
+
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+<script>
+
+
+  $(document).ready(function() {
+    Nletra = 0;
+LeeT("");
+//  DeterminaMotor("");
+
+
+var miVar3 = setTimeout(function(){
+ DictaSonido();
+},500);
+
+});
+
+document.body.addEventListener('keyup', function(e) {
+  if (e.keyCode == 112){
+     Ayuda();
+     return;
+  }
+if (e.which == 27 )
+    {
+       Regresar();
+       return;
+	 }
+
+Tpulsada = e.key.toString().toUpperCase();
+
+  palabra = SonidoQ[posL-1];
+  letra = palabra.substring(indiceS-1,indiceS).toUpperCase();
+
+ indiceLetra = 0;
+
+$(".label").css('display','block');
+$(".label").css('visibility','visible');
+
+
+    //izquierda
+if (e.keyCode == '37'){
+  ////console.log(Tpulsada + " = " + $("#L" + Nletra).text() + " >>>>>>>>>>>>>" + indiceS + " inicel " + indiceLetra);
+  Nletra--;
+  if ($("#L"+ Nletra).css('visibility') != "visible"){
+      while ($("#L"+ Nletra).css('visibility') != "visible") {
+        Nletra--;
+        if (Nletra <0){Nletra = 4}
+      }
+    }
+  if (Nletra < 1){Nletra = 4}
+  $(".lleva").css({"border":"none"}); 
+  $("#L" + Nletra).css({"border":"solid 7px blue","border-radius":"27%"});
+  LeeL($("#L" + Nletra).text()); 
+}
+
+else if (e.keyCode == '38'){
+
+  Nletra++;
+    if ($("#L"+ Nletra).css('visibility') != "visible"){
+      while ($("#L"+ Nletra).css('visibility') != "visible") {
+        Nletra++;
+        if (Nletra > 4){Nletra = 1}
+      }
+    }
+
+  if (Nletra > 4){Nletra = 1}
+  $(".lleva").css({"border":"none"});
+  $("#L" + Nletra).css({"border":"solid 7px blue","border-radius":"27%"});
+  LeeL($("#L" + Nletra).text()); 
+  //console.log(Nletra+ " ?? " + letra + " = " + $("#L" + Nletra).text() + " >>>>>>>>>>>>>" + indiceS + " inicel " + indiceLetra)
+  }
+   //derecha
+else if (e.keyCode == '39'){
+    Nletra++;
+    if ($("#L"+ Nletra).css('visibility') != "visible"){
+      while ($("#L"+ Nletra).css('visibility') != "visible") {
+        Nletra++;
+        if (Nletra > 4){Nletra = 1}
+      }
+    }
+
+  if (Nletra > 4){Nletra = 1}
+  $(".lleva").css({"border":"none"});
+  $("#L" + Nletra).css({"border":"solid 7px blue","border-radius":"27%"});
+  LeeL($("#L" + Nletra).text());
+  //console.log(Nletra+ " ?? " + letra + " = " + $("#L" + Nletra).text() + " >>>>>>>>>>>>>" + indiceS + " inicel " + indiceLetra);
+
+}
+else if (e.keyCode == '40'){
+  ////console.log(Tpulsada + " = " + $("#L" + Nletra).text() + " >>>>>>>>>>>>>" + indiceS + " inicel " + indiceLetra);
+  Nletra--;
+  if ($("#L"+ Nletra).css('visibility') != "visible"){
+      while ($("#L"+ Nletra).css('visibility') != "visible") {
+        Nletra--;
+        if (Nletra <0){Nletra = 4}
+      }
+    }
+  if (Nletra < 1){Nletra = 4}
+  $(".lleva").css({"border":"none"}); 
+  $("#L" + Nletra).css({"border":"solid 7px blue","border-radius":"27%"});;
+  LeeL($("#L" + Nletra).text()); 
+  //console.log(Nletra+ " ?? " + letra + " = " + $("#L" + Nletra).text() + " >>>>>>>>>>>>>" + indiceS + " inicel " + indiceLetra)
+
+    }
+else if (e.keyCode == '13'){
+    if(letra  == $("#L" + Nletra).text()){
+      //console.log("bien");
+      $("#L"+ Nletra).css('visibility','hidden');
+      $("#A" + indiceS).text(letra);
+      EvaluaK();
+    }
+    else if(letra  != $("#L" + Nletra).text()){
+      let ordinal;
+      if (indiceS == 1){ordinal = "primera"}
+      if (indiceS == 2){ordinal = "segunda"}
+      if (indiceS == 3){ordinal = "tercera"}
+      if (indiceS == 4){ordinal = "cuarta"}
+
+      LeeT($("#L" + Nletra).text() + " no es la " + ordinal + " letra ");
+    }
+}
+else {
+ // $(".label").css({"top":"auto","max-width":"80%","box-sizing":"inherit","padding":"3vh"});
+ // Lee("ayuda, " + Gres.ArmaPalabra0);
+}
+
+
+});
+
+
+
+function Regresar()
+{
+window.open( "../index.html","_self");
+}
+
+
+// aud = document.getElementById("myAudio");
+//  aud.onended = function() {
+//  };
+
+
+$("#L1").draggable({revert:  true});
+$("#L2").draggable({revert:  true});
+$("#L3").draggable({revert:  true});
+$("#L4").draggable({revert:  true});
+
+
+
+$(".recibe").droppable({
+ accept: ".lleva",
+  hoverClass: "ui-state-active",
+
+  over: function( event, ui ) {
+    $( this )
+    n1 = $(ui.draggable).data('id');
+    n2 = $(this).data('id');
+    var Nid = $(this).attr('id');
+    Nid = Nid.substring(1);
+    ndrag = $(ui.draggable).attr('id');
+
+
+    //console.log(Nid + " == <<<< " + indiceS + " " + n1 + " ==?? " + n2 + " es igual?  " + LetraInicial);
+
+    if (n1 == n2 && Nid == indiceS)
+    {
+      //console.log(indiceS);
+      LeeT("");
+      window.speechSynthesis.cancel();
+      $("#" + ndrag).draggable({revert:  false});
+      $("#" + ndrag).text('');
+      $(this).text( $(this).data('id').toUpperCase());
+      //console.log("A"+indiceS + " <<<< " + LetraInicial);
+      $("#cut"+indiceS).css('opacity', '0');
+      Evalua();
+     }
+   }
+});
+
+
+function Evalua(){
+   palabra = SonidoQ[posL-1];
+   completo =  $("#A1").text() + $("#A2").text() + $("#A3").text() + $("#A4").text() + $("#A5").text() + $("#A6").text();
+  if (completo == palabra.toUpperCase()){
+   estado = "completo";
+   //////console.log(completo + " == pasa dos veces ???  " + palabra);
+   DictaSonido();
+  }else{
+
+    //siguiente letra
+    indiceS++;
+
+    letra = palabra.substring(indiceS-1,indiceS);
+
+      LetraInicial = letra.toUpperCase();
+      //console.log(letra);
+    ////console.log(letra + " Siguiente >>>>" + indiceS);
+    indiceLetra = 0;
+    //recorrer desordenado para encontrar la letra
+    for (let index = 0; index < desordenado.length; index++) {
+    if(desordenado[index] == letra.toUpperCase()){
+    indiceLetra = index;
+    }
+    }
+  
+
+  LeeT("ubicar la " + Gres.SiguienteLetra);// + " '" + $("#L"+  (indiceLetra + 1)).text() + "' "+deiz);
+
+  }
+
+  //
+}
+
+function isOverlap(idOne,idTwo){
+        var objOne=$(idOne),
+            objTwo=$(idTwo),
+            offsetOne = objOne.offset(),
+            offsetTwo = objTwo.offset(),
+            topOne=offsetOne.top - objOne.height(),
+            topTwo=offsetTwo.top,
+            leftOne=offsetOne.left,
+            leftTwo=offsetTwo.left,
+            widthOne = objOne.width(),
+            widthTwo = objTwo.width(),
+            heightOne = objOne.height(),
+            heightTwo = objTwo.height();
+        var leftTop = leftTwo > leftOne && leftTwo < leftOne+widthOne                  && topTwo > topOne && topTwo < topOne+heightOne,             rightTop = leftTwo+widthTwo > leftOne && leftTwo+widthTwo < leftOne+widthOne                  && topTwo > topOne && topTwo < topOne+heightOne,             leftBottom = leftTwo > leftOne && leftTwo < leftOne+widthOne                  && topTwo+heightTwo > topOne && topTwo+heightTwo < topOne+heightOne,             rightBottom = leftTwo+widthTwo > leftOne && leftTwo+widthTwo < leftOne+widthOne                  && topTwo+heightTwo > topOne && topTwo+heightTwo < topOne+heightOne;
+
+
+        return leftTop || rightTop || leftBottom || rightBottom;
+}
+
+function collidesWith (element1, element2) {
+    var Element1 = {};
+    var Element2 = {};
+
+    Element1.top = $(element1).offset().top;
+    Element1.left = $(element1).offset().left;
+    Element1.right = Number($(element1).offset().left) + Number($(element1).width());
+    Element1.bottom = Number($(element1).offset().top) + Number($(element1).height());
+
+    Element2.top = $(element2).offset().top;
+    Element2.left = $(element2).offset().left;
+    Element2.right = Number($(element2).offset().left) + Number($(element2).width());
+    Element2.bottom = Number($(element2).offset().top) + Number($(element2).height());
+
+    if (Element1.right > Element2.left && Element1.left < Element2.right && Element1.top < Element2.bottom && Element1.bottom > Element2.top) {
+      return true;
+      // Do your stuff here
+    }
+}
+
+function Ayuda()
+{
+  //console.log("ayuda " + movil)
+  LeeCGB(document.title + ". "  + Gres.ArmaPalabra + ". "  + Gres.BarraSonido + ". " );// + Gres.BarraSonido);
+  //console.log(document.title + ". "  + Gres.ArmaPalabra);
+}
+
+function EvaluaK(){
+   palabra = SonidoQ[posL-1];
+   $("#cut"+indiceS).css('opacity', '0');
+   completo =  $("#A1").text() + $("#A2").text() + $("#A3").text() + $("#A4").text() + $("#A5").text() + $("#A6").text();
+  if (completo == palabra.toUpperCase()){
+   estado = "completo";
+   //////console.log(completo + " == pasa dos veces ???  " + palabra);
+   DictaSonido();
+  }else{
+
+    //siguiente letra
+    indiceS++;
+
+    // letra = palabra.substring(indiceS-1,indiceS);
+
+    //   LetraInicial = letra.toUpperCase();
+    //   //console.log(letra);
+    // ////console.log(letra + " Siguiente >>>>" + indiceS);
+    let Ncompleto =  $("#A1").text() + ". " +  $("#A2").text() + ". " + $("#A3").text() + ". " + $("#A4").text()+ ". " ;
+    //console.log(Ncompleto);
+  Ncompleto = Ncompleto.replace(/_. /g,"");
+  Ncompleto = Ncompleto.trim();
+  LeeT("escribiste, '" + Ncompleto + "' busca la siguiente letra");// + ". ubicar la " + Gres.SiguienteLetra);
+
+  }
+
+  //
+}
+
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- silenciar el lector de pantalla. esta aplicación tiene motor de voz propio -->
+<title>Pequén Cocina</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="theme-color" content="#E8FFCC">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- No mostrar el titulo de la pagina y Si mostrar la barra de navegacion Android Ios -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+
+<meta name="theme-color" content="#E8FFCC">
+
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<link rel="apple-touch-icon" href="/ResB/icon/maskable_icon.png">
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Generales.js"></script>
+
+<script>
+    var nlec =0;
+    var Cbot= 4;
+    var isPwa="";
+
+
+ </script> 
+ <style>
+.circulo { 
+  width: 100%;
+  margin-left: 10vw;
+  float: left;
+  display: grid; 
+  grid-template-columns: 20vw 80vw;
+  height: 60vh;   
+  top: 6vh;
+}
+	.circulo a.itemM {
+		display: block;
+		text-decoration: none;
+		border-radius: 100%;	
+    line-height: 10vh;	
+		text-align: left;		
+    height:10vh;		
+		color:black;
+		padding:0.5vh;		
+		font-size: 3vh;
+		transition:all 0.5s;
+		-moz-transition:all 0.5s;
+		-webkit-transition:all 0.5s;
+		-o-transition:all 0.5s;  
+        
+	}
+
+
+  img{
+    width: 10vh;
+    float:left;
+  }
+  .f1 {
+     width: 5vh; 
+     z-index: 70;         
+  }
+  .itemS{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vw;   
+    
+  }
+
+
+ </style>
+</head>
+<body  onkeyup="Npulsado(event)">  
+  <div id="SuperC">
+  <div id="contenedor">
+    
+    <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+      <div></div> 
+      <div style="font-size: 3.5vw;" >COCINAR CON PEQUÉN</div>
+      <div ></div>
+      </div>  
+
+  <div class="circulo" >   
+    <div>
+      <img class="panes" id="I1" src="./../../ResB/Panadero/lactal.png"/>
+     </div>    
+    
+     <div>
+       <a  id="L1" class="itemM"> <span2 id="s1" class="itemS">PAN LACTAL</span2></a>
+     </div>      
+   
+    <div>
+     <img class="panes" id="I2" src="./../../ResB/Panadero/brioche.png"/>
+    </div>
+   
+    <div>
+     <a id="L2" class="itemM"><span2 id="s2"  class="itemS">PAN BRIOCHE</span2></a>
+   </div>  
+   
+
+    <div>
+      <img class="panes" id="I3" src="./../../ResB/Panadero/PanQueso.png"/>
+    </div>    
+   
+    <div>
+      <a  id="L3" class="itemM"><span2 id="s3"  class="itemS">PAN DE QUESO O CHIPA</span2></a>
+    </div> 
+
+
+    <div>
+      <img class="panes" id="I4" src="./../../ResB/Panadero/GalletasMiel.png"/>
+    </div>    
+   
+    <div>
+      <a  id="L4" class="itemM"><span2 id="s4"  class="itemS">GALLETAS DE MIEL</span2></a>
+    </div> 
+
+    <div>
+      <img class="panes" id="I5" src="./../../ResB/Panadero/gavena.png"/>
+     </div>    
+    
+     <div>
+       <a  id="L5" class="itemM"> <span2 id="s5" class="itemS">BIZOCHITOS DE AVENA Y MIEL</span2></a>
+     </div>  
+ 
+   
+  
+    
+</div>
+ 
+  
+
+</div>
+
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" ></div>
+  <!-- globo -->
+  <div  class="label" style="bottom: 12%; z-index: 170;"></div>
+
+  <!-- Cierra SuperC  -->
+</div>
+<div  id="aviso-horizontal">Girar la pantalla</div>
+</body>
+
+</html>
+
+
+ 
+ <script>
+  var s, p=0;
+ 
+  $(document).ready(function() {  
+  
+  var miVar2 = setTimeout(function(){ 
+  
+  var mensaje =   "Cocinar con Pequén. Con las teclas de dirección seleccionar una receta";  
+ 
+    DeterminaMotor(mensaje);  
+
+  
+             
+       }, 10); 
+     var miVar3 = setTimeout(function(){  
+     
+      document.title="Cocinar con Pequén"
+       }, 5000);  
+       
+  
+
+
+  });  
+  
+  
+
+function atras(){
+	
+	p--;
+	if (p < 1){
+	 p = 5
+    }
+	
+	$(".itemS").css({"background-color": "white"});
+    $(".panes").css("width", "10vh");
+    $(".itemS").css({"color": "black"});   
+    $("#s" + p).css("background-color", "black");
+    $("#s" + p).css("color", "white");
+    $("#I" + p).css("width", "17vh");
+    LeeCGB($("#L" + p).text());
+	
+}
+
+function adelante(){
+	
+	p++;
+	if (p > 5){
+	 p = 1
+    }
+	
+	$(".itemS").css({"background-color": "white"});
+    $(".panes").css("width", "10vh");
+    $(".itemS").css({"color": "black"});   
+    $("#s" + p).css("background-color", "black");
+    $("#s" + p).css("color", "white");
+    $("#I" + p).css("width", "17vh");
+    LeeCGB($("#L" + p).text());
+	
+}
+
+
+
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+
+	if (event.keyCode == 112) {
+   // $.getScript("../F1/Generales.js", function(){
+
+      movil = 0;
+	  //TecladoQ();     
+	  LeeCGB(document.title + ". " + Gres.MenuActividad + ". ");     
+    //});
+  }
+
+
+if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+if (event.keyCode == 13) {
+if (p == 0 ){
+  LeeCGB("con teclas de dirección selecionar una receta y luego pulsar enter");  
+}else{
+   Abre(p);	
+  } 
+}
+  }
+///Fin tecla pulsada
+
+
+
+ 
+ function SinMouse(){
+  //console.log("sin mouse")
+    LeeCGB(Gres.SinRaton);
+  }
+
+  function Cerrar(){     
+
+  LeeCGB("Menú principal. Pequén 8 2025");
+
+}
+  
+  function Regresar()
+  {
+     window.open( "./index.html","_self"); 
+  }
+  function Ayuda()
+  {
+    LeeCGB(document.title + ". "  + Gres.MenuActividadInicio + ". Pequén 8 2025 también tiene actividades accesibles a un pulsador. En reemplazo de un pulsador se puede usar: el click del mouse o la barra espaciadora. pulsando brevemente se recorren las opciones de un menú. al mantener pulsado por unos segundos se ingresa a una opción. " + Gres.AyudaConfig);  
+  } 
+  
+  
+  window.addEventListener("orientationchange", ()=> {
+    //console.log(getOrientation());
+});
+
+function getOrientation() {
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        var current_mode = 'Portrait';
+    }
+    else if (window.matchMedia("(orientation: landscape)").matches) {
+        var current_mode = 'Landscape';
+        LeeCGB("Girar la pantalla");
+    }
+    else {
+        var current_mode = window.innerWidth < window.innerHeight ? "Portrait" : "Landscape";
+    }
+    return current_mode
+};
+
+
+
+let prompt; // Estableces una variable
+
+document.addEventListener('DOMContentLoaded', function () { //Al terminar de cargar la pagina
+
+window.addEventListener('beforeinstallprompt', (e) => { //Disparas al escucha del evento beforeinstallprompt 
+    prompt=e; //Le pasamos el evento a la variable
+    s4.style.display='block'; // hacemos visible el button
+    pinza.style.display='inline'; // hacemos visible el button
+}); 
+
+
+});
+
+
+function Abre(q)
+     {
+      var receta = ""; 
+      console.log("receta  " + q)
+       
+            if (q== 1){receta = "panlactal"}
+            else if (q== 2){receta = "brioche"}
+            else if (q== 3){receta = "dqueso"}
+            else if (q== 4){receta = "galletasmiel"}
+            else if (q== 5){receta = "bavena"             
+            }
+        
+        localStorage.setItem("receta", receta);    
+        window.open("./listaReceta.html","_self");
+     }
+
+
+    
+
+
+  </script> 
+ 

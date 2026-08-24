@@ -1,0 +1,1040 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Panadero Cocina</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<!-- <link href="PracticaSig.css" type="text/css" rel="stylesheet" id="linkestilo"/> -->
+
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./PuntosAlfa.js"></script> 
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<!-- <script type="text/javascript" src="VariableT.js"></script>  -->
+<script src="./../../F1/Practicaes.js"></script>
+<script src="./../../ResB/Tone.js"></script> 
+<style>
+  #botones{
+    position: absolute;
+    left: 1vw;
+    text-align: left;
+  }
+  .boton{
+    font-size: x-large;
+    background-color: bisque;
+    width: 25vw;
+    height: 5vw;
+  }
+  .boton2{
+    font-size: x-large;
+    background-color: rgb(196, 233, 255);
+    width: 5vw;
+    height: 5vw;
+  }
+  #DescripcionC{
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5vw;
+  }
+  /* #LetraComando{
+    border: solid 2px black;
+  } */
+  .img{  
+   /* width: 50vw; */
+    object-fit: contain
+  }
+  /* #imgVec{
+/* 
+    position: absolute;
+    bottom:10vh; */
+   
+  /* } */ 
+  Resalta{
+    font-weight: bold;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5.5vw;
+  }
+  #portaImagen{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    bottom: 10vh;
+  }
+  #DescripcionC::first-letter {     
+    font-size: 5.5vw;
+  }
+
+</style>
+
+ <script>
+	 var indices = [];
+	 var PrimerS = "";
+	 var SegundoS = "";
+	 var LetraD = "";
+   var diceDes ="";
+   var inicial ="";
+   var instruccionM ="";
+   var queComando ="";
+
+   var audio = document.createElement('audio');
+   var audioF = document.createElement('audio');
+   var PrimerS ="";
+   var NumPulsar = "";
+   var MLec = "";
+   var soloNumeros1TVB = "";
+   var soloNumeros2TVB = "";
+   var indices = [];
+   var errorD = [];
+   var ResCelda= 0;
+   var ultimo= "";
+
+   var Timbre =["C4n","D4n","E4n","C4n"];
+   var j1 =[   
+           ["c2","Ya tenemos lo necesario para elaborar el pan ciabatta. entrar a la cocina &aminar 2 pasos"],           
+           ["i3","Sobre la mesada poner un bowl. &ncorporar en el, 3 tazas de agua "],
+           ["a1","&gregar un sobre de levadura seca de 10 gramos, mezclar y dejar reposar 10 minutos"],
+           ["i3","&ncorporar 3 tazas de harina "],
+           ["m3","&ezclar 3 minutos con una cuchara de madera "],          
+           ["a1","&gregar  media taza de aceite "],
+           ["m3","&ezclar 3 minutos con las manos "],          
+           ["t1","&apar el bowl"],
+           ["g1","llevar el bowl a la heladera para que repose 24 horas. &irar a la derecha. G + D "],
+           ["d1"," &erecha"], 
+           ["c1","&aminar 1 paso a la heladera"],
+           ["a1","&brir la heladera y Dejar el bowl "],           
+           ["c1","&errar la heladera "],
+           ["c1","esfin"]];
+
+          
+
+//   var r1 =[["h1","Un kilo de harina "],
+//            ["l1","Un sobre de levadura seca"],
+//            ["a1","una botella de aceite"],
+//            ["s1","Un paquete de sal"] ];     
+           
+//  j1  = j1.concat(r1);
+//console.log  j1)
+//console.log " /////////  " +  r1.length)
+
+
+   var paso=0;
+   var pasosA = 0;
+   var orden = "";
+   var comando = "";
+   var instruccion ="";
+
+   
+   orden =  j1[0][0].toString().substring(1,2);
+   var instruccion =  j1[0][1];
+  
+ 
+
+
+</script> 
+<!-- <script type="text/javascript" src="./Alfab.js"></script> -->
+
+</head>
+
+<body>
+ 
+  <div id="titulo3">
+    <!-- <div id="LetraComando" style="font-size: 8vw;top:0">_</div>  -->
+    <div></div>
+    </div>
+  <!-- <script type="text/javascript" src="Tabla.js"> </script> -->
+  <!-- <div id="contenedor" style="height:100%"> -->
+    <div id="contenedor">
+
+
+ <div id="DescripcionC" style="font-size: 3vw;top:0;width: 90wv;" ></div>
+ <br>
+ 
+
+<div id="portaImagen">  
+ <img class="img" id="imgVec">
+</div>
+
+  <!-- Teclado Pulsado -->
+ <div id="gridcontenedorNo" > 
+  <!-- style="grid-template-columns: 1fr" ;top: 12vw;left: 25% -->
+  <div class="gridPlantillaED" id="braille">
+    
+   <div id="Primera" class="teclasE">
+   <elem class="box" id="box1">1</elem>	
+   <elem class="box" id="box4">4</elem> 
+   <elem class="box" id="box2">2</elem>
+   <elem class="box" id="box5">5</elem>
+   <elem class="box" id="box3">3</elem>
+   <elem class="box" id="box6">6</elem>
+   </div>
+   
+   <div id="Segunda" class="teclasE" style="display: none;">
+   <elem class="box" id="box01">1</elem>	
+   <elem class="box" id="box04">4</elem> 
+   <elem class="box" id="box02">2</elem>
+   <elem class="box" id="box05">5</elem>
+   <elem class="box" id="box03">3</elem>
+   <elem class="box" id="box06">6</elem>
+   </div>
+ 
+   <div id="Tercera" class="teclasE">
+     <elem class="box" id="box001">1</elem>	
+     <elem class="box" id="box004">4</elem> 
+     <elem class="box" id="box002">2</elem>
+     <elem class="box" id="box005">5</elem>
+     <elem class="box" id="box003">3</elem>
+     <elem class="box" id="box006">6</elem>
+     </div>
+ 
+   <div id="Cuarta" class="teclasE">
+     <elem class="box" id="box0001">1</elem>	
+     <elem class="box" id="box0004">4</elem> 
+     <elem class="box" id="box0002">2</elem>
+     <elem class="box" id="box0005">5</elem>
+     <elem class="box" id="box0003">3</elem>
+     <elem class="box" id="box0006">6</elem>
+     </div>	
+ </div> 
+ 
+</div> 
+
+
+  
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 3vw;margin-left: 20vw;width: 60vw;display: none;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+
+ <div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv0"></h2>
+  <h2 class="etq" id="statusdiv02"></h2>
+  <h2 class="etq" id="statusdiv03"></h2>
+  <h2 class="etq" id="statusdiv04"></h2>
+  <h2 class="etq" id="statusdiv05"></h2>
+  <h2 class="etq" id="statusdiv06"></h2>
+   </div>
+
+  </div>
+
+
+<script>
+    $(document).ready(function() {  
+     
+    //   var miVar2 = setTimeout(function(){ 
+     
+    //   KEY = 'UsuarioActual';
+    //     get().then(function (value) {
+    //         UsuarioActual = value;
+    //     });
+    //     KEY = 'Practica';
+    //     get().then(function (value) {
+    //         Practica = value;          
+    //     });
+    //  }, 10);       
+   
+    LeeCGB("Pequén Panadero");
+    orden =  j1[0][0].toString().substring(1,2);
+      var instruccion =  j1[0][1]; 
+     // //console.log"ready"  + orden); 
+     cargarNuevaImg();  
+
+    var miVar3 = setTimeout(function(){    
+      inicial =  j1[0].toString().substring(0,1);
+    
+      nuevaOrden();
+      $("#LetraComando").text("P");
+      $("#imgVec").show('9000');  
+
+   },3000); 
+   
+
+   
+     });
+      
+    function Ayuda()
+    {
+      LeeCGB(Gres.PracticaAfL);
+    }
+
+    function isNumeric(value) {
+     return /^-?\d+$/.test(value);
+    }
+    
+
+    $(document).keydown(function(e) { 
+    
+    if(e.keyCode != 83 && e.keyCode != 68 && e.keyCode != 70 && e.keyCode != 74 && e.keyCode != 75 && e.keyCode != 76 &&  e.keyCode != 32 )
+    {
+     LeeCGB("Usar el teclado virtual Braille");
+     return;
+    }
+ 
+     if (ResCelda == 0){        
+     if (e.keyCode == 70) {statusdiv.innerHTML = '1'; number = 1;
+         $("#box1").css("background-color","black");          
+         $("#box1").css("color","white");
+         pulsada = ""; pulsada = "";} //F
+ 
+     
+     if (e.keyCode == 68) {statusdiv2.innerHTML = '2'; number = 2;
+         $("#box2").css("background-color","black");          
+         $("#box2").css("color","white"); pulsada = "";} //D
+     if (e.keyCode == 83) {statusdiv3.innerHTML = '3'; number = 3;
+         $("#box3").css("background-color","black");          
+         $("#box3").css("color","white"); pulsada = "";} //S		
+ 
+     if (e.keyCode == 74) {statusdiv4.innerHTML = '4'; number = 4;
+         $("#box4").css("background-color","black");          
+         $("#box4").css("color","white"); pulsada = "";} //J
+ 
+   
+     if (e.keyCode == 75) {statusdiv5.innerHTML = '5'; number = 5;
+         $("#box5").css("background-color","black");          
+         $("#box5").css("color","white"); pulsada = "";} //K
+ 
+         
+     if (e.keyCode == 76) {statusdiv6.innerHTML = '6'; number = 6;
+         $("#box6").css("background-color","black");          
+         $("#box6").css("color","white"); pulsada = "";} //L
+ 
+   
+ 
+     }
+   
+   
+ });
+ 
+function giraAd(){
+  if  ( j1[paso][0].toString()  =="gd")
+   {GirarDerecha()} 
+   
+}
+function giraAi(){
+  if  ( j1[paso][0].toString()  =="gi")
+   {GirarIzquierda()} 
+   
+}
+function tocaV(){
+  if  ( j1[paso][0].toString()  =="tt")
+   {TocaTimbre() }   
+}
+function saltaV(){
+  if  ( j1[paso][0].toString().substring(0,1)  =="s")
+   {salta() }   
+}
+function remaV(){
+  if  ( j1[paso][0].toString().substring(0,1)  =="r")
+   {rema() }   
+}
+ 
+// function GirarDerecha(){
+//   LeeCGB("");
+//   $(".label").css("visibility","hidden");
+// paso++;
+// cargarNuevaImg();   
+// nuevaOrden();   
+    
+// }
+
+// function GirarIzquierda(){ 
+//   LeeCGB("");
+//   $(".label").css("visibility","hidden");
+//  paso++;
+//   cargarNuevaImg();  
+//   nuevaOrden();   
+// }
+ 
+
+
+function cargarNuevaImg(){ 
+  
+  $("#imgVec").css({"width":"70vw" });
+  $("#imgVec").css({"height":"50vh" });  
+
+
+  pasosA=0;
+
+  if (j1[paso][0].toString().substring(0,1) != "@" ){
+
+  inicial =  j1[paso][0].toString().substring(0,1);
+
+  console.log(inicial);
+   
+  
+var diceComando = "";
+  
+   if (inicial == "t"){  
+    
+    if ( j1[paso][1].toString().includes("apar el"))
+      { 
+      var imagen =  "masaP";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');      
+      }
+      else{        
+      var imagen =  "masaE";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');      
+      }
+    }    
+   else  if (inicial == "v"){
+    
+    if ( j1[paso][1].toString() == "Mezclar 3 minutos con las manos "){   
+    
+       var imagen = "puerta";
+       $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }    
+    else  if ( j1[paso][1].toString().includes("sacar las ciabattas")){     
+     var imagen = "panListo";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+   }
+
+    else  if ( j1[paso][1].toString() == "&olcar la masa del bowl sobre la mesada "){
+     
+      var imagen = "cocinaA";
+       $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }
+   
+
+ 
+    }
+   else  if (inicial == "e"){     
+     // console.log(j1[paso][1].toString());
+     // $("#LetraComando").text("E");
+      var imagen ="";
+
+    if ( j1[paso][1].toString().includes("&stirar la masa ")){
+      imagen = "mesadaM";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }
+    else  if ( j1[paso][1].toString().includes("&ncenderlo")){
+      imagen = "panCrudo";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }
+    
+      
+    
+    
+      
+     }
+     else  if (inicial == "s"){        
+      var imagen = "panListo";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');     
+      }
+  
+    else  if (inicial == "C"){        
+      if (j1[paso][1].toString().includes("heladera"))
+      {        
+      
+      var imagen ="heladeraC";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');     
+      } else if (j1[paso][1].toString().includes("horno"))
+      {        
+      
+      var imagen = "hornoC";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');    
+      } 
+    }
+    else  if (inicial == "a"){        
+      if (j1[paso][1].toString().includes("heladera"))
+      {        
+        
+      var imagen = "heladera";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');     
+      } 
+      else if (j1[paso][1].toString().includes("&brir el horno y sacar las ciabattas "))
+      {        
+        
+      var imagen ="hornoCSin";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');     
+      } 
+    }
+    else  if (inicial == "c"){
+     
+      if (j1[paso][1].toString().includes("&aminar un paso a la heladera"))
+      {       
+        var imagen ="heladera";      
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      }else  if (j1[paso][1].toString().includes("entrar a la cocina &aminar 2 pasos"))
+      {       
+        var imagen ="puertaCocina";      
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      }
+      else  if (j1[paso][1].toString().includes("errar la heladera"))
+      {       
+        var imagen ="heladeraA";      
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      }
+
+
+
+    }
+    else  if (inicial == "a"){
+     console.log(j1[paso][1].toString());
+     if (j1[paso][1].toString().includes("sobre de levadura seca"))
+     {       
+       var imagen ="levadura";      
+       $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+     }
+     else    if (j1[paso][1].toString().includes("levadura"))
+     {       
+       var imagen ="levadura";      
+       $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+     }
+   }
+
+   else  if (inicial == "i"){
+    var imagen ="cocina";      
+    $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+  
+   }
+
+
+
+else  if (inicial == "p"){
+     
+      if ( j1[paso][1].toString().includes("desde el borde izquierdo") )
+      {
+        Ding();   
+      var imagen = "masaD1"
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+       }
+       else if ( j1[paso][1].toString().includes("desde el borde derecho al izquierdo") ){
+        Ding();   
+        var imagen = "masaE"
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+       }       
+       else if ( j1[paso][1].toString().includes("desde el borde superior") ){
+        Ding();   
+        var imagen = "masaD2"
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+       }
+       else if ( j1[paso][1].toString().includes("finalmente") ){
+        Ding();   
+        var imagen = "masaD3"
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+       }
+     
+     
+  }
+
+
+
+else  if (inicial == "r"){   
+    
+      var imagen = "lago";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+
+      rutaAudio = "./../../ResB/arroyo.mp3"
+    audioF.volume=Volumen;
+    audioF.src =  rutaAudio;
+    audioF.loop = true;
+    audioF.load();       
+    audioF.play();    
+    
+  }
+
+  else  if (inicial == "m"){   
+     if (j1[paso][1].toString().includes("cuchara de madera"))
+       {       
+        var imagen ="mezclarHarina";      
+         $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+        }
+   }
+   else  if (inicial == "t"){   
+    console.log("t imagen");
+     if (j1[paso][1].toString().includes("cuchara de madera"))
+       {       
+        var imagen ="mezclarHarina";      
+         $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+        }
+
+     else  if (j1[paso][1].toString().includes("cuchara de madera"))
+       {       
+       var imagen ="masaP";      
+       $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png'); 
+       }   
+
+   }
+
+ if ( j1[paso][0].toString()== "g1"){
+    //  $("#LetraComando").text("D");  
+        if ( j1[paso][1].toString() == "Girar a la &erecha para ir a la heladera "){
+          var imagen = "cocina";
+        }else{
+          var imagen = "cocina";
+        }      
+      
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }
+
+    else  if ( j1[paso][0].toString()== "gi"){   
+     // $("#LetraComando").text("I");  
+      
+      var imagen = "cocina";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }
+}
+}
+
+
+function camina(){ 
+  LeeCGB("");
+
+  if (pasosA % 2 == 0){
+      //("es derecho");
+    rutaAudio = "./../../ResB/Panadero/paso1.mp3"
+    audio.volume=Volumen;
+    audio.src =  rutaAudio;
+    audio.load();       
+    audio.play();
+  }else if (pasosA % 2 != 0){
+      //("es izquierdo");
+      rutaAudio = "./../../ResB/Panadero/paso2.mp3"
+    audio.volume=Volumen;
+    audio.src =  rutaAudio;
+    audio.load();       
+    audio.play();
+    }
+  
+
+  if (pasosA == orden){
+   paso++;
+   pasosA=0;
+  
+  agranda();
+  
+  setTimeout(function(){     
+    cargarNuevaImg();   
+    nuevaOrden();
+   audioF.loop = false;
+}, 1000);
+
+   audioF.loop = false;
+   return;
+  }
+else{
+   agranda();
+  }
+
+
+
+}
+
+
+
+function caminaNo(){   
+  LeeCGB("");
+  $(".label").css("visibility","hidden");
+  if (pasosA % 2 == 0){ 
+    rutaAudio = "./../../ResB/Panadero/paso1.mp3"
+    audio.volume=Volumen;
+    audio.src =  rutaAudio;
+    audio.load();       
+    audio.play();
+  }else if (pasosA % 2 != 0){
+      ////es izquierdo
+      rutaAudio = "./../../ResB/Panadero/paso2.mp3"
+    audio.volume=Volumen;
+    audio.src =  rutaAudio;
+    audio.load();       
+    audio.play();
+    }
+  
+
+  if (pasosA == orden){
+   paso++;
+   pasosA=0;
+   cargarNuevaImg();
+   setTimeout(function(){   
+    nuevaOrden();
+   audioF.loop = false;
+}, 1000);
+   audioF.loop = false;
+   return;
+ }
+ agranda();
+
+}
+
+
+
+function elaborar(){
+  paso++
+  nuevaOrden();
+}
+
+function agranda(){
+
+  audioF.loop = false;
+
+  inicial =  j1[paso][0].toString().substring(0,1);
+  comando =  j1[paso][0].toString().substring(1,2);
+
+  var diceComando="";
+  if (comando == "d"){diceComando = " a la derecha"
+  $("#LetraComando").text("D");}
+  if (comando == "i"){diceComando = " a la izquierda"
+  $("#LetraComando").text("I");}
+
+  if (inicial == "f"){inicial = "flecha" }
+     else if (inicial == "p"){inicial = "puerta"  }
+     else  if (inicial == "g"){
+      let a = audio.ended;      
+      if (! a  ){       
+        inicial = "gira";
+        setTimeout(function(){
+          LeeCGB(" gira " + diceComando); 
+        }, 1000);
+       
+      }
+    
+   
+    
+    }
+    else  if (inicial == "t"){inicial = "timbre"; 
+     LeeCGB("tocar el timbre"); }
+   // else  if (inicial == "n"){  LeeCGB("fin del primer nivel");   } 
+
+  if (inicial == "puerta"){
+    $("#imgVec").animate({"width":"+=4vw","height":"+=4vw"  },1000);
+  }
+  else if (inicial == "flecha"){
+    $("#imgVec").animate({"width":"+=4vw","height":"+=4vw"  },1000);
+  }
+
+}
+
+function nuevaOrden()
+{
+  $("#imgVec").css({"width":"70vw" });
+  $("#imgVec").css({"height":"50vh" });
+console.log(paso + " < " + j1.length);
+
+if (paso == 13){
+
+  var imagen ="heladera";
+  $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png'); 
+  console.log("mensaje final");
+  LeeCGB("El primer día de elaboración fue completado con éxito. la masa quedará en reposo en la heladera hasta mañana. pulsa escape para salir");
+  $("#DescripcionC").html("la masa quedará en reposo en la heladera hasta mañana <br> pulsa escape para salir");
+  $("#LetraComando").text("");
+  return
+
+}
+
+  inicial =  j1[paso][0].toString().substring(0,1);
+  comando =  j1[paso][0].toString().substring(1,2);
+  instruccion =  j1[paso][1];
+
+  queComando = "Comando " + inicial;
+  var diceComando="";
+  instruccionM =""; 
+
+
+    instruccionM = instruccion.replace("&",inicial);   
+    LeeCGB( instruccionM +  ". " + queComando ) 
+    diceDes = instruccion + ". " + queComando;
+    diceDes = diceDes.toString().replace(/\./g , '<br>'); 
+    diceDes = diceDes.replace("&","<Resalta>" + inicial + "</Resalta>");   
+    $("#DescripcionC").html(diceDes);
+
+
+
+}
+
+
+$(document).keyup(function(e) { 
+  e.preventDefault();
+ //Ayuda
+ if (e.keyCode == 112) {    
+      movil = 0;
+      //TecladoQ();  
+      Ayuda();   
+  }
+  
+  if (e.keyCode == 32) {    
+      
+      LeeCGB($("#DescripcionC").text());
+      console.log($("#DescripcionC").text());
+      return;
+  }
+ // //console.logj1.length +  " == " + (paso))
+if (j1.length ==  (paso+1)){
+
+  return;
+}
+
+
+  PrimerS =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+
+   //  evaluaTVB(PrimerS);
+  if (PrimerS != ""){
+   
+    try {
+      var comando = eval("P"+ PrimerS);
+      //LeeCGB( comando );
+      
+      orden =  j1[paso][0].toString().substring(1,2);
+      
+     var  Ninicial =  j1[paso][0].toString().substring(0,1);
+
+
+      // if (Ninicial == "f"){Ninicial = "p"}
+      // if (Ninicial == "S"){Ninicial = "p"}
+      // if (Ninicial == "e"){Ninicial = "h"}   
+      // if (Ninicial == "h"){Ninicial = "h"}
+      // if (Ninicial == "l"){Ninicial = "l"}
+      // if (Ninicial == "a"){Ninicial = "a"}
+      // if (Ninicial == "s"){Ninicial = "s"}
+      // if (Ninicial == "A"){Ninicial = "a"}
+      // if (Ninicial == "C"){Ninicial = "c"}
+
+   //  console.log("Ninicial " + Ninicial + " >>>>>" + comando);
+
+      if (isNumeric(orden) && Ninicial == comando  ){
+     // console.log(Ninicial + " === " +  comando + " 222  >>>>>" + orden);
+        if (comando == "p"){
+         pasosA++
+         camina(); 
+         $(".etq").html('');
+         return;         
+        }
+        else if (comando == "t" ){
+         pasosA++      
+         Ding();                
+         ingrediente();         
+         $(".etq").html('');
+         return;
+        }
+        else if (comando == "l" ){
+         pasosA++   
+         $("#DescripcionC").text(instruccion + "  ["  + pasosA + "]");
+         //Lee(pasosA.toString());
+         Ding();              
+         ingrediente();         
+         $(".etq").html('');
+         return;
+        }
+        else if (comando == "a" ){
+         pasosA++  
+
+       if (j1[paso][1].toString().includes("tazas de harina"))
+        {       
+          var imagen ="tazaAceite";      
+          $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+        }
+
+         $("#DescripcionC").html(diceDes + "  ["  + pasosA + "]");
+         Ding();  
+         //Lee(pasosA.toString());             
+         ingrediente();         
+         $(".etq").html('');
+         return;
+        }       
+       
+        else if (comando == "c"){
+         pasosA++  
+         $("#DescripcionC").html(diceDes + "  ["  + pasosA + "]");        
+        camina();
+         $(".etq").html('');
+         return;
+        }   
+        else if (comando == "i"){
+         pasosA++  
+          if (j1[paso][1].toString().includes("&ncorporar 3 tazas de agua"))
+              {       
+                 var imagen ="taza2";      
+                 $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+               }
+         $("#DescripcionC").html(diceDes + "  ["  + pasosA + "]");
+       
+         Ding();               
+         ingrediente();
+         $(".etq").html('');
+         return;
+        }
+        else if (comando == "m"){
+         pasosA++ 
+         if (j1[paso][1].toString().includes("con las manos"))
+              {       
+                var imagen ="mezclarManos";      
+                $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+              }
+         
+
+         $("#DescripcionC").html(diceDes + "  ["  + pasosA + "]");
+        // Lee(pasosA.toString());
+         Ding();               
+         ingrediente();
+         $(".etq").html('');
+         return;
+        }
+        else if (comando == "h"){
+        paso++;
+        cargarNuevaImg(); 
+        nuevaOrden();
+        $(".etq").html('');
+        return; 
+        }
+        else if (comando == "t"){
+        paso++;
+        cargarNuevaImg(); 
+        nuevaOrden();
+        $(".etq").html('');
+        return; 
+        }
+        else  if (comando == "g" ){
+      paso++           
+         cargarNuevaImg(); 
+         nuevaOrden();        
+         $(".etq").html('');
+         return;
+     }
+     else if (comando == "d" ){
+         paso++           
+         cargarNuevaImg(); 
+         nuevaOrden();        
+         $(".etq").html('');
+         return;
+        }
+      else if (comando == "i" ){
+         paso++           
+         cargarNuevaImg(); 
+         nuevaOrden();        
+         $(".etq").html('');
+         return;
+      } 
+
+
+
+       
+       }        
+      
+     // else if (orden == comando ){           
+       
+      // if (comando == "i"){GirarIzquierda(); }
+      // if (comando == "d"){GirarDerecha(); }
+   
+
+    else{
+   
+      var puntos =  eval("L"+  inicial.toLowerCase());
+    puntos = puntos.split("");
+    puntos = puntos.toString().replace(/,/g , ", ");
+
+
+
+     LeeCGB("Pulsaste " + eval("P"+ PrimerS) +      ".  No es el comando " +  inicial  +  ".  pulsar los puntos " + puntos);
+     diceDes = ultimoDialogo.toString().replace(/\./g , '<br>'); 
+     $("#DescripcionC").html(diceDes);
+     }
+
+    } catch (error) {
+      LeeCGB("No es un comando");   
+      console.log(error);  
+    }
+   
+  }
+
+   if (isNumeric(orden) && Ninicial != comando && Ninicial != "g"  ){ 
+    var puntos =  eval("L"+  inicial.toLowerCase());
+    puntos = puntos.split("");
+    puntos = puntos.toString().replace(/,/g , ", ");
+
+
+
+     LeeCGB("Pulsaste " + eval("P"+ PrimerS) +      ".  No es el comando " +  inicial  +  ".  pulsar los puntos " + puntos);
+     diceDes = ultimoDialogo.toString().replace(/\./g , '<br>'); 
+     $("#DescripcionC").html(diceDes);
+   }
+
+
+   $(".etq").html('');
+
+  
+  
+
+
+});
+
+
+
+function ingrediente(){
+  
+   if (orden.trim() != "1"){   
+    LeeCGB( pasosA.toString() + " de " + orden   );
+  }
+
+  if (pasosA == orden){
+   paso++;
+   if (j1.length ==  (paso+1)){
+  LeeCGB("El primer día de elaboración fue completado con éxito. la masa quedará en reposo en la heladera hasta mañana. pulsa escape para salir");
+  $("#DescripcionC").html("la masa quedrá en reposo en la heladera hasta mañana <br> pulsa escape para salir");
+ $("#LetraComando").text("");
+  return;
+}
+   pasosA=0;
+   if (!j1[paso][1].toString().includes("apar el bowl"))
+              {   
+                // var imagen ="taza2";      
+                // $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');    
+                //cargarNuevaImg();
+              }
+ setTimeout(function(){ 
+    cargarNuevaImg();  
+    nuevaOrden();
+   audioF.loop = false;
+}, 1000);
+
+   return;
+ }
+
+}
+
+
+   function Ding(){
+    LeeCGB("");
+    $(".label").css("visibility","hidden");
+
+    if (controlAudio == "con" ) {
+    rutaAudio = "./../../ResB/Ding.mp3"
+    audio.src =  rutaAudio;
+    audio.load();
+   audio.play();
+    }
+}  
+
+
+    
+
+
+</script>
+
+</body>
+
+</html>

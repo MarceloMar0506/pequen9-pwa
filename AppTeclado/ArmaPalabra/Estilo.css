@@ -1,0 +1,233 @@
+﻿@media only screen and (orientation:portrait){
+  body {
+    width: 100%;
+    height: auto;
+    transform: rotate(90deg);
+  }
+}
+
+html, body {
+    transition-property: opacity, left, top, height;
+    transition-duration: 2s, 2s;
+    transition: background-color 2s ease;
+
+   -moz-user-select: none; 
+   -webkit-user-select: none;
+   -ms-user-select: none;
+    user-select: none; 
+    margin: 0px;     
+}
+
+
+#mimg
+{
+width:70%;	
+height:70%;
+}
+
+img.showed {
+  opacity: 1;
+  -webkit-transition: 1600ms all ease;
+  transition: 1600ms all ease;
+}
+
+#imgT
+{
+width:40%;	
+height:40%;
+ 
+}
+
+#logoP
+{
+width:20%;	
+height:80%;
+}
+
+
+
+#pie{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;  
+}
+
+#EtiquetaDos
+{
+font-family: "Dancing Script", Arial, Helvetica, sans-serif;
+	
+}
+
+#EtiquetaUnoTexto
+{
+text-transform:uppercase;
+font-size:3vw;
+}
+
+#EtiquetaUno
+{
+font-size:10vw;
+text-transform:uppercase;
+}
+
+#EtiquetaDos
+{
+font-size:10vw;
+text-transform:lowercase;
+}
+
+
+#formulario
+{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;  
+top: -999em;
+}
+
+#ayudaF1 {
+    width:65%;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;    
+     min-width:1px;
+     min-height:1px;
+     position:fixed;
+     bottom:10000px;
+     border: 2px solid blue;
+     border-radius: 3px;
+     background-color:white;
+     padding:1vw;
+     font-size:1vw;   
+}
+
+
+#Pie {
+  text-transform: uppercase;   
+    float: left;   
+    width:100%;
+    right: 0;
+    left: 0;    
+    position:fixed;
+    bottom:0;
+    padding:1vw;
+    font-size:1vw;
+    margin:0 auto;
+}
+
+#Pie .columna {
+  display: inline-block;
+ 
+}
+
+.grid {
+display: grid;
+/* margin-top:2.5vw; */
+justify-items: stretch;
+grid-template-columns: 1fr 1fr 1fr; 
+grid-template-rows: 1fr; 
+grid-column-gap: 0px;
+grid-row-gap: 0px; 
+justify-content: center;
+align-items: center;
+height: 20%;
+}
+
+
+ #izquierdaG{ 
+ display:flex;
+ flex-direction: row; 
+ justify-content:center;
+ vertical-align:middle;
+ text-align:center; 
+ width:100%;
+ height:100%;
+} 
+
+#CEntroImagenG 
+{
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+text-align:center;
+}
+
+ #derechaG{ 
+ display:flex;
+ flex-direction: row; 
+ justify-content:center;
+ vertical-align:middle;
+ text-align:center; 
+ width:100%;
+ height:100%;
+} 
+
+
+.BotonesNav
+{    position:fixed;
+    cursor:pointer;
+    text-decoration: none;
+    text-transform:uppercase;
+    padding: 0.3vw;
+    font-size: 1.5vw;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 16px;
+    border: 2px solid #0016b0;
+    width:5%;
+    margin-left:2%;
+    margin-right:0;
+    margin-bottom:0.3vw;
+    padding-left:0;
+    padding-right:0;
+    display:block;
+    text-align:center;   
+}
+/* Teclado qwerty V */
+.board {
+  display: none;
+  border: 1vw solid rgb(83, 65, 245); 
+  font-size: 1vw;
+  width: 30%;
+  height: 1vw; 
+}
+
+
+.keyboard-row {
+  text-align: center;
+  margin-bottom: 1vw;
+}
+
+#virtual-keyboard a {
+  text-transform: uppercase;;
+  font-family: Arial;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #070657;
+  padding:1vw 2vw;
+  font-size: 1vw;
+  color:#ffffff;
+  text-align: center;
+  margin-right: 1vw;
+}
+
+#virtual-keyboard a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+  background-color: cornflowerblue;
+}

@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Letras Pequén</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../ResB/jquery.ui.touch-punch.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script src="./../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script src="./../F1/Generales.js"></script>
+<style type="text/css">
+
+.circulo { 
+  height: 60vh;
+  position: relative;
+  margin: auto;
+  top: 6vh;
+}
+	.circulo a.itemM {
+		display: block;
+		text-decoration: none;
+		border-radius: 100%;		
+		text-align: center;	
+    height:20vh;
+		color:black;
+		padding:0.5vh;
+		position: absolute;
+		font-size: 3vh;
+		/* line-height: 10vh; */
+		transition:all 0.5s;
+		-moz-transition:all 0.5s;
+		-webkit-transition:all 0.5s;
+		-o-transition:all 0.5s;          
+	}
+
+	.circulo a.itemM:hover {
+		background: rgb(7, 90, 42);      
+    text-shadow: 1px 1px 2px rgb(0, 255, 136);
+	}
+   img{width: 20vh;}
+   .f1 {
+      width: 5vh;
+      z-index: 100;
+   }
+
+</style>
+
+</head>
+
+<body>
+<div id="contenedor" style="height:100%">
+   <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div class="esc" ontouchend="Regresar()" onclick="Regresar()"><img  class="f1" src="./../ResB/Fiz.png" alt="regresar">
+      </div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div ></div>
+    </div>
+
+<div class="menu-container">
+  
+   <div class="circulo">
+
+     <a onclick="Abre('1')" id="L1" class="itemM"><img class="im" id="s1" src="./../ResB/Teclado1.png"/><br>LETRAS</a> 
+     <a onclick="Abre('2')" id="L2" class="itemM"><img class="im" id="s2" src="./../ResB/Dactilo1.png"/><br>¿DÓNDE ESTÁ LA LETRA?</a>
+     <a onclick="Abre('3')" id="L3" class="itemM"><img class="im" id="s3" src="./../ResB/RompeC.png"/><br>ROMPECABEZAS</a>
+     <a onclick="Abre('4')" id="L4" class="itemM"><img class="im" id="s4" src="./../ResB/QueEs.png"/><br>SONIDO</a>
+     <a onclick="Abre('5')" id="L5" class="itemM"><img class="im" id="s5" src="./../ResB/Palabras.png"/><br>PALABRAS</a>
+     
+   </div>
+
+ </div> 
+
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1%;margin-left: 15%"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+
+</div>
+
+<script>
+  var items = document.querySelectorAll('.circulo a.itemM');
+  
+  for(var i = 0, l = items.length; i < l; i++) {
+    items[i].style.left = (40 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+    
+    items[i].style.top = (40 + 35*Math.sin(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+  }
+
+$(document).ready(function() {
+  s=-1
+  p=0;
+    
+        //Si es la primera vez crea el usuario " "
+  LeeIdbUsuario();
+  
+    DeterminaMotor(document.title + ". "  + Gres.MenuActividad);
+  
+    
+});
+
+
+function Abre(n)
+{ 
+  if (n ==1){
+   window.open("./Teclado/index.html","_self"); 
+  }
+  else if (n==2){
+   window.open("./BuscaLetras/index.html","_self");
+   }
+   else if (n==3){
+   window.open( "./RompeCabezas/index.html","_self");
+   }
+   else if (n==4){
+   window.open( "./QueEs/index.html","_self");
+   }
+   else if (n==5){
+   window.open( "./ArmaPalabra/index.html","_self"); 
+   }
+}
+
+
+
+
+function test(s) {
+  //console.log(s + " ??");
+  if (s < 1 )s=1;
+d=document.getElementById('L'+ s);
+imd=document.getElementById('s'+ s);
+if(d === null || typeof d === 'undefined'){
+    return;}
+//d.focus();
+
+var dice = d.innerText;
+Lee(dice);
+
+$(".itemM").css({"text-decoration":"none"});
+$(".itemM").css({"text-shadow": "none"});
+$(".im").css({"opacity": "0.2"});
+$(imd).css({"opacity": "1"});
+$(d).css({"text-shadow": "1px 1px 2px blue"});
+// $(".itemM").css({"background-color": "white"});
+// $(d).css({"background-color": "lightblue"});
+$(d).css({"text-decoration":"underline green"});
+
+p=s;
+}
+
+function adelante(){
+   p++;
+   if (p == 6) {p=1 }
+   test(p)
+}
+
+function prev() {
+p--;
+  if (p == 0) {p=5}
+  test(p)
+}
+
+document.onkeyup=function(e) {
+event.preventDefault();
+
+if (e.keyCode == 27){
+  Regresar();
+}
+e = e || window.event;
+if (e.keyCode == 112){
+    // var miVarA = setTimeout(function(){ 
+    //   movil=0;
+    // $.getScript('/F1/Generales.js', function() {
+    // },100);
+    // var miVarA2 = setTimeout(function(){ 
+    Ayuda();
+    return;
+    // },300);
+  // });
+  }
+if (e.keyCode == 37) {prev()}
+if (e.keyCode == 38) {prev()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+if (e.keyCode == 13) {
+   //console.log(p);
+   Abre(p)
+}
+
+return;
+}
+//test(p);
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+  LeeCGB(document.title + ". "  + Gres.MenuActividad);  
+}
+
+
+
+
+</script> 
+
+
+</body>
+
+</html>

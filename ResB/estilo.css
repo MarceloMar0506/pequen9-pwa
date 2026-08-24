@@ -1,0 +1,263 @@
+﻿html, body {
+    transition-property: opacity, left, top, height;
+    transition-duration: 2s, 2s;
+    transition: background-color 2s ease;
+   -moz-user-select: none; 
+   -webkit-user-select: none;
+   -ms-user-select: none;
+    margin: 0px; 
+}
+
+#mimg
+{
+width:30%;	
+height:30%;
+}
+
+#imgT
+{
+width:100%;	
+height:100%;
+}
+
+#logoP
+{
+width:20%;	
+height:80%;
+}
+
+
+
+#pieP{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;  
+}
+
+#EtiquetaDos
+{
+font-family: "Dancing Script", Arial, Helvetica, sans-serif;
+	
+}
+
+#EtiquetaUnoTexto
+{
+text-transform:uppercase;
+font-size:2vw;
+}
+
+#EtiquetaUno
+{
+text-transform:uppercase;
+transition-property: color, transform;
+transition-duration: 6s, 4s;
+transition-timing-function: ease;
+transition-delay: 2s, 0s;
+font-size:20vw;
+text-align:center; 
+font-family: Arial;
+}
+
+#EtiquetaDos
+{
+text-transform:lowercase;
+}
+
+
+#formulario
+{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;  
+
+top: -999em;
+}
+.CTexto
+ {
+  text-transform:lowercase;
+  }
+
+
+#ayudaF1 {
+/*    margin-left: 25%;*/
+/*    margin-right: 1%;*/
+     width:65%;
+      /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    
+     min-width:1px;
+     min-height:1px;
+     position:fixed;
+     bottom:10000px;
+     border: 2px solid blue;
+     border-radius: 3px;
+     background-color:white;
+     padding:1vw;
+     font-size:1vw;
+   
+     
+     /*margin: 0 auto;*/
+}
+
+#Pie a {
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+#Pie {
+      text-align:center;
+     width:100%;
+      /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+     position:fixed;
+     bottom:0;
+     padding:1vw;
+     font-size:1vw;
+}
+
+h2{
+  width:95%;
+ text-align:center;
+ font-size:2vw;
+}
+
+
+#progreso
+{	
+    text-align:right;
+     width:100%;
+      /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+     position:fixed;
+     bottom:0;
+
+}
+
+#superior
+{
+    width:100%;
+     text-align:center;
+      /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    font-size:2vw;
+}
+
+#grid {
+  display: grid;
+  grid-template-rows: repeat(1, 100%);
+  grid-template-columns: repeat(3, 20% 60% 20%);
+/*   align-items: start;*/
+   /* align-items: stretch; */
+   text-align:center; 
+/*  grid-gap: 10px;*/
+}
+
+/* #grid > div:nth-child(1) {
+     height:auto;
+   text-align:center;     
+}
+
+#grid > div:nth-child(2) {
+     height:auto;
+}
+#grid > div:nth-child(3) {
+     height:auto; 
+} */
+#izquierda
+{
+	text-align:center;
+}
+
+.default {
+      font-size:1.5vw;
+      
+      text-decoration:blink;           
+
+	background:gray ;/* : #292929;*/
+
+	border: 1px solid #111;	
+
+	border-radius: 5px;	
+
+	overflow: hidden;
+
+	box-shadow: 0 0 5px #333;				
+
+}
+
+.default div {
+  
+	background-color: #1a82f7;
+
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0099FF), to(#1a82f7)); 
+
+	background: -webkit-linear-gradient(top, #0099FF, #1a82f7); 
+
+	background: -moz-linear-gradient(top, #0099FF, #1a82f7); 
+
+	background: -ms-linear-gradient(top, #0099FF, #1a82f7); 
+
+	background: -o-linear-gradient(top, #0099FF, #1a82f7);
+
+}
+
+
+
+.BotonesNav
+{
+    
+    position:fixed;
+    cursor:pointer;
+    text-decoration: none;
+    text-transform:uppercase;
+    padding: 0.3vw;
+    font-size: 1.5vw;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 16px;
+    border: 2px solid #0016b0;
+    width:5%;
+    margin-left:2%;
+margin-right:0;
+margin-bottom:0.3vw;
+padding-left:0;
+padding-right:0;
+display:block;
+text-align:center;
+}
+.row .col {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 2vw;
+  min-height: 1px;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: bold;
+  font-family: Arial;
+  font-size: 2vw;
+  line-height: 0;
+}

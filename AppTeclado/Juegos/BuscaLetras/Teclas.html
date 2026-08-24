@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Teclas 1</title>
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+ 
+ 
+ 
+ 
+</head>
+<body>
+
+<form id="formulario" >
+<!-- validar() evita el eco del teclado Mostrarbraille suma el ascci de las teclas -->
+ <input type="text"  id="CTexto" class="CTexto" onkeypress="return validar(event,this.value)"  
+ name="Texto" size="1" style="border: 0;color:black"/>
+<!-- onkeyup="EvaluaLetra(this)"   onblur="Enfocar()"  -->
+ </form>
+<script>
+  //Evita repeticiones
+var pulsado = false;
+	$("#CTexto").keydown(function(e){ 
+            if(pulsado) return false;
+            pulsado = true;
+	}).keyup(function(){
+            pulsado = false;
+		}
+	);
+ </script>  
+
+
+</body>
+
+</html>

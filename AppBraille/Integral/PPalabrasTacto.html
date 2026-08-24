@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <title>Dictado</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>  
+   
+  <meta content="Capacitación de Mediadores Tecnológicos Digitales" name="SUBJECT" />
+  <meta content="Educación" name="RATING" />
+  <meta content="Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+  <meta
+    content="Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora"
+    name="ABSTRACT" />
+  <meta
+    content="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual"
+    name="KEYWORDS" />
+  <link rel="icon" type="image/png" href="../../ResB/favico.png" sizes="32x32" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" /> 
+   
+  <link href="../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+  <script type="text/javascript" src="../../ResB/jquery-3.3.1.min.js"></script> 
+  <script src="../../ResB/Idb-Keyval.js"></script>
+  <script type="text/javascript" src="../../ResB/Habla.js"></script> 
+  <script type="text/javascript" src="BEvaluaP.js"></script>
+  <script type="text/javascript" src="./Alfab.js"></script> 
+  <script type="text/javascript" src="../../ResB/AnimP.js"></script>
+  <script type="text/javascript" src="DictaP.js"> </script>
+  <script src="./../../F1/Practicaes.js"></script>
+  <script>
+    var LeccionActual = 0;
+    var Indexletra = 0;
+    var IndexPalabra = 0;
+    var pulsada = "";
+
+    var Palabras1 = ["ala","bala","rara","arca","carpa","oler","goma","sal","este","dique","filo","hijo","kilo","yema","niño","paz","show","tiza","nuez","voz","taxi","mamá","bebé","tía","óseo","atún","pingüino"];
+
+    </script>
+    <style>
+.teclasE {   
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 60% 60%;
+    grid-template-rows: 28% 28% 28%;
+    grid-column-gap: 1.5vw;
+    grid-row-gap: 1.5vw;
+    justify-content: center;
+    align-items: center;
+  }
+    
+.gridPlantillaED {
+    display: inline-flex;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 5vw;
+    justify-content: end;
+    align-items: center;
+}
+#titulo3{
+  justify-items: center;
+}
+#PPrimera{padding-right: 5vw;} 
+#PSegunda{padding-right: 5vw;}  
+#PTercera{padding-right: 5vw;}  
+#PCuarta{padding-right: 5vw;}  
+
+#PieInfo{    
+    position: absolute;   
+    bottom: 0;
+    right: 1vw;
+    width: 30vw;
+    height: 20vh;
+    padding: 1vw;    
+    margin-left: 1vw;
+    font-size: 2vw;
+  }
+    </style>
+   
+</head>
+
+<body onkeydown="pulsado(event)" onkeyup="evalua(event)">
+
+<div id="contenedor"> 
+
+   <div id="titulo3">
+		<div ></div> 
+
+    
+  <div id="brailleT"></div><br>
+
+    <!-- </span2> -->
+		<div ></div>
+    </div>
+    
+
+ 
+  <!-- Teclado Pulsado -->
+ <div class="grid">
+    <div style="text-align: center;  vertical-align: middle;padding: 0px;margin: 0;  line-height:-150vw;;margin-bottom: 30vw;" id="letra"></div>
+      
+   <!--  <div id="Sgenerador"> -->
+   <div class="teclas" style="margin-bottom: 30vw;margin-top: 6vw;" >
+    <elem class="box" id="box1">1</elem>
+    <elem class="box" id="box4">4</elem> 
+    <elem class="box" id="box2">2</elem>     
+    <elem class="box" id="box5">5</elem> 
+    <elem class="box" id="box3">3</elem>   
+    <elem class="box" id="box6">6</elem>
+    </div>
+    <div >
+       <span2 id="EtiquetaUnoTexto" style="font-size: 10vw;margin-top: 12vh;"></span2><br>
+      <span2 id="EtiquetaDosTexto" style="margin-bottom: 25vw;font-size: 10vw;"></span2> 
+    </div>
+</div>
+
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+   </div>
+
+    <div class=grid2>
+  
+
+    <div id="ettexto" style="text-align:center;width:100%; height: 6vw;">
+       <label id="EtiquetaInicio" style="display: none; text-align:center;width:100%; font-size:3vw;border-bottom:0;"></label>
+    </div>
+    <div id="ayudaF1" style="width:100%;z-index:4;background-color:white">  
+    </div>
+    <div id="progreso">
+      <div id="progressBar" class="default">
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- <div id="PieInfo"><img  class="f1" src="../../ResB/Ayuda.png" alt="Ayuda">
+  <div class="info" onclick="Informe()"></div>
+</div> -->
+   <!-- globo -->
+   <div  class="label" style="bottom: 8%;margin-left: 15%"></div>
+   <!-- Pequen -->
+   <div id="pequenG" class="esperaG"></div>
+
+
+  <ul id="myList">
+  </ul>
+</div>
+  <script>
+
+function evalua(ev){
+  if (ev.keyCode == 32){return}
+  if (ev.keyCode==112){return}
+  if (ev.keyCode==27){return}
+  if (ev.keyCode == 113 || ev.keyCode == 114 || ev.keyCode == 115 || ev.keyCode == 119 ){return}
+  
+
+var letra = $("#EtiquetaUnoTexto").text().substring(Indexletra,Indexletra +1);
+if (pulsada == letra){
+  var Dice = letra;
+         if (Dice == 'á'){Dice = 'a acentuada'}
+         if (Dice == 'é'){Dice = 'e acentuada'}
+         if (Dice == 'í'){Dice = 'i acentuada'}
+         if (Dice == 'ó'){Dice = 'o acentuada'}
+         if (Dice == 'ú'){Dice = 'u acentuada'}
+         if (Dice == 'y'){Dice = 'i griega'}
+         if (Dice == 'ü'){Dice = 'u con diéresis'}
+  Lee(Dice);
+  $("#EtiquetaDosTexto").text($("#EtiquetaDosTexto").text() + letra);
+  $("#letra").text(letra); 
+    
+
+  $("#brailleT").text($("#EtiquetaDosTexto").text());
+  Indexletra++;
+  var PrimeraC = eval("D"+ letra.toString().toLowerCase() );
+    var val = "";
+    if (Indexletra == 2) {val = "0"}
+    if (Indexletra == 3) {val = "00"}
+    if (Indexletra == 4) {val = "000"}
+    for (let index = 0; index < PrimeraC.length; index++)
+    {
+      const element = PrimeraC[index];
+      $("#pbox" + val + PrimeraC[index]).css("background-color","black");
+      $("#box" + val + PrimeraC[index]).css("color","white");
+    }
+  if ($("#EtiquetaUnoTexto").text().length ==  $("#EtiquetaDosTexto").text().length){
+    
+    sayTimeout = setTimeout(function () {	
+    Dicta++;
+    Indexletra = 0;    
+    $(".box").css("color","black");
+    $(".box").css("background-color","white");
+    if (Dicta  <  Palabras1.length){
+      DictarNuevaL();
+    } else {ActualizaUsuLec()}
+    
+    },2000);
+  }
+ 
+}else if (pulsada != letra){
+  $(".teclas .box").css("color","black");
+  $(".teclas .box").css("background-color","white");
+  var dpuntos = eval("D"+ letra).toString().split('');
+  dpuntos = dpuntos.toString().replace(/,/g , ", ");
+  var Dice = letra;
+         if (Dice == 'á'){Dice = 'a acentuada'}
+         if (Dice == 'é'){Dice = 'e acentuada'}
+         if (Dice == 'í'){Dice = 'i acentuada'}
+         if (Dice == 'ó'){Dice = 'o acentuada'}
+         if (Dice == 'ú'){Dice = 'u acentuada'}
+         if (Dice == 'y'){Dice = 'i griega'}
+         if (Dice == 'ü'){Dice = 'u con diéresis'}
+
+  Lee(Gres.noes + " '" + Dice + "' " + dpuntos );
+
+   //graba vector de error con la palabra
+   var PDic = $("#EtiquetaUnoTexto").text();  
+   const arrayP = errorD.toString();
+    if (arrayP.indexOf(PDic.toString()) == -1){
+ errorD.push(" " + PDic);
+    }  
+}
+
+}
+
+      function Regresar()
+      {   
+        sayTimeout = setTimeout(function () {		    
+        window.open("./ListaPracticas.html","_self");        
+        }, 1000); 
+
+      }
+
+  function pulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+ 
+  //Ayuda
+  if (keyCode == 112) {        
+      Ayuda();  
+  } 
+  else  if (keyCode == 32)
+  {
+    Informe();
+    return;
+  }
+ else  if (keyCode == 27)
+  {
+    Regresar();
+    return;
+  }
+  else {
+    escribeL(event.key);
+  }
+
+
+
+  
+    }
+
+
+    function Informe()
+      { 
+        var cuanto = $("#EtiquetaDosTexto").text().trim().length;
+        var Dice = $("#EtiquetaUnoTexto").text().substring(cuanto,cuanto+1); 
+        //console.log($("#EtiquetaUnoTexto").text() + " //////////// "  + cuanto + " " +   $("#EtiquetaUnoTexto").text().substring(cuanto,cuanto+1) + "   " +   $("#EtiquetaDosTexto").text() )
+        if ($("#EtiquetaDosTexto").length == 0){
+          Dice = $("#EtiquetaUnoTexto").text();
+        }
+        //var Dice = $("#letra").text();
+         if (Dice == 'á'){Dice = 'a acentuada'}
+         if (Dice == 'é'){Dice = 'e acentuada'}
+         if (Dice == 'í'){Dice = 'i acentuada'}
+         if (Dice == 'ó'){Dice = 'o acentuada'}
+         if (Dice == 'ú'){Dice = 'u acentuada'}
+         if (Dice == 'y'){Dice = 'i griega'}
+         if (Dice == 'ü'){Dice = 'u con diéresis'}
+         if (Dice == 'v'){Dice = 'v'}
+         if (Dice == 'may'){Dice = 'signo mayúscula'}
+
+         if ( $("#EtiquetaDosTexto").text().length > 0){
+var escrito =  $("#EtiquetaDosTexto").text();
+         
+escrito = escrito.split("").join(", ");
+
+LeeCGB(Gres.palabraD + (Dicta + 1) + Gres.de + palabra.length + ". " + palabra[Dicta] + ". " + Gres.escribiste +  escrito  + ". " + Gres.escribir +  Dice + ". ");
+         }
+         else if ( $("#EtiquetaDosTexto").text().length == 0){
+  LeeCGB(Gres.palabraD + (Dicta + 1) + Gres.de + palabra.length + ". " + palabra[Dicta] + ". " + Gres.escribir +  Dice + ". ");
+         }
+
+      }
+
+  function escribeL(k){
+    try {
+      k = eval("letraT" + k.toLocaleLowerCase());
+    } catch (error) {
+     return; 
+    }
+  
+  pulsada = k; 
+  $(".teclas .box").css("color","black");
+  $(".teclas .box").css("background-color","white");
+  
+  var PrimeraC = eval("D"+ k.toString().toLowerCase() );
+	  
+	for (let index = 0; index < PrimeraC.length; index++)
+	{
+    const element = PrimeraC[index];
+    $("#box" + element).css("background-color","black");
+		$("#box" + element).css("color","white");
+  }
+  if (k != "num"){
+   $("#Lm").text(k.toString().toLowerCase());
+   Lee($("#Lm").text().toLocaleLowerCase());
+  }
+  else if (k == "num"){
+   $("#Lm").text('#');
+   Lee("signo número");
+  }	
+} 
+    function Ayuda()
+    {
+      LeeCGB(Gres.PalabraTacto);
+    }
+
+function ActualizaUsuLec()
+    {
+      $("#EtiquetaUnoTexto").text('');
+      $("#EtiquetaDosTexto").text('');
+      $("#letra").text('');
+    termino = "si";   
+    KEY = UsuarioActual + 'PalabrasTactil';
+    VALUE = errorD.toString();// DactiloAc;   
+    set().then(function (value) {
+ 
+if (errorD.length > 1) {
+    Lee(Gres.findelap + errorD.length  + Gres.errores);
+} 
+else if (errorD.length == 1 ){
+Lee(Gres.findelapUn);
+}
+else if (errorD.length == 0 ){
+Lee(Gres.findelapCorr);
+}
+});
+}
+
+$(document).ready(function() {        
+        isTouchDevice();
+        sayTimeout = setTimeout(function () {		
+
+        KEY = 'UsuarioActual';
+        get().then(function (value) {
+  UsuarioActual = value;
+        });
+        KEY = 'Practica';
+        get().then(function (value) {
+  LeccionActual = value;
+  palabra = eval("Palabras1");
+   
+  Lpalabras =  eval(palabra.length);
+     DictarPrimera();
+   });
+
+  }, 3000); 
+});
+
+</script>
+  </body>
+  </html>
+  

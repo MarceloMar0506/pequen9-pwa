@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Prácticas de estenografía</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="PAUnSigno.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+
+<script>
+
+var valBaseVec = "";
+var 	NumLec = '1';
+var MLec = " ";
+</script> 
+
+<style>
+	.menuGrid{
+	  width: 100vw;
+	  float: left;
+	  display: grid;
+	  grid-template-rows: 1fr 1fr;
+	  grid-template-columns: repeat(5,1fr);
+	  justify-items: center;
+	  text-align: center;   
+	}
+	.itemS{
+	  font-size: 4vh;     
+	}
+ 
+ 
+   img{width: 20vh;}
+   .f1 {
+	  width: 5vh; 
+	  z-index: 100;
+	 
+   }
+   a:hover{
+	 background-color: white!important;	
+   }
+   a{
+	 background-color: white!important;   
+   }
+   .f1 {
+     width: 5vh;
+     z-index: 100;
+  }
+ 
+  </style>
+
+
+</head>
+
+<body  onkeyup="Npulsado(event)">	 
+	
+	<div id="contenedor" style="height:100%">
+	<div id="titulo3">
+		<div></div> 
+		<div id="titulo"></div>
+		<div></div>
+		</div>
+<div class="menuGrid">
+<div>
+<span4 id="1" class="itemN" onclick="ingresa(1)"><img src="./../../../ResB/UnSigno.png"/><br><span2 id="s1"  class="itemS"> PALABRAS ABREVIADAS CON UN SIGNO</span2></span4>
+</div>
+<div></div>
+<div>
+<span4 id="2" class="itemN" onclick="ingresa(2)"><img src="./../../../ResB/BotGN.png"/><br><span2 id="s2"  class="itemS"> GÉNERO Y NÚMERO</span2></span4>
+</div>
+<div></div>
+<div>
+<span4 id="3" class="itemN" onclick="ingresa(3)"><img src="./../../../ResB/DosOM.png"/><br><span2 id="s3"  class="itemS"> PALABRAS ABREVIADAS CON DOS O MÁS SIGNOS</span2></span4>
+</div>
+<div></div>
+<div>
+	<span4 id="4" class="itemN" onclick="ingresa(4)"><img src="./../../../ResB/Secuencias.png"/><br><span2 id="s4"  class="itemS">SECUENCIAS</span2></span4>
+	</div>
+<div></div>
+<div>
+<span4 id="5" class="itemN" onclick="ingresa(5)"><img src="./../../../ResB/Principios.png"/><br><span2 id="s5"  class="itemS">PRINCIPIOS CONTRACCIONES TERMINACIONES</span2></span4>
+</div>
+</div>
+
+<div id="Mleccion" class="Mleccion" style="font-size: 3vw;width: 70%;margin: auto;word-wrap: break-word;"></div>
+<div id="ettexto" style="text-align:center;float:left;width:100%;" >
+	<label class="etiquetaTexto" id="EtiquetaUnoTexto" style="text-align:center;width:100%;border-bottom:0; "></label>
+	</div>
+  <div  class="label" style="bottom: 10%;margin-left: 20vw;width: 60vw;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+</div>
+<script>
+
+function ingresa(valor)
+{	
+	sayTimeout = setTimeout(function () {	
+		var NumLec = "";
+		nlec = valor;
+		NumLec = nlec;
+ 	    NumLec= NumLec.toString();
+		if (nlec == 0)
+		{
+			Lee(Gres.MenuPractica);
+			return;
+		}
+		else if (nlec == 1){	
+		window.speechSynthesis.cancel();	;
+		window.open("./ListaPracticaUnSigno.html","_self"); 			
+		}
+		else if (nlec == 2){	
+		window.speechSynthesis.cancel();	;
+		window.open("./PracticaGenNum.html","_self"); 			
+		}
+		else if (nlec == 3){	
+		window.speechSynthesis.cancel();	;
+		window.open("./ListaPracticaDosSignos.html","_self"); 			
+		}
+		else if (nlec == 4){	
+		window.speechSynthesis.cancel();	;
+		window.open("./ListaPracticaSecuencias.html","_self"); 			
+		}
+		else if (nlec == 5){	
+		window.speechSynthesis.cancel();	;
+		window.open("./ListaPracticaEsten.html","_self"); 			
+	    }
+	}, 500); 
+	
+
+}
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+if (keyCode == 112) {
+    //$.getScript("../../F1/Generales.js", function(){
+      movil = 0;
+	  //TecladoQ();
+	  LeeCGB(document.title + ". " + Gres.MenuPractica + ". ");
+   // });
+  }
+
+  }
+///Fin tecla pulsada
+function atras(){
+	
+	nlec--;
+	if (nlec < 1){
+	 nlec = 5
+	}
+	
+	    MLec = eval("Practica" + (nlec) );
+	 	// MLec = MLec.toString().replace(/,/g , ", ")
+		//  $("#Mleccion").text(MLec);
+		// LeePractica();
+		var dice = $("#"+ nlec).text();
+		Lee(dice);
+	if (nlec == 2  ){
+       	LeePractica();
+	}
+
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + nlec).css("background-color", "black");
+    $("#s" + nlec).css("color", "white");
+
+	NumLec = nlec;
+ 	NumLec= NumLec.toString();
+	
+}
+
+function adelante(){
+	
+	nlec++;
+	
+	
+	if (nlec > 5){
+	 nlec = 1
+	}
+	
+		MLec = eval("Practica" + (nlec) );		
+		var dice = $("#"+ nlec).text();
+		Lee(dice);
+		//console.log(event.keyCode + " practica numero " + nlec);
+     if (nlec == 2   ){
+       	LeePractica();
+	 }
+	
+
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + nlec).css("background-color", "black");
+    $("#s" + nlec).css("color", "white");
+	NumLec = nlec;
+ 	NumLec= NumLec.toString();	
+}
+
+</script>
+
+<script>
+	$(document).ready(function() {
+		
+	KEY ="UsuarioActual";
+    get().then(function (value) {			
+		UsuarioActual = value;
+	});	
+	if (movil == 0) {
+				$("#Pie").css("display", "none");
+			}
+	DeterminaMotor(document.title + ". " + Gres.MenuPractica + ". ");
+  
+	});
+	var nlec = 0;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+
+  $(document).on("touchstart mousedown", function( e ) {
+		
+		xPosVie = 0;
+		yPosVie = 0;
+		var touchstart = e.type === 'touchstart',
+
+			e = touchstart ? e.originalEvent : e,
+			pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+			pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+			xPosVie = pageX;
+			yPosVie = pageY;
+			//console.log(xPosVie);
+});
+
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+});
+
+$(document).on("touchend mouseup", function(e) {
+	
+	if (e.target.className == "itemL")
+	{
+		nlec = e.target.id;
+		ingresa();
+		return;
+	}
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return} 
+ 
+      DifX =  xPosNew  - xPosVie ;
+   
+	  //console.log(xPosNew);
+         //arrastró a la derecha
+  		if (DifX > 200){        
+ 	 		//console.log( DifX + " derecha " + nlec );
+	 		adelante();        
+    	}
+
+        if (DifX < -200){      
+			//console.log(DifX + " izquierda " + nlec);
+			atras();      
+        }
+
+        if (DifY > 100){
+        
+              //  //console.log(" Baja #L"+ Quien + Opcion);
+        
+        
+          return;
+        }
+
+        if (DifY < -100){
+        
+          //console.log(DifY + " Sube #L"+ Quien + Opcion);
+        
+
+          
+          return;
+        }
+    return;
+
+});
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+
+if (e.keyCode == 13) {
+		ingresa(nlec);
+}
+
+return;
+}
+function AyudaM()
+    {
+      LeeCGB(document.title + ". " + Gres.MenuPractica + ". ");
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+	  }
+
+function LeePractica()
+	  {	
+	
+		   KEY = UsuarioActual + 'GeNu'
+			
+			get().then(function (value) {				
+				//console.log(value);
+		   if (value == undefined)
+		   {   
+			   var dice = $("#"+ nlec).text();
+			   Lee(dice + Gres.sinrealizar + ". " + Gres.barraEscuchala);
+			   return;
+		   }		
+			var valBase = eval("value.Leccion1" );
+			//console.log("que grabó " +  valBase);
+			valBaseVec = valBase;			
+
+			var vectorE =[];
+			var MuestraVectorE = [];
+			MuestraVectorE = [];
+			MuestraVectorE = MLec;
+			$("#Mleccion").html('');
+			vectorE =  valBaseVec.split(',');
+			var cuentaErrores = 0;
+			for (let index2 = 0; index2 < MuestraVectorE.length; index2++) {
+			for (let index = 0; index < vectorE.length; index++) {
+				if ( MuestraVectorE[index2].trim() + " " == vectorE[index].trim() + " ")
+				{
+				// 	//console.log("reemplazar " + vectorE[index].trim());
+					MuestraVectorE[index2] = '<span class="myClass">'  +  vectorE[index] + '</span>';
+					cuentaErrores++;
+					index = vectorE.length;
+				}
+
+			}
+			}
+			if (MuestraVectorE[0].indexOf(",") == -1){
+			for (let index2 = 0; index2 < MuestraVectorE.length; index2++) {
+				MuestraVectorE[index2] =  MuestraVectorE[index2] +  "&nbsp;";
+			}
+			}
+			//MuestraVectorE = MuestraVectorE.toString().replace(" ",", ");
+
+			$("#Mleccion").html(MuestraVectorE);
+
+			//console.log(vectorE.length);
+			if (vectorE.length == 1){	
+				Lee($("#" + nlec).text()  + Gres.sinrealizar);
+			}
+			else if (vectorE.length > 1){
+				if (vectorE.length == 1){
+				Lee($("#" + nlec).text() + ". " + Gres.realizadacon + "un" + Gres.error);
+				}	
+				else if (vectorE.length > 1){
+				Lee($("#" + nlec).text() + ". " + Gres.realizadacon + vectorE.length + Gres.errores);
+				}	
+				else if (vectorE.length == 0){
+					
+				Lee($("#" + nlec).text() + ". " + Gres.realizadaCorr);
+				}	
+			}
+
+});
+
+
+
+	  }
+
+
+  function hiliter(word) {
+	
+	var repl = '<span class="myClass">' + word + '</span>';	
+	$("#Mleccion").html($("#Mleccion").html().replace(word, repl));
+
+	repl =  repl.replace(" ","");		
+	$("#Mleccion").html($("#Mleccion").html().replace(word, repl));
+}
+
+
+
+	
+	</script> 
+<!-- </div> -->
+
+</body>
+
+</html>

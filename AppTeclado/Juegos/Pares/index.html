@@ -1,0 +1,453 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Juego de Pares</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="./Estilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+</script>
+
+</head>
+
+<body >
+
+<div id="contenedor">
+ 
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+   </div>
+
+  
+   <div id="contenedorPD">
+    <div></div>
+<div id="Pqdice">
+  <div>
+  <img  class="img" id="bot7" src="./../../../ResB/7.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot8" src="./../../../ResB/8.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot9" src="./../../../ResB/9.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot4" src="./../../../ResB/4.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot5" src="./../../../ResB/5.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot6" src="./../../../ResB/6.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot1" src="./../../../ResB/1.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot2" src="./../../../ResB/2.png" ></img> </div>
+  <div>
+  <img  class="img" id="bot3" src="./../../../ResB/3.png" ></img> </div>
+  
+</div>
+</div>
+
+</div>
+
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 2%;margin-left: 10%;width:85vw"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+
+ <!-- <div id="ayudaF1">
+  <ul  style="float:left" id="myList">
+  
+</ul> -->
+
+ </div>
+
+ <audio id="myAudio" >
+</audio>
+ 
+<script>
+var numeros = [1,2,3,4,5,6,7,8,9];
+var vnumero =0;
+var resuelto= 0;
+var numeroAcumulado ="";
+var jugar=false;
+
+var Par1 =[0,0];
+var Par2 =[0,0];
+var Par3 =[0,0];
+var Par4 =[0,0];
+var XiloN = 0;
+
+var ParArmado = 0;
+var Descubierto1=0;
+var Descubierto2=0;
+
+
+numeros= shuffle(numeros); 
+var tempLenNumeros =0;
+  var audio = document.createElement('audio');
+
+$(document).ready(function() {
+var x = 0;
+
+DeterminaMotor("Pulsar barra espaciadora para iniciar el juego de pares");
+
+});
+
+document.body.addEventListener('keyup', function(e) {
+ 
+  if (e.keyCode == 112){
+     Ayuda();
+      return;
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+  if (e.keyCode == 32){ 
+    vnumero=0;
+    resuelto = 0;
+    numeros= shuffle(numeros); 
+    //LeeCGB(" Escucha. " + numeros[vnumero] );
+    ArmaJuego();
+     return;
+  }
+  if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}
+
+ //blq num
+  var active = event.getModifierState('NumLock');
+  var keyCode = e.keyCode;
+
+  if (keyCode == 144)
+  {
+  if (active == false){LeeCGB(Gres.TnNh );return;}
+  if (active == true){LeeCGB(Gres.TnH );return;}
+  }
+  
+  
+  
+  //Blq num no bloqueado
+  if (keyCode >= 33 && keyCode <= 40)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+  
+  if (keyCode ==  12 || keyCode == 45)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+  
+ 
+
+
+
+if  ($.isNumeric(e.key)  == false && e.key != 32 && e.key != 27 && e.key != 112 ) {
+  LeeCGB("No es un número");
+  return;
+}
+if (jugar==false){return}
+
+////console.log( ($("#bot"+ Descubierto1).is(":visible") + " == visible  && " +  Descubierto1  + " ==  "+   e.key ))
+
+
+
+// Evaluar: Si Descubierto_1 es igual a  Descubiero_2 =>>> Bien! ParArmado++  Si no Mal
+//Jugad0 = 0; Descubierto1 = 0;  Descubierto2 = 0;      
+
+//Si ParArmado == 3 =>>> Fin del juego
+//Si pulsa barra espaciadora rearma random los pares e inica de nuevo =>>> ArmaJuego();
+
+if(Descubierto1==0){
+  if (Descubierto1 == XiloN)
+  {
+    Descubierto1=0;
+    LeeCGB("El xilofón no tiene par");
+    $("#bot"+ Descubierto1).css("visibility","hidden");
+    return;
+  }
+
+}
+
+
+if(Descubierto1==0){
+  Descubierto1= e.key;
+  //console.log($("#bot"+ Descubierto1).css('visibility') === 'visible') 
+  
+if ($("#bot"+ Descubierto1).css('visibility') === 'visible'  ){
+  LeeCGB("ya está " + $("#bot" + Descubierto1).attr("alt")); 
+  Descubierto1=0; 
+}
+else{
+  $("#bot"+ Descubierto1).css("visibility","visible"); 
+  Lee(Descubierto1 + ", " + $("#bot" + Descubierto1).attr("alt"));
+  return;
+}
+}
+
+if(Descubierto2 ==0 ){
+   Descubierto2= e.key;
+   
+  if ($("#bot"+ Descubierto2).css('visibility') === 'visible' ){   
+  LeeCGB("ya está " + $("#bot" + Descubierto2).attr("alt"));
+  Descubierto2=0;
+  }else{
+   $("#bot"+ Descubierto2).css("visibility","visible");
+ 
+   Lee(Descubierto2 + ", " + $("#bot" + Descubierto2).attr("alt"));
+
+  // var miVar4 = setTimeout(function(){  
+    evalua();
+ // }, 3000);
+     
+   return;
+  }
+
+  }
+
+});
+
+function evalua(){
+  jugar=false;
+if ( $("#bot" + (Descubierto1)).attr("alt") == $("#bot" + (Descubierto2)).attr("alt"))
+{
+  
+  ParArmado++;
+   LeeCGB("bien se formó un par de " + $("#bot" + (Descubierto1)).attr("alt") + "s" );
+ 
+
+  if (ParArmado==4){
+    $("#bot"+ XiloN).css("visibility","visible"); 
+    LeeCGB("bien se formó un par de " + $("#bot" + (Descubierto1)).attr("alt") + "s.  fin del juego. barra espaciadora para volver a jugar");
+    Descubierto1=0;
+    Descubierto2=0;
+    $("#bot"+ Descubierto1).data('seleccionado',false); //setter
+    $("#bot"+ Descubierto2).data('seleccionado',false); //setter
+
+    audio.src =  "./../../../ResB/xilofón.mp3";
+    audio.load();  
+    setTimeout(function(){ 
+      audio.play();
+    },1000);
+   
+
+  }
+  Descubierto1=0;
+  Descubierto2=0;
+  $("#bot"+ Descubierto1).data('seleccionado',false); //setter
+  $("#bot"+ Descubierto2).data('seleccionado',false); //setter
+
+
+}else{
+  $("#bot"+ Descubierto1).css("visibility","hidden");
+  $("#bot"+ Descubierto2).css("visibility","hidden");
+
+  LeeCGB( $("#bot" + (Descubierto1)).attr("alt") + " y " + $("#bot" + (Descubierto2)).attr("alt") + " no son pares");
+  Descubierto1=0;
+  Descubierto2=0;
+  $("#bot"+ Descubierto1).data('seleccionado',false); //setter
+  $("#bot"+ Descubierto2).data('seleccionado',false); //setter
+
+}
+jugar=true;
+
+}
+
+
+
+
+function Regresar()
+{
+window.open( "../index.html","_self"); 
+}
+
+aud = document.getElementById("myAudio");
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+ 
+  LeeCGB(document.title + ". Memoriza y repite la secuencia de números con el teclado numérico"  );  
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // Mientras queden elementos a mezclar...
+  while (0 !== currentIndex) {
+
+    // Seleccionar un elemento sin mezclar...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // E intercambiarlo con el elemento actual
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+ function ArmaJuego(){
+ 
+  $(".img").css("visibility","hidden");
+
+
+   jugar=false;
+   ParArmado = 0;
+   Descubierto1=0;
+   Descubierto2=0;
+
+
+
+  Par1 =[numeros[0], numeros[1]];
+  Par2 = [numeros[2], numeros[3]];
+  Par3 = [numeros[4], numeros[5]];
+  Par4 = [numeros[6], numeros[7]];  
+  XiloN = numeros[8];
+  // //console.log(numeros);
+  // //console.log(Par1 + " <<<<<<<< " + Par1[0] + " ? " + Par1[1] + " ////// " +  Par2 + " <<<<<<<< "  + Par3 + " <<<<<<<< " +  Par4 + " <<<<<<<< " + XiloN );
+  var ImgP1 ="./../../../ResB/gato.png";
+  var SonP1 ="./../../../ResB/gato.mp3";
+  var ImgP1Nom="gato";
+  var ImgP2 ="./../../../ResB/perro.png"
+  var SonP2 ="./../../../ResB/perro.mp3";;
+  var ImgP2Nom="perro";
+  var ImgP3 ="./../../../ResB/gallo.png";
+  var SonP3 ="./../../../ResB/gallo.mp3";
+  var ImgP3Nom="gallo";
+  var ImgP4 ="./../../../ResB/elefante.png";
+  var SonP4 ="./../../../ResB/elefante.mp3";
+  var ImgP4Nom="elefante";
+  var ImgX ="./../../../ResB/xilofón.png";
+  var ImgP5Nom="xilofón";
+  var SonP5 ="./../../../ResB/xilofón.mp3";
+  var i = 0;
+  
+  $("#bot" + Par1[0]).attr("src",ImgP1);
+  $("#bot" + Par1[0]).attr("alt",ImgP1Nom);
+  $("#bot" + Par1[1]).attr("src",ImgP1);
+  $("#bot" + Par1[1]).attr("alt",ImgP1Nom);
+
+  $("#bot" + Par2[0]).attr("src",ImgP2);
+  $("#bot" + Par2[0]).attr("alt",ImgP2Nom);
+  $("#bot" + Par2[1]).attr("src",ImgP2);
+  $("#bot" + Par2[1]).attr("alt",ImgP2Nom);
+
+  $("#bot" + Par3[0]).attr("src",ImgP3);
+  $("#bot" + Par3[0]).attr("alt",ImgP3Nom);
+  $("#bot" + Par3[1]).attr("src",ImgP3);
+  $("#bot" + Par3[1]).attr("alt",ImgP3Nom);
+
+  $("#bot" + Par4[0]).attr("src",ImgP4);
+  $("#bot" + Par4[0]).attr("alt",ImgP4Nom);
+  $("#bot" + Par4[1]).attr("src",ImgP4);
+  $("#bot" + Par4[1]).attr("alt",ImgP4Nom);
+
+  $("#bot" + XiloN).attr("src",ImgX);
+  $("#bot" + XiloN).attr("alt",ImgP5Nom);
+
+
+ 
+    
+rutaAudio = "./../../../ResB/"+ $("#bot" + (i +1)).attr("alt") + ".mp3"; 
+
+audio.src =  rutaAudio;
+audio.load();  
+setTimeout(function(){ 
+  audio.play();
+},1000);
+Lee((i+1) + ", " + $("#bot" + (i +1)).attr("alt"));
+$("#bot" + (i +1)).css("visibility","visible");
+
+audio.onended = function() {
+
+
+
+
+
+  i++;
+
+  if (i == 9){
+  jugar = true;
+  LeeCGB("juega");
+  $(".img").css("visibility","hidden");
+  return;
+}
+
+  if (i < 9){
+rutaAudio = "./../../../ResB/"+  $("#bot" + (i +1)).attr("alt") + ".mp3"; 
+audio.src =  rutaAudio;
+audio.load();  
+
+setTimeout(function(){ 
+  audio.play();
+},1000);
+
+
+
+Lee(i+1 + ", " + $("#bot" + (i +1)).attr("alt"));
+$("#bot" + (i +1)).css("visibility","visible");
+
+  }
+
+};
+
+
+
+    
+     
+
+
+ }
+
+
+ function _wait() {
+    if ( ! window.speechSynthesis.speaking ) {
+      //onend();
+      //console.log(habla);
+      return;
+    }
+    window.setTimeout( _wait, 200 );
+    //console.log(habla);
+  }
+  _wait();
+
+
+	</script>
+
+
+  </script>
+
+</body>
+
+</html>

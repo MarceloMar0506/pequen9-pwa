@@ -1,0 +1,502 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./DosOmas.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="../../../F1/Generales.js"></script>
+<script src="./../../../pulsador.js"></script>
+<style>
+	#Primera{
+		padding: 0;
+	}
+	#Segunda{
+		padding: 0;
+		margin-left: 12vw;
+	}
+	#Tercera{
+		padding: 0;
+		margin-left: 12vw;
+	}
+	#Cuarta{
+		padding: 0;
+		margin-left: 12vw;
+	}
+	.gridPlantillaE{
+		grid-template-columns: 1fr 1fr;
+		column-gap: 0vw;
+	}
+
+	</style>
+</head>
+
+<body onkeyup="Lpulsada(event)">	
+<div id="contenedor" style="height:100%">
+	
+	 
+	   <span2 id="EtiquetaUnoTexto" style="font-size: 8vw;margin-top: 2vh;font-family: Arial, Helvetica, sans-serif;">_</span2>	
+	 
+	
+
+<div id="grillaListaE">
+	<div id="Fiz"><img class="animated flash2" src="./../../../ResB/Fiz.png" onclick="atras()" alt=""></div> 	
+
+	<div class="gridPlantillaE">
+    
+   <!--  <div id="Sgenerador"> -->
+   <div id="Primera" class="teclasE">
+	<elem class="box" id="box1">1</elem>	
+	<elem class="box" id="box4">4</elem> 
+	<elem class="box" id="box2">2</elem>
+	<elem class="box" id="box5">5</elem>
+	<elem class="box" id="box3">3</elem>
+	<elem class="box" id="box6">6</elem>
+	</div>
+
+	<div id="Segunda" class="teclasE">
+	<elem class="box" id="box01">1</elem>	
+	<elem class="box" id="box04">4</elem> 
+	<elem class="box" id="box02">2</elem>
+	<elem class="box" id="box05">5</elem>
+	<elem class="box" id="box03">3</elem>
+	<elem class="box" id="box06">6</elem>
+	</div>
+
+	<div id="Tercera" class="teclasE">
+		<elem class="box" id="box001">1</elem>	
+		<elem class="box" id="box004">4</elem> 
+		<elem class="box" id="box002">2</elem>
+		<elem class="box" id="box005">5</elem>
+		<elem class="box" id="box003">3</elem>
+		<elem class="box" id="box006">6</elem>
+		</div>
+
+	<div id="Cuarta" class="teclasE">
+		<elem class="box" id="box0001">1</elem>	
+		<elem class="box" id="box0004">4</elem> 
+		<elem class="box" id="box0002">2</elem>
+		<elem class="box" id="box0005">5</elem>
+		<elem class="box" id="box0003">3</elem>
+		<elem class="box" id="box0006">6</elem>
+		</div>	
+</div>
+<div id="Fder"><img class="animated flash2" src="./../../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+</div>  
+<!-- Letras -->
+<div id="letrasAlfa" style="margin-top:8vh;visibility: hidden;">
+<div class="Tl" onmouseup="ml('abajo')" ontouchend="ml('abajo')" id="a" >A</div>
+<div class="Tl" onmouseup="ml('bajo')" ontouchend="ml('bajo')" id="b" >B</div>
+<div class="Tl" onmouseup="ml('casi')" ontouchend="ml('casi')" id="c" >C</div>
+<div class="Tl" onmouseup="ml('debajo')" ontouchend="ml('debajo')" id="d" >D</div>
+<div class="Tl" onmouseup="ml('Ecuador')" ontouchend="ml('Ecuador')" id="e" >E</div>
+<div class="Tl" onmouseup="ml('fácil')" ontouchend="ml('fácil')" id="f" >F</div>
+<div class="Tl" onmouseup="ml('general')" ontouchend="ml('general')" id="g" >G</div>
+
+<div class="Tl" onmouseup="ml('haber')" ontouchend="ml('haber')" id="h" >H</div>
+<div class="Tl" onmouseup="ml('igual')" ontouchend="ml('igual')" id="i" >I</div>
+<div class="Tl" onmouseup="ml('joven')" ontouchend="ml('joven')" id="j" >J</div>
+<div class="Tl" onmouseup="ml('largo')" ontouchend="ml('largo')" id="l" >L</div>
+<div class="Tl" onmouseup="ml('madre')" ontouchend="ml('134')" id="m" >M</div>
+<div class="Tl" onmouseup="ml('nada')" ontouchend="ml('nada')" id="n" >N</div>
+<div class="Tl" onmouseup="ml('ocasión')" ontouchend="ml('ocasión')" id="o" >O</div>
+
+<div class="Tl" onmouseup="ml('padre')" ontouchend="ml('padre')" id="p" >P</div>
+<div class="Tl" onmouseup="ml('qué')" ontouchend="ml('qué')" id="q" >Q</div>
+<div class="Tl" onmouseup="ml('razón')" ontouchend="ml('razón')" id="r" >R</div>
+<div class="Tl" onmouseup="ml('sido')" ontouchend="ml('sido')" id="s" >S</div>
+<div class="Tl" onmouseup="ml('también')" ontouchend="ml('también')" id="t" >T</div>
+<div class="Tl" onmouseup="ml('último')" ontouchend="ml('último')" id="u" >U</div>
+<div class="Tl" onmouseup="ml('veces')" ontouchend="ml('veces')" id="v" >V</div>
+</div>
+
+
+
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+   </div>
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1vh;margin-left: 15vw;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div> 
+<script>
+
+function adelante(){
+	
+	$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	
+	nlec++;	
+	if (nlec + 1 > keys.length ) {nlec = nlec-1}
+
+	var MLec = signosT.get(keys[nlec]);
+	//console.log(nlec + " " + MLec)
+	var cadena = MLec;
+	var DiceL = MLec;
+	
+	var vecP =  signosT.get(keys[nlec]);
+	
+	DiceL =  keys[nlec]; 
+	var signosE =  vecP;
+	MLec = MLec.toString().replace(/,/g , ", ");
+	$(".box").css("color","black");
+	$(".box").css("background-color","white");	
+	var PrimM =  vecP.toString().indexOf("_");
+	var PrimeraC =  vecP.substring(0,PrimM);
+	var SegM =  vecP.toString().indexOf("-");
+    
+	if (SegM > 0){
+		var SegundaC = vecP.substring(PrimM + 1,SegM);
+	}
+	else  if (SegM < 0){
+		var SegundaC = vecP.substring(PrimM + 1);
+	}
+	
+	var TerM =  vecP.toString().indexOf("=");
+	
+	if (TerM > 0){
+	 var TerceraC = vecP.substring(SegM + 1,TerM);
+	}
+	else  if (TerM < 0){
+	  var TerceraC = vecP.substring(SegM + 1);
+      var TerM =  vecP.toString().indexOf("-" + TerceraC);
+
+	}
+
+	var CuarM =  vecP.toString().indexOf("=");
+	
+	if (CuarM > 0){
+	 var CuartoC = vecP.substring(CuarM + 1);
+	}
+		$("#Segunda").css("visibility","visible");
+	var regex = /(\d+)/g;	
+	PrimeraC  = PrimeraC.match(regex);	
+	for (let index = 0; index < PrimeraC.toString().trim().length; index++)
+	{
+		const element = PrimeraC.toString().trim().substring(index,index + 1);
+		
+		$("#box" + element).css("background-color","black");
+		$("#box" + element).css("color","white");
+	}
+		 SegundaC  = SegundaC.match(regex);	
+		for (let index = 0; index < SegundaC.toString().trim().length; index++)
+		{
+			const element = SegundaC.toString().trim().substring(index,index + 1);		
+			$("#box0" + element).css("background-color","black");
+			$("#box0" + element).css("color","white");
+		}
+	
+ 	if (TerM > 0){
+	   $("#Tercera").css("display","grid");	   
+		 TerceraC  = TerceraC.match(regex);	
+		for (let index = 0; index < TerceraC.toString().trim().length; index++)
+		{
+			const element = TerceraC.toString().trim().substring(index,index + 1);		
+			$("#box00" + element).css("background-color","black");
+			$("#box00" + element).css("color","white");
+		}	
+	}
+	else if (TerM < 0){
+	 $("#Tercera").css("display","none");	 
+	}
+
+
+	if (CuarM > 0){
+		$("#Cuarta").css("display","grid");	  
+		CuartoC  = CuartoC.match(regex);	
+	   for (let index = 0; index < CuartoC.toString().trim().length; index++)
+	   {
+		   const element = CuartoC.toString().trim().substring(index,index + 1);		   
+		   $("#box000" + element).css("background-color","black");
+		   $("#box000" + element).css("color","white");
+	   }   
+   }
+   else if (CuarM < 0){
+	 $("#Cuarta").css("display","none");	
+	 
+	}
+
+
+		$("#EtiquetaUnoTexto").text(keys[nlec]);
+		signosE = signosE.toString().split("");
+	
+	signosE = signosE.toString().replace(/,/g , ", ");
+
+	signosE = signosE.replace("_"," segunda celda ");
+	signosE = signosE.replace("-"," tercera celda ");
+	signosE = signosE.replace("="," cuarta celda ");
+	DiceL =  DiceL + ". primera celda " +  signosE;
+	//console.log("donde??? " + DiceL);	
+   
+	var DiceN = DiceL;
+	DiceN = DiceN.toString().replace(/,,/g , ", ");
+    DiceN = DiceN.toString().replace(/cómo/g , "cómo con acento, ");
+    DiceN = DiceN.toString().replace(/cuánto/g , "cuánto con acento, ");
+    DiceN = DiceN.toString().replace(/dónde/g , "dónde con acento");
+    DiceN = DiceN.toString().replace(/cuándo/g , "cuándo con acento ");
+    DiceN = DiceN.toString().replace(/cuál/g , "cuál con acento");
+    DiceN = DiceN.toString().replace(/qué/g , "qué con acento");
+	DiceN = DiceN.toString().replace(/está /g , "está con acento");
+	DiceN = DiceN.toString().replace(/quién/g , "quién con acento");
+	LeeCGB(DiceN);
+
+}
+function atras(){	
+	$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	nlec--;
+	if (nlec < 0){
+	 nlec = 0 ;
+	}
+
+	var MLec = signosT.get(keys[nlec]);
+	//console.log(nlec + " " + MLec)
+	var cadena = MLec;
+	var DiceL = MLec;
+	
+	var vecP =  signosT.get(keys[nlec]);
+	
+	DiceL =  keys[nlec]; 
+	var signosE =  vecP;
+	MLec = MLec.toString().replace(/,/g , ", ");
+	$(".box").css("color","black");
+	$(".box").css("background-color","white");	
+	var PrimM =  vecP.toString().indexOf("_");
+	var PrimeraC =  vecP.substring(0,PrimM);
+	var SegM =  vecP.toString().indexOf("-");
+    
+	if (SegM > 0){
+		var SegundaC = vecP.substring(PrimM + 1,SegM);
+	}
+	else  if (SegM < 0){
+		var SegundaC = vecP.substring(PrimM + 1);
+	}
+	
+	var TerM =  vecP.toString().indexOf("=");
+	
+	if (TerM > 0){
+	 var TerceraC = vecP.substring(SegM + 1,TerM);
+	}
+	else  if (TerM < 0){
+	  var TerceraC = vecP.substring(SegM + 1);
+      var TerM =  vecP.toString().indexOf("-" + TerceraC);
+
+	}
+
+	var CuarM =  vecP.toString().indexOf("=");
+	
+	if (CuarM > 0){
+	 var CuartoC = vecP.substring(CuarM + 1);
+	}
+	
+		$("#Segunda").css("visibility","visible");
+	var regex = /(\d+)/g;	
+	PrimeraC  = PrimeraC.match(regex);
+	
+	for (let index = 0; index < PrimeraC.toString().trim().length; index++)
+	{
+		const element = PrimeraC.toString().trim().substring(index,index + 1);
+		
+		$("#box" + element).css("background-color","black");
+		$("#box" + element).css("color","white");
+	}
+		 SegundaC  = SegundaC.match(regex);	
+		for (let index = 0; index < SegundaC.toString().trim().length; index++)
+		{
+			const element = SegundaC.toString().trim().substring(index,index + 1);
+			$("#box0" + element).css("background-color","black");
+			$("#box0" + element).css("color","white");
+		}
+	
+ 	if (TerM > 0){
+	   $("#Tercera").css("display","grid");	
+		 TerceraC  = TerceraC.match(regex);	
+		for (let index = 0; index < TerceraC.toString().trim().length; index++)
+		{
+			const element = TerceraC.toString().trim().substring(index,index + 1);		
+			$("#box00" + element).css("background-color","black");
+			$("#box00" + element).css("color","white");
+		}	
+	}
+	else if (TerM < 0){
+	 $("#Tercera").css("display","none");
+	 
+	}
+
+
+	if (CuarM > 0){
+		$("#Cuarta").css("display","grid");	  
+		CuartoC  = CuartoC.match(regex);	
+	   for (let index = 0; index < CuartoC.toString().trim().length; index++)
+	   {
+		   const element = CuartoC.toString().trim().substring(index,index + 1);		   
+		   $("#box000" + element).css("background-color","black");
+		   $("#box000" + element).css("color","white");
+	   }   
+   }
+   else if (CuarM < 0){
+	 $("#Cuarta").css("display","none");	
+	 
+	}
+
+
+		$("#EtiquetaUnoTexto").text(keys[nlec]);
+		signosE = signosE.toString().split("");
+	
+	signosE = signosE.toString().replace(/,/g , ", ");
+
+	signosE = signosE.replace("_"," segunda celda ");
+	signosE = signosE.replace("-"," tercera celda ");
+	signosE = signosE.replace("="," cuarta celda ");	
+	DiceL =  DiceL + ". primera celda " +  signosE;	
+
+
+	var DiceN = DiceL;
+	DiceN = DiceN.toString().replace(/,,/g , ", ");
+    DiceN = DiceN.toString().replace(/cómo/g , "cómo con acento, ");
+    DiceN = DiceN.toString().replace(/cuánto/g , "cuánto con acento, ");
+    DiceN = DiceN.toString().replace(/dónde/g , "dónde con acento");
+    DiceN = DiceN.toString().replace(/cuándo/g , "cuándo con acento ");
+    DiceN = DiceN.toString().replace(/cuál/g , "cuál con acento");
+    DiceN = DiceN.toString().replace(/qué/g , "qué con acento");
+	DiceN = DiceN.toString().replace(/está /g , "está con acento");
+	DiceN = DiceN.toString().replace(/quién/g , "quién con acento");
+	LeeCGB(DiceN);
+
+
+	
+	
+}
+
+</script>
+
+<script>
+	$(document).ready(function() {
+		
+$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");	
+$("#Primera").css("display","grid");
+$("#Segunda").css("display","grid");  
+if (movil == 0){
+			$("#Pie").css("display","none");
+		}
+//DeterminaMotor(Gres.ListaPDos);   
+
+var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 = Gres.ListaPDosP;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje= Gres.ListaPDos;            
+            DeterminaMotor(mensaje);  
+     }
+
+
+ 
+	});
+	var nlec = -1;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+if (e.keyCode == 112) { 
+      movil = 0;
+      Ayuda(); 
+  }
+
+
+d.innerHTML =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+     PrimerS =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+     $(".etq").html('');
+
+
+return;
+}
+
+function Lpulsada(event)
+{
+if (event.keyCode == 32){return}
+
+$("#"+event.key).mouseup();
+}
+function Ayuda()
+    {
+	  $(".label").css("display","block");
+	  $("#pequenG").css("display","block");
+      LeeCGB(Gres.ListaPDos);
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+
+	  $(document).keydown(function(e) { 
+
+
+if (e.keyCode == 70) {statusdiv.innerHTML = '1'; number = 1;} //F
+if (e.keyCode == 68) {statusdiv2.innerHTML = '2'; number = 2;} //D
+if (e.keyCode == 83) {statusdiv3.innerHTML = '3'; number = 3;} //S		
+if (e.keyCode == 74) {statusdiv4.innerHTML = '4'; number = 4;} //J
+if (e.keyCode == 75) {statusdiv5.innerHTML = '5'; number = 5;} //K
+if (e.keyCode == 76) {statusdiv6.innerHTML = '6'; number = 6;} //L
+	  }
+	  );
+
+	  function ml(PalabraIndice)
+	  {		
+			nlec = keys.indexOf(PalabraIndice) - 1;
+			adelante();
+
+	  }
+
+
+
+</script>
+
+</body>
+
+</html>

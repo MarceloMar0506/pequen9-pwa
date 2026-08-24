@@ -1,0 +1,66 @@
+﻿@media only screen and (orientation:portrait){
+  body {
+    width: 100%;
+    height: auto;
+    transform: rotate(90deg);
+  }
+}
+
+html, body {
+    transition-property: opacity, left, top, height;
+    transition-duration: 2s, 2s;
+    transition: background-color 2s ease;
+}
+
+
+
+#ayudaF1 {
+  display:none
+}
+
+#F1
+{
+text-decoration:underline;
+cursor:pointer;
+bottom:0%;	
+}
+#Amanda{
+  width: 70vw;
+  margin-left: 15vw;
+  left: 0;
+  display: grid;  
+  grid-template-columns: repeat(3,1fr);
+  justify-content: center;
+  align-self: baseline;
+  align-items: baseline; 
+  text-align: center;
+  
+}
+#Canastas {  
+  position: fixed; 
+  bottom: 1vh;
+  left: 15vw;
+  display: grid;  
+  grid-template-columns: repeat(9,1fr);
+  justify-content: center;
+} 
+#imgA {  
+  margin-top: 20vh;  
+  } 
+#cuenta {   
+    font-size: 4vW;
+    font-family: Arial, Helvetica, sans-serif; 
+    }   
+#cuentaG{
+ height: 50vh; 
+align-self: end;
+}    
+.imgC {  
+    display: none;
+    width: 9vw;
+    } 
+ #imgQ {    
+  width: 8vw;
+  display: none;  
+ }   
+    

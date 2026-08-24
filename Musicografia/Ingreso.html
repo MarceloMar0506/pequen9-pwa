@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Ingreso de Usuario Pequén</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href=../../Res/favico.png sizes="32x32"/>
+<link href=../../Res/PQEstilo.css type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src=../../Res/jquery-3.3.1.min.js></script>
+<script type="text/javascript" src="InputText.js"></script>
+<script src="../../Res/Idb-Keyval.js"></script>
+<script type="text/javascript" src=../../Res/MotoresEs.js></script>
+<script type="text/javascript" src="../../Res/Habla.js"></script>
+<script type="text/javascript" src=../../Res/AnimP.js></script>
+<script src="../../F1/Generales.js"></script>
+<script>
+  var tocados = 0;
+  var pvez = true;
+  var primerEnter = true;
+  // leeUsuarioActual();
+</script>
+</head>
+
+<body>
+  <div id="contenedor" style="height:100%">
+    <div id="titulo3">
+      <div class="esc" ontouchend="Regresar()" onclick="Regresar()"><img src="../../Res/FizR.png" alt="regresar"></div> 
+      <div class="board">&nbsp;</div> 
+      <div class="f1"  ontouchend="Ayuda()" onclick="Ayuda()"><img  class="f1" src="../../Res/Ayuda.png" alt="Ayuda"></div>
+      </div> 
+   
+      <div class="row" style="margin-top: 15vw;">
+      <div id="content">    
+        <div id="virtual-keyboard">
+      <div id="virtual-keyboard">
+  
+            <div class="keyboard-row">
+                <a href="#"  class="Lt" data="Q">Q</a>
+                <a href="#"  class="Lt" data="W">W</a>
+                <a href="#"  class="Lt" data="E">E</a>
+                <a href="#"  class="Lt" data="R">R</a>
+                <a href="#"  class="Lt" data="T">T</a>
+                <a href="#"  class="Lt" data="Y">Y</a>
+                <a href="#"  class="Lt" data="U">U</a>
+                <a href="#"  class="Lt" data="I">I</a>
+                <a href="#"  class="Lt" data="O">O</a>
+                <a href="#"  class="Lt" data="P">P</a>
+            </div>
+            <div class="keyboard-row">
+                <a href="#" id="A" class="Lt" data="A">A</a>
+                <a href="#" id="S" class="Lt" data="S">S</a>
+                <a href="#"  class="Lt" data="D">D</a>
+                <a href="#"  class="Lt" style="text-decoration: underline" data="F">F</a>
+                <a href="#"  class="Lt" data="G">G</a>
+                <a href="#"  class="Lt" data="H">H</a>
+                <a href="#"  class="Lt" style="text-decoration: underline" data="J">J</a>
+                <a href="#"  class="Lt" data="K">K</a>
+                <a href="#"  class="Lt" data="L">L</a>
+                <a href="#"  class="Lt" data="Ñ">Ñ</a>
+            </div>
+            <div class="keyboard-row">
+                <a href="#"  class="Lt" data="Z">Z</a>
+                <a href="#"  class="Lt" data="X">X</a>
+                <a href="#"  class="Lt" data="C">C</a>
+                <a href="#"  class="Lt" data="V">V</a>
+                <a href="#"  class="Lt" data="B">B</a>
+                <a href="#"  class="Lt" data="N">N</a>
+                <a href="#"  class="Lt" data="M">M</a>
+            </div>
+             <div class="keyboard-row">
+                <a href="#"  class="Lt"  data=" ">ESPACIO</a>
+                <a href="#"  class="Lt" data="RETROCESO">RETROCESO</a>
+                <a href="#"  class="Lt" data="INGRESAR">INGRESAR</a>
+            </div> 
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+
+ <!-- globo -->
+ <div  class="label" style="margin-bottom: 0.5vw"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+
+  <script>
+
+
+  $(document).ready(function() {
+   
+  // DeterminaMotor();
+   //$.getScript("../../F1/General" + langB + ".js");
+    KEY ="UsuarioActual";
+    get().then(function (value) {
+
+  
+    if (value != null){$('.board').text(value); }
+      UsuarioActual = value;
+      var repl = '<span class="seleccClass">' + value + '</span>';	
+      $(".board").html($(".board").html().replace(value, repl)); 
+      
+      var miVar2 = setTimeout(function(){ 
+  
+
+      //console.log($('.board').text());
+      if ($('.board').text() == " ")
+      {
+        DeterminaMotor(Gres.Ingreso0);       
+      }  
+      else if ($('.board').text() != "")
+      {
+        DeterminaMotor($('.board').text() + " " + Gres.Ingreso1);      
+      } 
+     
+		},10);
+
+  
+    });
+
+
+
+    $("#virtual-keyboard a").on('mouseup', function(e) {
+        e.preventDefault();
+
+      if ($(this).attr('data') == "INGRESAR")
+      {
+        Navega();
+        return;
+      } 
+      else if ($('.board').text() ==  UsuarioActual && pvez == true)
+       {
+         pvez = false;
+         $('.board').text("");
+         $('.board').css('background-color','white');
+         return;
+       }
+        
+       else if ($(this).attr('data') == 'RETROCESO') {
+              board_text = $('.board').text();
+              board_text = board_text.substring(0, board_text.length-1);
+              $('.board').text(board_text);
+            }
+        else {      
+         
+          if ($('.board').text() == " ") {$('.board').text("")}                     
+              $('.board').text($('.board').text() + $(this).attr('data'));              
+          }
+      });
+  });
+
+ 
+
+  $(document).keyup(function(e) {
+    
+    
+    if (e.keyCode == 27)
+    {
+      Regresar();
+    }
+
+    if (e.keyCode == 13)
+      {
+        if (primerEnter == true) {
+          primerEnter =false;         
+          return}
+        else {
+           Navega();
+         }
+      } 
+  //Ayuda
+  if (e.keyCode == 112) {
+   // $.getScript("../../F1/Generales.js", function(){
+      movil = 0;
+      TecladoQ();    
+      Ayuda();
+    //});
+  }
+
+  //retroceso
+  if (e.keyCode == 8)
+    {
+          board_text = $('.board').text();
+          Lee(Gres.borro  + board_text.substring(board_text.length-1, board_text.length));
+          board_text = board_text.substring(0, board_text.length-1);
+          if (board_text == ""){board_text = " "}
+          $('.board').text(board_text);  
+    }
+
+    var ev = $('.board');
+
+    if (ev.is(':visible') == false ) {return}      
+ 
+      pulsada = e.key;
+      //console.log(pulsada + "  " + isLetter(pulsada));
+      //si no es una letra retorna
+      if (isLetter(pulsada) == false){return}
+
+      if (e.keyCode !=32)
+       {
+      pulsada = e.key.toUpperCase()
+       }
+
+      if (pulsada == "INGRESAR")
+      {
+        Navega();
+       
+      }
+      else if (pulsada == "BACKSPACE")
+      {
+          board_text = $('.board').text();
+          Lee(Gres.borro + board_text.substring(board_text.length-1, board_text.length));
+          board_text = board_text.substring(0, board_text.length-1);
+          $('.board').text(board_text);  
+      } 
+      else if (pulsada == "F7")
+      {
+        return;
+      }
+      else if (pulsada.includes("ARROW") )
+      {
+        Lee($('.board').text());
+      }
+      else 
+      {
+       if (e.keyCode !=32)
+       {
+        Lee(pulsada.toLowerCase());
+       }
+       if (e.keyCode ==32)
+       {
+        Lee(Gres.espacio);
+       }
+       if ($('.board').text() ==  UsuarioActual && pvez == true)
+       {
+         pvez = false;
+         $('.board').text("");
+         $('.board').css('background-color','white');
+       }
+     
+          if ($('.board').text() == " ") {$('.board').text("")}  
+      $('.board').text($('.board').text() + pulsada);    
+       }   
+  
+    });  
+    function Ayuda()
+    {
+      LeeCGB(Gres.Ingreso);
+    }
+
+function Regresar(){
+  window.open("../index.html","_self");
+}
+
+    function isLetter(str) {
+      return str.length === 1 && str.match(/[a-z]/i);
+    }
+ 
+
+    window.addEventListener('touchstart', function(evt){
+      evt.preventDefault();
+     
+        Lee(evt.touches.item(0).target.getAttribute('data'));
+     
+    });
+    window.addEventListener('touchmove', function(evt){
+      tocados = 1;
+    });
+
+    window.addEventListener('touchend', function(evt){
+
+      if (tocados > 0)
+      {
+        tocados = 0;
+
+      if (evt.target.className === 'Lt'){ 
+ 
+      if (evt.target.getAttribute('data') == "INGRESAR")
+      {
+        Navega();
+        window.navigator.vibrate(200); 
+        return;
+      }
+      else if ($('.board').text() ==  UsuarioActual && pvez == true)
+       {
+         pvez =false;
+         $('.board').text("");
+         $('.board').css('background-color','white');
+         return;
+       }  
+        
+       else if (evt.target.getAttribute('data') == 'DEL') {
+              board_text = $('.board').text();
+              board_text = board_text.substring(0, board_text.length-1);
+              $('.board').text(board_text);
+              window.navigator.vibrate(200); 
+            }
+        else { 
+                        
+          //console.log("touchend" + $(this).attr('data')) ;
+          if ($('.board').text() == " ") {$('.board').text("")}   
+              $('.board').text($('.board').text() + evt.target.getAttribute('data'));  
+              window.navigator.vibrate(200);   
+                          
+          }
+       } 
+
+
+      }//fin de tocados == 1
+      // tocados = 0;
+    
+     
+    
+
+    }, false);
+
+
+    
+
+
+  </script>  
+
+
+</body>
+
+</html>

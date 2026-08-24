@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <title>Dictado</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>  
+   
+  <meta content="Capacitación de Mediadores Tecnológicos Digitales" name="SUBJECT" />
+  <meta content="Educación" name="RATING" />
+  <meta content="Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+  <meta
+    content="Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora"
+    name="ABSTRACT" />
+  <meta
+    content="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual"
+    name="KEYWORDS" />
+  <link rel="icon" type="image/png" href="../../../ResB/favico.png" sizes="32x32" />
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  
+  <link href="../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+  <script type="text/javascript" src="../../../ResB/jquery-3.3.1.min.js"></script> 
+  <script src="../../../ResB/Idb-Keyval.js"></script>
+  <script type="text/javascript" src="../../../ResB/Habla.js"></script>
+  <script type="text/javascript" src="VariablesT.js"></script>
+  <script type="text/javascript" src="BEvaluaP.js"></script>
+  <script type="text/javascript" src="DictaL.js"></script>
+  <script type="text/javascript" src="Lecciones.js"></script>
+  <script type="text/javascript" src="progressbar.js"></script>
+  <script type="text/javascript" src="../../../ResB/AnimP.js"></script>
+  <script type="text/javascript" src="DictaP.js"> </script>
+  <script src="./../../../F1/Practicaes.js"></script>
+  <script>
+    var LeccionActual = 0;
+
+    </script>
+    <style>
+.teclasE {   
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 28% 28% 28%;
+    grid-column-gap: 1.5vw;
+    grid-row-gap: 1.5vw;
+    justify-content: center;
+    align-items: center;
+  }
+    .gridPlantillaPizarra {
+    display: inline-flex;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 5vw;
+    justify-content: end;
+    align-items: center;
+    margin-left: 0%;
+  }
+  #titulo3{
+      justify-items: center;  
+  }
+  #letra{
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size: 15vw;
+  }
+  #titulo3{
+   visibility: visible;
+  }
+
+
+
+    </style>
+     
+     
+    
+   
+</head>
+
+<body onkeyup="Npulsado(event)" onkeypress="Dpulsado(event)">
+
+<div id="contenedor"> 
+
+   <div id="titulo3">
+		<div></div> 
+    
+        <!-- PIZARRA -->
+<div class="gridPlantillaPizarra"  id="aPbraille">
+  <div id="PQuinta" class="teclasE">
+    <elem class="box" id="pbox00004"></elem> 
+    <elem class="box" id="pbox00001"></elem>	
+    <elem class="box" id="pbox00005"></elem>
+    <elem class="box" id="pbox00002"></elem>
+    <elem class="box" id="pbox00006"></elem>
+    <elem class="box" id="pbox00003"></elem>
+  </div>	
+  <div id="PCuarta" class="teclasE">
+    <elem class="box" id="pbox0004"></elem> 
+    <elem class="box" id="pbox0001"></elem>	
+    <elem class="box" id="pbox0005"></elem>
+    <elem class="box" id="pbox0002"></elem>
+    <elem class="box" id="pbox0006"></elem>
+    <elem class="box" id="pbox0003"></elem>
+  </div>	
+
+  <div id="PTercera" class="teclasE">
+    <elem class="box" id="pbox004"></elem> 
+    <elem class="box" id="pbox001"></elem>	
+    <elem class="box" id="pbox005"></elem>
+    <elem class="box" id="pbox002"></elem>
+    <elem class="box" id="pbox006"></elem>
+    <elem class="box" id="pbox003"></elem>
+  </div>
+
+  <div id="PSegunda" class="teclasE">
+    <elem class="box" id="pbox04"></elem> 
+    <elem class="box" id="pbox01"></elem>	
+    <elem class="box" id="pbox05"></elem>
+    <elem class="box" id="pbox02"></elem>
+    <elem class="box" id="pbox06"></elem>
+    <elem class="box" id="pbox03"></elem>
+  </div>
+
+  <div id="PPrimera" class="teclasE">
+    <elem class="box" id="pbox4"></elem> 
+    <elem class="box" id="pbox1"></elem>	
+    <elem class="box" id="pbox5"></elem>
+    <elem class="box" id="pbox2"></elem>
+    <elem class="box" id="pbox6"></elem>
+    <elem class="box" id="pbox3"></elem>
+  </div>
+  </div>
+    
+		<div></div>
+    </div>
+    
+  <!-- Teclado Pulsado -->
+ <div class="grid">
+    <div style="text-align: center;  vertical-align: middle;padding: 0px;margin: 0;  line-height:-150vw;;margin-bottom: 30vw;" id="letra"></div>
+   
+   <div class="teclas" style="margin-bottom: 30vw;margin-top: 6vw;" >
+        <elem class="box" id="box4">4</elem> 
+        <elem class="box" id="box1">1</elem>
+        <elem class="box" id="box5">5</elem> 
+        <elem class="box" id="box2">2</elem>     
+        <elem class="box" id="box6">6</elem>
+        <elem class="box" id="box3">3</elem>   
+    </div>  
+    <div >
+       <span2 id="EtiquetaUnoTexto" style="font-size: 10vw;margin-top: 12vh;"></span2><br>
+      <span2 id="EtiquetaDosTexto" style="margin-bottom: 15vw;font-size: 10vw;"></span2> 
+    </div>
+</div>
+
+
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+   </div>
+
+    <div class=grid2>
+  
+
+    <div id="ettexto" style="text-align:center;width:100%; height: 6vw;">
+       <label id="EtiquetaInicio" style="display: none; text-align:center;width:100%; font-size:3vw;border-bottom:0;"></label>
+    </div>
+    <div id="ayudaF1" style="width:100%;z-index:4;background-color:white">  
+    </div>
+    <div id="progreso">
+      <div id="progressBar" class="default">
+        <div>
+        </div>
+        <script>progressBar(0, $('#progressBar'));</script>
+      </div>
+    </div>
+  </div>
+   <!-- globo -->
+   <div  class="label" style="bottom: 8%;margin-left: 15%"></div>
+   <!-- Pequen -->
+   <div id="pequenG" class="esperaG"></div>
+
+  <ul id="myList">
+  </ul>
+</div>
+  <script>  
+  
+    window.addEventListener('load', function(){
+      
+        var box1 = document.getElementById('box1');
+        var statusdiv = document.getElementById('statusdiv');
+        var box2 = document.getElementById('box2');
+        var statusdiv2 = document.getElementById('statusdiv2');
+        var box3 = document.getElementById('box3');
+        var statusdiv3 = document.getElementById('statusdiv3');
+        var box4 = document.getElementById('box4');
+        var statusdiv4 = document.getElementById('statusdiv4');
+        var box5 = document.getElementById('box5');
+        var statusdiv6 = document.getElementById('statusdiv5');
+        var box6 = document.getElementById('box6');
+        var statusdiv6 = document.getElementById('statusdiv6');
+        var d = document.getElementById('d');
+        var box = document.getElementsByClassName('box');
+  
+  
+  
+  
+     
+    }, false)
+  
+  
+    function evalua(numeros)
+    {
+          
+      window.speechSynthesis.cancel();
+      LetraD = palabra[Dicta].substring(idLetra,idLetra + 1);
+      if (palabra.length  ==  parseInt(Dicta))      
+      { 
+        return;
+       }
+       else {
+  
+      
+      if (eval("D" + LetraD) === numeros)
+         {
+          Lee(LetraD);
+           //"bien";
+         document.getElementById('EtiquetaDosTexto').innerHTML += LetraD;
+        
+         idLetra++;
+         LetraD = palabra[Dicta].substring(idLetra,idLetra+1);
+         
+         var Dice = LetraD;// alfab[indiceL];
+         if (Dice == 'á'){Dice = 'a acentuada'}
+         if (Dice == 'é'){Dice = 'e acentuada'}
+         if (Dice == 'í'){Dice = 'i acentuada'}
+         if (Dice == 'ó'){Dice = 'o acentuada'}
+         if (Dice == 'ú'){Dice = 'u acentuada'}
+         if (Dice == 'y'){Dice = 'i griega'}
+         if (Dice == 'ü'){Dice = 'u con diéresis'}
+         if (Dice == 'v'){Dice = 'v'}
+         if (Dice == 'may'){Dice = 'signo mayúscula'}
+  
+         var miVar = setTimeout(function(){
+
+        if  (LetraD.length > 0 ){
+         letra.innerHTML = LetraD;
+          $(".teclas .box").css("background-color","white");
+          $(".teclas .box").css("color","black");
+        }
+       }, 100);  
+
+       var miVar2 = setTimeout(function(){
+       
+       if (palabra.length  ==  Dicta){return};
+
+       if (palabra[Dicta].length == idLetra)
+      {
+        $(".box").css("background-color","white");
+        $(".box").css("color","black");
+        idLetra = 0;
+        Dicta++;     
+        DictarNuevaL();
+        
+        return;
+      }
+    }, 1000); 
+
+        
+        
+        }
+      else if (eval("D" + LetraD ) != numeros)
+         {
+          $(".etq").html('');
+         const arrayP = errorD.toString();
+           if (arrayP.indexOf(palabra[Dicta].toString()) == -1){
+           errorD.push(" " + palabra[Dicta]);
+           indiceErr++;
+          }
+
+         var Dice =  LetraD ;
+         if (Dice == 'á'){Dice = 'a acentuada'}
+         if (Dice == 'é'){Dice = 'e acentuada'}
+         if (Dice == 'í'){Dice = 'i acentuada'}
+         if (Dice == 'ó'){Dice = 'o acentuada'}
+         if (Dice == 'ú'){Dice = 'u acentuada'}
+         if (Dice == 'y'){Dice = 'i griega'}
+         if (Dice == 'ü'){Dice = 'u con diéresis'}
+         if (Dice == 'v'){Dice = 'v'}
+         if (Dice == 'may'){Dice = 'signo mayúscula'}
+         
+         var miVar2 = setTimeout(function(){ 
+          
+          const input =  eval("D" + LetraD );
+  
+  //1, 2, 3 ....................
+  const output = input.split('').reduce((s, c) => {let l = s.length-1; (s[l] && s[l].length < 1) ? s[l] += c : s.push(" " + c); return s;}, []);
+  
+        if (Dice != "a"){
+          Lee(Gres.noes + " '" + Dice + "' " + Gres.puntos + output + ". " );
+        }
+        else if (Dice == "a"){
+          Lee(Gres.noes + " '" + Dice + "' " + Gres.punto + output + ". " );
+        }
+        error++;
+
+           $(".teclas .box").css("background-color","white");
+           $(".teclas .box").css("color","black");
+       }, 10); 
+        
+        // $(".box").css("background-color","white");
+        } 
+      }//fin de no es la ultima palabra
+    }
+
+    function Informe()
+      {       
+        var Dice = $("#letra").text();
+         if (Dice == 'á'){Dice = 'a acentuada'}
+         if (Dice == 'é'){Dice = 'e acentuada'}
+         if (Dice == 'í'){Dice = 'i acentuada'}
+         if (Dice == 'ó'){Dice = 'o acentuada'}
+         if (Dice == 'ú'){Dice = 'u acentuada'}
+         if (Dice == 'y'){Dice = 'i griega'}
+         if (Dice == 'ü'){Dice = 'u con diéresis'}
+         if (Dice == 'v'){Dice = 'v'}
+         if (Dice == 'may'){Dice = 'signo mayúscula'}
+
+         if ( $("#EtiquetaDosTexto").text().length > 0){
+          var escrito =  $("#EtiquetaDosTexto").text();
+         
+          //console.log(escrito.split("").join(", "));
+          escrito = escrito.split("").join(", ");
+
+          LeeCGB(Gres.palabraD + (Dicta + 1) + Gres.de + palabra.length + ". " + palabra[Dicta] + ". " + Gres.escribiste +  escrito  + ". " + Gres.escribir +  Dice + ". ");
+          
+         }
+         else if ( $("#EtiquetaDosTexto").text().length == 0){
+            LeeCGB(Gres.palabraD + (Dicta + 1) + Gres.de + palabra.length + ". " + palabra[Dicta] + ". " + Gres.escribir +  Dice + ". ");
+           
+         }
+
+      }
+    function Regresar()
+      {
+       
+        window.open("./Lista.html","_self");
+      }
+  ///Numero pulsado
+  function Npulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+ 
+  //Ayuda
+  if (keyCode == 112) {
+    //$.getScript("../../F1/Practicaes.js", function(){
+      movil = 0;
+      //TecladoQ();    
+      Ayuda();
+      return;
+    //});
+  }
+  if (keyCode == 113 || keyCode == 114 || keyCode == 115 || keyCode == 119 ){return}
+  
+  if (keyCode == 32)
+  {
+    Informe();
+    return;
+  }
+
+
+  var numeroK = event.keyCode;
+//console.log(event.keyCode); 
+if (numeroK == 103 || numeroK == 100 || numeroK == 97  ){
+    LeeCGB(Gres.PizarraPuntos);
+    return;
+  }
+
+
+ 
+  //console.log(event.keyCode);
+
+if (numeroK ==105){Lee("punto 1")}   
+if (numeroK ==102){Lee("punto 2")}   
+if (numeroK ==99){Lee("punto 3")}   
+if (numeroK ==104){Lee("punto 4")}   
+if (numeroK ==101){Lee("punto 5")}   
+if (numeroK ==98){Lee("punto 6")}   
+
+
+//para Android
+if (numeroK ==57){
+  numeroK=105;
+  number=9;
+  Lee("punto 1")}   
+if (numeroK ==54){
+  numeroK=102;
+  number=6;
+  Lee("punto 2")}   
+if (numeroK ==51){
+  numeroK=99;
+  number=3;
+  Lee("punto 3")}   
+if (numeroK ==56){
+  numeroK=104;
+  number=8;
+  Lee("punto 4")}   
+if (numeroK ==53){
+  numeroK=101;
+  number=5;
+  Lee("punto 5")}   
+if (numeroK ==50){
+  number=2;
+  numeroK=98;
+  Lee("punto 6")}   
+
+
+  if (numeroK<96 || numeroK>105){
+    Lee("para simular la pizarra usar el teclado numérico");
+    return;
+  }
+
+  //blq num
+  var active = event.getModifierState('NumLock');
+  
+  if (keyCode == 144)
+  {
+  if (active == false){Lee(Gres.TnNh);return;}
+  if (active == true){Lee(Gres.TnH);return;}
+  }
+  
+  
+  
+  //Blq num no bloqueado
+  if (keyCode >= 33 && keyCode <= 40)
+  {
+  if (active == false){Lee(Gres.NBtN);return;}
+  }
+  
+  if (keyCode ==  12 || keyCode == 45)
+  {
+  if (active == false){Lee(Gres.NBtN);return;}
+  }
+  
+  
+ 
+   if (keyCode ==116){return}
+   if (termino == "si"){return}
+   
+      if (keyCode >= 96 && keyCode <= 105) {
+          // Numpad keys        
+          keyCode -= 48;
+          number = String.fromCharCode(keyCode);
+      }
+  ////console.log(number);
+    if (number == 9){
+       statusdiv.innerHTML = '1'; 
+       number = 1;        
+                 $("#box1").css("background-color","black");          
+            $("#box1").css("color","white");
+       
+    }
+    else if (number == 6){
+       statusdiv2.innerHTML = '2';         
+       number = 2;
+       
+                 $("#box2").css("background-color","black");          
+            $("#box2").css("color","white");
+    }
+    else if (number == 3){
+       statusdiv3.innerHTML = '3';         
+       number = 3;
+       
+                 $("#box3").css("background-color","black");          
+            $("#box3").css("color","white");
+    }
+    else if (number == 8){
+       statusdiv4.innerHTML = '4';         
+       number = 4;
+      
+                 $("#box4").css("background-color","black");          
+            $("#box4").css("color","white");
+    }
+    else if (number == 5){
+       statusdiv5.innerHTML = '5';         
+       number = 5;
+      
+                 $("#box5").css("background-color","black");          
+            $("#box5").css("color","white");
+    }
+    else if (number == 2){
+       statusdiv6.innerHTML = '6';         
+       number = 6;
+      
+              $("#box6").css("background-color","black");          
+            $("#box6").css("color","white");
+    }
+    d.innerHTML =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+  
+
+LetraD = palabra[Dicta].substring(idLetra,idLetra + 1);
+
+if (d.innerHTML.toString().trim().length < eval("D" + LetraD).length && eval("D" + LetraD).includes(number) )
+    {return}
+    else {   
+    Lee(LetraD);
+    coloresPizarra();
+    evalua(d.innerHTML);
+    $(".etq").html('');
+    }
+    }
+  
+  
+    function Ayuda()
+    {
+      LeeCGB(Gres.PalabraPizarra);
+    }
+
+function ActualizaUsuLec()
+    {
+     
+    termino = "si";   
+    KEY = UsuarioActual + 'PalabrasPizarra';
+    get().then(function (value) {
+      try {
+      
+Dactilo = {
+Leccion1:value.Leccion1,
+Leccion2:value.Leccion2,
+Leccion3:value.Leccion3,
+Leccion4:value.Leccion4,
+Leccion5:value.Leccion5,
+Leccion6:value.Leccion6,
+Leccion7:value.Leccion7,
+Leccion8:value.Leccion8,
+Leccion9:value.Leccion9,
+Leccion10:value.Leccion10,
+Leccion11:value.Leccion11,
+Leccion12:value.Leccion12,
+Leccion13:value.Leccion13,
+Leccion14:value.Leccion14,
+Leccion15:value.Leccion15,
+Leccion16:value.Leccion16,
+Leccion17:value.Leccion17,
+Leccion18:value.Leccion18,
+Leccion19:value.Leccion19,
+Leccion20:value.Leccion20,
+Leccion21:value.Leccion21,
+Leccion22:value.Leccion22,
+};
+//console.log(value.Leccion2 + " y " + value.Leccion1);
+var DactiloM = [];
+    DactiloM["Leccion" + LeccionActual]=errorD.toString();
+    //DactiloM['Leccion' + leccion ]=LeccionV; 
+    var DactiloAc = Object.assign(Dactilo, DactiloM);
+
+    ///Actualiza Bd
+    KEY = UsuarioActual + 'PalabrasPizarra';
+    VALUE = DactiloAc;   
+    set().then(function (value) {
+ 
+if (errorD.length > 1) {
+    Lee(Gres.findelap + errorD.length  + Gres.errores);
+} 
+else if (errorD.length == 1 ){
+Lee(Gres.findelapUn);
+}
+else if (errorD.length == 0 ){
+Lee(Gres.findelapCorr);
+}
+
+    });
+  } catch (error) {
+
+    //console.log(error); 
+    var DactiloM = [];
+    DactiloM["Leccion" + LeccionActual]=errorD.toString();
+    var DactiloAc = Object.assign(Dactilo, DactiloM);
+    ///Actualiza Bd    
+    KEY = UsuarioActual + 'PalabrasPizarra';
+    VALUE = DactiloAc;   
+    set().then(function (value) { 
+      if (errorD.length > 1) {
+    Lee(Gres.findelap + errorD.length  + Gres.errores);
+} 
+else if (errorD.length == 1 ){
+Lee(Gres.findelapUn);
+}
+else if (errorD.length == 0 ){
+Lee(Gres.findelapCorr);
+}
+
+
+    //Lee("Fin de la  práctica");
+    });   
+    
+  } 
+
+})
+    
+}
+
+
+
+    </script>
+    <script>
+      $(document).ready(function() {
+        
+       // DeterminaMotor("");            
+      
+       var miVar3 =  setTimeout(function () {		
+
+        KEY = 'UsuarioActual';
+        get().then(function (value) {
+            UsuarioActual = value;
+        });
+        KEY = 'Practica';
+        get().then(function (value) {
+            LeccionActual = value;
+            palabra = eval("Leccion" + LeccionActual);// value.Leccion);
+            Lpalabras =  eval(palabra.length);
+            
+
+      DictarPrimera();
+
+        });
+
+  },1000); 
+  
+
+        
+     
+      });
+
+function Dpulsado(e){
+  var keyCode = e.keyCode;
+  var number = String.fromCharCode(keyCode);
+  if (termino == "si"){return}
+
+    if (number == 9){      
+            $("#box1").css("background-color","black");          
+            $("#box1").css("color","white");
+       
+    }
+    else if (number == 6){      
+       
+            $("#box2").css("background-color","black");          
+            $("#box2").css("color","white");
+    }
+    else if (number == 3){       
+       
+            $("#box3").css("background-color","black");          
+            $("#box3").css("color","white");
+    }
+    else if (number == 8){       
+      
+            $("#box4").css("background-color","black");          
+            $("#box4").css("color","white");
+    }
+    else if (number == 5){       
+      
+            $("#box5").css("background-color","black");          
+            $("#box5").css("color","white");
+    }
+    else if (number == 2){       
+      
+            $("#box6").css("background-color","black");          
+            $("#box6").css("color","white");
+    }
+}
+
+
+
+function coloresPizarra()
+{   
+ if (idLetra == 0){  
+    $("#pbox1").css("background-color",$("#box1").css("background-color"));
+    $("#pbox1").css("color",$("#box1").css("color"));
+    $("#pbox2").css("background-color",$("#box2").css("background-color"));
+    $("#pbox2").css("color",$("#box2").css("color"));
+    $("#pbox3").css("background-color",$("#box3").css("background-color"));
+    $("#pbox3").css("color",$("#box3").css("color"));
+    $("#pbox4").css("background-color",$("#box4").css("background-color"));
+    $("#pbox4").css("color",$("#box4").css("color"));
+    $("#pbox5").css("background-color",$("#box5").css("background-color"));
+    $("#pbox5").css("color",$("#box5").css("color"));
+    $("#pbox6").css("background-color",$("#box6").css("background-color"));
+    $("#pbox6").css("color",$("#box6").css("color"));
+  }else if (idLetra == 1){ 
+    //segunda
+    $("#pbox01").css("background-color",$("#box1").css("background-color"));
+    $("#pbox01").css("color",$("#box1").css("color"));
+    $("#pbox02").css("background-color",$("#box2").css("background-color"));
+    $("#pbox02").css("color",$("#box2").css("color"));
+    $("#pbox03").css("background-color",$("#box3").css("background-color"));
+    $("#pbox03").css("color",$("#box3").css("color"));
+    $("#pbox04").css("background-color",$("#box4").css("background-color"));
+    $("#pbox04").css("color",$("#box4").css("color"));
+    $("#pbox05").css("background-color",$("#box5").css("background-color"));
+    $("#pbox05").css("color",$("#box5").css("color"));
+    $("#pbox06").css("background-color",$("#box6").css("background-color"));
+    $("#pbox06").css("color",$("#box6").css("color"));
+
+  }else if (idLetra == 2){ 
+    //tercera
+    $("#pbox001").css("background-color",$("#box1").css("background-color"));
+    $("#pbox001").css("color",$("#box1").css("color"));
+    $("#pbox002").css("background-color",$("#box2").css("background-color"));
+    $("#pbox002").css("color",$("#box2").css("color"));
+    $("#pbox003").css("background-color",$("#box3").css("background-color"));
+    $("#pbox003").css("color",$("#box3").css("color"));
+    $("#pbox004").css("background-color",$("#box4").css("background-color"));
+    $("#pbox004").css("color",$("#box4").css("color"));
+    $("#pbox005").css("background-color",$("#box5").css("background-color"));
+    $("#pbox005").css("color",$("#box5").css("color"));
+    $("#pbox006").css("background-color",$("#box6").css("background-color"));
+    $("#pbox006").css("color",$("#box6").css("color"));
+  }else if (idLetra == 3){ 
+     //cuarta
+     $("#pbox0001").css("background-color",$("#box1").css("background-color"));
+     $("#pbox0001").css("color",$("#box1").css("color"));
+     $("#pbox0002").css("background-color",$("#box2").css("background-color"));
+     $("#pbox0002").css("color",$("#box2").css("color"));
+     $("#pbox0003").css("background-color",$("#box3").css("background-color"));
+     $("#pbox0003").css("color",$("#box3").css("color"));
+     $("#pbox0004").css("background-color",$("#box4").css("background-color"));
+     $("#pbox0004").css("color",$("#box4").css("color"));
+     $("#pbox0005").css("background-color",$("#box5").css("background-color"));
+     $("#pbox0005").css("color",$("#box5").css("color"));
+     $("#pbox0006").css("background-color",$("#box6").css("background-color"));
+     $("#pbox0006").css("color",$("#box6").css("color"));
+  }
+else if (idLetra == 4){ 
+     //quinta
+     $("#pbox00001").css("background-color",$("#box1").css("background-color"));
+     $("#pbox00001").css("color",$("#box1").css("color"));
+     $("#pbox00002").css("background-color",$("#box2").css("background-color"));
+     $("#pbox00002").css("color",$("#box2").css("color"));
+     $("#pbox00003").css("background-color",$("#box3").css("background-color"));
+     $("#pbox00003").css("color",$("#box3").css("color"));
+     $("#pbox00004").css("background-color",$("#box4").css("background-color"));
+     $("#pbox00004").css("color",$("#box4").css("color"));
+     $("#pbox00005").css("background-color",$("#box5").css("background-color"));
+     $("#pbox00005").css("color",$("#box5").css("color"));
+     $("#pbox00006").css("background-color",$("#box6").css("background-color"));
+     $("#pbox00006").css("color",$("#box6").css("color"));
+  }
+
+}
+
+
+
+     </script>
+  
+  
+  </body>
+  
+  </html>
+  

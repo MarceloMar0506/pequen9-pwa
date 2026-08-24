@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <title>Partitura</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+ 
+  
+  <meta content="Capacitación de Mediadores Tecnológicos Digitales" name="SUBJECT" />
+  <meta content="Educación" name="RATING" />
+  <meta content="Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+  <meta
+    content="Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora"
+    name="ABSTRACT" />
+  <meta
+    content="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual"
+    name="KEYWORDS" />
+  <link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32" />
+
+
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+ 
+  
+  <link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+  <script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script> 
+  <script src="./BraToPeq.js"></script>
+  <script src="./piano.js"></script>
+  <!-- <script src="./../ResB/audiosynth.js"></script> -->
+  <script src="./../ResB/Tone.js"></script> 
+
+  <script>
+    var anterior=0;
+    var indiceNota =0;
+
+  </script>
+
+  </head>
+  <body>
+    <form name="myForm">
+        <input name="myInput" type="file" >
+      </form>
+      <textarea id="texto" rows="4" cols="50"></textarea>
+      <button id="Smelodia" onclick="Suena()">Melodia</button>  <p>
+      <button  onclick="piano()">Piano</button>  
+      </p>
+      <br><p>
+        <p style="text-align: center;" >&nbsp;</i> </p>
+      </p>
+    
+<!-- Teclado Pulsado -->
+ <div class="grid">
+    <div style="line-height: 0.5;margin-left: 6vw; line-height:0.5;" id="letra">.</div>
+  
+    <div class="gridPlantilla">   
+    <!--  <div id="Sgenerador"> -->
+    <div id="Primerac" class="teclasE">
+    <elem class="box" id="box1" onclick="punto('1')" >1</elem>
+    <elem class="box" id="box4" onclick="punto('4')" >4</elem> 
+    <elem class="box" id="box2" onclick="punto('2')" >2</elem>     
+    <elem class="box" id="box5" onclick="punto('5')" >5</elem> 
+    <elem class="box" id="box3" onclick="punto('3')" >3</elem>   
+    <elem class="box" id="box6" onclick="punto('6')" >6</elem>            
+    </div>
+
+    <div id="Segundac" class="teclasE" style="display: none;">
+      <elem class="box" id="box01" onclick="punto2('1')">1</elem>	
+      <elem class="box" id="box04" onclick="punto2('4')">4</elem> 
+      <elem class="box" id="box02" onclick="punto2('2')">2</elem>
+      <elem class="box" id="box05" onclick="punto2('5')">5</elem>
+      <elem class="box" id="box03" onclick="punto2('3')">3</elem>
+      <elem class="box" id="box06" onclick="punto2('6')">6</elem>
+      </div>
+  
+      <div id="Tercerac" class="teclasE" style="display: none;">
+      <elem class="box" id="box001" onclick="punto3('1')">1</elem>	
+      <elem class="box" id="box004" onclick="punto3('4')">4</elem> 
+      <elem class="box" id="box002" onclick="punto3('2')">2</elem>
+      <elem class="box" id="box005" onclick="punto3('5')">5</elem>
+      <elem class="box" id="box003" onclick="punto3('3')">3</elem>
+      <elem class="box" id="box006" onclick="punto3('6')">6</elem>
+      </div>
+    </div> 
+
+
+
+
+
+    <div style="position: absolute; right: 0;">
+      <img id="FiguraImg" src="./../ResB/Nada.png" style="width: 24vw; margin-right: 4vw;"></span2><br>
+      <span2 id="EtiquetaDosTexto" style="margin-bottom: 25vw;font-size: 10vw;"></span2> 
+    </div>
+   <!-- //segunda fila -->
+    <!-- <div></div> -->
+    <div id="separador">&nbsp; </div>
+    <div id="separador">&nbsp; </div>
+
+    <p></p>
+    <div  style="position: absolute;bottom: 50%;border: solid 1px;" contentEditable="true" id="musica"></div><p>
+
+    </p>
+   
+
+    <!-- <div> <button onclick="espacio()" id="espacio" >ESPACIO</button> </div> -->
+    <div></div>
+
+  </div>
+
+
+    
+  </body>
+
+  </html>
+
+
+
+  <script>
+
+
+
+var input = myForm.myInput;
+var reader = new FileReader;
+var cadena = "";
+var compasActual = 1;
+var xAnterior =0;
+var xActual = 0;
+var nuevaCadena ="";
+
+input.addEventListener('change', onChange);
+
+
+function onChange(event) {
+
+ 
+
+  var file = event.target.files[0];
+  
+  reader.readAsText(file);
+  
+  reader.onload = onLoad;
+
+  
+}
+
+function onLoad() {
+
+
+
+  var result = reader.result; // Obtienes el texto
+  // En tu ejemplo lo obtienes de una petición HTTP
+  
+  var lineas = result.split('\n');
+  
+  
+  // o lineas.forEach(function(linea){ ... })
+  // o lineas.find(function(linea){ return linea == contraseña })
+  var contenido = "";
+  var partitura = []; 
+  for(var linea of lineas) {
+   // console.log('[linea]', linea);
+    contenido += linea + " "  ; 
+  }
+
+  $("#texto").text(contenido);
+
+  palabra="";
+  cadena = "";
+  nuevaCadena="";
+  $("#musica").html(palabra); 
+
+  
+  contenido =contenido.toString().replace(/ /g , "ª");
+  console.log(contenido);
+
+  for (let x = 0; x < contenido.length; x++) {
+    //verificar sostenidos o bemoles en este compas y repetirlos si hay
+    if (contenido[(x)] == "ª" ){
+        xAnterior = xActual; 
+        xActual = x; 
+        var notasActuales = contenido.substring(xAnterior,contenido.indexOf("ª",xAnterior+1) );
+        
+        var indiceBecuadro = notasActuales.indexOf("1");         
+        
+        //repite sostenidos en el compás 
+         var indiceSostenido = notasActuales.indexOf("3");         
+         if (indiceSostenido > -1 && indiceBecuadro == -1){
+            var notaA = notasActuales.substring(indiceSostenido + 1 , indiceSostenido + 2);
+            //console.log("compas actual con sostenido " + compasActual +  " ////  " + notasActuales + " " + notaA);
+            var re = new RegExp(notaA, 'g')    
+            notasActuales= notasActuales.replace(re,"3"+notaA);
+            notasActuales= notasActuales.replace(/33/g,"3");
+            console.log(compasActual + "<<<<<< " + notasActuales + " >>>>>>>>>>> " +  indiceSostenido + " incide del sostenido " + notaA);
+         }
+
+          //repite Bemoles en el compás
+         var indiceBemol = notasActuales.indexOf("2");         
+         if (indiceBemol > -1 && indiceBecuadro == -1){
+            var notaB = notasActuales.substring(indiceBemol + 1 , indiceBemol + 2);
+            console.log("compas actual con Bemol " + compasActual +  " ////  " + notasActuales + " " + notaB);
+            var re = new RegExp(notaB, 'g')    
+            notasActuales= notasActuales.replace(re,"2"+notaB);
+            notasActuales= notasActuales.replace(/22/g,"2");
+
+        //    console.log(compasActual + "<<<<<< " + notasActuales + " >>>>>>>>>>> " +  indiceSostenido + " incide del sostenido " + notaA);
+         }
+         
+         nuevaCadena+=notasActuales;
+         compasActual++;          
+       }
+  }
+
+nuevaCadena = nuevaCadena.replace(/ª/g,"");
+
+console.log(nuevaCadena + " Nueva");
+contenido = nuevaCadena;
+
+  var octava=0;
+  var element="";
+  var elementA="";
+  var elemento = "";
+   var elementoa = "";
+  
+ // console.log(contenido);
+  //contenido =contenido.toString().replace(/ /g , "");
+  for (let x = 0; x < contenido.length; x++) {
+    element = contenido[x].toString();
+  
+   // console.log(notaIndex.indexOf(element) + " <<< " + x);
+
+   try {
+     
+      elementA = contenido[x-1].toString();
+      elemento =  eval("n" + element);  
+      elementoa =  eval("n" + elementA);  
+
+      
+     
+      //si el anterior es nota      
+      if (notaIndex.indexOf(elementoa.charAt(0)) > 0  ){
+         anterior = notaIndex.indexOf(elementoa.charAt(0)); 
+         //console.log(elementoa + " <<<<<<->>>>>>>>>>>>>> " + anterior + " " + elementA);
+      }
+   } catch (error) {
+    console.log (elemento + " <<<<<<<<< " +  error + " " + element + " " + elementA + x);
+    anterior = indiceNota;
+   }
+  
+  // console.log(element + " " + x.toString() + "!!!!!!!!!!!!!!!!! >>>>>>>>> " +   elemento);
+   if (element == "'"){
+      partitura[x]="'";
+      octava = 1;     
+    }
+   else if (element == "^"){
+      partitura[x]="^";
+      octava = 2;     
+    }   
+   else if (element == "%"){
+      partitura[x]="%";
+      octava = 3;    
+    } 
+   else if (element == "@"){
+      octava = 4;
+      partitura[x]="@";    
+    }
+    else if (element == "{"){
+      partitura[x]="{";
+      octava = 5;      
+    }    
+    else if (element == '"'){
+      partitura[x]='"';
+      octava = 6;
+    }
+    else if (element == "_"){
+      partitura[x]="_";
+      octava = 7;
+    }
+    else if (element == "."){
+      //puntillo
+      partitura[x]="pun";
+    }
+    else if (element == "m"){      
+      partitura[x]="0r";
+     }
+     else if (element == "u"){    
+      partitura[x]="0b";
+    } 
+    else if (element == "v"){    
+      partitura[x]="0n";
+    }
+    else if (element == "x"){    
+      partitura[x]="0c";
+    }
+
+
+    
+    
+   //              1                  2                  3                  4                 5                  6                  7   
+   if (element != "'"  && element != "^"  && element != "%"  && element != "@" && element != "{"  && element != '"'  && element != '_'  && element != "¿"   && element.trim().length != 0 && element != "." ){
+  //if (notaIndex.indexOf(elemento.charAt(0)) > 0)
+ 
+    try {
+      element = eval("n" + element); 
+    } catch (error) {
+     console.log(element + " ingresa con error!!!!!!!!!!!!");
+   
+    if (element == "="){
+         element = "Fr";//Fa Redonda Fr      
+         elemento = element;
+    }  
+    else if (element == "("){
+         element = "Gr";//Sol Redonda Gr      
+         elemento = element;
+     }
+    else if (element == "!"){
+         element = "Ar";//La Redonda Ar      
+         elemento = element;
+     }     
+    else if (element == ")"){
+         element = "Br";//Si Redonda Br      
+         elemento = element;
+     }       
+    else if (element == '&'){
+         element = "Er";//Mi Redonda Er
+         elemento = element;    
+    }
+    else if (element == "?"){
+         element = "Cn";//Do negra      
+         elemento = element;
+     }         
+    else if (element == ":"){
+         element = "Dn";//Re negra      
+         elemento = element;
+     }   
+     else if (element == "$"){
+         element = "En";//Mi negra      
+         elemento = element;
+     }    
+     else if (element == "}"){
+         element = "Fn";//Fa negra      
+         elemento = element;
+     }  
+     else if (element == "\\"){
+         element = "Gn";//Sol negra      
+         elemento = element;
+     }    
+     else if (element == "["){
+         element = "An";//La negra      
+         elemento = element;
+     }
+     else if (element == "u"){
+         element = "0r";//silencio de redonda
+         elemento = element;
+     }      
+
+
+
+    console.log(element + " ingresa con error!!!!!!!!!!!!");
+    console.log(element + " cual es el que tira error?? " + elemento + " Error: " + error );  
+     
+    } 
+
+    
+     
+   
+indiceNota = notaIndex.indexOf(elemento.charAt(0));
+
+
+var octavaExplicita = false;
+if (contenido[(x-1)] == "'" || contenido[(x-1)] == "^" || contenido[(x-1)] == "%" || contenido[(x-1)] == "@" || contenido[(x-1)] == "{"  ){
+  octavaExplicita=true;
+}
+//console.log("compas  " + x +  " ////  " + contenido[(x)] + " " + contenido);
+
+
+ if ( element != "Sostenido" &&  element != "Bemol" && element != "Becuadro" && !element.toString().includes("S de")   )
+   {  
+  //  console.log(contenido[(x-1)] + " !== " + contenido[x] + " >>  " +  element + " element ???? " +  octava.toString()  + " ////// " +  anterior + " menor mayor?  " +  indiceNota );
+   if (anterior - indiceNota < - 4    && octavaExplicita == false  ){   
+    
+       //si es bemol
+       if (contenido[(x-1)] == "2"){
+        element= element.charAt(0)+"b"+ (octava  - 1).toString()+ element.substring(1);
+      //
+     }
+     //si es sostenido
+     else if (contenido[(x-1)] == "3"){
+        element= element.charAt(0)+"s"+ (octava  - 1).toString()+ element.substring(1);
+        console.log("es sotenido y baja una octava??? "  + anterior - indiceNota < - 4);
+       }else{
+        element= element.charAt(0)+(octava  - 1).toString()+ element.substring(1);          
+       }
+      
+      console.log(elemento.charAt(0)+(octava -1).toString()+ elemento.substring(1)  + " Armó bien Resta? ????????? " + anterior + "-  " + indiceNota)  ;
+      octava = parseInt(octava - 1);
+      partitura[x]= element; 
+    
+    }
+   else  if (anterior - indiceNota > 4 && octavaExplicita == false ){   
+       
+        //si es bemol
+       if (contenido[(x-1)] == "2"){
+        element= element.charAt(0)+"b"+(octava + 1).toString()+ element.substring(1);
+       }
+      //si es sostenido
+     else if (contenido[(x-1)] == "3"){
+        element= element.charAt(0)+"s"+ (octava  + 1).toString()+ element.substring(1);
+       }else{
+        element= element.charAt(0)+(octava + 1).toString()+ element.substring(1);
+      }
+        console.log(anterior + " - " + indiceNota + " > 3 ???? ");
+         console.log(elemento.charAt(0)+(octava +1).toString()+ elemento.substring(1)  + " Armó bien Suma ??????????")  ;
+         octava =  parseInt(octava  + 1);
+         partitura[x]= element; 
+      }
+    else{
+
+        //si es bemol
+        if (contenido[(x-1)] == "2"){
+          console.log("le pone bemol?????? " + octavaExplicita + " " + (anterior  - indiceNota).toString() + " vale??")
+          element= element.charAt(0)+"b"+ (octava).toString()+ element.substring(1);
+        }
+        //si es sostenido
+       else if (contenido[(x-1)] == "3"){
+        element= element.charAt(0)+"s"+ (octava).toString()+ element.substring(1);
+       }else{
+       // console.log("elemento" + elemento + " ------------------- " + element)
+        element= element.charAt(0)+(octava).toString()+ element.substring(1);
+       }
+
+    partitura[x]= element; 
+    }
+   
+
+  }
+
+
+   if ( contenido[(x)] != "." &&  contenido[(x)] != "'"  && contenido[(x)] != "^"  && contenido[(x)] != "%"  && contenido[(x)] != "@" && contenido[(x)] != "{"  && contenido[(x)] != '"'  && contenido[(x)] != '_'  && contenido[(x)] != "¿"  && contenido[(x)] != "ª" && element.trim().length != 0 && contenido[(x)] !="1" && contenido[(x)] !="2"  && contenido[(x)] != "3"){
+     // console.log("anterior " +elemento.charAt(0) + " " + contenido[(x)]  );
+     // anterior=  notaIndex.indexOf(elemento.charAt(0));
+     }
+
+    } 
+    else if (element.trim() == "ª"){        
+        partitura[x]= "Spa"; 
+    }else if (element == "¿"){
+        element = "Salto";
+        partitura[x]= element; 
+    }     
+    
+  }
+  console.log(partitura);
+  var filtrados = partitura.filter(item => item != ' ' && item != "Sostenido"   && item != "Bemol" && item != "'"  && item != "^"  && item != "%"  && item != "@" && item != "{" && item != "%3" && item != "%2"  && item != "@4" && item != "^2" && item != "{5" );
+  cadena = filtrados;
+  cadena  = cadena.toString().replace(/c,pun/g , "=");
+  cadena  = cadena.toString().replace(/n,pun/g , "-");
+  cadena  = cadena.toString().replace(/b,pun/g , ":");
+  cadena  = cadena.toString().replace(/r,pun/g , ".");
+  cadena  = cadena.toString().replace(/u,pun/g , " r");
+ 
+  console.log("Filtrado " +  cadena);
+  palabra = cadena;// eval("Melodia" + LeccionActual + "E");
+    $("#musica").html(palabra);  
+}
+</script>
+
+
+

@@ -1,0 +1,543 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista Alfabeto</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="Alfab.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Generales.js"></script>
+<script src="./../../pulsador.js"></script>
+<style>
+	#Primera{
+		padding: 0;
+	}
+ 
+</style>
+</head>
+
+<body  onkeyup="Npulsado(event)">
+
+	<div id="contenedor" style="height:90%">
+	 <div id="titulo3">
+		<div></div> 
+		<span2 id="EtiquetaUnoTexto">_</span2>	
+		<div></div>
+		</div>
+
+
+ <div id="grillaLista" style="grid-auto-columns: 1fr 1fr 1fr;">
+	<div id="Fiz"><img class="animated flash" src="./../../ResB/Fiz.png" onclick="atras()" alt=""></div> 
+
+  <!-- Teclado Pulsado -->
+  <div class="gridPlantilla" style="grid-template-columns: 1fr;">
+    
+   <!--  <div id="Sgenerador"> -->
+   <div id="Primera" class="teclas">
+	<elem class="box" id="box1">1</elem>	
+	<elem class="box" id="box4">4</elem> 
+	<elem class="box" id="box2">2</elem>
+	<elem class="box" id="box5">5</elem>
+	<elem class="box" id="box3">3</elem>
+	<elem class="box" id="box6">6</elem>
+	</div>
+
+	<div style="padding-right: 20vw;" id="Segunda" class="teclas" style="visibility: hidden;" >
+	<elem class="box" id="box01">1</elem>	
+	<elem class="box" id="box04">4</elem> 
+	<elem class="box" id="box02">2</elem>
+	<elem class="box" id="box05">5</elem>
+	<elem class="box" id="box03">3</elem>
+	<elem class="box" id="box06">6</elem>
+	</div>
+
+ 
+</div>
+<div id="Fder"><img class="animated flash" src="./../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+</div>
+
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+   </div>
+
+
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+ <!-- globo -->
+ <div  class="label" ></div>
+
+
+
+</div>
+
+<script>
+
+function adelante(){
+	window.speechSynthesis.cancel();
+	$("#Primera").css("display","inline-grid");
+	$("#EtiquetaDosTexto").text("");
+
+	//$("#Segunda").css("visibility","hidden");	
+	
+	nlec++;
+	if (nlec + 1 > alfab.length ) {nlec = alfab.length -1 }
+	//////console.log(nlec + " > 33 " );
+	var MLec = eval("D"+alfab[nlec]);
+	MLec = MLec.split('');
+		
+	var indices = [];
+	for(var i = 0; i < MLec.toString().length; i++) {
+		
+		if (MLec.toString().substring(i, i + 1)  === "P") 
+		{
+		indices.push(i);
+		}
+
+	}
+	////console.log(MLec + " Puntos?  " + indices.length);
+	if (indices.length == 2)
+	{
+		$(".gridPlantilla").css("grid-template-columns", "1fr 1fr");
+		//$("#Segunda").css("visibility","visible");
+		$("#Primera").css("padding-left","20vw");
+		//$("#Primera").css("margin","0");
+
+	}
+	else if (indices.length != 2)
+	{
+		$(".gridPlantilla").css("grid-template-columns", "1fr");
+		$("#Primera").css("padding-left","0");
+
+	}
+
+	MLec = MLec.toString().replace(/,/g , ", ")
+	//$("#Mleccion").text(MLec);
+
+	DiceL =  alfab[nlec] + ". " + MLec + ". ";
+
+	DiceL = DiceL.replace("á.", " a acentuada. ");
+	DiceL = DiceL.replace("é.", " é acentuada, ");
+	DiceL = DiceL.replace("í.", " í acentuada. ");
+	DiceL = DiceL.replace("ó.", " ó acentuada. ");
+	DiceL = DiceL.replace("ú.", " ú acentuada. ");
+	DiceL = DiceL.replace("y.", " i griega. ");
+	DiceL = DiceL.replace("ü.", " u con diéresis. ");
+	if ( alfab[nlec] == "may")
+	{
+		DiceL = "mayúscula. "  + MLec + ". ";
+	}
+	
+
+
+
+	var NNMLec =  eval("D"+alfab[nlec])[0].substring(0,eval("D"+alfab[nlec])[0].indexOf("Punto"));
+	NNMLec = NNMLec.replace("."," ");
+	$("#Mleccion").text("ALFABETO");
+
+
+
+	$(".box").css("color","black");
+	$(".box").css("background-color","white");
+	////console.log(MLec.substring(MLec.indexOf("Punto")+ 6));
+	var soloNumeros = MLec.substring(MLec.indexOf("Punto")+ 6);
+	////console.log("sin cortar " + soloNumeros);
+	if (indices.length == 1){
+	  var PrimeraC = eval("D"+alfab[nlec]);// soloNumeros;// .substring(soloNumeros.indexOf("Punto"));
+	 // alert(PrimeraC);
+	}
+	else if (indices.length == 2){
+	  var PrimeraC = soloNumeros.substring(0,soloNumeros.indexOf("Punto"));
+	  
+	}
+
+	var regex = /(\d+)/g;
+	////console.log(PrimeraC + " numeros??? " + soloNumeros.match(regex)); 
+	//PrimeraC  = PrimeraC.match(regex);
+	var PrimeraC = eval("D"+alfab[nlec]);// soloNumeros;// .substring(soloNumeros.indexOf("Punto"));
+	  
+	for (let index = 0; index < PrimeraC.length; index++)
+	{
+		const element = PrimeraC[index];		
+		//////console.log(element);
+		$("#box" + element).css("background-color","black");
+		$("#box" + element).css("color","white");
+	}
+
+	if (indices.length == 2){
+		
+		 var SegundaC = soloNumeros.substring(soloNumeros.indexOf("Punto")+ 6);
+		 SegundaC  = SegundaC.match(regex);
+		for (let index = 0; index < SegundaC.length; index++)
+		{
+			const element = SegundaC[index];		
+			////console.log("#box0" + element);
+			$("#box0" + element).css("background-color","black");
+			$("#box0" + element).css("color","white");
+		}
+	
+	}
+
+	if ( alfab[nlec] == "may")
+	{
+		$("#EtiquetaUnoTexto").text("Mayúscula");
+	}
+	else{
+		$("#EtiquetaUnoTexto").text(alfab[nlec]);
+	}	    
+		LeeCGB(DiceL);
+		$(".label").css("visibility","hidden");
+
+}
+function atras(){
+	$("#Primera").css("display","inline-grid");
+	$("#EtiquetaDosTexto").text("");
+	
+	nlec--;
+	if (nlec < 0){
+	 nlec = 0;
+	}
+	window.speechSynthesis.cancel();
+	$("#Primera").css("display","inline-grid");
+	$("#EtiquetaDosTexto").text("");
+
+	
+	var MLec = eval("D"+alfab[nlec]);
+	MLec = MLec.split('');
+		
+	var indices = [];
+	for(var i = 0; i < MLec.toString().length; i++) {
+		
+		if (MLec.toString().substring(i, i + 1)  === "P") 
+		{
+		indices.push(i);
+		}
+
+	}
+	////console.log(MLec + " Puntos?  " + indices.length);
+	if (indices.length == 2)
+	{
+		$(".gridPlantilla").css("grid-template-columns", "1fr 1fr");
+		//$("#Segunda").css("visibility","visible");
+		$("#Primera").css("padding-left","20vw");
+		//$("#Primera").css("margin","0");
+
+	}
+	else if (indices.length != 2)
+	{
+		$(".gridPlantilla").css("grid-template-columns", "1fr");
+		$("#Primera").css("padding-left","0");
+
+	}
+
+	MLec = MLec.toString().replace(/,/g , ", ")
+	//$("#Mleccion").text(MLec);
+
+	DiceL =  alfab[nlec] + ". " + MLec + ". ";
+
+	DiceL = DiceL.replace("á.", " a acentuada. ");
+	DiceL = DiceL.replace("é.", " é acentuada, ");
+	DiceL = DiceL.replace("í.", " í acentuada. ");
+	DiceL = DiceL.replace("ó.", " ó acentuada. ");
+	DiceL = DiceL.replace("ú.", " ú acentuada. ");
+	DiceL = DiceL.replace("y.", " i griega. ");
+	DiceL = DiceL.replace("ü.", " u con diéresis. ");
+	
+	if ( alfab[nlec] == "may")
+	{
+		DiceL = "mayúscula. " + MLec + ". ";
+	}
+
+
+
+	var NNMLec =  eval("D"+alfab[nlec])[0].substring(0,eval("D"+alfab[nlec])[0].indexOf("Punto"));
+	NNMLec = NNMLec.replace("."," ");
+	$("#Mleccion").text("ALFABETO");
+
+
+
+	$(".box").css("color","black");
+	$(".box").css("background-color","white");
+	////console.log(MLec.substring(MLec.indexOf("Punto")+ 6));
+	var soloNumeros = MLec.substring(MLec.indexOf("Punto")+ 6);
+	////console.log("sin cortar " + soloNumeros);
+	if (indices.length == 1){
+	  var PrimeraC = eval("D"+alfab[nlec]);// soloNumeros;// .substring(soloNumeros.indexOf("Punto"));
+	  //alert(PrimeraC);
+	}
+	else if (indices.length == 2){
+	  var PrimeraC = soloNumeros.substring(0,soloNumeros.indexOf("Punto"));
+	  
+	}
+
+	var regex = /(\d+)/g;
+	////console.log(PrimeraC + " numeros??? " + soloNumeros.match(regex)); 
+	//PrimeraC  = PrimeraC.match(regex);
+	var PrimeraC = eval("D"+alfab[nlec]);// soloNumeros;// .substring(soloNumeros.indexOf("Punto"));
+	  
+	for (let index = 0; index < PrimeraC.length; index++)
+	{
+		const element = PrimeraC[index];		
+		//////console.log(element);
+		$("#box" + element).css("background-color","black");
+		$("#box" + element).css("color","white");
+	}
+
+	if (indices.length == 2){
+		
+		 var SegundaC = soloNumeros.substring(soloNumeros.indexOf("Punto")+ 6);
+		 SegundaC  = SegundaC.match(regex);
+		for (let index = 0; index < SegundaC.length; index++)
+		{
+			const element = SegundaC[index];		
+			////console.log("#box0" + element);
+			$("#box0" + element).css("background-color","black");
+			$("#box0" + element).css("color","white");
+		}
+	
+	}
+	if ( alfab[nlec] == "may")
+	{
+		$("#EtiquetaUnoTexto").text("Mayúscula");
+	}
+	else{
+		$("#EtiquetaUnoTexto").text(alfab[nlec]);
+	}
+	// $("#EtiquetaUnoTexto").css("font-size","16vw");
+	//$(".central").css("top","-3vw");
+
+		LeeCGB(DiceL);
+		$(".label").css("visibility","hidden");
+	////console.log(DiceL);
+	
+}
+
+
+
+
+function ingresa()
+{
+	//AbrirLeccion(nlec - 1);
+	var NumLec = parseInt(nlec) - 1;
+	NumLec= NumLec.toString();
+	//alert(nlec);
+	sayTimeout = setTimeout(function () {		
+		if (nlec == 0)
+		{
+			//Gres.MenuPractica);
+			return;
+	    }else{
+			var miVar3 = setTimeout(function(){
+				window.speechSynthesis.cancel();
+				KEY = 'Practica';
+				VALUE = NumLec;
+				set();
+			},10);
+			var miVar4 = setTimeout(function(){
+				window.open("indexBPalabras.html","_self");
+			},200);	
+	    }
+	}, 500); 
+	
+
+}
+</script>
+
+<script>
+	$(document).ready(function() {				
+		$("#Primera").css("display","inline-grid");
+	    $("#EtiquetaDosTexto").text("");				
+		
+		var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){
+            //console.log(pulsaTrue + " pulsador ?? ");
+           var  mensaje2 = Gres.MenuAlfaP;            
+            DeterminaMotor(mensaje2);  
+          }
+          else{
+            var mensaje= Gres.MenuAlfa;            
+            DeterminaMotor(mensaje);  
+          }
+
+
+
+	});
+
+window.addEventListener("orientationchange", function(event) { 
+  if(event.target.screen.orientation.angle == 0 )
+  {
+	  Lee(UsarHorizontal);
+  } 
+});
+	var nlec = -1;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+	var DiceL = "";
+
+  $(document).on("touchstart mousedown", function( e ) {
+		
+		xPosVie = 0;
+		yPosVie = 0;
+		var touchstart = e.type === 'touchstart',
+
+			e = touchstart ? e.originalEvent : e,
+			pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+			pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+			xPosVie = pageX;
+			yPosVie = pageY;
+		//	////console.log(xPosVie);
+});
+
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+});
+
+$(document).on("touchend", function(e) {
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return}     
+      DifX =  xPosNew  - xPosVie ;
+  		if (DifX > 200){        
+	 		adelante();       
+    	}
+        if (DifX < -200){      		
+			atras();      
+        }
+        if (DifY > 100){
+                      //  ////console.log(" Baja #L"+ Quien + Opcion);                
+          return;
+        }
+        if (DifY < -100){
+         ////console.log(DifY + " Sube #L"+ Quien + Opcion);          
+          return;
+        }
+    return;
+
+});
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("./index.html","_self");
+	return;
+}
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+
+if (e.keyCode == 13) {
+	//	ingresa();
+}
+
+return;
+}
+function Ayuda()
+    {
+		
+		LeeCGB(Gres.MenuAlfa);
+    }
+	function Regresar()
+      {
+        window.open("./index.html","_self");
+      }
+	
+	
+
+function Npulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+ 
+  //Ayuda
+  if (keyCode == 112) {
+    //$.getScript("../F1/Generales.js", function(){
+      movil = 0;
+	  //TecladoQ();
+      Ayuda();
+    //});
+  }
+
+//   if (keyCode == 32)
+//   {
+//     Informe();
+//     return;
+//   }
+
+  //blq num
+  var active = event.getModifierState('NumLock');
+  
+  if (keyCode == 144)
+  {
+  if (active == false){Lee(Gres.TnNh);return;}
+  if (active == true){Lee(Gres.TnH);return;}
+  }
+  
+  
+  
+  //Blq num no bloqueado
+  if (keyCode >= 33 && keyCode <= 40)
+  {
+  if (active == false){Lee(Gres.NBtN);return;}
+  }
+  
+  if (keyCode ==  12 || keyCode == 45)
+  {
+  if (active == false){Lee(Gres.NBtN);return;}
+  }
+  
+  
+ 
+   if (keyCode ==116){return}
+   
+      if (keyCode >= 96 && keyCode <= 105) {
+          // Numpad keys        
+          keyCode -= 48;
+          number = String.fromCharCode(keyCode);
+      }
+	}
+
+</script>
+
+</body>
+
+</html>

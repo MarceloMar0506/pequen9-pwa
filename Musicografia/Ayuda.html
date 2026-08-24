@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Configuración de voz de Pequén</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../ResB/Idb-Keyval.js"></script>
+
+
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script>
+<script>
+    var nlec =0;
+    $(document).ready(function() {    
+      DeterminaMotor( document.title +  ". " + Gres.MenuOpcion);  
+}); 
+
+
+</script>
+<style>
+    .menuGrid{
+     width: 100vw;     
+     display: grid;
+     grid-template-rows: 1fr;
+     grid-template-columns: repeat(3,1fr);
+     justify-items: center; 
+     margin-bottom: 10vh;    
+   }
+   .menuGrid4{
+     width: 100vw;     
+     display: grid;
+     grid-template-rows: 1fr;
+     grid-template-columns: repeat(4,1fr);
+     justify-items: center; 
+     margin-bottom: 10vh    
+   }
+  
+   .itemS{
+     font-size: 4vh;     
+   }
+
+
+  img{width: 10vh;}
+  .f1 {
+     width: 5vh; 
+     z-index: 100;
+    
+  }
+  .imgA{
+    display: none;
+    position: fixed;
+    top: 1vh;
+    left: 0;
+    width: 100vw;
+  }
+  a, a:visited{
+     color: black;
+}
+#imgAyudaPz{
+  width: 30vw;
+}
+.im{
+    width: 50%;
+  }
+ #ayudaV{
+  width: 4vh;
+ }  
+</style>
+</head>
+
+<body onkeyup="Npulsado(event)" >  
+
+
+  <div id="contenedor">
+    <div id="titulo3">
+      <div class="f1" ontouchend="Regresar()" onclick="Regresar()"><img class="f1" src="./../ResB/FizR.png" alt="regresar"></div> 
+       <span2 id="nota">_</span2>       
+       <div class="f1"  ontouchend="AyudaM()" onclick="AyudaM()"><img  class="f1" src="./../ResB/Ayuda.png" alt="Ayuda"></div>
+       </div>
+
+
+
+<div class="menuGrid4">
+  <div>
+    <span4 id="P4" class="itemN" onclick=" MotoresConfig()" ><img id="ayudaV" src="./../ResB/Ayuda.png"/><br><span2 id="s4"  class="itemS" style="font-size: small;">MOTOR <br> DE VOZ</span2></span4>
+  </div>
+  <div>
+    <span4 id="P5" class="itemN" onclick=" Velocidad()" ><img id="ayudaV" src="./../ResB/QSonido.png"/><br><span2 id="s5"  class="itemS" style="font-size: small;">VELOCIDAD <br> DE VOZ</span2></span4>
+  </div>
+  <div>
+    <span4 id="P6" class="itemN" onclick="TonoConfig()"" ><img id="ayudaV" src="./../ResB/Ayuda.png"/><br><span2 id="s6"  class="itemS" style="font-size: small;">TONO <br> DE VOZ</span2></span4>
+  </div>
+  <div>
+    <span4 id="P7" class="itemN" onclick=" VolumenV()"><img id="ayudaV" src="./../ResB/QSonido.png"/><br><span2 id="s7"  class="itemS" style="font-size: small;">VOLUMEN <br> DE VOZ</span2></span4>
+  </div>
+
+  </div>
+
+  
+  <div>   
+  
+  </div>
+
+
+ <div style="height: 20vh;" ></div> <div></div> <div></div> <div></div>
+
+ <div>
+
+</div>
+<div></div>
+<div></div>
+<div>
+ 
+</div>
+</div>
+
+</div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+  <!-- globo -->
+  <div  class="label" style="width: 70vw;margin-left: 15vw;"></div>
+
+
+
+ 
+<script>
+var enter = 0;
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+if (keyCode == 112) {            
+      $(".AyudaV").css("display","none");
+      AyudaM();   
+  }
+
+if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+
+
+if (event.keyCode == 13)
+{
+  if (nlec == 1)
+  {  
+    LeeCGBD(Gres.Peq6)
+  }
+  if (nlec == 2)
+  {LeeCGB(Gres.TecladoQ)}
+  if (nlec == 3)
+  { window.open("../F1/AyudaBraille.html","_self");}
+  if (nlec == 4)
+  {
+   //Motor
+   if (enter == 0){
+    enter = 1;
+    MotorC();
+   }else{
+     //function  MotorConfig  en Habla js
+     MotoresConfig();
+   }
+  }
+
+  if (nlec == 5)
+  {
+    //Velocidad
+   if (enter == 0){
+    enter = 1;
+    VelocidadC();
+   }else{
+
+    //function  Velocidad en Habla js
+   Velocidad();
+   }
+    //console.log("valor de Enter " +  enter);
+  
+  }
+  if (nlec == 6)
+  {
+   //Tono
+   if (enter == 0){
+    enter = 1;
+    TonoC();
+   }else{
+    //function  Tono  en Habla js
+   TonoConfig();
+   }    
+  }
+
+  if (nlec == 7)
+  {
+   //Volumen
+   if (enter == 0){
+    enter = 1;
+    VolumenC();
+   }else{
+    //function  Volumnen  en Habla js
+    VolumenV();
+   }
+    
+  }
+  if (nlec == 8)
+  {www()}
+  if (nlec == 9)
+  {Mail()}
+  if (nlec == 10)
+  {wa()}
+  if (nlec == 11)
+  {MailConsulta()}
+ 
+
+}
+
+  }
+///Fin tecla pulsada
+function atras(){
+  enter = 0;
+  $("#imgTactil").css("display","none");
+  $("#imgAyudaPZ").css("display","none");
+  $("#imgAyudaCN").css("display","none");
+  $("#imgAyudaFJ").css("display","none");  
+  $(".AyudaV").css("display","none"); 
+	
+	nlec--;
+	if (nlec < 1){
+	 nlec = 11
+    }
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+    $("#s"+nlec).css({"background-color": "black"});
+    $("#s"+nlec).css({"color": "white"});
+    Lee($("#P" + nlec).text());
+	
+}
+
+function adelante(){
+
+  enter = 0;
+  $("#imgTactil").css("display","none");
+  $("#imgAyudaPZ").css("display","none");
+  $("#imgAyudaCN").css("display","none");
+  $("#imgAyudaFJ").css("display","none");  
+  $(".AyudaV").css("display","none"); 
+	
+	nlec++;
+	if (nlec > 11){
+	 nlec = 1
+    }
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+    $("#s"+nlec).css({"background-color": "black"});
+    $("#s"+nlec).css({"color": "white"});
+    Lee($("#P" + nlec).text());
+   
+	
+}
+
+function AyudaM()
+      {
+        LeeCGB(document.title);
+      }
+
+ 
+function Regresar()
+      {
+        window.open("./index.html","_self");
+      }
+  
+
+function VelocidadC(){  
+LeeCGB("Pulsar alternadamente la tecla enter para configurar la velocidad de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F2.")
+}
+function TonoC(){
+LeeCGB("Pulsar alternadamente la tecla enter para configurar el tono de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F4.")
+}
+function VolumenC(){
+LeeCGB(" Pulsar alternadamente la tecla enter para configurar el volumen de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F8. El valor 1 es el máximo y el valor 0 es el mínimo que equivale a silencio")
+}
+
+
+function MotorC(){
+  LeeCGB("Pulsar alternadamente la tecla enter para configurar el motor de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F3.")  
+}
+
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Pequén Dice</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="Estilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<!-- <script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script> -->
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<script>
+   var letras = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z"];
+   shuffle(letras);
+   console.log(letras);
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+
+
+ function shuffle(array) {
+   array.sort(() => Math.random() - 0.5);
+ }
+
+</script>
+
+</head>
+
+<body >
+
+<div id="contenedor">
+ 
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+   </div>
+
+  
+   <div id="contenedorPD">
+   
+<div id="Pqdice">
+  <div  id="bot7" style="background-color: aqua;" >7</div>
+  <div id="bot8" style="background-color: yellowgreen;">8</div>
+  <div id="bot9"style="background-color: aqua;">9 </div>
+  <div id="bot4" style="background-color: yellowgreen;" >4 </div>
+  <div id="bot5"style="background-color: yellow;">5</div>
+  <div id="bot6" style="background-color: yellowgreen;">6</div>
+  <div id="bot1" style="background-color: aqua;">1</div>
+  <div id="bot2" style="background-color: yellowgreen;">2 </div>
+  <div id="bot3"  style="background-color: aqua;">3 </div>
+  </div>
+
+  <div id="Pi" class="grillaC">
+    <div>  <elem class="box" id="box1">1</elem>	</div>
+    <div><elem class="box" id="box4">4</elem></div>
+    <div><elem class="box" id="box2">2</elem></div>
+    <div><elem class="box" id="box5">5</elem></div>
+    <div><elem class="box" id="box3">3</elem></div>
+     <div><elem class="box" id="box6">6</elem></div>
+    </div>
+  </div>  
+
+  
+</div>
+</div>
+
+</div>
+
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 2%;margin-left: 10%;width:85vw"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+
+ <!-- <div id="ayudaF1">
+  <ul  style="float:left" id="myList">
+  
+</ul> -->
+
+ </div>
+
+ <div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv0"></h2>
+  <h2 class="etq" id="statusdiv02"></h2>
+  <h2 class="etq" id="statusdiv03"></h2>
+  <h2 class="etq" id="statusdiv04"></h2>
+  <h2 class="etq" id="statusdiv05"></h2>
+  <h2 class="etq" id="statusdiv06"></h2>
+   </div>
+
+
+ <audio id="myAudio" >
+</audio>
+ 
+<script>
+//var numeros = [1, 2, 3,4,5,6,7,8,9];
+var vnumero =0;
+var resuelto= 0;
+var numeroAcumulado ="";
+//numeros= shuffle(numeros); 
+var tempLenNumeros =0;
+  var audio = document.createElement('audio');
+
+$(document).ready(function() {
+var x = 0;
+DeterminaMotor("Memoriza y repite la secuencia de letras. Pequén dice. " + letras[vnumero] );
+});
+
+
+
+$(document).keydown(function(e) { 
+    
+    if(e.keyCode != 83 && e.keyCode != 68 && e.keyCode != 70 && e.keyCode != 74 && e.keyCode != 75 && e.keyCode != 76 &&  e.keyCode != 32 )
+    {
+     LeeCGB("Usar el teclado virtual Braille");
+     return;
+    }
+ 
+     if (ResCelda == 0){        
+     if (e.keyCode == 70) {statusdiv.innerHTML = '1'; number = 1;
+         $("#box1").css("background-color","black");          
+         $("#box1").css("color","white");
+         pulsada = ""; pulsada = "";} //F 
+     
+     if (e.keyCode == 68) {statusdiv2.innerHTML = '2'; number = 2;
+         $("#box2").css("background-color","black");          
+         $("#box2").css("color","white"); pulsada = "";} //D
+     if (e.keyCode == 83) {statusdiv3.innerHTML = '3'; number = 3;
+         $("#box3").css("background-color","black");          
+         $("#box3").css("color","white"); pulsada = "";} //S		
+ 
+     if (e.keyCode == 74) {statusdiv4.innerHTML = '4'; number = 4;
+         $("#box4").css("background-color","black");          
+         $("#box4").css("color","white"); pulsada = "";} //J
+ 
+   
+     if (e.keyCode == 75) {statusdiv5.innerHTML = '5'; number = 5;
+         $("#box5").css("background-color","black");          
+         $("#box5").css("color","white"); pulsada = "";} //K
+ 
+         
+     if (e.keyCode == 76) {statusdiv6.innerHTML = '6'; number = 6;
+         $("#box6").css("background-color","black");          
+         $("#box6").css("color","white"); pulsada = "";} //L  
+ 
+     }   
+   
+   
+ });
+ 
+
+
+document.body.addEventListener('keyup', function(e) {
+ 
+  if (e.keyCode == 112){
+     Ayuda();
+      return;
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+  if (e.keyCode == 32){ 
+    vnumero=0;
+    resuelto = 0;
+   // numeros= shuffle(numeros); 
+    LeeCGB("De nuevo. Memoriza y repite la secuencia de números. Pequén dice. " + numeros[vnumero] );
+     return;
+  }
+  if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}
+
+ //blq num
+  var active = event.getModifierState('NumLock');
+  var keyCode = e.keyCode;
+
+  if (keyCode == 144)
+  {
+  if (active == false){LeeCGB(Gres.TnNh );return;}
+  if (active == true){LeeCGB(Gres.TnH );return;}
+  }
+  
+  
+  
+  //Blq num no bloqueado
+  if (keyCode >= 33 && keyCode <= 40)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+  
+  if (keyCode ==  12 || keyCode == 45)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+  
+ 
+
+
+
+if  ($.isNumeric(e.key) == false) {
+  LeeCGB("No es un número");
+  return;
+}
+//&& vnumero < (resuelto + 1)
+
+if (e.key == numeros[vnumero] ){
+  //console.log("bien" + e.key); 
+  LeeCGB(numeros[vnumero].toString() + ".") 
+ 
+  $("#bot" + numeros[vnumero] ).animate({opacity:"0.2"},300);
+  $("#bot" + numeros[vnumero] ).animate({opacity:"1"},300);
+ 
+  vnumero++;
+  } 
+else if (e.key != numeros[vnumero] ){
+  //console.log("mal de nuevo" + e.key);  
+  vnumero=0;
+  resuelto = 0;
+  //numeros= shuffle(numeros); 
+  LeeNumero("¡Jugamos de nuevo!. Memoriza y repite la secuencia de números. Pequén dice. " + numeros[vnumero] );
+  return; 
+
+  } 
+
+///fin
+if (vnumero == 9){
+  LeeCGB("¡Muy bien! Juego resuelto. Pulsar barra espaciadora para repetir o escape para salir ");
+  return;
+}
+
+  //console.log((resuelto) + "  == " +  vnumero);
+if ((resuelto + 1 ) ==  vnumero  ){ 
+
+  resuelto++; 
+  var i 
+  numeroAcumulado="";
+  for (i=0;i<=resuelto;i++) { 
+    numeroAcumulado+= numeros[i] + ". ";    
+  }
+
+ 
+  LeeNumero(numeros[vnumero-1].toString() + ". pequén dice. " + numeroAcumulado +". juega" );
+  vnumero=0;
+}
+
+Tpulsada = e.key.toString().toUpperCase();
+//console.log(Tpulsada)
+//EvaluaLetra(Tpulsada);
+});
+
+
+
+
+
+function Regresar()
+{
+window.open( "../index.html","_self"); 
+}
+
+aud = document.getElementById("myAudio");
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+ 
+  LeeCGB(document.title + ". Memoriza y repite la secuencia de números con el teclado numérico"  );  
+}
+
+// function shuffle(array) {
+//   var currentIndex = array.length, temporaryValue, randomIndex;
+
+//   // Mientras queden elementos a mezclar...
+//   while (0 !== currentIndex) {
+
+//     // Seleccionar un elemento sin mezclar...
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex -= 1;
+
+//     // E intercambiarlo con el elemento actual
+//     temporaryValue = array[currentIndex];
+//     array[currentIndex] = array[randomIndex];
+//     array[randomIndex] = temporaryValue;
+//   }
+
+//   return array;
+// }
+
+
+function LeeNumero(texto)
+  { 
+  window.speechSynthesis.cancel();
+  TextoLargo[0] = texto;
+  indEs=0;
+  TextoLargo = texto.split(". ");
+  $(".label").html(TextoLargo[0]);
+  $('.label').css('text-align','left');  
+  $('#label').css('text-align','left'); 
+  $(".label").css("visibility","visible");
+ 
+  msgNo = new SpeechSynthesisUtterance(TextoLargo[0]);
+  msgNo.voice = speechSynthesis.getVoices()[Voz];
+  msgNo.volume=Volumen;
+  msgNo.rate = Veloz;	
+  msgNo.pitch = Tono;	
+  msgNo.onboundary = function(event) { 
+    }	
+   msgNo.onend = function(event) {
+   var amISpeaking = speechSynthesis.speaking; 
+  if (TextoLargo.length > 0)
+   {
+   indEs ++;
+   LeeSiguienteND();
+   return;
+   }
+  EsperaAnim();
+  }
+  window.speechSynthesis.speak(msgNo);
+  HablaAnim();
+  
+  } 
+  
+  function LeeSiguienteND()
+  {
+ // if (TextoLargo[indEs] == undefined){return}
+  
+  $(".label").html(TextoLargo[indEs]);  
+  $('.label').css('text-align','left');  
+  $('#label').css('text-align','left'); 
+ var texto = $(".label").text();
+ if (texto.includes("'Y")){
+   texto = texto.replace("'Y'","i griega")
+ }  
+  msgNo = new SpeechSynthesisUtterance(texto);
+  
+  if  ($.isNumeric(texto) == true) {
+  $("#bot" + texto ).animate({opacity:"0.2"},300);
+  $("#bot" + texto ).animate({opacity:"1"},300);
+  }
+
+  msgNo.voice = speechSynthesis.getVoices()[Voz];
+  msgNo.volume=Volumen;
+  msgNo.rate = Veloz;	
+  msgNo.pitch = Tono;	
+    
+   msgNo.onend = function(event) {
+    
+    indEs ++;
+
+    if (TextoLargo[indEs] != undefined)
+    {    
+    LeeSiguienteND();
+    }
+    else{
+    EsperaAnim();
+    //Dictar();
+   }
+  }
+  HablaAnim();
+  window.speechSynthesis.speak(msgNo);    
+  }
+
+ 
+
+
+
+	</script>
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Excepciones</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../../ResB/favico.png" sizes="32x3/>
+<link href="../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../../ResB/jquery-3.3.1.min.js"></script>
+<script src="../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="../../ResB/Habla.js"></script>
+<script type="text/javascript" src="PAUnSigno.js"></script>
+<script type="text/javascript" src="../../ResB/AnimP.js"></script>
+<script src="../../F1/Generales.js"></script>
+<script src="./LeeUnS.js"></script>
+<style>
+#Primera{
+	padding: 0;
+}
+</style>
+</head>
+<!-- onkeyup="Npulsado(event)" -->
+<body>
+
+
+<div id="contenedor" style="height:100%;text-align: left;" >
+	<div id="titulo3">
+	   <div ></div> 
+	   <span2 id="EtiquetaUnoTexto" style="font-size: 10vw;"></span2>	
+	   <div class="f1" ontouchend="Ayuda()" onclick="Ayuda()"><img class="f1" src="../../ResB/Ayuda.png" alt="Ayuda"></div>
+	 </div>
+
+<h4 id="e1" class="itemS">Ejemplos donde no se usa contracción 'on' porque sólo debe ir después de consonante:</h4>
+<p id="p1" style="display : none;">
+<br><span id="l11">'neonato' Primera celda 1 3 4 5, segunda 1 5, tercera 1 3 5, cuarta 1 3 4 5, quinta 1, sexta 2 3 4 5, séptima 1 3 5</span>
+<br><span  id="l12"> 'leones' Primera celda 1 2 3, segunda 1 5, tercera 1 3 5, cuarta 1 3 4 5, quinta 1 2 4 6</span>
+<br><span  id="l13">'peones' Primera celda 1 2 3 4, segunda 1 5, tercera 1 3 5, cuarta 1 3 4 5, quinta 1 2 4</span> 
+</p>
+<h4 id="e2">Ejemplos de palabras que no se contraen con la letra anterior sino con la posterior:</h4>
+<p id="p2" style="display : none">
+'afuera' Primera celda 1, segunda 1 2 4, tercera 1 3 6, cuarta 2 3 6, quinta 1
+<br><span id="l21">'cuerpo' Primera celda 1 4, segunda 1 3 6, tercera 2 3 6, cuarta 1 2 3 4, quinta 1 3 5</span>
+<br><span id="l22">'cuento' Primera celda 1 4, segunda 1 3 6, tercera 2 5, cuarta 2 3 4 5, quinta 1 3 5</span>
+<br><span id="l23">'hueso' Primera celda 1 2 5, segunda 1 3 6, tercera 1 2 4 6, cuarta 1 3 5</span>
+<br>'puente' Primera celda 1 2 3 4, segunda 1 3 6, tercera 2 5, cuarta 2 3 4 5, quinta 1 5
+<br>'cuenca' Primera celda 1 4, segunda 1 3 6,tercera 2 5, cuarta 1 4, quinta 1
+<br>'cuenta' Primera celda 1 4, segunda 1 3 6, tercera 2 5, cuarta 2 3 4 5, quinta 1
+</p>
+<h4 id="e3" class="itemS">Ejemplos donde no se usa contracción u e por pertenecer a sílaba g u e:</h4>
+<p id="p3" style="display : none">
+'pague':  Primera celda 1 2 3 4, segunda 1, tercera 1 2 4 5, cuarta 1 3 6, quinta 1 
+<br>'dengue':  Primera celda 1 4 5, segunda 2 6, tercera 1 2 4 5, cuarta 1 3 6, quinta 1 
+<br>'cargue':  Primera celda 1 4, segunda 1 6, tercera 1 2 4 5, cuarta 1 3 6, quinta 1 
+<br>'albergue':  Primera celda 1 3, segunda 1 2, tercera 2 3 6, cuarta 1 2 4 5, quinta 1 3 6, sexta 1 
+<br>'despegue':  Primera celda 1 4 5, segunda 1 2 4 6, tercera 1 2 3 4, cuarta 1 5, quinta 1 2 4 5, sexta 1 3 6, séptima 1 
+<br>'desfogue':  Primera celda 1 4 5, segunda 1 2 4 6, tercera 1 2 4, cuarta 1 3 5, quinta 1 2 4 5, sexta 1 3 6, séptima 1 
+<br>'despliegue':  Primera celda 1 4 5, segunda 1 2 4 6, tercera 1 2 3 4, cuarta 1 2 3, quinta 2 4, sexta 1 5, séptima 1 2 4 5, octava 1 3 6, novena 1 
+<br>'enjuague':  Primera celda 2 6, segunda 2 4 5, tercera 1 3 6, cuarta 1, quinta 1 2 4 5, sexta 1 3 6, séptima 1 
+<br>'llegue':  Primera celda 1 2 3 4 5 6, segunda 1 5, tercera 1 2 4 5, cuarta 1 3 6, quinta 1 
+<br>'merengue':  Primera celda 1 3 4, segunda 2 3 6, tercera 2 6, cuarta 1 2 4 5, quinta 1 3 6, sexta 1 
+<br>'pliegue':  Primera celda 1 2 3 4, segunda 1 2 3, tercera 2 4, cuarta 1 5, quinta 1 2 4 5, sexta 1 3 6, séptima 1 
+<br>'repliegue':  Primera celda 1 2 3 5, segunda 1 2 3 4, tercera 1 2 3, cuarta 2 4, quinta 1 5, sexta 1 2 4 5, séptima 1 3 6, octava 1 
+</p>
+<h4 id="e4" class="itemS">Ejemplos de palabras que no se contraen porque el dígrafo lleva acento:</h4>
+<p id="p4" style="display : none">
+'afán':  Primera celda 1, segunda 1 2 4, tercera 1 2 3 5 6, cuarta 1 3 4 5
+<br>'árbol':  Primera celda 1 2 3 5 6, segunda 1 2 3 5, tercera 1 2, cuarta 1 3 5, quinta 1 2 3"
+<br>'árbitro':  Primera celda 1 2 3 5 6, segunda 1 2 3 5, tercera 1 2, cuarta 2 4, quinta 3 5 6, sexta 1 3 5
+<br>'áspero':  Primera celda 1 2 3 5 6, segunda 2 3 4, tercera 1 2 3 4, cuarta 2 3 6, quinta 1 3 
+<br>'mástil':  Primera celda 1 3 4, segunda 1 2 3 5 6, tercera 2 3 4, cuarta 2 3 4 5, quinta 2 4, sexta 1 2 3
+<br>'césped':  Primera celda 1 4, segunda 2 3 4 6, tercera 2 3 4, cuarta 1 2 3 4, quinta 1 5 , sexta 1 4 5
+<br>'bebés':  Primera celda 1 2, segunda 1 5, tercera 1 2, cuarta 2 3 4 6, quinta 2 3 4"
+</p>
+<h4 id="e5" class="itemS">Ejemplos donde no se aplica la contracción 'a b' al final de la palabra para evitar confusión con coma ortográfica:</h4>
+<p id="p5" style="display : none">
+'fab':  Primera celda 1 2 4, segunda 1, tercera 1 
+<br>'baobab':  Primera celda 1 2, segunda 1, tercera 1 3 5, cuarta 1 2, quinta 1, sexta 1 
+<br>'mayab':  Primera celda 1 3 4, segunda 1, tercera 1 3 4 5 6, cuarta 1, quinta 1 
+<br>'mihrab':  Primera celda 1 3 4, segunda 2 4, tercera 1 2 5, cuarta 1 2 3 5, quinta 1, sexta 1 2
+<br>'nabab':  Primera celda 1 3 4 5, segunda 1, tercera 1 2, cuarta 1, quinta 1 
+<br>'salab':  Primera celda 2 3 4, segunda 1, tercera 1 2 3, cuarta 1, quinta 1 
+</p>
+
+</div>
+
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 3%;margin-left: 35%;width: 30%;display: none;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ <!-- //Flechas animadas -->
+ <!-- <div id="Pie" style="text-align: center; margin-right : auto; margin-left: auto;top:90%;width: 15%;">
+	<div class="css-arrow-left"></div>
+	<div class="css-arrow-right"></div>
+	</div> -->
+
+<script>
+
+function adelante(){	
+	nlec++;	
+	if (nlec > 3)
+	 {nlec = 1;}
+	$("span").css("text-decoration", "none"); 
+	$("span").css('font-weight', 'normal');   	   	
+    $("#l" + nEnc + nlec).css("text-decoration", "underline");
+	$("#l" + nEnc + nlec).css('font-weight', 'bold');   	   	
+	LeeCGB($("#l" + nEnc + nlec).text() );
+}
+
+
+
+function atras(){
+	nlec--;
+	if (nlec < 0){
+	 nlec =  5;
+	}
+}
+
+function abajo(){	
+	nEnc++;	
+	if (nEnc > 5)
+	 {nEnc = 1;}	
+	
+	$("h4").css({"background-color": "white"});
+    $("h4").css({"color": "black"});   
+    $("#e" + nEnc).css("background-color", "black");
+    $("#e" + nEnc).css("color", "white");
+	$("p").css({"display":"none"})
+	$("#p"+nEnc).css({"display":"block"})
+
+	//$("#e" + nEnc).focus();
+	Lee( $("#e" + nEnc).text() + ".  pulsar teclas derecha o izquierda para recorrerlos" );
+}
+
+
+
+</script>
+
+<script>
+	$(document).ready(function() {
+		
+DeterminaMotor();
+
+$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	$("#Primera").css("display","inline-grid");
+if (movil == 0){
+			$("#Pie").css("display","none");
+		}
+
+ 
+	});
+	var nlec = 0;
+	var nEnc = 0;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+
+  $(document).on("touchstart mousedown", function( e ) {
+		
+		xPosVie = 0;
+		yPosVie = 0;
+		var touchstart = e.type === 'touchstart',
+
+			e = touchstart ? e.originalEvent : e,
+			pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+			pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+			xPosVie = pageX;
+			yPosVie = pageY;
+			////console.log(xPosVie);
+});
+
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+});
+
+$(document).on("touchend", function(e) {
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return} 
+      DifX =  xPosNew  - xPosVie;
+	  ////console.log(xPosNew);
+         //arrastró a la derecha
+  		if (DifX > 200){        
+ 	 		////console.log( DifX + " derecha " nlec );
+	 		adelante();        
+    	}
+
+        if (DifX < -200){      
+			////console.log(DifX + " izquierda " nlec);
+			atras();      
+        }
+
+        if (DifY > 100){
+        
+              //  ////console.log(" Baja #L" Quien + Opcion);
+        
+        
+          return;
+        }
+
+        if (DifY < -100){
+        
+          ////console.log(DifY + " Sube #L" Quien + Opcion);
+        
+
+          
+          return;
+        }
+    return;
+
+});
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {arriba()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {abajo()}
+if (e.keyCode == 112) {
+   // $.getScript("../../F1/Generales.js", function(){
+      movil = 0;
+	  ////TecladoQ();
+	  LeeCGB(Gres.ListaPUnS);
+    //});
+  }
+
+
+return;
+}
+function Ayuda()
+    {
+      LeeCGB(Gres.ListaPUnS);
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+	
+
+
+</script>
+
+</body>
+
+</html>

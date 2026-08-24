@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Dactilografía</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="42x42"/>
+
+<link href="./../../ResB/materialize.css" type="text/css" rel="stylesheet"/> 
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../ResB/VariableDicta.js"></script>  
+<script type="text/javascript" src="./../../ResB/Lecciones.js"></script>  
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/Reloj.js"></script>
+<script type="text/javascript" src="./../../ResB/progressbar.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Practicaes.js"></script>
+<script type="text/javascript" language="javascript">
+$(document).ready(function() {
+
+  $('form').keypress(function(e){  
+  
+    if(e == 13){
+      return false;
+    }
+     if(e == 38){
+      return false;
+    }
+    if(e == 40){
+      return false;
+    }
+   
+  });
+  
+ 
+  $('input').keypress(function(e){
+  
+    if(e.which == 13){
+      return false;
+    }
+    if(e.which == 38){
+      return false;
+    }
+    if(e.which == 40){
+      return false;
+    }
+    
+  });
+
+});
+</script> 
+
+
+<style type="text/css">
+.auto-style1 {
+	text-align: left;
+}
+#progressBar{
+  background-color: #68a3db;
+  color: black;
+  font-size: 3vh;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+    }
+  #progreso{
+    position: absolute;
+    left: 0;
+    bottom: 0;    
+    width: 100vw;
+    text-align: center;
+  }
+</style>
+
+
+</head>
+
+<body onkeyup="EvaluaLetra(event)" onclick="noUsesM(event)">
+ <script type="text/javascript" src="./../../ResB/BDicta.js"></script>
+  <div id="titulo3" style="text-align: center;">
+    <div></div> 
+    <div id="nprac"></div> 
+    <div></div>
+    </div>
+
+<div class="grid" id="grid" style="grid-template-columns: 0.5fr 2fr 0.5fr;">
+<div id="izquierda" style="font-size: 25vh;text-align: center;">
+ <label class="Netiqueta" id="EtiquetaUno">_</label>
+ 
+</div>
+<div class="imagencentral" id="CEntroImagen" >
+        <div class="row" style="padding:0;width: 200%;margin-left: -60%;" >
+            <div class="col s11 offset-s1 center" >
+            <div class="col s1 yellow btn" id="q" style="width: 4%; ">Q </div>
+            <div class="col s1 btn" id="w" style="background-color: #9966CC;width: 4%; "> W </div>
+            <div class="col s1 btn" id="e" style="background-color: #68a3db;width: 4%; "> E </div>
+            <div class="col s1 green btn" id="r" style="width: 4%; "> R </div>
+            <div class="col s1 green btn" id="t" style="width: 4%; "> T </div>
+            <div class="col s1 btn" id="y" style="background-color: #FF9999;width: 4%; "> Y </div>
+            <div class="col s1 btn" id="u" style="background-color: #FF9999;width: 4%; "> U </div>
+            <div class="col s1 btn" id="i" style="background-color:#68a3db;width: 4%; "> I </div>
+            <div class="col s1 btn" id="o" style="background-color: #9966CC;width: 4%; "> O </div>
+            <div class="col s1 yellow btn" id="p" style="width: 4%; "> P </div>
+            <div class="col s1 yellow btn" id="acento" style="width: 4%;font-size: 3vw;"> ` </div>
+          </div>
+        </div>
+        <div class="row"  style="padding:0;width: 200%;margin-left: -55%;">
+          <div class="col s11 offset-s1" >
+            <div class="col s1 yellow btn" id="a" style="width: 4%;"> A</div>
+            <div class="col s1 btn" id="s" style="background-color: #9966CC;width: 4%;"> S</div>
+            <div class="col s1 btn" id="d" style="background-color: #68a3db;width: 4%;"> D</div>
+            <div class="col s1 green btn" id="f" style="text-decoration: underline;width: 4%;" > F</div>
+            <div class="col s1 green btn" id="g"style="width: 4%;"> G</div>
+            <div class="col s1 btn" id="h" style="background-color: #FF9999;width: 4%;"> H</div>
+            <div class="col s1 btn" id="j" style="background-color: #FF9999;text-decoration: underline;width: 4%;"> J</div>
+            <div class="col s1 btn" id="k" style="background-color: #68a3db;width: 4%;"> K</div>
+            <div class="col s1 btn" id="l" style="background-color: #9966CC;width: 4%;"> L</div>
+            <div class="col s1 yellow btn" id="ñ"style="width: 4%;"> Ñ</div>
+            <div class="col s1 yellow btn" id="acento" style="width: 4%;font-size: 3vw;"> ´ </div>
+          </div>        
+        </div>
+        
+        <div class="row" style="padding:0;width: 200%;margin-left: -70%;">
+          <div class="col s11 offset-s2">
+            <div class="col s1 yellow btn" id="z" style="width: 4%;"> Z </div>
+            <div class="col s1 btn" id="x" style="background-color: #9966CC;width: 4%;"> X </div>
+            <div class="col s1 btn" id="c" style="background-color: #68a3db;width: 4%;"> C </div>
+            <div class="col s1 green btn" id="v" style="width: 4%;"> V </div>
+            <div class="col s1 green btn" id="b" style="width: 4%;"> B </div>
+            <div class="col s1 btn" id="n" style="background-color: #FF9999;width: 4%;"> N </div>
+            <div class="col s1 btn" id="m" style="background-color: #FF9999;width: 4%;"> M </div>
+            <div class="col s1 btn" id="COMA" style="background-color: #68a3db;width: 4%;"> , </div>
+           <div class="col s1  btn" id="PUNTO" style="background-color: #9966CC;width: 4%;"> . </div>
+           <div class="col s1 yellow btn" id="guion"style="width: 4%;"> - </div>
+          </div>
+        </div>
+
+<br/>
+</div>
+<div id="derecha" style="font-size: 5vh;" >
+<!-- Tiempo -->
+    <h2 style="width:100%;height:100%;text-align:center">Tiempo</h2>
+</div>
+</div><!-- Grid -->
+</div>
+ <!-- globo -->
+ <div  class="label" style="margin-left: 15vw;bottom: 10vh;background-color: white;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+ <h3 id="Pie" style="font-size: 2vh;margin-bottom: 4vh;"><b>[Ctrl] CONTROL: REPITE LA LETRA DICTADA</b> </h3>
+<div id="progreso" style="text-align: center;width: 100vw;">
+<div id="progressBar" style="width: 1vw;"></div>
+</div>
+
+
+</div>
+	
+	</div>
+ <ul  style="float:left" id="myList">
+  
+</ul>
+
+</body>
+
+<script>
+$(document).ready(function() {
+ 
+  termino = "nn";
+  tiempoEvalua ="";
+  bienacento = false;  
+  var LeccionD = "";
+  KEY = 'Practica';
+    get().then(function (value) {
+    LeccionD  = value;
+  });
+  
+  var miVar2 =  setTimeout(function(){ 
+   
+   if (LeccionD == 1){
+   // Dice=  Gres.dactilografia;
+   DeterminaMotor("práctica de dactilografía, línea del medio");
+  }
+  else if (LeccionD == 2){
+   // Dice= Gres.dIndice;
+   DeterminaMotor("práctica de dactilografía, dedo índice");
+  }
+  else if (LeccionD == 3){
+   // Dice= Gres.dMedio;
+   DeterminaMotor("práctica de dactilografía, dedo medio");
+  }
+  else if (LeccionD == 4){
+    //Dice= Gres.dAnular;
+    DeterminaMotor("práctica de dactilografía, dedo anular");
+  }
+  else if (LeccionD == 5){
+   // Dice= Gres.dMeñique;
+   DeterminaMotor("práctica de dactilografía, dedo meñique");
+  }
+  else if (LeccionD == 6){
+    //Dice= Gres.dAcentos;
+    DeterminaMotor("práctica de dactilografía, acentos");
+  } 
+
+
+
+    KEY ="UsuarioActual"; 
+    get().then(function (value) {       
+	  UsuarioActual = value;
+    //console.log(UsuarioActual);
+
+   
+
+
+    });  
+  }, 500);
+
+    var miVar3 = setTimeout(function(){ 
+      progressBar(0, $('#progressBar'))
+      LeeLeccion(); 
+    },4000);      
+     
+
+
+});f
+
+
+$(document).keyup(function(e) {
+    
+   // //console.log(e.keyCode + " acento??" );
+   // $("#Pie").text(e.keyCode);
+    e.preventDefault();
+    if (e.keyCode == 27)
+    {
+      Regresar();
+    }
+    if (e.keyCode == 112)
+    {
+      Ayuda();
+    }
+  });
+
+  function Regresar(){
+    var miVar3 = setTimeout(function(){ 
+      window.open("./Lista.html","_self");
+    },1000);      
+     
+    
+  }
+
+
+function noUsesM(event){
+  //console.log(event.target.className);
+  if  (event.target.className == 'f1') {return}
+  Lee("usa el teclado qwerty en esta aplicación");
+}
+
+ function Ayuda()
+ {
+  //LeeCGB(document.title + ". " +Gres.letras);
+  if (Leccion == 1){
+    Dice=  Gres.dactilografia;
+  }
+  else if (Leccion == 2){
+    Dice=Gres.dIndice;
+  }
+  else if (Leccion == 3){
+    Dice= Gres.dMedio;
+  }
+  else if (Leccion == 4){
+    Dice=Gres.dAnular;
+  }
+  else if (Leccion == 5){
+    Dice=Gres.dMeñique;
+  }
+  else if (Leccion == 6){
+    Dice=Gres.dAcentos;
+  }
+  LeeCGB(Dice);
+ }
+
+</script> 
+
+
+</html>
+

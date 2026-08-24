@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Información sobre Pequén</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../ResB/favico.png" sizes="32x32"/>
+<link href="../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../ResB/Habla.js"></script>
+<script type="text/javascript" src="../ResB/AnimP.js"></script>
+<script src="../F1/Generales.js"></script>
+<script src="./../pulsador.js"></script>
+<script>
+    var p =0;
+    $(document).ready(function() {    
+    
+      var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 = document.title + ". "  + Gres.MenuActividadP;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje= document.title + ". "  + Gres.MenuActividad;
+            DeterminaMotor(mensaje);  
+     }
+}); 
+
+
+</script>
+<style>
+    .menuGrid{
+     width: 100vw;     
+     display: grid;
+     grid-template-rows: 1fr;
+     grid-template-columns: repeat(3,1fr);
+     justify-items: center; 
+     margin-bottom: 10vh;    
+   }
+   .menuGrid4{
+     width: 100vw;     
+     display: grid;
+     grid-template-rows: 1fr;
+     grid-template-columns: repeat(4,1fr);
+     justify-items: center; 
+     margin-bottom: 10vh    
+   }
+  
+   .itemS{
+     font-size: 4vh;     
+   }
+
+
+  img{width: 10vh;}
+  .f1 {
+     width: 5vh; 
+     z-index: 100;
+    
+  }
+  .imgA{
+    display: none;
+    position: fixed;
+    top: 1vh;
+    left: 0;
+    width: 100vw;
+  }
+  a, a:visited{
+     color: black;
+}
+#imgAyudaPz{
+  width: 30vw;
+}
+.im{
+    width: 50%;
+  }
+ #ayudaV{
+  width: 4vh;
+ }  
+</style>
+</head>
+
+<body onkeyup="Npulsado(event)" >
+
+  <div class="AyudaV"></div> 
+    <img class="imgA" id="imgAyudaFJ" src="../ResB/qwertyFJ.png" alt=""/>
+    <img class="imgA" id="imgAyudaCN" src="../ResB/qwertyCN.png" alt=""/> 
+    <img class="imgA" id="imgAyudaPZ" src="../ResB/PizarraTN.png" alt=""/> 
+    <img class="imgA" id="imgTactil" src="../ResB/qwertyAdaptadoConS.png" alt=""/> 
+  </div>
+
+  <div id="contenedor">
+    <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+      <div><span2 id="s12" class="itemS" style="font-size: small;"> <img src="../ResB/Fiz.png" alt="regresar" style="width: 5vh;"/><br>REGRESAR</span2></div> 
+      <div ></div>
+      <div ></div>
+      </div>
+    
+
+  <div class="menuGrid">
+ <!-- PRIMERA FILA  -->   
+  <div>
+    <span4 id="P1"  class="itemN"><img src="../ResB/ElSoftware.png"/><br><span2 id="s1"  class="itemS">Pequén 8 2025</span2></span4>
+  </div> 
+   <!-- SEGUNDA FILA  -->
+  <div>
+    <span4 id="P2" class="itemN"><img src="../ResB/Teclado1.png"/><br><span2 id="s2"  class="itemS">TECLADO QWERTY</span2></span4>
+  </div> 
+  <div>
+    <span4 id="P3" class="itemN"><img src="../ResB/Integral.png"/><br><span2 id="s3"  class="itemS">BRAILLE</span2></span4>
+  </div>
+</div>
+
+<div class="menuGrid4">
+  <div>
+    <span4 id="P4" class="itemN"><img id="ayudaV" src="../ResB/Ayuda.png"/><br><span2 id="s4"  class="itemS" style="font-size: small;">MOTOR <br> DE VOZ</span2></span4>
+  </div>
+  <div>
+    <span4 id="P5" class="itemN"><img id="ayudaV" src="../ResB/QSonido.png"/><br><span2 id="s5"  class="itemS" style="font-size: small;">VELOCIDAD <br> DE VOZ</span2></span4>
+  </div>
+  <div>
+    <span4 id="P6" class="itemN"><img id="ayudaV" src="../ResB/Ayuda.png"/><br><span2 id="s6"  class="itemS" style="font-size: small;">TONO <br> DE VOZ</span2></span4>
+  </div>
+  <div>
+    <span4 id="P7" class="itemN"><img id="ayudaV" src="../ResB/QSonido.png"/><br><span2 id="s7"  class="itemS" style="font-size: small;">VOLUMEN <br> DE VOZ</span2></span4>
+  </div>
+
+  </div>
+
+  <div class="menuGrid4">
+    <div>
+      <span4 id="P8"><a id="www"><img style="width: 8vh" src="../ResB/www.png" title="Sitio"><br><span2 id="s8"  class="itemS" style="font-size: small;" > Sitio Web de Pequén </span2></a></span4>
+    </div> 
+    <div>
+    <span4 id="P9"><a id="Wa"><img style="width: 8vh" src="../ResB/Mail.png" title="Mail"><br><span2 id="s9"  class="itemS" style="font-size: small;" > Compartir por Email</span2></a></span4>
+  </div> 
+  <div>
+    <span4 id="P10"><a id="Wa"><img style="width: 8vh;vertical-align: middle;" src="../ResB/WhatsApp.png" title="Whatsaap"><br><span2 id="s10"  class="itemS" style="font-size: small;">  Compartir en Whatsapp</span2></a></span4>
+  </div>
+  <div>
+    <span4 id="P11"><a id="Wa"><img style="width: 8vh;vertical-align: middle;" src="../ResB/Mail.png"  title="Mail"><br><span2 id="s11"  class="itemS" style="font-size: small;">Enviar consultas o sugerencias a los desarrolladores <br> consulta@pequen.info</span2></a></span4>
+  </div>
+  </div>
+  
+  <div>   
+  
+  </div>
+
+
+ <div style="height: 20vh;" ></div> <div></div> <div></div> <div></div>
+
+ <div>
+
+</div>
+<div></div>
+<div></div>
+<div>
+ 
+</div>
+</div>
+
+</div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+  <!-- globo -->
+  <div  class="label" style="width: 70vw;margin-left: 15vw;"></div>
+
+
+
+ 
+<script>
+var enter = 0;
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+if (keyCode == 112) {            
+      $(".AyudaV").css("display","none");
+      AyudaM();   
+  }
+
+if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+
+
+if (event.keyCode == 13)
+{
+  if (p == 1)
+  {  
+    LeeCGB(Gres.Peq6)
+  }
+  if (p == 2)
+  {LeeCGB(Gres.TecladoQ)}
+  if (p == 3)
+  { window.open("../F1/AyudaBraille.html","_self");}
+  if (p == 4)
+  {
+   //Motor
+   if (enter == 0){
+    enter = 1;
+    MotorC();
+   }else{
+     //function  MotorConfig  en Habla js
+     MotoresConfig();
+   }
+  }
+
+  if (p == 5)
+  {
+    //Velocidad
+   if (enter == 0){
+    enter = 1;
+    VelocidadC();
+   }else{
+
+    //function  Velocidad en Habla js
+   Velocidad();
+   }
+    //console.log("valor de Enter " +  enter);
+  
+  }
+  if (p == 6)
+  {
+   //Tono
+   if (enter == 0){
+    enter = 1;
+    TonoC();
+   }else{
+    //function  Tono  en Habla js
+   TonoConfig();
+   }    
+  }
+
+  if (p == 7)
+  {
+   //Volumen
+   if (enter == 0){
+    enter = 1;
+    VolumenC();
+   }else{
+    //function  Volumnen  en Habla js
+    VolumenV();
+   }
+    
+  }
+  if (p == 8)
+  {www()}
+  if (p == 9)
+  {Mail()}
+  if (p == 10)
+  {wa()}
+  if (p == 11)
+  {MailConsulta()}
+ 
+
+}
+
+  }
+///Fin tecla pulsada
+
+function Abre(n)
+          { 
+            if (n ==1){
+              LeeCGB(Gres.Peq6)
+            }
+            else if (n==2){
+              LeeCGB(Gres.TecladoQ)
+             }
+            else if (n==3){
+              window.open("../F1/AyudaBraille.html","_self");
+             }    
+             else if (n==4){
+             //Motor
+            if (enter == 0){
+              enter = 1;
+              MotorC();
+            }else{
+              //function  MotorConfig  en Habla js
+              MotoresConfig();
+            }
+             }   
+             else if (n==5){
+               //Velocidad
+            if (enter == 0){
+              enter = 1;
+              VelocidadC();
+            }else{
+
+              //function  Velocidad en Habla js
+            Velocidad();
+            }  
+           } 
+           else if (n==6){
+            //Tono
+            if (enter == 0){
+              enter = 1;
+              TonoC();
+            }else{
+              //function  Tono  en Habla js
+            TonoConfig();
+            }    
+
+           }
+           else if (n==7){
+              //Volumen
+            if (enter == 0){
+              enter = 1;
+              VolumenC();
+            }else{
+              //function  Volumnen  en Habla js
+              VolumenV();
+            }
+           
+           }
+           if (n == 8)
+            {www()}
+           if (n == 9)
+             {Mail()}
+            if (n == 10)
+            {wa()}
+            if (n == 11)
+            {MailConsulta()}
+           else if (n==12){
+             Regresar();
+           }
+          }
+
+
+
+
+function atras(){
+  enter = 0;
+  $("#imgTactil").css("display","none");
+  $("#imgAyudaPZ").css("display","none");
+  $("#imgAyudaCN").css("display","none");
+  $("#imgAyudaFJ").css("display","none");  
+  $(".AyudaV").css("display","none"); 
+	
+	p--;
+	if (p < 1){
+	 p = 12
+    }
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+    $("#s"+p).css({"background-color": "black"});
+    $("#s"+p).css({"color": "white"});
+    Lee($("#P" + p).text());
+	
+}
+
+function adelante(){
+
+  enter = 0;
+  $("#imgTactil").css("display","none");
+  $("#imgAyudaPZ").css("display","none");
+  $("#imgAyudaCN").css("display","none");
+  $("#imgAyudaFJ").css("display","none");  
+  $(".AyudaV").css("display","none"); 
+	
+	p++;
+	if (p > 12){
+	 p = 1
+    }
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+    $("#s"+p).css({"background-color": "black"});
+    $("#s"+p).css({"color": "white"});
+    Lee($("#s" + p).text());
+   
+	
+}
+
+function AyudaM()
+      {
+        LeeCGB(document.title + ". "  + Gres.MenuOpcion);
+      }
+
+function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+   
+function www()
+{
+  LeeCGB("Si usa lector de pantalla. habilitarlo para navegar en el sitio de Pequén 8 2025");
+  window.open("https://www.pequen.info/");}
+
+function Mail()
+{
+  LeeCGB("Si usa lector de pantalla. habilitarlo para compartir el link de Pequén 8 2025");
+  window.open('mailto:?subject=Pequén&body=https://www.pequen.info/P8/');}
+
+
+  function MailConsulta()
+{
+  LeeCGB("Si usa lector de pantalla. habilitarlo para enviar la consulta por correo electrónico");
+  window.open('mailto:consulta@pequen.info?subject=Consulta desde Pequén 8 2025');}
+
+
+
+function wa(){
+  LeeCGB("Si usa lector de pantalla. habilitarlo para enviar el link de Pequén 8 2025 en WhatsApp web ");
+  window.open("https://api.whatsapp.com/send?text=https://www.pequen.info/P8")
+}
+function VelocidadC(){  
+LeeCGB("Pulsar alternadamente la tecla enter para configurar la velocidad de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F2.")
+}
+function TonoC(){
+LeeCGB("Pulsar alternadamente la tecla enter para configurar el tono de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F4.")
+}
+function VolumenC(){
+LeeCGB(" Pulsar alternadamente la tecla enter para configurar el volumen de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F8. El valor 1 es el máximo y el valor 0 es el mínimo que equivale a silencio")
+}
+
+
+function MotorC(){
+  LeeCGB("Pulsar alternadamente la tecla enter para configurar el motor de voz. También se puede configurar desde cualquier pantalla de Pequén 8 2025 pulsando la tecla F3.")  
+}
+
+
+  </script>
+
+
+</body>
+
+</html>

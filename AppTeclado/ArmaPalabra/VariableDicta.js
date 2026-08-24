@@ -1,0 +1,1 @@
+﻿var SonidoQ = ["gato","pato","sapo"];//,"león","puma","mono","loro","vaca","lobo","foca","rana"];

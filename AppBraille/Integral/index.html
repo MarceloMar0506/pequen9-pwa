@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Braille Integral</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Generales.js"></script>
+<script src="./../../pulsador.js"></script>
+<script>
+    var nlec =0;
+</script>
+<style>
+  .menuGrid{
+     width: 90vw;
+     margin-left: 5vw;
+     float: left;
+     display: grid;
+     grid-template-rows: 1fr 1fr;
+     grid-template-columns: repeat(5,1fr);
+     justify-items: center;
+     text-align: center;   
+   }
+   .itemS{
+     font-size: 4vh;     
+   }
+  img{width: 20vh;}
+  /* #i5{
+    display: block;
+    width: 40vh;
+  } */
+  .esc{width: 5vh;}
+  .f1 {
+     width: 5vh;
+     z-index: 100;
+  }
+  a:hover{
+    background-color: white!important;    
+  }
+
+</style>
+
+</head>
+
+<body>
+  <div id="contenedor" style="height:100%">
+    <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+      <div><span2 id="s6" class="itemS" style="font-size: small;"> <img src="./../../ResB/Fiz.png" alt="regresar" style="width: 5vh;"/><br>REGRESAR</span2></div> 
+      <div ></div>
+      <div ></div>
+      </div>
+    
+ <div class="menu-container">
+  
+  <div class="menuGrid">
+    <div></div>
+    <div>
+    <a onclick="Abre('1')"  class="itemM" id="L1"><img src="./../../ResB/alfa.png"/><br><span2 id="s1"  class="itemS">ALFABETO</span2></a>
+  </div>
+  <div></div>
+  <div>
+   <a onclick="Abre('2')" id="L2" class="itemM"><img src="./../../ResB/SignosO.png"/><br><span2 id="s2" class="itemS">OTROS SIGNOS</span2></a>  
+  </div>
+  <div></div> 
+  <div>
+   <a onclick="Abre('3')" id="L3" class="itemM"><img src="./../../ResB/Tacto.png"/><br><span2 id="s3"  class="itemS">BRAILLE AL TACTO</span2></a>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+   <a onclick="Abre('4')" id="L4" class="itemM"><img src="./../../ResB/Practica.png"/><br><span2 id="s4"  class="itemS">PRÁCTICAS</span2></a>
+  </div>
+  <div></div>
+  <div></div>
+  <div>
+  <a onclick="Abre('5')" id="L5"  class="itemM" ><img id="i5" src="./../../ResB/LimonesCanasta.png"/><br><span2 id="s5"  class="itemS">JUEGOS</span2></a>
+</div>
+<div></div>
+  
+  <div></div> 
+ </div>
+
+</div> 
+ 
+
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+  <!-- globo -->
+  <div  class="label"></div>
+
+
+</div>
+ 
+
+        <script>
+          $(document).ready(function() {         
+            
+           var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){           
+           var  mensaje2 = document.title + ". con pulsador recorrer el menú. para ingresar a una opción mantener pulsado por unos segundos " ;
+            DeterminaMotor(mensaje2);  
+          }
+          else{
+            var mensaje= document.title + ". "  + Gres.MenuActividad;            
+            DeterminaMotor(mensaje);  
+          }
+              
+          });
+          
+          
+          function Abre(n)
+          { 
+            if (n ==1){
+             window.open("./ListaAlfa.html","_self"); 
+            }
+            else if (n==2){
+             window.open("./ListaSignos.html","_self");
+             }
+            else if (n==3){
+             window.open("./LecturaT.html","_self");
+             }    
+             else if (n==4){
+             window.open("./Ingreso.html","_self");             
+            }   
+            else if (n==5){
+             window.open("../Actividades/index.html","_self");
+            }
+             else if (n==6){
+             Regresar();
+             }   
+                 
+          }
+          
+          var s, p=0;
+          
+          
+          function test(s) {
+          
+          d=document.getElementById('s'+ s);
+          if(d === null || typeof d === 'undefined'){
+              return;}
+          //d.focus();
+          
+          var dice = d.innerText;
+          console.log('s'+ s)
+          Lee(dice );
+          
+         // $(d).css({"text-shadow": "1px 1px 2px blue"});
+          $(".itemS").css({"background-color": "white"});
+          $(".itemS").css({"color": "black"});
+          $(d).css({"background-color": "black"});
+          $(d).css({"color": "white"});
+          $(d).focus();
+          
+          p=s;
+          }
+          
+          function adelante(){
+             p++;
+             console.log(p)
+             if (p == 7) {p=1 }
+             
+             test(p)
+          }
+          
+          function prev() {
+          p--;
+          if (p == 0) {p=6} 
+          test(p)
+          }
+          
+          document.onkeyup=function(e) {
+          event.preventDefault();
+          
+          e = e || window.event;
+          if (e.keyCode == 112) {
+          // $.getScript("../F1/Generales.js", function(){
+            movil = 0;
+            //TecladoQ();           
+            Ayuda();
+         // });
+        }
+     
+
+          if (e.keyCode == 37) {prev()}
+          if (e.keyCode == 38) {prev()}
+          if (e.keyCode == 39) {adelante()}
+          if (e.keyCode == 40) {adelante()}
+          if (e.keyCode == 27) {Regresar()}
+          if (e.keyCode == 13) {
+             //console.log(p);
+             Abre(p)
+          }
+          
+          return;
+          }
+          test(p);
+          
+          function Regresar()
+          {
+             window.open( "../index.html","_self"); 
+          }
+          function Ayuda()
+          {
+            LeeCGB(document.title + ". "  + Gres.MenuActividad);  
+          }   
+         
+          
+          </script>                   
+          </body>
+          
+          </html>
+          

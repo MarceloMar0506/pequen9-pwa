@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista Uso del Punto 5</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./PTC.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="../../../F1/Generales.js"></script>
+<script src="./../../../pulsador.js"></script>
+<style>
+	.Tl {width: 15vw;}
+</style>
+<style>
+	#Primera{
+		padding: 0;
+	}
+	#Segunda{
+		padding: 0;
+		margin-left: 12vw;
+		/* display: grid; */
+	}
+	.gridPlantillaE{
+		grid-template-columns: 1fr 1fr 1fr;
+		column-gap: 0vw;
+	}
+	#titulo3{
+   visibility: visible;
+  }
+  bo{
+		font-weight: bold;
+	}
+
+	</style>
+
+</head>
+
+<body>	
+	<div id="contenedor">
+	
+	   <span2 id="EtiquetaUnoTexto" style="font-size: 5vw;margin-top: 0.02vh;"></span2>		  
+	
+</div>
+
+<div id="grillaListaE">
+<div id="Fiz"><img class="animated flash2" src="./../../../ResB/Fiz.png" onclick="atras()" alt=""></div> 	
+
+<div id="textoSec" style="font-size: 5vh;"></div>	
+
+<div id="Fder"><img class="animated flash2" src="./../../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+
+
+</div>  
+
+
+
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1vh;margin-left: 15vw;width: 80%;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div> 
+<script>
+var nlec=0;
+function adelante(){
+	
+	$("#pequenG").css("display","block");
+	//$(".label").css("display","none");
+		
+	nlec++;	
+	if (nlec > 8) {nlec = 1}
+	var MLec = eval("punto5_"+ (nlec) );	
+	var cadena = MLec;
+	var DiceL = MLec;
+	var vecP = eval("punto5_" + nlec )[0];//.split(',');
+	var vecP1 = eval("punto5_" + nlec )[1];
+	var muestraVecp1 = vecP1.replace(/\./g , '<br>');
+	$("#EtiquetaUnoTexto").text(vecP);
+	$("#textoSec").html(vecP1);
+	
+	if (vecP1.includes("'bre'. ")){vecP1 = vecP1.replace("'bre'. ","'bré'. ")}
+	if (vecP1.includes("'in'. ")){vecP1 = vecP1.replace("'in'. ","'innn'. ")}
+	LeeSinGB(vecP + ". " + vecP1);
+
+}
+function atras(){
+	
+	$("#pequenG").css("display","block");
+	$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	nlec--;
+	if (nlec < 1){
+	 nlec = 1
+	}
+	if (nlec > 0){
+		var MLec = eval("punto5_"+ (nlec) );	
+		var MLec = eval("punto5_"+ (nlec) );	
+	var cadena = MLec;
+	var DiceL = MLec;
+	var vecP = eval("punto5_" + nlec )[0];//.split(',');
+	var vecP1 = eval("punto5_" + nlec )[1];
+	var muestraVecp1 = vecP1.replace(/\./g , '<br>');	
+	$("#EtiquetaUnoTexto").text(vecP);
+	$("#textoSec").html(vecP1);
+	if (vecP1.includes("'bre'. ")){vecP1 = vecP1.replace("'bre'. ","'bré'. ")}
+	if (vecP1.includes("'in'. ")){vecP1 = vecP1.replace("'in'. ","'innn'. ")}
+	
+	LeeSinGB(vecP + ". " + vecP1);
+
+
+	}
+	
+}
+function ingresa()
+{
+	//AbrirLeccion(nlec - 1);
+	var NumLec = parseInt(nlec) - 1;
+	NumLec= NumLec.toString();
+	//alert(nlec);
+	sayTimeout = setTimeout(function () {		
+		if (nlec == 0)
+		{
+			Lee(Gres.MenuPractica);
+			return;
+	    }else{
+			var miVar3 = setTimeout(function(){
+				window.speechSynthesis.cancel();
+				KEY = 'Practica';VALUE = NumLec;
+				set();
+			},10)
+			var miVar4 = setTimeout(function(){
+				window.open("indexBPalabras.html","_self");
+			},200);	
+	    }
+	}, 500); 
+	
+
+}
+</script>
+
+<script>
+	$(document).ready(function() {
+
+$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+
+$("#Primera").css("display","grid");
+ 
+if (movil == 0){
+			$("#Pie").css("display","none");
+		}
+	//DeterminaMotor(Gres.ListaPunto5);
+	
+var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 = Gres.ListaPunto5P;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje= Gres.ListaPunto5;            
+            DeterminaMotor(mensaje);  
+     }
+
+ 
+	});
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+ //console.log(e.keyCode);
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+if (e.keyCode == 17)
+{
+	Lee("callar");
+}
+
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+if (e.keyCode == 112) {
+   // $.getScript("../../F1/Generales.js", function(){
+      movil = 0;
+	  //TecladoQ();      
+      Ayuda();
+   // });
+  }
+
+
+return;
+}
+
+function Ayuda()
+    {
+	  $(".label").css("display","block");
+	  $("#pequenG").css("display","block");
+      LeeCGB(Gres.Listasecuenciaes);
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

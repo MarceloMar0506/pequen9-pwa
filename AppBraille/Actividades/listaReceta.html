@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- silenciar el lector de pantalla. esta aplicación tiene motor de voz propio -->
+<title>Cocinar con Pequén</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="theme-color" content="#E8FFCC">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- No mostrar el titulo de la pagina y Si mostrar la barra de navegacion Android Ios -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+
+<meta name="theme-color" content="#E8FFCC">
+
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<link rel="apple-touch-icon" href="/ResB/icon/maskable_icon.png">
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Generales.js"></script>
+
+<script>
+    var nlec =0;
+    var Cbot= 4;
+    var isPwa="";
+    var p = -1;
+    var tituloR="";
+    //R1 ciabatta para 1/2 K de harina
+    var brioche =[
+         
+           ["una taza de agua, equivale a 245 gramos"],
+           ["dos cucharaditas de levadura seca,  equivale a 6 gramos"],          
+           ["Dos huevos"],
+           ["tres cucharadas de azúcar blanca o rubia, equivale a 45 gramos"],
+           ["nueve cucharadas de aceite, equivale a 135 gramos"],           
+           ["tres tazas de harina , equivale a 450 gramos"],
+           ["una cucharadita de sal (optativo),  equivale a 5 gramos"]
+        ]   
+    var panlactal =[
+          ["Un kilo de harina "],
+          ["dos cucharaditas de levadura seca,  equivale a 6 gramos"],
+          ["tres tazas de leche, equivale a 750 gramos"],
+          ["tres cucharadas al ras de manteca derretida o aceite,  equivale a 45 gramos"],
+          ["una cucharada de miel, equivale a 30 gramos"]
+        ]    
+
+
+        var bavena =[
+          ["Media taza de azúcar "],
+          ["Dos cucharadas de miel "],
+          ["Un huevo"],
+          ["Un cuarto taza de aceite "],
+          ["Tres cuartos taza de harina"],
+          ["Una cucharita de polvo de hornear "],
+          ["Una taza de avena aplastada"],          
+          ["Media taza de pasas de uva y nueces"]
+        ]      
+       
+        var dqueso =[
+          ["dos tazas de fécula de mandioca, equivale a 300 gramos"],
+          ["Una cucharadita de polvo de hornear"],
+          ["una taza de queso semi duro rallado grueso, equivale a 200 gramos"],
+          ["Una cucharadita de sal, optativo"],     
+          ["tres cucharadas al ras de manteca derretida o aceite,  equivale a 45 gramos"],            
+          ["Un huevo"],
+          ["Ocho cucharadas de leche, equivalente a 100 gramos"]
+        ]     
+
+        var galletasmiel =[
+          ["diez cucharadas de aceite, equivale a  150 gramos"],
+          ["diez cucharadas de azúcar moreno, equivale a 150 gramos"],
+          ["Un huevo"],
+          ["dos cucharadas de miel, equivale a 60 gramos"],
+          ["Una cucharadita de escencia de vainilla"],
+          ["Una taza de harina, equivale a 230 gramos"],                  
+          ["Una cucharadita de bicarbonato de sodio"],
+          ["Azúcar blanca para espolvorear"]
+        ]     
+
+
+
+
+
+ </script> 
+ <style>
+.circulo { 
+  width: 100%;
+  margin-left: 10vw;
+  float: left;
+  display: grid; 
+  grid-template-columns: 20vw 80vw;
+  height: 60vh;   
+  top: 6vh;
+}
+	.circulo a.itemM {
+		display: block;
+		text-decoration: none;
+		border-radius: 100%;	
+    line-height: 20vh;	
+		text-align: left;		
+    height:20vh;		
+		color:black;
+		padding:0.5vh;		
+		font-size: 3vh;
+		transition:all 0.5s;
+		-moz-transition:all 0.5s;
+		-webkit-transition:all 0.5s;
+		-o-transition:all 0.5s;          
+	}
+
+
+  img{
+    width: 15vh;   
+  }
+  #im{
+    margin-left: 10vw;
+  }
+  .f1 {
+     width: 5vh; 
+     z-index: 70;         
+  }
+  .itemaS{
+    font-family: Arial, Helvetica, sans-serif;    
+  }
+  #ingredientes{
+    display: inline-block;
+    padding: 1vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vw;
+    border: black 2px solid;
+    text-align: left;
+    width: 75vw;
+    text-transform: uppercase;
+    line-height: 5vh;
+  }
+
+ </style>
+</head>
+<body  onkeyup="Npulsado(event)">  
+  <div id="SuperC">
+  <div id="contenedor">
+    
+    <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+      <div> <img id="im"/></div> 
+      <div style="font-size: xx-large;" id="listaTitulo"> </div>
+      <div ></div>
+      </div>  
+      
+      <div style="text-align: center;">
+        
+       </div>
+       <p></p>
+ <div id="ingredientes"></div>
+ </div>
+
+
+
+
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" ></div>
+  <!-- globo -->
+  <div  class="label" style="bottom: 0; z-index: 170; left: 5%;width: 75%; "></div>
+
+ </div>
+<script>
+
+ $(document).ready(function() {  
+
+    var receta = localStorage.getItem("receta");
+   
+    if (receta == "panlactal"){
+      tituloR = "PAN LACTAL"
+      $('#im').attr('src', "./../../ResB/Panadero/lactal.png");            
+    }
+   else if (receta == "bavena"){
+      tituloR = "BIZCOCHITOS DE AVENA Y MIEL"
+      $('#im').attr('src', "./../../ResB/Panadero/gavena.png");            
+    }
+    else if (receta == "brioche"){
+      tituloR = "PAN BRIOCHE"
+      $('#im').attr('src', "./../../ResB/Panadero/brioche.png");
+    }
+    else if (receta == "dqueso"){
+      tituloR = "PAN DE QUESO O CHIPA"
+      $('#im').attr('src', "./../../ResB/Panadero/panQueso.png");
+    }
+    else if (receta == "galletasmiel"){
+      tituloR = "GALLETAS DE MIEL"
+      $('#im').attr('src', "./../../ResB/Panadero/GalletasMiel.png");
+    }
+    $("#listaTitulo").html(tituloR);
+
+
+    recetaLength = eval(receta).length,
+    resultados = document.getElementById('ingredientes');
+var x=-1;
+for (i = 0; i < recetaLength; i++) {
+    x++;
+    resultados.insertAdjacentHTML('beforeend', '<div id=s' + x  +' class="brand">'+ eval(receta)[i]+'</div>');
+}
+
+  
+    var miVar2 = setTimeout(function(){ 
+    
+    var mensaje =   "Receta para hacer " + tituloR.toString() + ". Con teclas de dirección escucharás los ingredientes que se emplean. Para ingresar a la elaboración pulsar enter. para regresar pulsar escape";  
+   
+    console.log(receta + " " + mensaje);
+      DeterminaMotor(mensaje);  
+  
+    
+               
+         }, 10); 
+      //  var miVar3 = setTimeout(function(){         
+      //   document.title="Receta"
+      //    }, 5000);  
+    
+    });  
+
+
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+
+//Ayuda
+
+	if (event.keyCode == 112) {
+   // $.getScript("../F1/Generales.js", function(){
+
+      movil = 0;
+	  //TecladoQ();     
+	 // LeeCGB(document.title + ". " + Gres.MenuActividad + ". ");     
+    LeeCGB(" Receta para hacer " + tituloR + ". Con teclas de dirección escucharás los ingredientes que se emplean. Para ingresar a la elaboración pulsar enter. para regresar pulsar escape" );     
+    //});
+  }
+
+
+if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+if (event.keyCode == 13) {
+//console.log("13 " + p)
+Abre();	
+}
+  }
+///Fin tecla pulsada
+
+
+function Abre()
+  { 
+     window.open( "./produccion.html","_self"); 
+  }
+
+
+function Regresar()
+  {
+      window.open( "./recetas.html","_self"); 
+  }
+
+
+  function atras(){
+	
+	p--;
+	if (p < 1){
+	 p = 0
+    }
+	
+	$(".brand").css({"background-color": "white"});    
+    $(".brand").css({"color": "black"});   
+    $("#s" + p).css("background-color", "black");
+    $("#s" + p).css("color", "white");
+    $("#I" + p).css("width", "17vw");
+    Lee($("#s" + p).text());
+	
+}
+
+function adelante(){
+	
+	p++;
+  console.log(recetaLength + " " +  p)
+	if (p > recetaLength -1){
+	 p = 0
+    }
+	
+  	$(".brand").css({"background-color": "white"});  
+    $(".brand").css({"color": "black"});   
+    $("#s" + p).css("background-color", "black");
+    $("#s" + p).css("color", "white");
+    $("#I" + p).css("width", "16vw");
+    Lee($("#s" + p).text());
+	
+}
+
+
+
+
+</script>    
+ 
+</body>

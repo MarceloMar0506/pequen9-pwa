@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Palabras</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../ResB/materialize.css" type="text/css" rel="stylesheet"/> 
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="VariableDicta.js"></script> 
+<script type="text/javascript" src="./../../ResB/progressbar.js"></script>
+<script type="text/javascript" src="./../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+</script>
+<style type="text/css">
+  #progressBar{
+  background-color: #68a3db;
+  color: black;
+  font-size: 3vh;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+    }
+    #progreso{
+      position: absolute;
+      left: 0;
+      bottom: 0;    
+      width: 100vw;
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+
+ <script type="text/javascript" src="./BDicta.js"></script>  
+ <script type="text/javascript" src="./L.js"></script>  
+
+
+<div id="contenedor">
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+    </div>
+
+ <div  style="position: fixed;height: 15vh; width: 100%;text-align: center;top: 35vh;left: 0;"> 
+
+  <div class="row" style="padding:0;width: 200%;margin-left: -60%;" >
+    <div class="col s11 offset-s1 center" >
+      <div class="col s1 yellow btn" id="q" style="width: 4%; ">Q </div>
+      <div class="col s1 btn" id="w" style="background-color: #9966CC;width: 4%; "> W </div>
+      <div class="col s1 btn" id="e" style="background-color: #68a3db;width: 4%; "> E </div>
+      <div class="col s1 green btn" id="r" style="width: 4%; "> R </div>
+      <div class="col s1 green btn" id="t" style="width: 4%; "> T </div>
+      <div class="col s1 btn" id="y" style="background-color: #FF9999;width: 4%; "> Y </div>
+      <div class="col s1 btn" id="u" style="background-color: #FF9999;width: 4%; "> U </div>
+      <div class="col s1 btn" id="i" style="background-color:#68a3db;width: 4%; "> I </div>
+      <div class="col s1 btn" id="o" style="background-color: #9966CC;width: 4%; "> O </div>
+      <div class="col s1 yellow btn" id="p" style="width: 4%; "> P </div>
+      <!-- <div class="col s1 yellow btn" id="acento" style="width: 4%;font-size: 3vw;"> ` </div> -->
+    </div>
+  </div>
+<div class="row"  style="padding:0;width: 200%;margin-left: -55%;">
+  <div class="col s11 offset-s1" >
+    <div class="col s1 yellow btn" id="a" style="width: 4%;"> A</div>
+    <div class="col s1 btn" id="s" style="background-color: #9966CC;width: 4%;"> S</div>
+    <div class="col s1 btn" id="d" style="background-color: #68a3db;width: 4%;"> D</div>
+    <div class="col s1 green btn" id="f" style="text-decoration: underline;width: 4%;" > F</div>
+    <div class="col s1 green btn" id="g"style="width: 4%;"> G</div>
+    <div class="col s1 btn" id="h" style="background-color: #FF9999;width: 4%;"> H</div>
+    <div class="col s1 btn" id="j" style="background-color: #FF9999;text-decoration: underline;width: 4%;"> J</div>
+    <div class="col s1 btn" id="k" style="background-color: #68a3db;width: 4%;"> K</div>
+    <div class="col s1 btn" id="l" style="background-color: #9966CC;width: 4%;"> L</div>
+    <div class="col s1 yellow btn" id="ñ"style="width: 4%;"> Ñ</div>
+    <!-- <div class="col s1 yellow btn" id="acento" style="width: 4%;font-size: 3vw;"> ´ </div> -->
+  </div>
+</div>
+<div class="row" style="padding:0;width: 200%;margin-left: -80%;">
+  <div class="col s11 offset-s2">
+    <div class="col s1 yellow btn" id="z" style="width: 4%;"> Z </div>
+    <div class="col s1 btn" id="x" style="background-color: #9966CC;width: 4%;"> X </div>
+    <div class="col s1 btn" id="c" style="background-color: #68a3db;width: 4%;"> C </div>
+    <div class="col s1 green btn" id="v" style="width: 4%;"> V </div>
+    <div class="col s1 green btn" id="b" style="width: 4%;"> B </div>
+    <div class="col s1 btn" id="n" style="background-color: #FF9999;width: 4%;"> N </div>
+    <div class="col s1 btn" id="m" style="background-color: #FF9999;width: 4%;"> M </div>
+    <!-- <div class="col s1 btn" id="coma" style="background-color: #68a3db;width: 4%;"> , </div>
+   <div class="col s1  btn" id="punto" style="background-color: #9966CC;width: 4%;"> . </div>
+   <div class="col s1 yellow btn" id="guion"style="width: 4%;"> - </div>
+  </div> -->
+<!-- </div> -->
+
+    <div class="keyboard-row">     
+     <!-- <a href="#"  class="Lf" id="barra" data=""></a>     -->
+    
+
+ <div id="parte" style="text-align: center;line-height: 15vh;font-size: 15vh;text-transform: lowercase;font-family: Arial, Helvetica, sans-serif;margin: auto;z-index: -1;"></div>
+ </div>
+</div>
+</div>
+</div>
+<div id="progreso" style="text-align: center;width: 100vw;">
+  <div id="progressBar" style="width: 1vw;"></div>
+  </div>
+ <!-- globo -->
+ <div  class="label" style="bottom: 2%;margin-left: 15%;z-index: 100;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+</div>
+
+<script>
+$(document).ready(function() { 
+var miVar3 = setTimeout(function(){
+  progressBar(0, $('#progressBar'))
+  DictaPalabra(); 
+},1000);
+});
+document.body.addEventListener('keyup', function(e) {
+  if (e.keyCode == 112){
+    var miVarA = setTimeout(function(){ 
+      movil=0;   
+    var miVarA2 = setTimeout(function(){ 
+    Ayuda();
+    return;
+    },300);
+  });
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+Tpulsada = e.key.toString().toUpperCase();
+//console.log(Tpulsada + " " + e.keyCode);
+if (e.keyCode == 32){return;}
+if (e.keyCode == 27){return;}
+if (Tpulsada == "F1"){return;}
+if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}
+EvaluaLetra(Tpulsada);
+});
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+  LeeCGB(  "Dictado de palabras . " + Gres.dactilografia + Gres.palabras);  
+}
+  </script>
+
+</body>
+
+</html>

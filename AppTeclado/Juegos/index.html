@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Menú Juegos</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../../ResB/jquery.ui.touch-punch.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script src="./../../F1/Generales.js"></script>
+
+<style type="text/css">
+
+.circulo {
+   width: 120vh;
+    height: 62vh;
+   position: relative;
+   margin: auto;
+   /* top: -16vh; */
+}
+	.circulo a.itemM {
+		display: block;
+		text-decoration: none;
+		border-radius: 100%;		
+		text-align: center;
+	  height:20vh;
+		color:black;
+		padding:0.5vh;
+		position: absolute;
+		font-size: 3vh;		
+		transition:all 0.5s;
+		-moz-transition:all 0.5s;
+		-webkit-transition:all 0.5s;
+		-o-transition:all 0.5s;          
+	}
+
+	.circulo a.itemM:hover {
+		background: rgb(7, 90, 42);     
+      text-shadow: 1px 1px 2px rgb(0, 255, 136);
+	}   
+   .f1 {
+      width: 5vh;
+      z-index: 100;
+   }
+
+	.menuGrid{
+    margin: 1vw;
+	  width: 100vw;
+	  float: left;
+	  display: grid;
+	  grid-template-rows:repeat(4,1fr);
+	  grid-template-columns: repeat(5,1fr);
+	  justify-items: center;
+	  text-align: center;   
+	}
+	.itemS{
+	  font-size: 3vh;     
+	}
+  img{width: 40%;}
+ 
+ 
+	#titulo3{
+		margin-bottom: 0%;
+		margin-top: 0%;
+	}	
+	.f1 {
+     width: 5vh; 
+     z-index: 100;
+   
+  }   
+  </style>
+
+
+
+
+</head>
+<body>
+<div id="contenedor" style="height:100%">
+   <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+    <div ></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+    </div>
+<div class="menu-container" >
+  
+   <div class="menuGrid">   
+     <a onclick="Abre('1')" id="L1" class="itemM"><img class="im" src="./../../ResB/Teclado1.png"/><br><spam id="s1" class="itemS">SONIDOS EN LAS LETRAS</spam></a>
+     <div></div>
+     <div></div>
+     <div></div>
+     <a onclick="Abre('2')" id="L2" class="itemM"><img class="im" src="./../../ResB/QueEsCuanto.png"/><br><spam  id="s2" class="itemS">¿QUÉ SONIDO ES?</spam></a>      
+     <div></div>        
+     <a onclick="Abre('3')" id="L3" class="itemM"><img class="im" src="./../../ResB/BotQnEs.png"/><br><spam  id="s3" class="itemS">PEQUÉN DICE</spam></a>
+      <div></div>     
+     <a onclick="Abre('4')" id="L4" class="itemM"><img class="im" src="./../../ResB/BotPares.png"/><br><spam  id="s4" class="itemS">JUEGO DE PARES</spam></a>
+     <div></div>     
+     <a onclick="Abre('5')" id="L5" class="itemM"><img class="im" src="./../../ResB/LimonesCanasta.png"/><br><spam  id="s5" class="itemS">COSECHANDO LIMONES</spam></a>        
+     
+     <div></div>
+     <div></div>     
+     <div></div>     
+     <a onclick="Abre('6')" id="L6" class="itemM"><img class="im" src="./../../ResB/BotAmanda.png"/><br><spam  id="s6" class="itemS">CANASTAS Y LIMONES</spam></a>                
+     <div></div> <div></div>             
+     <a onclick="Abre('7')" id="L7" class="itemM"><img class="im" src="./../../ResB/BotPesca.png"/><br><spam  id="s7" class="itemS">PESCA EN EL MAR</spam></a>                
+     <div></div>
+   </div>
+
+ </div> 
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 10vh;margin-left: 15%"></div>
+
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+
+</div>
+
+<script>
+$(document).ready(function() {
+    
+        //Si es la primera vez crea el usuario " "
+  LeeIdbUsuario();
+ 
+    DeterminaMotor(document.title + ". "  + Gres.MenuActividad);
+ 
+    
+});
+function Cerrar(){
+  // Lee("Pulsar Alt + F4");
+  window.open("../index.html","_self"); 
+}
+
+
+function Abre(n)
+{ 
+  if (n ==1){
+   window.open("./BuscaLetras/index.html","_self"); 
+  }  
+  else if (n==2){   
+   window.open("./QueEs/index.html","_self");
+   }
+   else if (n==3){
+    window.open("./PQdice/index.html","_self");    
+   }
+   else if (n==4){
+    window.open("./Pares/index.html","_self");
+   }
+   else if (n==5){
+   window.open("./QueNes/index.html","_self");
+   }
+   else if (n==6){
+    window.open("./Tablas/index.html","_self");
+   }
+   else if (n==7){
+    window.open("./Pescando/index.html","_self");
+   }
+  
+  
+}
+
+var s, p=0;
+
+
+function test(s) {
+  
+  d=document.getElementById('s'+ s);
+  if(d === null || typeof d === 'undefined'){
+      return;}
+  //d.focus();
+  //console.log(s);
+  var dice = d.innerText;
+  Lee(dice);
+  $(".itemS").css({"background-color": "white"});
+  $(".itemS").css({"color": "black"});
+  $(d).css({"background-color": "black"});
+  $(d).css({"color": "white"});
+  p=s;
+  }
+
+function adelante(){
+   p++;
+   if (p == 8) {p=1 }
+   test(p)
+}
+
+function prev() {
+p--;
+if (p == 0) {p=7} 
+test(p)
+}
+document.onkeyup=function(e) {
+event.preventDefault();
+
+
+e = e || window.event;
+if (e.keyCode == 112){
+    Ayuda();
+    return;   
+  }
+if (e.keyCode == 37) {prev()}
+if (e.keyCode == 38) {prev()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+if (e.keyCode == 27) {Cerrar()}
+if (e.keyCode == 13) {
+   //console.log(p);
+   Abre(p)
+}
+
+return;
+}
+test(p);
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+  LeeCGB(document.title + ". "  + Gres.MenuActividad);  
+}
+
+var items = document.querySelectorAll('.circulo a.itemM');
+  
+  for(var i = 0, l = items.length; i < l; i++) {
+    items[i].style.left = (40 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+    
+    items[i].style.top = (40 + 35*Math.sin(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+  }
+
+
+</script> 
+
+
+</body>
+
+</html>

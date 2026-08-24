@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista Secuencias</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./PTC.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="../../../F1/Generales.js"></script>
+<script src="./../../../pulsador.js"></script>
+<!-- <script src="./LeeUnS.js"></script> -->
+<style>
+	.Tl {width: 15vw;}
+</style>
+<style>
+	#Primera{
+		padding: 0;
+	}
+	#Segunda{
+		padding: 0;
+		margin-left: 12vw;
+	}
+	.gridPlantillaE{
+		grid-template-columns: 1fr 1fr 1fr;
+		column-gap: 0vw;
+	}
+	bo{
+		font-weight: bold;
+	}
+
+	#textoSec{
+	   font-size: 3vh;
+       width: 100%;
+	}
+	</style>
+
+</head>
+
+<body>	
+	<div id="contenedor">
+	<div id="titulo3">
+	   <div></div> 
+	   <span2 id="EtiquetaUnoTexto" style="font-size: 3vw;margin-top: 0.02vh;"></span2>	
+	   <div "></div>
+	 </div>
+	 </div>
+
+<div id="grillaListaE">
+<div id="Fiz"><img class="animated flash2" src="./../../../ResB/Fiz.png" onclick="atras()" alt=""></div> 	
+
+<div id="textoSec"></div>	
+
+<div id="Fder"><img class="animated flash2" src="./../../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+
+
+</div>  
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1vh;margin-left: 15vw;width: 80%;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div> 
+<script>
+var nlec=0;
+function adelante(){
+	$(".label").css("display","none");
+	$("#pequenG").css("display","block");
+	nlec++;	
+	if (nlec > 4) {nlec = 4}
+	var MLec = eval("secuencia"+ (nlec) );	
+	var cadena = MLec;
+	var DiceL = MLec;
+	var vecP = eval("secuencia" + nlec )[0];//.split(',');
+	var vecP1 = eval("secuencia" + nlec )[1];
+
+	$("#textoSec").html(vecP1);
+	$("#EtiquetaUnoTexto").text(vecP);
+
+	if (vecP.toString().includes(" ei.")){
+		vecP = vecP.replace(" ei. "," Hey. ")
+	}
+	if (vecP1.includes("contestable")){vecP1 = vecP1.replace("contestable","contestáble")}
+	
+	LeeSinGB(vecP + ". " + vecP1);
+
+}
+function atras(){
+	$(".label").css("display","none");
+	$("#pequenG").css("display","block");
+	$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	nlec--;
+	if (nlec < 1){
+	 nlec = 0	}
+	if (nlec > 0){
+		var MLec = eval("secuencia"+ (nlec) );	
+		var MLec = eval("secuencia"+ (nlec) );	
+	var cadena = MLec;
+	var DiceL = MLec;
+	var vecP = eval("secuencia" + nlec )[0];
+	var vecP1 = eval("secuencia" + nlec )[1];
+	var muestraVecp1 = vecP1.replace(/\./g , '<br>');	
+
+	$("#textoSec").html(vecP1);
+	$("#EtiquetaUnoTexto").text(vecP);
+
+	if (vecP.toString().includes(" ei.")){
+		vecP = vecP.replace(" ei. "," Hey. ")
+	}
+	if (vecP1.includes("contestable")){vecP1 = vecP1.replace("contestable","contestáble")}
+
+	LeeSinGB(vecP + ". " + vecP1);
+
+
+	}
+	
+}
+</script>
+
+<script>
+	$(document).ready(function() {
+	
+$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+$("#Primera").css("display","grid");
+ 
+if (movil == 0){
+			$("#Pie").css("display","none");
+		}
+
+    
+	  $("#textoSec").html(" La secuencias son las palabras  abreviadas con un solo signo:  'ante'. 'esta'. 'que'. y 'para'. se utilizan según ciertas  reglas para formar palabras más largas. ");
+
+	 // DeterminaMotor(Gres.ListaSecuencias);
+	 
+var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 = Gres.ListaSecuenciasP;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje= Gres.ListaSecuencias;            
+            DeterminaMotor(mensaje);  
+     }
+
+ 
+	});
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+ //console.log(e.keyCode);
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+if (e.keyCode == 17)
+{
+	Lee("callar");
+}
+
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+if (e.keyCode == 112) {
+      movil = 0;  
+      Ayuda();
+  }
+
+return;
+}
+
+function Ayuda()
+    {
+	  $(".label").css("display","block");
+	  $("#pequenG").css("display","block");
+      LeeCGB(Gres.Listasecuenciaes);
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+
+
+</script>
+
+</body>
+
+</html>

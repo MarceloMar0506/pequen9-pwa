@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Qué es</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="PracticaSig.css" type="text/css" rel="stylesheet" id="linkestilo"/>
+
+
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="UsuarioIngreso.js"></script> 
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+ <script type="text/javascript" src="VariableT.js"></script> 
+<script src="./../../F1/Practicaes.js"></script>
+
+ <script>
+	 var indices = [];
+	 var PrimerS = "";
+	 var SegundoS = "";
+	 var LetraD = "";
+   var inicio=false;
+   var Qpalabra = ""
+
+</script> 
+<script type="text/javascript" src="./Alfab.js"></script>
+<script type="text/javascript" src="./PuntosAlfa.js"></script>
+<style>
+    #PieT{       
+    height: 25vh;  
+  }
+  #pequenG{
+    position: relative;
+  }
+  #gridPie{   
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;               
+        width: 100vw;
+        position: absolute;
+        bottom:1vh;
+        text-align: center;
+
+  }
+  #palabraD{
+    font-size: 10vw;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    text-align: center;
+  }
+  .teclasE{
+        margin-top: 6vh;
+        display: grid;
+        grid-template-columns: 20% 20%;
+        grid-template-rows: 33% 33% 33%;
+        grid-column-gap: 2vw;
+        grid-row-gap: 2.5vw;
+  }
+  #vecPalabra{        
+        display: grid;       
+        margin: auto;    
+        width: 50%;  
+  }
+  #letraD{
+    font-size: 20vw;
+    text-transform: capitalize;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .grid{
+    height: auto;
+  }
+  .letraB{
+    font-size: 7vw;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;   
+  }
+</style>
+
+</head>
+
+<body>
+  <script type="text/javascript" src="Tabla.js"> </script>
+  <div id="contenedor" style="height:100%">
+    <div id="contenedor">
+<div id="titulo3">
+  <div></div> 
+  <div id="Mleccion" style="font-size: 8vw;top:0"> </div> 
+  <div></div>
+  </div>
+ </div>
+
+ <div class="grid">
+  <div id="izquierdaG">
+  <!-- Letra Imprenta Mayúscula -->
+  <label id="letraD" style="font-size: 20vw;top:0"></label>
+  <!-- <label class="Netiqueta" id="EtiquetaUno" style="font-size: 30vh;">&zwnj;</label> -->
+  </div>
+  <!-- Imagen central-->
+  <div id="CEntroImagenG"><img  id="mimg" src="./../../ResB/QE.png" style="width: 45vh;"></img></div>
+  <div id="derechaG">    
+    <div id="Primera" class="teclasE">
+    <elem class="box" id="box1">1</elem>	
+    <elem class="box" id="box4">4</elem> 
+    <elem class="box" id="box2">2</elem>
+    <elem class="box" id="box5">5</elem>
+    <elem class="box" id="box3">3</elem>
+    <elem class="box" id="box6">6</elem>
+    </div>    
+</div> 
+</div>
+<div id="vecPalabra">
+<div class="letraB"  id="l0"></div>
+<div class="letraB"  id="l1"></div>
+<div class="letraB"  id="l2"></div>
+<div class="letraB"  id="l3"></div>
+<div class="letraB"  id="l4"></div>
+<div class="letraB"  id="l5"></div>
+<div class="letraB"  id="l6"></div>
+<div class="letraB"  id="l7"></div>
+<div class="letraB"  id="l8"></div>
+<div class="letraB"  id="l9"></div>
+<div  class="letraB" id="l10"></div>
+</div>
+
+<div id="palabraD"></div>
+<p></p>
+
+<div id="gridPie">
+  <!-- globo -->
+  <label  class="label" style="bottom:13vw;margin-left: 2vw;width: 60vw;"></label>
+  <!-- Pequen -->
+  <div id="pequenG" class="esperaG"></div>
+  <div> <img id="PieT" src="./../../ResB/tablaLetras.png" alt="Signos braille"></div>
+ <div></div>  
+ 
+ </div>
+
+
+ <div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv0"></h2>
+  <h2 class="etq" id="statusdiv02"></h2>
+  <h2 class="etq" id="statusdiv03"></h2>
+  <h2 class="etq" id="statusdiv04"></h2>
+  <h2 class="etq" id="statusdiv05"></h2>
+  <h2 class="etq" id="statusdiv06"></h2>
+   </div>
+
+
+<script src="L.js"></script>
+<script src="./quePalabraEsBrai.js"></script>
+<!-- <script src="FuncionesMouseDOS.js"></script> -->
+<script>
+    $(document).ready(function() {  
+      DeterminaMotor("Usando el teclado virtuál braille"); 
+     // LeeCGB("");  
+    //   var miVar2 = setTimeout(function(){ 
+    //  // DeterminaMotor("");
+    //   KEY = 'UsuarioActual';
+    //     get().then(function (value) {
+    //         UsuarioActual = value;
+    //     });
+    //     KEY = 'Practica';
+    //     get().then(function (value) {
+    //         Practica = value;          
+    //     });
+    //  }, 10);    
+    Qpalabra = localStorage.getItem("Palabra");    
+        console.log(  Qpalabra + " %% ")
+     var miVar3 = setTimeout(function(){ 
+        nlec = 0;
+        IndiceL = 0;
+        //QueNumeros();  
+       DictaPalabra();
+    //  DeterminaMotor("pulsar barra espaciadora para iniciar");
+       // alert("qué sonido es")
+     },3000);        
+      });
+      
+    function Ayuda()
+    {
+      if (Qpalabra == "Animal"){
+         LeeCGB("con el teclado virtual braille descubre el nombre de un animal. pulsar barra espaciadora para conocer el estado del juego .  para salir pulsar escape. ")
+      }else{
+        LeeCGB("con el teclado virtual braille descubre el nombre de un instrumento musical. pulsar barra espaciadora para conocer el estado del juego .  para salir pulsar escape. ")
+      }
+
+    }
+    
+    
+$(document).on("touchstart mousedown", function( e ) {
+
+if (e.target.id == "Pie")
+{
+  $(".gridtable").css("visibility","visible"); 
+  }
+});
+$(document).on("touchend mouseup", function(e) {
+if (e.target.id == "Pie")
+{
+$(".gridtable").css("visibility","hidden"); 
+}
+});
+
+$(document).keyup(function(e) { 
+  e.preventDefault();
+ //Ayuda
+ if (e.keyCode == 112) {    
+      movil = 0;
+      //TecladoQ();  
+      Ayuda();   
+  }
+ 
+  if (e.keyCode == 32) { 
+    descubiertasLetras="";
+    var acento="";
+
+    if ((palabraD.length - descubiertas) == 0){
+    posL++;   
+    descubiertas=0; 
+
+     DictaPalabra();
+     for (let i = 0; i < palabraD.length; i++) {
+        $("#l"+ i ).data("lista", "") ;
+    }
+    }
+    else {
+      for (let i = 0; i < palabraD.length; i++) {
+       //acentos??
+      //  if (palabraD[i] == "á" ){acento = ". lleva la letra  'a' acentuada"} 
+      //  if (palabraD[i] == "é" ){acento = ". lleva la letra 'e' acentuada"} 
+      //  if (palabraD[i] == "í" ){acento = ". lleva la letra  'i' acentuada"} 
+      //  if (palabraD[i] == "ó" ){acento = ". lleva la letra  'o' acentuada"} 
+      //  if (palabraD[i] == "ú" ){acento = ". lleva la letra  'u' acentuada"} 
+       
+     if ($("#l"+ i ).text() == ""){
+      descubiertasLetras += parseInt(i +1).toString() + " en blanco. "     
+     }else{
+      var diceLetra =  $("#l"+ i ).text();
+      if (diceLetra == 'á'){letra = 'a acentuada'
+        acento = "";
+      }
+      if (diceLetra == 'é'){diceLetra = 'e acentuada';
+        acento = "";
+    }
+      if (diceLetra == 'í'){diceLetra = 'i acentuada';
+      acento = "";}
+      if (diceLetra == 'ó'){diceLetra = 'o acentuada';
+      acento = "";}
+      if (diceLetra == 'ú'){diceLetra = 'u acentuada';
+      acento = "";}
+      if (diceLetra == 'y'){diceLetra = 'i griega'}
+      if (diceLetra == 'ü'){diceLetra = 'u con diéresis';
+      acento = "";}  
+      if (diceLetra == 'y'){diceLetra = 'y griega'}  
+
+
+      descubiertasLetras +=   parseInt(i +1).toString() + ": " + diceLetra + ". ";      
+    }
+  }
+
+      if ( descubiertas == 0){
+       LeeCGB("palabra de " + palabraD.length + " letras. no se  descubrió ninguna letra  ")
+      }else if(descubiertas == 1){
+        LeeCGB("palabra de " + palabraD.length + " letras.  descubierta la letra  " + descubiertasLetras)
+      }else if(descubiertas > 1 ){
+        LeeCGB("palabra de " + palabraD.length + " letras.  descubiertas:  " + descubiertasLetras)
+      }
+    }
+
+    
+  }
+ 
+   
+ 
+  if (e.keyCode == 27) {Regresar()}
+
+
+});
+function Regresar()
+          {
+             window.open( "../Actividades/index.html","_self"); 
+          }
+
+
+
+function LeeSonidoActual(texto){
+
+$(".label").html(texto);
+window.speechSynthesis.cancel();
+msgNo = new SpeechSynthesisUtterance(texto);
+msgNo.voice = speechSynthesis.getVoices()[Voz];
+msgNo.volume=Volumen;
+msgNo.rate =Veloz;	
+msgNo.pitch = Tono;
+
+msgNo.onend = function(event) {
+$(".label").html("");
+$(".label").css("width","auto");
+DictaSonido();
+$("#mimg").attr("src","./../../ResB/QE.png");      
+}
+
+window.speechSynthesis.speak(msgNo);
+
+
+
+
+}
+
+
+// // $("#Primera elem").css("border","2px solid black");	
+// /// $("#PPrimera elem").css("border","2px solid black");	
+
+// window.speechSynthesis.cancel();
+// msgNo = new SpeechSynthesisUtterance(texto);
+// msgNo.voice = speechSynthesis.getVoices()[Voz];
+// msgNo.volume=Volumen;
+// msgNo.rate =Veloz;	
+// msgNo.pitch = Tono;
+
+// msgNo.onend = function(event) {
+// posL++;                
+// DictaSonido();
+// $("#mimg").attr("src","./../../ResB/QE.png");      
+// }
+
+// window.speechSynthesis.speak(msgNo);
+
+
+
+
+// }
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<title>Prácticas en Braille Integral</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />	
+	<meta http-equiv="Last-Modified" content="0" />	
+	<meta content="Capacitación de Mediadores Tecnológicos Digitales" name="SUBJECT" />
+	<meta content="Educación" name="RATING" />
+	<meta content="Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+	<meta
+content="Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora"
+name="ABSTRACT" />
+	<meta
+content="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual"
+name="KEYWORDS" />
+	<meta http-equiv="Last-Modified" content="0" />	
+	<link rel="icon" type="image/png" href="../../ResB/favico.png" sizes="32x32" />
+
+	<link href="../../ResB/PQEstilo.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../ResB/jquery-3.3.1.min.js"></script>	
+	<script src="../../ResB/Idb-Keyval.js"></script>
+	<script type="text/javascript" src="UsuarioIngreso.js"></script>
+	<script type="text/javascript" src="../../ResB/Habla.js"></script>
+	<script type="text/javascript" src="Alfab.js"></script>	
+	<script type="text/javascript" src="../../ResB/AnimP.js"></script>
+	<script src="./../../F1/Generales.js"></script>
+	<script>
+var valBase = "0,0";
+var Palabras1 = ["ala","bala","rara","arca","carpa","oler","goma","sal","este","dique","filo","hijo","kilo","yema","niño","paz","show","tiza","nuez","voz","taxi","mamá","bebé","tía","óseo","atún","pingüino"];
+var Dice ="";
+	</script>
+	<style>
+		.itemL{
+			   padding: 0.5vw 0% 0.5vw;
+		 
+			   margin-bottom: 0.8vw;
+		}
+		#titulo3{
+			margin-bottom: 0%;
+			margin-top: 0%;
+		}	   
+
+	.menuGrid{
+     width: 90vw;
+     margin-left: 5vw;
+     float: left;
+     display: grid;
+     grid-template-rows: 1fr 1fr;
+     grid-template-columns: repeat(5,1fr);
+     justify-items: center;
+     text-align: center;   
+   }
+   .itemS{
+     font-size: 4vh;     
+   }
+  img{width: 30vh;}
+  .f1 {
+     width: 5vh;
+     z-index: 100;
+  }
+  #Mleccion{
+	  position: fixed;
+	  left: 0;
+	  bottom: 18vh;
+	  font-size: 2vw;
+	  width: 100vw;
+	  padding: 2vh;
+	  margin: auto;
+	  word-wrap: break-word;
+	  text-align: center;
+  }
+  a:hover{
+    background-color: white!important;   
+  }
+  a{
+    background-color: white!important;   
+  }
+</style>
+
+</head>
+
+<body onkeyup="Npulsado(event)">
+<div id="contenedor" style="height:100%;    width: 100%;margin-left: auto;margin-right: auto;padding: 0.1vw;">
+	<div id="titulo3" style="margin-top: 1vw; margin-right: 1vw;" >
+<div></div> 
+<span2 style="text-align: center;"></span2>	
+<div></div>
+</div>
+
+<div class="menu-container">
+  
+	<div class="menuGrid">
+		<div></div>
+	<div>
+	  <a id="1" class="itemM" onclick="ingresa(1)"><img src="../../ResB/alfa.png"/><br><span2 id="s1"  class="itemS">ALFABETO</span2></a>
+	</div>
+	<div></div>
+	<div>
+	 <a id="2" class="itemM" onclick="ingresa(2)"><img src="../../ResB/SignosO.png"/><br><span2 id="s2" class="itemS">OTROS SIGNOS</span2></a>
+	</div>
+	<div></div>
+    <div>
+		<a id="3" class="itemM" onclick="ingresa(3)"><img src="../../ResB/Pizarra.png"/><br><span2 id="s3"  class="itemS">PIZARRA</span2></a>
+	</div>
+		<div></div>
+		<div></div>
+		<div></div>
+	<div>   
+	 <a id="4" class="itemM" onclick="ingresa(4)"><img src="../../ResB/Tacto.png"/><br><span2 id="s4"  class="itemS">LECTURA AL TACTO</span2></a>
+	</div>   
+  
+   </div>
+  
+  </div> 
+
+
+	</div>
+
+
+
+	<!-- Pequen -->
+	<div id="pequenG" class="esperaG"></div>
+	<div class="label" style="bottom: 1vw;"></div>
+
+	<script>
+
+function ingresa(valor) {
+
+	sayTimeout = setTimeout(function () {
+var NumLec = "";
+nlec = valor;
+NumLec = nlec;
+NumLec = NumLec.toString();
+if (nlec == 0) {
+	Lee(Gres.MenuPractica);
+	return;
+} else {
+	var miVar3 = setTimeout(function(){ 
+	KEY = 'Practica';
+    VALUE = NumLec;   
+    set();
+	},10);
+	var miVar4 = setTimeout(function(){
+		window.speechSynthesis.cancel();
+		if (nlec == 1) {
+			window.open("./PracticaAF.html", "_self");
+		}
+		else if (nlec == 2) {
+			window.open("./PracticaSig.html", "_self");
+		}		
+		else if (nlec == 3) {
+			window.open("../Pizarra/index.html", "_self");
+		}
+		else if (nlec == 4){
+		   window.open("./PPalabrasTacto.html", "_self"); 	
+		}
+	},200);
+	//}
+//});
+
+}
+	}, 500);
+
+
+}
+function Npulsado(event) {
+	event.preventDefault();
+	var number = String.fromCharCode(event.which);
+	var keyCode = event.keyCode || event.which;
+	//Ayuda
+	if (keyCode == 112) {
+    //$.getScript("../F1/Generales.js", function(){
+      movil = 0;
+	  //TecladoQ();   
+      Ayuda();
+   // });
+  }
+
+
+	if (keyCode == 32)
+	{
+		Dice = " " + palabras;// valBase.toString();
+	    
+//console.log(palabras + " " + nlec)
+		if (nlec == 1){
+         if (Dice.indexOf('á') > -1){Dice = Dice.replace('á','a acentuada')};
+         if (Dice.indexOf('é') > -1){Dice = Dice.replace('é', 'e acentuada')};
+         if (Dice.indexOf('í') > -1){Dice = Dice.replace('í', 'i acentuada')};
+         if (Dice.indexOf('ó') > -1){Dice = Dice.replace('ó','o acentuada')};
+         if (Dice.indexOf('ú') > -1){Dice = Dice.replace('ú','u acentuada')};
+         if (Dice.indexOf('y') > -1){Dice = Dice.replace('y','i griega')};
+		 if (Dice.indexOf('ü') > -1){Dice = Dice.replace('ü','u con diéresis')};
+		 LeeCGB(Dice);
+		}
+		
+		//signos ortográficos
+		else if (nlec == 2){
+			Dice = "";
+			palabras = palabras.toString().replace(/,/g , "");
+
+			
+			 
+			for (i = 0; i < palabras.length; i++) {
+             //console.log(palabras[i]);
+			 Dice += palabras[i];
+
+            }
+			//Dice = Dice.replace(/ /g,"");
+			//console.log(Dice + " ?????????????????????????????????????????????????????????????" + palabras);
+			
+		 queDice();
+
+
+		 //console.log(Dice);    
+		 LeeCGB(Dice);
+
+		}
+		
+
+
+
+        
+		
+	}
+
+}
+///Fin tecla pulsada
+function atras() {
+	var keys = Array.from( signosT.keys() )
+	nlec--;
+	if (nlec < 1) {
+nlec = 4;
+	}
+
+	if (nlec == 1) {
+$("#Mleccion").css("text-align", "center");
+MLec = alfab;
+LeePractica();
+$(".itemS").css({"background-color": "white"});
+$(".itemS").css({"color": "black"});
+$("#s" + nlec).css("background-color", "black");
+$("#s" + nlec).css("color", "white");	
+NumLec = nlec;
+NumLec = NumLec.toString();
+return;
+	}
+else if (nlec == 2) {
+$("#Mleccion").css("text-align", "center");
+Muestrasignos = keys.toString();// [".",",",";",":","?","!","(",")","[","]","{","}","-","_","*","'","/","M"];
+MLec = Muestrasignos;
+LeePractica();
+$(".itemS").css({"background-color": "white"});
+$(".itemS").css({"color": "black"});
+$("#s" + nlec).css("background-color", "black");
+$("#s" + nlec).css("color", "white");	
+NumLec = nlec;
+NumLec = NumLec.toString();
+return;
+	}
+else if (nlec == 3) {
+MLec = "";
+$("#Mleccion").text(" " + MLec + "  ");
+$(".itemS").css({"background-color": "white"});
+$(".itemS").css({"color": "black"});
+$("#s" + nlec).css("background-color", "black");
+$("#s" + nlec).css("color", "white");
+NumLec = nlec;
+NumLec = NumLec.toString();
+$("#Mleccion").text("");
+Lee(Gres.PpizarraB);
+}
+else if (nlec == 4) {
+	Palabras1 = ["ala","bala","rara","arca","carpa","oler","goma","sal","este","dique","filo","hijo","kilo","yema","niño","paz","show","tiza","nuez","voz","taxi","mamá","bebé","tía","óseo","atún","pingüino"];
+MLec = Palabras1;
+LeePractica();
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+	$("#s" + nlec).css("background-color", "black");
+	$("#s" + nlec).css("color", "white");
+	NumLec = nlec;
+	NumLec = NumLec.toString();
+ }
+}
+
+function adelante() {
+	nlec++;
+	if (nlec > 4) {
+nlec = 1
+	}
+if (nlec == 1) {
+$("#Mleccion").css("text-align", "center");
+MLec = alfab;
+LeePractica();
+$(".itemS").css({"background-color": "white"});
+$(".itemS").css({"color": "black"});
+$("#s" + nlec).css("background-color", "black");
+$("#s" + nlec).css("color", "white");
+NumLec = nlec;
+NumLec = NumLec.toString();
+return;
+	}
+else if (nlec == 2) {
+$("#Mleccion").css("text-align", "center");
+Muestrasignos = keys.toString();// [".","c",";",":","?","!","(",")","[","]","{","}","-","_","*","'","/","M"];
+MLec = Muestrasignos;
+LeePractica();
+$(".itemS").css({"background-color": "white"});
+$(".itemS").css({"color": "black"});
+$("#s" + nlec).css("background-color", "black");
+$("#s" + nlec).css("color", "white");
+NumLec = nlec;
+NumLec = NumLec.toString();
+return	
+	
+	}
+else if (nlec == 3) {
+MLec = "";
+$("#Mleccion").text(" " + MLec + "  ");
+$(".itemS").css({"background-color": "white"});
+$(".itemS").css({"color": "black"});
+$("#s" + nlec).css("background-color", "black");
+$("#s" + nlec).css("color", "white");
+NumLec = nlec;
+NumLec = NumLec.toString();
+Lee(Gres.PpizarraB);
+}
+else if (nlec == 4) {
+	Palabras1 = ["ala","bala","rara","arca","carpa","oler","goma","sal","este","dique","filo","hijo","kilo","yema","niño","paz","show","tiza","nuez","voz","taxi","mamá","bebé","tía","óseo","atún","pingüino"];
+MLec = Palabras1;
+////console.log(Palabras1 + "??????????? ")
+LeePractica();
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+	$("#s" + nlec).css("background-color", "black");
+	$("#s" + nlec).css("color", "white");
+	NumLec = nlec;
+	NumLec = NumLec.toString();
+ }
+}
+
+
+
+	</script>
+
+	<script>
+$(document).ready(function () {
+	var MLec = "";
+	cuentaErrores = 0;
+	palabras = "";
+	vectorE =[];
+	MuestraVectorE = [];	  
+	if (movil == 0) {
+$("#Pie").css("display", "none");
+	}
+	var miVar2 = setTimeout(function(){ 
+	KEY ="UsuarioActual";
+    get().then(function (value) {
+		UsuarioActual = value;
+		//console.log(UsuarioActual);
+	});
+
+	},10);
+	
+    DeterminaMotor(document.title + ". " + Gres.MenuPractica);	
+    
+	
+
+	document.onkeyup = function (e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27) {
+	RegresarB();
+	return;
+}
+
+if (e.keyCode == 37) { atras() }
+if (e.keyCode == 38) { atras() }
+if (e.keyCode == 39) { adelante() }
+if (e.keyCode == 40) { adelante() }
+
+if (e.keyCode == 13) {
+
+	ingresa(nlec);
+}
+
+return;
+	}
+  
+
+
+	//  $(".jm-loadingpage").delay(3000).fadeOut("slow");
+});
+var nlec = 0;
+var xPosVie = 0;
+var yPosVie;
+var xPosNew;
+var yPosNew;
+var DifX = 0;
+var DifY = 0;
+
+$(document).on("touchstart mousedown", function (e) {
+
+	xPosVie = 0;
+	yPosVie = 0;
+	var touchstart = e.type === 'touchstart',
+
+e = touchstart ? e.originalEvent : e,
+pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+	xPosVie = pageX;
+	yPosVie = pageY;
+	
+});
+
+$(document).on("mousemove touchmove", function (e) {
+	xPosNew = 0;
+	yPosNew = 0;
+	var touchstart = e.type === 'touchmove',
+e = touchstart ? e.originalEvent : e,
+pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+	xPosNew = pageX;
+	yPosNew = pageY;
+});
+
+$(document).on("touchend mouseup", function (e) {
+
+	if (e.target.className == "itemL") {
+nlec = e.target.id;
+ingresa();
+return;
+	}
+	if (e.target.className === 'f1') { return }
+	if (e.target.className === 'esc') { return }
+
+	DifX = xPosNew - xPosVie;
+	//arrastró a la derecha
+	if (DifX > 200) {
+adelante();
+	}
+
+	if (DifX < -200) {
+atras();
+	}
+	return;
+});
+
+function Ayuda() {
+	LeeCGB(document.title + ". " + Gres.MenuPractica);
+}
+function RegresarB() {
+	window.open("../index.html", "_self");
+}
+
+function LeePractica() {	
+   cuentaErrores = 0;
+if (nlec == 1) { 
+	var miVar2 = setTimeout(function(){ 
+   KEY = UsuarioActual + 'Alfabeto';
+   get().then(function (value) {
+   valBase = value;
+   //console.log(UsuarioActual);
+if (valBase == undefined)
+{
+	valBase ="SR";
+}
+   },10);
+   var miVar3 = setTimeout(function(){ 
+	//console.log(UsuarioActual + " lee este usuario? " + valBase);
+	MLec = MLec.toString().replace(/,/g, "  ");
+		$("#Mleccion").text(" " + MLec + " ");
+	if (valBase == "SR"){
+		LeeCGB($("#" + nlec).text() + ": " + Gres.Psinrealizar);
+	}else if (valBase == ""){	
+	   LeeCGB($("#" + nlec).text() + Gres.PrealizadaCorr);
+	}
+	else {
+       FcuentaErrores();
+	   return; 
+    }
+  },1000);	
+});
+	}
+	else if (nlec == 2) {
+		//$("#Mleccion").text( keys.toString());
+		//MLec = ( ". c   ;  :  ?  !  (  )  [  ]  {  }  -  _  *  '  /  M ");
+	 var miVar2 = setTimeout(function(){ 
+       KEY = UsuarioActual + 'Signos';
+       get().then(function (value) {	
+       valBase = value;
+	   //console.log(UsuarioActual + "signos???" + valBase);
+if (valBase == undefined)
+{
+	valBase ="SR";	
+}
+},10);
+var miVar2 = setTimeout(function(){ 
+	if (valBase == "SR"){
+		LeeCGB($("#" + nlec).text() + ": " + Gres.Psinrealizar);
+	}else if (valBase == ""){	
+	   LeeCGB($("#" + nlec).text() + Gres.PrealizadaCorr);
+	}
+	else {
+       FcuentaErrores();
+	   return; 
+    }
+},1000);
+});
+	}
+	
+ else if (nlec == 4) {
+	MLec = MLec.toString().replace(/,/g, "  ");
+		$("#Mleccion").text(" " + MLec + " ");
+
+	var miVar2 = setTimeout(function(){ 
+KEY = UsuarioActual + 'PalabrasTactil';
+                get().then(function (value) {
+	// try {
+valBase = value;
+if (valBase == undefined)
+{
+	valBase ="SR";
+}
+},10);
+var miVar3 = setTimeout(function(){ 
+	if (valBase == "SR"){	
+		LeeCGB($("#" + nlec).text() + ": " + Gres.Psinrealizar);
+	}
+	else if (valBase == ""){	
+	   LeeCGB($("#" + nlec).text() + Gres.PrealizadaCorr);
+	}
+	else {
+       FcuentaErroresPizarra();
+	   return; 
+    }
+},1000);
+});
+}
+ 
+}
+
+function FcuentaErrores() {
+	if (nlec == 4){return}
+	vectorE.length = 0;
+	MuestraVectorE =[];
+	//try {
+	//	MLec = keys.split('');	
+	// } catch (error) {
+		
+	// }
+	
+	MuestraVectorE = keys// MLec;
+	
+	var vecErrores = valBase;
+	vecErrores = vecErrores.replace(/,/g, "");
+	vecErrores = vecErrores.replace(/" "/g, "");
+
+	vecErrores = vecErrores.split(" ");
+	
+
+	//console.log(vecErrores.length + ">>>>>>>" +  valBase + " ?????   "+ MuestraVectorE);
+	
+	vectorE =  valBase.split(',');	
+	cuentaErrores = vecErrores.length -1;
+	palabras = "";
+// 	for (let index2 = 0; index2 < MuestraVectorE.length; index2++) {      
+
+// 	for (let index = 0; index < vectorE.length; index++) {
+// 			if ( MuestraVectorE[index2].trim() + " " == vectorE[index].trim() + " ")
+// 		{
+// 			var remP = vectorE[index];
+// 			palabras = palabras + remP + ", ";
+// 		    if (remP.trim() == "c" && nlec == 2) {
+//                remP = " , ";				
+// 			}			
+// 	        MuestraVectorE[index2] = "<span class='myClass'>"  +  remP + "</span>&nbsp;"; 
+// 			cuentaErrores++;
+// 		}
+
+// 	}
+
+//   }
+  //palabras = palabras + "'";
+//console.log("en " + nlec + " hay " + cuentaErrores + " errores " + palabras);
+palabras = palabras.trim();
+//palabras = palabras.toString().replace(/ /g, ",");
+$("#Mleccion").html(MuestraVectorE);
+if ( cuentaErrores == 1){
+	LeeCGB($("#" + nlec).text() +  Gres.Prealizadacon + "un" + Gres.error);
+}	
+else if ( cuentaErrores > 1){
+	LeeCGB($("#" + nlec).text() +  Gres.Prealizadacon + vectorE.length + Gres.errores);
+}	
+else if ( cuentaErrores == 0){
+	Lee($("#" + nlec).text() +  Gres.PrealizadaCorr);	
+}
+}
+
+
+
+
+//para pizarra
+
+function FcuentaErroresPizarra() {
+	vectorE.length = 0;
+	MuestraVectorE =[];
+	//try {
+		MLec = MLec.split(' ');	
+	// } catch (error) {
+		
+	// }
+	
+	MuestraVectorE = MLec;
+	////console.log(valBase);
+	
+	vectorE =  valBase.split(',');	
+	cuentaErrores = 0;
+	palabras = "";
+	for (let index2 = 0; index2 < MuestraVectorE.length; index2++) {
+
+       //if (MuestraVectorE[index2] == ","){ MuestraVectorE[index2] = "c"}
+
+	for (let index = 0; index < vectorE.length; index++) {
+		////console.log(" fuera " + MuestraVectorE[index2].trim() + ">< == " + vectorE[index].trim() + " " )
+		if ( MuestraVectorE[index2].trim() + " " == vectorE[index].trim() + " ")
+		{
+			////console.log(" errores " + MuestraVectorE[index2].trim() + ">< == " + vectorE[index].trim() + " " );
+			
+			var remP = vectorE[index];
+			palabras = palabras + remP + ", ";		  
+		  			
+	        MuestraVectorE[index2] = "<span class='myClass'>"  +  remP + "</span>&nbsp;"; 
+			cuentaErrores++;
+		}
+        MuestraVectorE[index2] =  MuestraVectorE[index2]+" ";
+	}
+
+  }
+  //palabras = palabras + "'";
+//console.log("en " + nlec + " hay " + cuentaErrores + " errores " + palabras);
+palabras = palabras.trim();
+$("#Mleccion").html(MuestraVectorE);
+if ( cuentaErrores == 1){
+	LeeCGB($("#" + nlec).text() +  Gres.Prealizadacon + "un" + Gres.error);
+}	
+else if ( cuentaErrores > 1){
+	LeeCGB($("#" + nlec).text() +  Gres.Prealizadacon + vectorE.length + Gres.errores);	
+}	
+else if ( cuentaErrores == 0){
+	Lee($("#" + nlec).text() +  Gres.PrealizadaCorr);	
+}
+}
+
+
+
+
+
+
+function FcuentaErroresNooo() {
+	vectorE.length = 0;
+	MuestraVectorE.length =0;	
+	MuestraVectorE = MLec;
+	//console.log(valBase);
+	if (nlec == 2)
+    {
+	    //console.log(valBase);
+	   //valBase = valBase.replace(",","c");
+	   //console.log(valBase);
+	}
+	vectorE =  valBase.split(',');	
+	cuentaErrores = 0;
+	//si hay errores y hay que mostrarlos	
+	if (valBase.length > 0 ){
+	 	 
+	for (let index2 = 0; index2 < MuestraVectorE.length; index2++) {
+
+       //if (MuestraVectorE[index2] == ","){ MuestraVectorE[index2] = "c"}
+
+	for (let index = 0; index < vectorE.length; index++) {
+		
+		if ( MuestraVectorE[index2].trim() + " " == vectorE[index].trim() + " ")
+		{
+	      var remP = vectorE[index];
+		  
+		  if (remP.trim() == "c") {
+              remP = " , ";
+			}	
+	MuestraVectorE[index2] = '<span class="myClass">'  +  remP + '</span>&nbsp;';
+	//console.log(MuestraVectorE[index2]);
+	cuentaErrores++;
+	index = vectorE.length;
+     }
+	 else if ( MuestraVectorE[index2].trim() + " " ==  "," && vectorE[index].trim() + " " == "c")
+		{
+			//console.log ("<<" + MuestraVectorE[index2].trim() + "==" + vectorE[index].trim() + ">>");
+	      var remP = vectorE[index];
+		  
+		  if (remP.trim() == "c") {
+              remP = " , ";
+			}	
+	MuestraVectorE[index2] = '<span class="myClass">'  +  remP + '</span>&nbsp;';
+	//console.log(MuestraVectorE[index2]);
+	cuentaErrores++;
+	index = vectorE.length;
+    }
+	else if ( MuestraVectorE[index2].trim() == ">" &&  vectorE[index].trim() == "Mq")
+	{
+	var remP = vectorE[index];	
+	if (remP == " Mq") {
+		remP = " > ";
+	}	
+	MuestraVectorE[index2] = '<span class="myClass">'  +  remP + '</span>&nbsp;';
+	cuentaErrores++;
+	index = vectorE.length;
+    }
+	else if ( MuestraVectorE[index2].trim() == "<" &&  vectorE[index].trim() == "mQ")
+    {
+	var remP = vectorE[index];	 
+	if (remP == " mQ") {
+		remP = " < ";
+	}	
+	MuestraVectorE[index2] = '<span class="myClass">'  +  remP + '</span>&nbsp;';
+	cuentaErrores++;
+	index = vectorE.length;
+    }
+
+	}
+	}
+
+} else if (valBase.length == 0 ){
+		MLec = MLec.toString().replace(/,/g, "  ");
+
+	$("#Mleccion").text(" " + MLec + " ");
+	
+}
+else if (valBase.length > 0 ){
+  if (nlec == 2)
+    {
+		
+		MLec = ". c ; : ? ! (  ) [ ] { }  - _ * ' / M";
+		$("#Mleccion").html(MuestraVectorE);
+   }
+   else if (nlec != 2)
+    {
+		MuestraVectorE = MuestraVectorE.toString().replace(/,/g, "  ");
+		$("#Mleccion").html(MuestraVectorE);
+   }
+	}
+	
+
+//console.log($("#" + nlec).text() + " <" + vectorE + "> " + vectorE.length + " " + cuentaErrores);	
+if ( cuentaErrores == 1){
+	LeeCGB($("#" + nlec).text() +  Gres.Prealizadacon + "un" + Gres.error);
+	cuentaErrores=0;
+	return;
+}	
+else if ( cuentaErrores > 1){
+	LeeCGB($("#" + nlec).text() +  Gres.Prealizadacon + vectorE.length + Gres.errores);
+	cuentaErrores=0;
+	return;
+}	
+else if ( cuentaErrores == 0){
+	Lee($("#" + nlec).text() +  Gres.PrealizadaCorr);	
+}	
+
+}
+
+function muestraKeys(){
+	const signosT = new Map([
+    ["." , "3"],
+    ["," ,"2"],
+    [":" , "25"],
+    ["?" , "26"],
+    ["!" , "235"],
+    [";" , "23"],
+    ["º" , "356"],
+    ["(" , "126"],
+    [")" , "345"],
+    ["[" , "12356"],
+    ["]" , "23456"],
+    ["{" , "5,123"],
+    ["}" , "456,2"],
+    ["-" , "36"],
+    ["÷" , "256"],
+    ["—" , "36,36"],
+    ["_" , "6"],
+    ["*" , "35"],
+    ["|" , "456"],
+    ["$" , "456,1234"],
+    ["\"" , "236"],
+    ["&" , "6,12346"],
+    ["M" , "46"],
+    ["/" , "6,2"],
+    ["@" , "5"],
+    ["#" , "3456"],
+    ["%" , "456,356"],
+    ["<" , "246"],
+    [">" , "135"],
+    ["«" , "246,246"],
+    ["»" , "135,135"],
+    ["≥" , "135,2356"],
+    ["≤" , "246,2356"],
+    ["~" , "4,2356"],
+    ["=" ,"2356"],
+    ["≠" , "45,2356"],
+    [ "==" , "2356,2356"],
+    ["○"  , "246,135"],
+    ["□" , "456,13456"],
+    ["▌" , "12346,13456"],
+    ["⌂" , "12346,135"],
+    ["⊿" , "456,236"],
+    ["△" , "6,23456"]
+
+  ]);
+   // convertir map keys en array
+   var keys = Array.from( signosT.keys() );
+ 
+}
+
+function queDice()
+{ 
+    
+	
+	Dice = Dice.replace("M","mayúscula");	 
+	Dice = Dice.replace(".","punto ortográfico o apóstrofo. ");	
+	Dice = Dice.replace(",","coma ortográfica o punto decimal. ");
+	Dice = Dice.replace(";","punto y coma. ");
+	Dice = Dice.replace(":","dos puntos. ");
+	Dice = Dice.replace("?","interrogación. ");	
+	Dice = Dice.replace("!","admiración o suma. ");
+	Dice = Dice.replace("(","abre paréntesis. ");
+	Dice = Dice.replace(")","cierra paréntesis. ");
+	Dice = Dice.replace("[","abre corchete. ");
+	Dice = Dice.replace("]","cierra corchete. ");
+	Dice = Dice.replace("{","abre llave. ");
+	Dice = Dice.replace("}","cierra llave. ");
+	Dice = Dice.replace("-","guión medio o resta. ");
+	Dice = Dice.replace("—","guión de diálogo. ");
+	Dice = Dice.replace("_","guión bajo. ");
+	Dice = Dice.replace("*","asterisco o resaltador de texto. ");
+	Dice = Dice.replace("'","apóstrofo. ");
+	Dice = Dice.replace("/","barra oblicua. ");	
+	Dice = Dice.replace("º","grados. ");
+	Dice = Dice.replace("|","barra vertical. ");
+	Dice = Dice.replace("$","signo pesos ");
+	Dice = Dice.replace("÷","división. ");
+	Dice = Dice.replace("\"","comillas o multiplicación. ");
+	Dice = Dice.replace("&","ampersand. ");
+	Dice = Dice.replace("÷","división. ");
+    Dice = Dice.replace("&","ampersand ");
+    Dice = Dice.replace("~","aproximadamente igual ");
+    Dice = Dice.replace("≠","desigual o diferente ");
+    Dice = Dice.replace("«","mucho menor ");
+    Dice = Dice.replace("»","mucho mayor ");
+    Dice = Dice.replace("%","porciento ");
+    Dice = Dice.replace("==","exactamente igual ");
+    Dice = Dice.replace("○","círculo ");
+    Dice = Dice.replace("□","cuadrado ");
+    Dice = Dice.replace("▌","rectángulo ");
+    Dice = Dice.replace("⌂","polígono ");
+    Dice = Dice.replace("⊿","triángulo rectángulo ");
+    Dice = Dice.replace("△","triángulo equilátero ");
+    Dice = Dice.replace("/","barra oblicua ");
+    Dice = Dice.replace("@","arroba o prefijo de minúscula o interruptor estenográfico ");
+    Dice = Dice.replace("#","signo número ");
+    Dice = Dice.replace("<","menor ");
+    Dice = Dice.replace(">","mayor ");
+    Dice = Dice.replace("≥","mayor o igual ");
+    Dice = Dice.replace("≤","menor o igual ");
+    Dice = Dice.replace("=","igual ");
+
+}
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+
+
+
+
+
+</html>

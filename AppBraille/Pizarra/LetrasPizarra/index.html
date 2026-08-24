@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Pizarra Braille</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../../../ResB/favico.png" sizes="32x32"/>
+
+<link href="../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="VariableT.js"></script>
+<script src="../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="DictaL.js"></script>
+<script type="text/javascript" src="../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Practicaes.js"></script>
+
+<script>
+	var NUsuarioActual = "";
+	var valBase = "";
+	var repl = ""; 
+	var cuentaErrores = 0;
+
+window.onload = function()
+    {
+ 
+    KEY = 'UsuarioActual';
+  get().then(function (value) {
+UsuarioActual = value;
+  });
+}
+
+</script>
+<style>
+  #letraP{
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size: 15vw;
+  }
+</style>
+
+</head>
+
+<body onkeyup="Npulsado(event)" onkeypress="Dpulsado(event)" >
+
+<div id="contenedor"> 
+   <div id="titulo3">
+    <div></div> 
+    <span2 style="text-align: center;"></span2>
+    <div></div>
+    </div>
+
+  <!-- Teclado Pulsado -->
+  <div class="grid">
+    <div style="text-align: center;  vertical-align: middle;padding: 0px;margin: 0; line-height:-150vw;margin-bottom: 30vw;"><label id="letraP">a</label></div>
+<div id="Sgenerador" style="margin-bottom: 40vw;margin-top: 6vh;">
+  <elem class="teclas" >
+    <elem class="box" id="box4">4</elem> 
+    <elem class="box" id="box1">1</elem>
+    <elem class="box" id="box5">5</elem> 
+    <elem class="box" id="box2">2</elem>     
+    <elem class="box" id="box6">6</elem>
+    <elem class="box" id="box3">3</elem>   
+  </elem>
+</div>
+<div></div>
+</div>
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+   </div>
+ <!-- globo -->
+ <div  class="label" style="bottom: 12%;margin-left: 28%;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" style="margin-left: 6%;bottom:0%;z-index: 100; "></div>
+
+</div>
+
+<script>
+ 
+ 
+var audio = document.createElement('audio');
+
+
+  window.addEventListener('load', function(){
+
+    
+var box1 = document.getElementById('box1');
+var statusdiv = document.getElementById('statusdiv');
+var box2 = document.getElementById('box2');
+var statusdiv2 = document.getElementById('statusdiv2');
+var box3 = document.getElementById('box3');
+var statusdiv3 = document.getElementById('statusdiv3');
+var box4 = document.getElementById('box4');
+var statusdiv4 = document.getElementById('statusdiv4');
+var box5 = document.getElementById('box5');
+var statusdiv6 = document.getElementById('statusdiv5');
+var box6 = document.getElementById('box6');
+var statusdiv6 = document.getElementById('statusdiv6');
+var d = document.getElementById('d');
+var box = document.getElementsByClassName('box');
+
+
+
+   
+  }, false)
+
+
+  function evalua(numeros)
+  {
+    window.speechSynthesis.cancel(); 
+  
+  
+
+    if (eval("D" + alfab[indiceL] ) == numeros)
+ {
+
+  playSound();
+ if (alfab.length ==  indiceL + 1)
+ {
+ termino = "si";
+    ActualizaUsuLec();
+ return;
+ }
+
+
+ indiceL++;
+ 
+ var Dice = alfab[indiceL];
+ if (Dice == 'á'){Dice = 'a acentuada'}
+ if (Dice == 'é'){Dice = 'e acentuada'}
+ if (Dice == 'í'){Dice = 'i acentuada'}
+ if (Dice == 'ó'){Dice = 'o acentuada'}
+ if (Dice == 'ú'){Dice = 'u acentuada'}
+ if (Dice == 'y'){Dice = 'i griega'}
+ if (Dice == 'ü'){Dice = 'u con diéresis'}
+ if (Dice == 'v'){Dice = 'v'}
+ if (Dice == 'may'){Dice = 'signo mayúscula'}
+
+  Lee(Gres.escribir + Dice );
+  if (Dice == 'signo mayúscula'){
+    letraP.innerHTML =  "Mayúscula";
+    $("#letraP").css("font-size", "5vw");
+    
+  }
+  else {
+  letraP.innerHTML =  alfab[indiceL];
+  $("#letraP").css("font-size", "15vw");
+
+}
+
+  $(".box").css("background-color","white");
+  $(".box").css("color","black");
+
+}
+    else if (eval("D" + alfab[indiceL]) != numeros)
+ {
+  
+ if (ultimoError !=  alfab[indiceL])
+ {
+   ultimoError = alfab[indiceL];
+   errorD.push(alfab[indiceL]);  
+   errorD[indiceErr] =  alfab[indiceL];  
+   indiceErr++;
+ }
+
+ var Dice = alfab[indiceL];
+ if (Dice == 'á'){Dice = 'a acentuada'}
+ if (Dice == 'é'){Dice = 'e acentuada'}
+ if (Dice == 'í'){Dice = 'i acentuada'}
+ if (Dice == 'ó'){Dice = 'o acentuada'}
+ if (Dice == 'ú'){Dice = 'u acentuada'}
+ if (Dice == 'y'){Dice = 'i griega'}
+ if (Dice == 'ü'){Dice = 'u con diéresis'}
+ if (Dice == 'v'){Dice = 'v'}
+ if (Dice == 'may'){Dice = 'signo mayúscula'}
+  
+  const input =  eval("D" + alfab[indiceL]);
+
+//1, 2, 3 ....................
+const output = input.split('').reduce((s, c) => {let l = s.length-1; (s[l] && s[l].length < 1) ? s[l] += c : s.push(" " + c); return s;}, []);
+
+
+
+if (output.length > 1)
+{
+  Lee(Gres.noes + " '" + Dice + "'' " + Gres.puntos + output + ". ");
+}
+else if (output.length == 1)
+{
+  Lee(Gres.noes + " '" + Dice + "'' " + Gres.punto  + output + ". " );
+  
+}
+  
+   $(".box").css("background-color","white");
+   $(".box").css("color","black");
+} 
+  }
+
+
+
+  $("#box1").bind('touchmove',function( event ) {    
+    if ($("#box1").text() != Nnumero)
+    {
+Nnumero = $("#box1").text();
+    }    
+  });
+  $("#box2").bind('touchmove',function( event ) {    
+    if ($("#box2").text() != Nnumero)
+    {
+Nnumero = $("#box2").text();
+    }    
+  });
+  $("#box3").bind('touchmove',function( event ) {    
+    if ($("#box3").text() != Nnumero)
+    {
+Nnumero = $("#box3").text();
+    }    
+  });
+  $("#box4").bind('touchmove',function( event ) {    
+    if ($("#box4").text() != Nnumero)
+    {
+Nnumero = $("#box4").text();
+    }    
+  });
+  $("#box5").bind('touchmove',function( event ) {    
+    if ($("#box5").text() != Nnumero)
+    {
+Nnumero = $("#box5").text();
+    }    
+  });
+  $("#box6").bind('touchmove',function( event ) {    
+    if ($("#box6").text() != Nnumero)
+    {
+Nnumero = $("#box6").text();
+    }    
+  })
+
+
+  $("#Sgenerador").mousemove(function( event ) {    
+  Nnumero ="";
+    });
+
+    $("#Sgenerador").bind('touchmove',function( event ) {    
+  Nnumero ="";
+    });
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+ 
+  var number = String.fromCharCode(event.which);
+
+var keyCode = event.keyCode || event.which;
+if (keyCode == 13){return;}
+if (keyCode == 112) {
+      movil = 0;
+      LeeCGB(Gres.LetraPizarra);
+  }
+
+if (keyCode == 27){
+  Regresar();
+  return
+} 
+if (keyCode == 113 || keyCode == 114 || keyCode == 115 || keyCode == 119 ){return}
+
+
+if (keyCode == 32)
+{
+  var Dice = alfab[indiceL];
+ if (Dice == 'á'){Dice = 'a acentuada'}
+ if (Dice == 'é'){Dice = 'e acentuada'}
+ if (Dice == 'í'){Dice = 'i acentuada'}
+ if (Dice == 'ó'){Dice = 'o acentuada'}
+ if (Dice == 'ú'){Dice = 'u acentuada'}
+ if (Dice == 'y'){Dice = 'i griega'}
+ if (Dice == 'ü'){Dice = 'u con diéresis'}
+ if (Dice == 'v'){Dice = 'v'}
+ if (Dice == 'may'){Dice = 'signo mayúscula'}
+  Lee("Escribir: " + Dice + ".");
+  return;
+}
+
+
+var numeroK = event.keyCode;
+//console.log(event.keyCode); 
+if (numeroK == 103 || numeroK == 100 || numeroK == 97  ){
+    LeeCGB(Gres.PizarraPuntos);
+    return;
+  }
+ 
+
+//blq num
+var active = event.getModifierState('NumLock');
+
+if (keyCode == 144)
+{
+if (active == false){Lee(Gres.TnNh);return;}
+if (active == true){Lee(Gres.TnH);return;}
+}
+
+//Blq num no bloqueado
+if (keyCode >= 33 && keyCode <= 40)
+{
+if (active == false){Lee(Gres.NBtN);return;}
+}
+
+if (keyCode ==  12 || keyCode == 45)
+{
+if (active == false){Lee(Gres.NBtN);return;}
+}
+
+if (numeroK ==105){Lee("punto 1")}   
+if (numeroK ==102){Lee("punto 2")}   
+if (numeroK ==99){Lee("punto 3")}   
+if (numeroK ==104){Lee("punto 4")}   
+if (numeroK ==101){Lee("punto 5")}   
+if (numeroK ==98){Lee("punto 6")}   
+
+//para Android
+if (numeroK ==57){
+  numeroK=105;
+  number=9;
+  Lee("punto 1")}   
+if (numeroK ==54){
+  numeroK=102;
+  number=6;
+  Lee("punto 2")}   
+if (numeroK ==51){
+  numeroK=99;
+  number=3;
+  Lee("punto 3")}   
+if (numeroK ==56){
+  numeroK=104;
+  number=8;
+  Lee("punto 4")}   
+if (numeroK ==53){
+  numeroK=101;
+  number=5;
+  Lee("punto 5")}   
+if (numeroK ==50){
+  number=2;
+  numeroK=98;
+  Lee("punto 6")}   
+
+if (numeroK ==  112)
+{
+  Ayuda();
+  return;
+}    
+ 
+if (numeroK<96 || numeroK>105){     
+    Lee("para simular la pizarra usar el teclado numérico");
+    return;
+  }
+
+ if (keyCode ==116){return}
+ if (termino == "si"){return}
+
+    if (keyCode >= 96 && keyCode <= 105) {
+  // Numpad keys  
+  keyCode -= 48;
+  number = String.fromCharCode(keyCode);
+    }
+
+  if (number == 9){
+     statusdiv.innerHTML = '1'; 
+     number = 1;  
+   $("#box1").css("background-color","black");    
+    $("#box1").css("color","white");
+     
+  }
+  else if (number == 6){
+     statusdiv2.innerHTML = '2';   
+     number = 2;
+     
+   $("#box2").css("background-color","black");    
+    $("#box2").css("color","white");
+  }
+  else if (number == 3){
+     statusdiv3.innerHTML = '3';   
+     number = 3;
+     
+   $("#box3").css("background-color","black");    
+    $("#box3").css("color","white");
+  }
+  else if (number == 8){
+     statusdiv4.innerHTML = '4';   
+     number = 4;
+     
+   $("#box4").css("background-color","black");    
+    $("#box4").css("color","white");
+  }
+  else if (number == 5){
+     statusdiv5.innerHTML = '5';   
+     number = 5;
+    
+   $("#box5").css("background-color","black");    
+    $("#box5").css("color","white");
+  }
+  else if (number == 2){
+     statusdiv6.innerHTML = '6';   
+     number = 6;
+    
+   $("#box6").css("background-color","black");    
+    $("#box6").css("color","white");
+  }
+  d.innerHTML =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;  
+
+  if (d.innerHTML.toString().trim().length < eval("D" + alfab[indiceL]).length && eval("D" + alfab[indiceL]).includes(number) )
+ {return}
+ else{  
+evalua(d.innerHTML);
+$(".etq").html('');
+ }
+  }
+  function Regresar(){
+
+  window.open("../index.html","_self");
+}
+
+  $(document).ready(function() {
+
+    var miVar2 = setTimeout(function(){ 
+     }, 10); 
+ 
+      DeterminaMotor(Gres.ecribirPizarraL  + alfab[0]);
+
+});
+
+function ActualizaUsuLec()
+    {
+     
+    termino = "si";
+    KEY ="UsuarioActual";
+    get().then(function (value) {
+UsuarioActual = value;
+
+    ///Actualiza Bd
+  KEY = UsuarioActual + 'LetrasPizarra';
+  VALUE = errorD.toString();// DactiloAc;   
+   set().then(function (value) {
+if (errorD.length > 1) {
+    Lee(Gres.findelap + errorD.length  + " errores.");
+} 
+else if (errorD.length == 1 ){
+Lee(Gres.findelapUn);
+}
+else if (errorD.length == 0 ){
+Lee(Gres.findelapCorr);
+}
+    });
+    });   
+    
+  } 
+
+
+
+  function playSound(){
+    if (controlAudio == "con" ) {
+    rutaAudio = "./../../../ResB/Ding.mp3"
+    audio.src =  rutaAudio;
+    audio.load();
+   audio.play();
+    }
+}  
+
+
+function Ayuda()
+{
+  LeeCGB(Gres.LetraPizarra);
+}
+
+
+function Dpulsado(e){
+  var keyCode = e.keyCode;
+
+  var number = String.fromCharCode(keyCode);
+  if (termino == "si"){return}
+    if (number == 9){
+$("#box1").css("background-color","black");    
+$("#box1").css("color","white");
+ 
+    }
+    else if (number == 6){
+ 
+$("#box2").css("background-color","black");    
+$("#box2").css("color","white");
+    }
+    else if (number == 3){ 
+ 
+$("#box3").css("background-color","black");    
+$("#box3").css("color","white");
+    }
+    else if (number == 8){ 
+
+$("#box4").css("background-color","black");    
+$("#box4").css("color","white");
+    }
+    else if (number == 5){ 
+
+$("#box5").css("background-color","black");    
+$("#box5").css("color","white");
+    }
+    else if (number == 2){ 
+
+$("#box6").css("background-color","black");    
+$("#box6").css("color","white");
+    }
+
+
+}
+   
+  </script>
+
+
+</body>
+
+</html>

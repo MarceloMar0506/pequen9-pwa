@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+<title>Práctica de palabras con principios, contracciones y terminaciones</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="UsuarioIngreso.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./PTC.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<style>
+	.flash{width:100%}
+</style>
+
+
+<script>
+	    var nlec = 1;
+        var xPosVie =0;
+        var yPosVie;
+        var xPosNew;
+        var yPosNew;
+        var DifX=0;
+        var DifY=0;
+        var sLetra = [];
+
+	var Esadelante = true;
+
+window.onload = function()
+{
+
+KEY = 'UsuarioActual';
+        get().then(function (value) {
+            UsuarioActual = value;
+		});
+	}
+
+</script>
+<style>
+	#letrasPTC{	
+      display: grid; 
+      justify-items: stretch; 
+      grid-template-columns: repeat(18,1fr);       
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;      
+      justify-content: center; 
+      align-items: center; 
+	  width: 100%;
+	  left: 0;
+    
+	}
+</style>
+
+
+</head>
+
+
+<body  onkeyup="Npulsado(event)">	 
+	
+	<div id="contenedor" style="height:100%">
+	<div id="titulo3">
+<div></div> 
+<div id="titulo"></div>
+<div></div>
+</div>
+
+<!-- Letras -->
+<div id="letrasPTC" style="margin-top:3vw">
+	<div id="1" class="Tl">A</div>
+	<div id="2" class="Tl">B</div>
+	<div id="3" class="Tl">C</div>
+	<div id="4" class="Tl">D</div>
+	<div id="5" class="Tl">E</div>
+	<div id="6" class="Tl">F</div>
+	<div id="7" class="Tl">G</div>	
+	<div id="8" class="Tl">I</div> 
+	<div id="9" class="Tl">L</div>
+	<div id="10" class="Tl">M</div>
+	<div id="11" class="Tl">N</div>
+	<div id="12" class="Tl">O</div>
+	<div id="13" class="Tl">P</div>
+	<div id="14" class="Tl">R</div>
+	<div id="15" class="Tl">S</div>
+	<div id="16" class="Tl">T</div>
+	<div id="17" class="Tl">Ú</div>
+	<div id="18" class="Tl">V</div>
+	
+	</div>
+
+
+<!-- <div id="Mleccion" class="Mleccion" style="font-size: 3vw;width: 70%;margin: auto;word-wrap: break-word;"></div> -->
+<div id="grillaLista" style="grid-template-columns: 10vw 80vw 10vw;">
+	<div id="Fiz" style="width: 7vh;"><img class="animated flash" src="./../../../ResB/Fiz.png" onclick="atras()" alt=""></div> 
+
+	<div id="Mleccion" class="Mleccion" style="font-size: 3vw;width: 100%;margin: auto;word-wrap: break-word;"></div>
+
+	<div id="Fder" style="width: 7vh;"><img class="animated flash" src="./../../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+
+</div>
+
+<div id="ettexto" style="text-align:center;float:left;width:100%;" >
+	<label class="etiquetaTexto" id="EtiquetaUnoTexto" style="text-align:center;width:100%;border-bottom:0; "></label>
+	</div>
+	<div  class="label" style="bottom: 5vh;margin-left: 20vw;width: 60vw;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+</div>
+<script>
+	var valBase = "";
+
+
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+if (keyCode == 112) {
+      movil = 0;
+	  LeeCGB(document.title + ". " + Gres.MenuPractica + ". ");
+  }
+
+  }
+///Fin tecla pulsada
+function atras(){
+	
+	nlec--;
+	if (nlec < 1){
+	 nlec = 1
+	}
+
+	letras = "";
+	cuantos=0;
+	res = $('#'+ nlec).text()
+for (let i = 0; i < keysPTC.length; i++) {
+ if  (keysPTC[i].startsWith(res) )
+ {
+  letras = letras + " " + keysPTC[i];
+  cuantos++;
+}
+
+}
+
+
+	MLec = "";
+ 
+ $("#Mleccion").text(letras);
+
+
+LeePractica();
+
+    $("button").css("color","black");
+	$("button").css("background-color","lightsteelblue");
+	$(".Tl").css("color","black");
+    $(".Tl").css("background-color","lightsteelblue");
+
+    $("#" + nlec).css("background-color","black");
+    $("#" + nlec).css("color","white");
+    $("#" + nlec).focus();
+	
+	NumLec = nlec;
+ 	NumLec= NumLec.toString();	
+	
+}
+
+function adelante(){
+	
+	nlec++;
+	if (nlec > 18){
+	 nlec = 18
+	}
+
+	letras = "";
+	cuantos=0;
+	res = $('#'+ nlec).text()
+for (let i = 0; i < keysPTC.length; i++) {
+ if  (keysPTC[i].startsWith(res) )
+ {
+  letras = letras + " " + keysPTC[i];
+  cuantos++; 
+}
+
+}
+//console.log(keysPTC[nlec] + letras + " ????????????????"); 
+
+MLec = "";
+ $("#Mleccion").text(letras);
+	
+
+LeePractica();
+
+    $("button").css("color","black");
+	$("button").css("background-color","lightsteelblue");
+	$(".Tl").css("color","black");
+    $(".Tl").css("background-color","lightsteelblue");
+
+    $("#" + nlec).css("background-color","black");
+    $("#" + nlec).css("color","white");
+    $("#" + nlec).focus();
+	
+	NumLec = nlec;
+ 	NumLec= NumLec.toString();	
+}
+
+</script>
+
+<script>
+	$(document).ready(function() {
+
+	KEY ="UsuarioActual";
+    get().then(function (value) {
+UsuarioActual = value;
+	});
+	if (movil == 0) {
+	$("#Pie").css("display", "none");
+}
+	DeterminaMotor(document.title + ". " + Gres.MenuPractica + ". ");
+
+   
+
+	});
+	var nlec = 0;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+	var letras = "";
+	var res ="";
+	var cuantos = 0;
+
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("./ListaPracticas.html","_self");
+	return;
+}
+
+if (e.keyCode == 32)
+	{
+		var DiceN = $("#Mleccion").text().split(' ');
+		//console.log(cuentaErrores + valBase + "  " + DiceN.length + " " +  $("#Mleccion").text() );
+		if (cuentaErrores > 0  ){
+		   DiceN = DiceN + ". con error en: " +  valBase;
+		}
+		 //console.log(DiceN.toString());
+
+		 DiceN = DiceN.toString().replace(/,/g , ", ");
+		 DiceN = DiceN.slice(1);
+		LeeCGB(DiceN.toString());
+	}
+
+
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+
+if (e.keyCode == 13) {
+    ingresa(nlec);
+}
+
+return;
+}
+function AyudaM()
+    {
+      LeeCGB(document.title + ". " + Gres.MenuPractica + ". ");
+    }
+	function Regresar()
+      {
+        window.open("./ListaPracticas.html","_self");º
+	  }
+
+
+function LeePractica()
+	  {
+		cuentaErrores = 0;		
+		KEY = UsuarioActual + 'Esten';
+        get().then(function (value) {
+			try{
+				if (Esadelante == true)
+				{
+				  var Nnlec = nlec;
+				}
+				else if (Esadelante == false)
+				{
+				  var Nnlec = nlec;
+			    }
+
+	  valBase = eval("value.Leccion" + Nnlec);
+	  //console.log("value.Leccion" + Nnlec);
+	  if  (valBase == "SR")
+	    {
+	   if (cuantos > 1){
+			Lee( cuantos +  " palabras que inician con la letra '" + $("#" + nlec).text() +"'. " + Gres.sinrealizar + ". " + Gres.barraEscucharlo);
+	   }
+	   else if (cuantos == 1){
+			Lee( cuantos +  " palabra que inicia con la letra '"  + $("#" + nlec).text() +"'. "  + Gres.sinrealizar + ". " + Gres.barraEscucharlo);
+	   }
+		
+		}
+	 else{
+	  FcuentaErroresPP();
+	}
+	}
+	  catch(error){
+	   if (cuantos > 1){
+		Lee(cuantos +  " palabras que inician con la letra '"  + $("#" + nlec).text() +"'. " +  Gres.sinrealizar + ". " + Gres.barraEscucharlo);
+	   }
+	   else if (cuantos == 1){
+		Lee(cuantos +  " palabra que inicia con la letra '"  + $("#" + nlec).text() +"'. " +  Gres.sinrealizar + ". " + Gres.barraEscucharlo);
+	   }
+	  }
+	});
+ }
+
+
+
+
+
+ function FcuentaErroresPP()
+ {
+var vectorE =[];
+vectorE = valBase.split(',');
+cuentaErrores = 0;
+for (let index = 0; index < vectorE.length; index++) {
+	if (vectorE[index].length > 0)
+	{
+	   cuentaErrores++;
+	}
+	hiliterPP(vectorE[index]);
+
+}
+//console.log(cuentaErrores)
+if (cuentaErrores >  1){
+		  //console.log(MLec + " RRRR " + cuantos);
+	  if (cuantos > 1){
+        Lee(cuantos +  " palabras que inician con la letra '" + $("#" + nlec).text() +"'. " + Gres.realizadacon + cuentaErrores + Gres.errores + ". " + Gres.barraEscucharlos );
+	  }
+	  if (cuantos == 1){
+        Lee(cuantos +  " palabra que inicia con la letra '" + $("#" + nlec).text() +"'. " + Gres.realizadacon + cuentaErrores + Gres.errores + ". " + Gres.barraEscucharlos );
+	  }
+
+}else if (cuentaErrores ==  1){	
+	
+	  if (cuantos > 1){
+         Lee(cuantos +  " palabras que inician con la letra '" + $("#" + nlec).text() +"'. " + Gres.conUnError + ". " + Gres.barraEscucharlo );
+	  }else if (cuantos == 1){
+         Lee(cuantos +  " palabra que inicia con la letra '" + $("#" + nlec).text() +"'. " + Gres.conUnError + ". " + Gres.barraEscucharlo );
+	  }
+
+
+}else if (cuentaErrores ==  0){
+	
+	if (cuantos > 1){
+       Lee(cuantos +  " palabras que inician con la letra '" +  $("#" + nlec).text() +"'. " + Gres.realizadaCorr);
+	} 
+	else if (cuantos == 1){
+       Lee(cuantos +  " palabra que inicia con la letra '" +  $("#" + nlec).text() +"'. " + Gres.realizadaCorr);
+	}     
+}
+
+ }
+
+
+  function hiliterPP(word) {
+    word = word.trim();	
+	repl = '<span>'  + word +  '</span>';	
+	$("#Mleccion").html($("#Mleccion").html().replace(word,repl));
+	
+}
+
+
+function ingresa(ev)
+{	
+	if (Esadelante == true)
+		{
+	    var NumLec = parseInt(nlec -1);
+		}
+	else if (Esadelante == false)
+		{
+	    var NumLec = parseInt(nlec);
+		}
+
+	NumLec= NumLec.toString();
+	sayTimeout = setTimeout(function () {		
+		if (nlec == 0)
+		{
+			Lee(Gres.MenuPractica);
+			return;
+	    }else{
+			var miVar3 = setTimeout(function(){
+				window.speechSynthesis.cancel();
+				KEY = 'Practica';
+				VALUE = nlec;
+				set();
+			},10);
+			var miVar4 = setTimeout(function(){
+				window.open("./PracticaPCT.html","_self");
+			},200);	 
+	    }
+	}, 500); 
+
+}
+
+
+</script> 
+
+
+
+
+</body>
+
+</html>

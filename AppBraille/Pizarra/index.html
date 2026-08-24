@@ -1,0 +1,438 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Pizarra Virtual</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+
+<!-- <link href="../Pizarra/LetrasPizarra/Estilo.css" type="text/css" rel="stylesheet"/> -->
+
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script type="text/javascript" src="./LetrasPizarra/DictaL.js"></script>
+<script src="./../../F1/Generales.js"></script>
+<script>
+  var nlec = 0;
+  var Esadelante = true;
+	var NUsuarioActual = "";
+	var valBase = "";
+	var repl = ""; 
+	var cuentaErrores = 0;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+
+</script>
+<style>
+  .menuGrid{
+     width: 100vw;
+     float: left;
+     display: grid;
+     grid-template-rows: 1fr;
+     grid-template-columns: repeat(5,1fr);
+     justify-items: center;
+     text-align: center;   
+   }
+   .itemS{
+     font-size: 4vh;     
+   }
+  img{width: 30vh;}
+  .f1 {
+     width: 5vh;
+     z-index: 100;
+  }
+  a:hover{
+    background-color: white!important;   
+  }
+  .imgA{
+    display: none;
+    position: fixed;
+    top: 10vh;
+    left: 0;
+    width: 100vw;
+  }  
+  span {
+     color:white;
+     background-color:blue;
+    }
+</style>
+
+
+</head>
+
+<body onkeyup="Npulsado(event)" >
+  <div id="contenedor" style="height:100%;    width: 100%;margin-left: auto;margin-right: auto;padding: 0.1vw;">
+
+    <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+      <div></div> 
+      <span2 style="text-align: center;line-height: 7vw;">PIZARRA VIRTUAL</span2>
+      <div></div>
+      </div>
+
+      <img class="imgA" id="imgAyudaPZ" src="./../../ResB/PizarraTN.png" alt=""/> 
+    
+  <dsiv class="menuGrid"> 
+    <div></div>
+    <div>
+      <a onclick="Abrir('letras')" id="P1" class="itemM"><img src="./../../ResB/PizarraP.png"/><br><span2 id="s1"  class="itemS">PRÁCTICA DE LETRAS</span2></a> 
+
+  </div>
+  <div></div>
+  <div>
+    <a onclick="Abrir('palabras')" id="P2" class="itemM"><img src="./../../ResB/Pizarra.png"/><br><span2 id="s2"  class="itemS">PRÁCTICA DE PALABRAS</span2></a>
+
+  </div>
+  <div></div> 
+  </div>
+
+  <div style="position: fixed;bottom: 1vh;right: 1vw;text-align:right;">
+  <a onclick="Abrir('ayuda')" id="P3" class="itemN"><img src="./../../ResB/ElSoftware.png"  style="width: 14vh;"/><br><span2 id="s3"  class="itemN" style="color: transparent;">como usar la aplicación</span2></a>
+</div>
+     
+
+
+<div id="Mleccion" class="Mleccion" style="font-size: 6vw; width: 70%;margin: auto;word-wrap: break-word; text-align: center;"></div>
+
+<div id="Lecc" 	style="text-align: center;font-size: 6vw;"></div>
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 6vw;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" style="z-index: 100; "></div>
+</div>
+
+
+<script>
+        function Abrir(q)
+        {
+        KEY = 'UsuarioActual';
+        get().then(function (value) {
+            UsuarioActual = value;
+        });
+        
+        if (q == "letras")
+          {           
+            window.speechSynthesis.cancel();
+            window.open("../Pizarra/LetrasPizarra/index.html","_self");
+          }
+        else if (q == "palabras")
+          {
+			      window.speechSynthesis.cancel();
+            window.open("../Pizarra/PalabrasPizarra/Lista.html","_self");          
+          }
+        else if (q == "ayuda")
+          {
+           LeeCGB(Gres.Pizarra);
+          }
+
+        }
+ ////////////////////////////////////////   
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+
+var number = String.fromCharCode(event.which);
+
+var keyCode = event.keyCode || event.which;
+
+//Ayuda
+if (keyCode == 112) {
+   // $.getScript("../F1/Generales.js", function(){
+      movil = 0;
+      //TecladoQ();
+      LeeCGB(document.title + ". " + Gres.MenuPractica);
+   // });
+  }
+
+
+if (keyCode == 27)
+{
+	Regresar();  
+}
+
+// if (event.keyCode == 32)
+// 	{
+// 		var DiceN = $("#Mleccion").text().split(' ');
+// 		//console.log(cuentaErrores + valBase + "  " + DiceN.length + " " +  $("#Mleccion").text() );
+// 		if (cuentaErrores > 0  ){
+// 		   DiceN =valBase;
+//     }
+     
+// 		 //console.log(DiceN.toString());
+//      DiceN = DiceN.toString().replace(/,,/g , ", ")
+//      var DiceL = DiceN;
+// 	DiceL = DiceL.replace("á", "a acentuada");
+// 	DiceL = DiceL.replace("é", "e acentuada");
+// 	DiceL = DiceL.replace("í", "i acentuada");
+// 	DiceL = DiceL.replace("ó", "o acentuada");
+// 	DiceL = DiceL.replace("ú", "u acentuada");
+// 	DiceL = DiceL.replace("y", "i griega");
+// 	DiceL = DiceL.replace("ü", "u con diéresis");
+//   DiceL = DiceL.toString().replace(/,/g , ", ")
+
+// 		LeeCGB(DiceL.toString());
+// 	}
+
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+if (event.keyCode == 13) {
+  if (nlec == 1){Abrir("letras")}
+  if (nlec == 2){Abrir("palabras")}
+  if (nlec == 3){Abrir("ayuda")} 
+
+	
+}
+  }
+///Fin tecla pulsada
+function atras(){
+	Esadelante = false;
+	nlec--;
+	if (nlec < 1){
+	 nlec = 3
+    }
+
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+
+
+    if (nlec != 3){
+      $("#s" + nlec).css("background-color", "black");
+      $("#s" + nlec).css("color", "white");
+  } 
+ 
+
+
+    
+    if(nlec == 2){
+    $("#Lecc").text("");
+    Lee($("#P" + nlec).text());
+   }
+   else if (nlec == 1){    
+    LeePractica();
+    }
+	
+}
+
+function adelante(){
+	Esadelante = true;
+  nlec++;
+  //console.log("adelante " + nlec)
+	if (nlec > 3){
+	 nlec = 1
+    }
+ 
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+
+    if (nlec != 3){
+      $("#s" + nlec).css("background-color", "black");
+      $("#s" + nlec).css("color", "white");
+  } 
+
+   if(nlec == 2 || nlec == 3){
+    $("#Lecc").text("");
+    Lee($("#P" + nlec).text());
+   }
+   else if (nlec == 1){   
+      LeePractica();
+    }
+	
+}
+function ayudaP()
+      {
+        window.open("https://www.pequen.info","_self");    
+      }
+function Regresar()
+    {
+      window.open("../Integral/ListaPracticas.html","_self");
+	  }      
+
+  function AyudaM()
+{
+  LeeCGB(Gres.MenuPractica);
+}
+$(document).ready(function() {  
+  
+  nlec = 0;  
+   DeterminaMotor(document.title + ". " + Gres.MenuPractica);
+    
+});
+
+
+function LeePractica()
+	  {
+
+
+		cuentaErrores = 0;
+    var MLec = " " + alfab;
+	MLec = MLec.toString().replace(/,/g , ", ")
+  $("#Lecc").text(MLec);
+     KEY ="UsuarioActual";
+    get().then(function (value) {         
+      UsuarioActual = value; 
+		
+	KEY = UsuarioActual + 'LetrasPizarra';
+  get().then(function (value) {	
+     
+      valBase = value;// eval("value.Leccion1");
+      //console.log(valBase + " valbase " + value); 
+
+			try{
+				if (Esadelante == true)
+				{
+				  var Nnlec = nlec - 1;
+				}
+				else if (Esadelante == false)
+				{
+				  var Nnlec = nlec;
+			    }
+
+	  if  (valBase == "SR")
+	    {Lee($("#P" + nlec).text()+ ".  " +Gres.Psinrealizar )}
+	 else{
+	  FcuentaErroresPP();
+	}
+	}
+	  catch(error){
+      //console.log(error);
+		Lee($("#P" + nlec).text()+ ".  " +Gres.Psinrealizar );
+	  }
+  });
+});
+	//}
+	
+
+ }
+ function FcuentaErroresPP()
+ {
+	//console.log(valBase + " error??");
+var vectorE =[];
+vectorE = valBase.split(',');
+cuentaErrores = 0;
+for (let index = 0; index < vectorE.length; index++) {
+	if (vectorE[index].length > 0)
+	{
+	   cuentaErrores++;
+	}
+	hiliterPP(vectorE[index]);
+
+}
+//console.log(cuentaErrores)
+if (cuentaErrores >  1){
+//console.log(Gres.realizadacon + cuentaErrores + Gres.errores);
+  Lee($("#P" + nlec).text().trim() + " " + Gres.realizadacon + cuentaErrores + Gres.errores);
+}else if (cuentaErrores ==  1){
+  Lee($("#P" + nlec).text().trim() +  Gres.PLcUno);
+}else if (cuentaErrores ==  0){
+  Lee($("#P" + nlec).text().trim() + Gres.PLrCorr);
+}
+
+ }
+
+
+  function hiliterPP(word) {	
+  //  //console.log("pinta " + word + " contiene " + $("#Mleccion").html() );
+  word = word.trim()
+	repl = '<span>'  + word +  '</span>';
+	$("#Lecc").html($("#Lecc").html().replace(word,repl));
+	
+}
+
+$(document).on("touchstart mousedown", function( e ) {
+		
+		xPosVie = 0;
+		yPosVie = 0;
+		var touchstart = e.type === 'touchstart',
+
+			e = touchstart ? e.originalEvent : e,
+			pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+			pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+			xPosVie = pageX;
+			yPosVie = pageY;
+			////console.log(xPosVie);
+});
+
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+});
+
+$(document).on("touchend", function(e) {
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return}      
+
+      DifX =  xPosNew  - xPosVie;
+         //arrastró a la derecha
+  		if (DifX > 200){        
+ 	 		//console.log( DifX + " derecha " + nlec );
+	 		adelante();        
+    	}
+
+        if (DifX < -200){      
+			//console.log(DifX + " izquierda " + nlec);
+			atras();      
+        }
+
+        if (DifY > 100){
+        
+              //  //console.log(" Baja #L"+ Quien + Opcion);
+        
+        
+          return;
+        }
+
+        if (DifY < -100){
+        
+          //console.log(DifY + " Sube #L"+ Quien + Opcion);
+        
+
+          
+          return;
+        }
+    return;
+
+});
+
+var items = document.querySelectorAll('.circulo a.itemM');
+            
+            for(var i = 0, l = items.length; i < l; i++) {
+              items[i].style.left = (40 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+              
+              items[i].style.top = (40 + 35*Math.sin(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+            }
+          
+   
+
+
+
+  </script>
+
+
+</body>
+
+</html>

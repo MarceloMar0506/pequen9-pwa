@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>¿Qué Número Es?</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="Estilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<!-- <script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script> -->
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+  var ResCelda= 0;
+  var P1 = "1";
+  var P12 = "2";
+  var P14 = "3";
+  var P145 = "4";
+  var P15 = "5";
+  var P124 = "6";
+  var P1245 = "7";
+  var P125 = "8";
+  var P24 = "9";
+  var P245 = "0";
+  var P3456 = "";
+  var xN = 0;
+</script>
+
+</head>
+
+<body style="background-image: url('./../../../ResB/FondoEsc.jpg'); background-repeat: no-repeat;  background-position: center;">
+
+<div id="contenedor">
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+    </div>
+    
+<div class="gridQ">
+
+<!-- Imagen central-->
+<div id="Amanda">
+  <img  class="img" id="imgLimonero" src="./../../../ResB/limonero.gif" ></img> 
+  <img  class="img" id="Canasta" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="img" id="imgA" src="./../../../ResB/AmandaA2.png" ></img> 
+</div>
+
+<div id="derechaG">
+<!-- Letra Imprenta Minúscula -->
+<!-- <label class="Netiqueta" id="EtiquetaDos" style="font-size: 30vh;">&zwnj;</label></div> -->
+<div id="Pi" class="grillaC">
+  <div>  <elem class="box" id="box1">1</elem>	</div>
+  <div><elem class="box" id="box4">4</elem></div>
+  <div><elem class="box" id="box2">2</elem></div>
+  <div><elem class="box" id="box5">5</elem></div>
+  <div><elem class="box" id="box3">3</elem></div>
+   <div><elem class="box" id="box6">6</elem></div>
+  </div>
+  
+  <div id="Se" class="grillaC" >
+    <div> <elem class="box" id="box01">1</elem>	</div>
+    <div><elem class="box" id="box04">4</elem></div>
+    <div><elem class="box" id="box02">2</elem></div>
+    <div><elem class="box" id="box05">5</elem></div>
+    <div><elem class="box" id="box03">3</elem></div>
+     <div><elem class="box" id="box06">6</elem></div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 2%;margin-left: 10%;width:85vw"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+
+ <!-- <div id="ayudaF1">
+  <ul  style="float:left" id="myList">
+  
+</ul> -->
+
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv0"></h2>
+  <h2 class="etq" id="statusdiv02"></h2>
+  <h2 class="etq" id="statusdiv03"></h2>
+  <h2 class="etq" id="statusdiv04"></h2>
+  <h2 class="etq" id="statusdiv05"></h2>
+  <h2 class="etq" id="statusdiv06"></h2>
+   </div>
+
+
+
+ </div>
+
+ <audio id="myAudio" >
+</audio>
+ 
+<script>
+  //var numeroRandom = (getRandomInt(9) + 1);
+
+  var numeros = [1, 2, 3, 4, 5, 6, 7, 8 ,9];
+  shuffle(numeros);
+  var numeroRandom = numeros[xN];
+
+  //var numeroRandomN = 0;
+  
+  var audio = document.createElement('audio');
+
+$(document).ready(function() {
+var x = 0;
+var arrayOfImages = ['./../../../ResB/AmandaA1.png', './../../../ResB/AmandaA2.png']; //where do the images come from
+ // DeterminaMotor("");  
+var PrimerS = "";
+var miVar3 = setTimeout(function(){ 
+//console.log(Gres.MenuActividad) 
+animar();             
+},3000);
+
+
+function animar(){ 
+  window.setInterval(function(){
+      $('#imgA').attr("src", arrayOfImages[x]); //change the image to 1 from the array with index x
+      x++;
+      if (x > 1 ) {x = 0;}      
+  }, 1000);
+}
+
+DeterminaMotor("Amanda va a cosechar limones de su árbol. adivina y escribe cuántos limones se llevará en la canasta ");
+
+});
+
+
+$(document).keydown(function(e) { 
+    
+    if(e.keyCode != 83 && e.keyCode != 68 && e.keyCode != 70 && e.keyCode != 74 && e.keyCode != 75 && e.keyCode != 76 &&  e.keyCode != 32 )
+    {
+     LeeCGB("Usar el teclado virtual Braille");
+     return;
+    }
+ 
+     if (ResCelda == 0){        
+     if (e.keyCode == 70) {statusdiv.innerHTML = '1'; number = 1;
+         $("#box1").css("background-color","black");          
+         $("#box1").css("color","white");
+         pulsada = ""; pulsada = "";} //F 
+     
+     if (e.keyCode == 68) {statusdiv2.innerHTML = '2'; number = 2;
+         $("#box2").css("background-color","black");          
+         $("#box2").css("color","white"); pulsada = "";} //D
+     if (e.keyCode == 83) {statusdiv3.innerHTML = '3'; number = 3;
+         $("#box3").css("background-color","black");          
+         $("#box3").css("color","white"); pulsada = "";} //S		
+ 
+     if (e.keyCode == 74) {statusdiv4.innerHTML = '4'; number = 4;
+         $("#box4").css("background-color","black");          
+         $("#box4").css("color","white"); pulsada = "";} //J
+ 
+   
+     if (e.keyCode == 75) {statusdiv5.innerHTML = '5'; number = 5;
+         $("#box5").css("background-color","black");          
+         $("#box5").css("color","white"); pulsada = "";} //K
+ 
+         
+     if (e.keyCode == 76) {statusdiv6.innerHTML = '6'; number = 6;
+         $("#box6").css("background-color","black");          
+         $("#box6").css("color","white"); pulsada = "";} //L  
+ 
+     }
+
+     else if (ResCelda == 1){        
+     if (e.keyCode == 70) {statusdiv.innerHTML = '1'; number = 1;
+         $("#box01").css("background-color","black");          
+         $("#box01").css("color","white");
+         pulsada = ""; pulsada = "";} //F 
+     
+     if (e.keyCode == 68) {statusdiv2.innerHTML = '2'; number = 2;
+         $("#box02").css("background-color","black");          
+         $("#box02").css("color","white"); pulsada = "";} //D
+     if (e.keyCode == 83) {statusdiv3.innerHTML = '3'; number = 3;
+         $("#box03").css("background-color","black");          
+         $("#box03").css("color","white"); pulsada = "";} //S		
+ 
+     if (e.keyCode == 74) {statusdiv4.innerHTML = '4'; number = 4;
+         $("#box04").css("background-color","black");          
+         $("#box04").css("color","white"); pulsada = "";} //J
+ 
+   
+     if (e.keyCode == 75) {statusdiv5.innerHTML = '5'; number = 5;
+         $("#box05").css("background-color","black");          
+         $("#box05").css("color","white"); pulsada = "";} //K
+ 
+         
+     if (e.keyCode == 76) {statusdiv6.innerHTML = '6'; number = 6;
+         $("#box06").css("background-color","black");          
+         $("#box06").css("color","white"); pulsada = "";} //L  
+ 
+     }
+   
+   
+ });
+ 
+
+
+document.body.addEventListener('keyup', function(e) {
+  if (e.keyCode == 112){
+     Ayuda();
+      return;
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+  if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}
+
+//blq num
+var active = event.getModifierState('NumLock');
+  var keyCode = e.keyCode;
+
+  if (keyCode == 144)
+  {
+  if (active == false){LeeCGB(Gres.TnNh );return;}
+  if (active == true){LeeCGB(Gres.TnH );return;}
+  }
+  
+  
+  
+  //Blq num no bloqueado
+  if (keyCode >= 33 && keyCode <= 40)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+  
+  if (keyCode ==  12 || keyCode == 45)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+ 
+
+
+  if (e.keyCode == 32){   
+    audio.pause();
+    xN++;
+    
+    if (xN == 9){
+      xN = 0;    
+
+    }//vuelve a empezar
+    numeroRandom =numeros[xN]
+    //console.log(xN + " <" + numeros + "> " + numeroRandom)
+
+     $('#Canasta').attr("src", "./../../../ResB/CanastaLimon0.gif"  );
+     LeeCGB("Amanda va a cosechar limones de su árbol. adivina y escribe cuántos limones se llevará en la canasta");
+     $("#Se .box").css("color","black");
+     $("#Se .box").css("background-color","white");
+     $("#Pi .box").css("color","black");
+     $("#Pi .box").css("background-color","white");
+     return;
+    
+  }
+//console.log('keyup:' + e.keyCode + " " + e.key + " " + numeroRandom.toString());
+// if  ($.isNumeric(e.key) == false) {
+//   LeeCGB("No es un número");
+//   return;
+// }
+
+//Tpulsada = e.key.toString().toUpperCase();
+//console.log(Tpulsada + " Pulsó")
+//console.log(Tpulsada)
+//EvaluaLetra(Tpulsada);
+PrimerS =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+$(".etq").html('');
+
+if (PrimerS == ""){return}
+
+if (PrimerS != ""){
+
+//console.log(PrimerS + " Pulsó en celda nº: " + ResCelda + " numero esperado " + numeroRandom + " pulsado " +  eval("P"+ PrimerS))
+if (ResCelda == 0){
+try {
+  if ( eval("P"+ PrimerS) === undefined){
+    console.log("no definido");
+  }
+} catch (error) {
+ 
+  LeeCGB("No es el Signo número. pulsar 3 4 5 6");
+   $(".etq").html('');
+   $("#Pi .box").css("color","black");
+   $("#Pi .box").css("background-color","white");
+   PrimerS="";
+   return;
+
+}
+}
+
+
+if (ResCelda == 0 && PrimerS == "3456"){
+  ResCelda = 1;
+  LeeCGB("Signo número");
+  PrimerS="";
+  return;
+}else if (ResCelda == 0 && PrimerS != "3456"){
+   LeeCGB("No es el Signo número. pulsar 3 4 5 6");
+   $(".etq").html('');
+   $("#Pi .box").css("color","black");
+   $("#Pi .box").css("background-color","white");
+   PrimerS="";
+   return;
+}
+
+try {
+  
+
+if (numeroRandom == eval("P"+PrimerS) &&  ResCelda == 1 ){
+
+  var repite="Pulsa barra espaciadora para volver a jugar o escape para salir."
+    if (xN == 8){
+      xN = -1;
+    //  repite = "Todos los números fueron resueltos. Pulsa barra espaciadora para volver a repetir o escape para salir"
+
+    }//vuelve a empezar
+
+  if (numeroRandom > 1){
+   LeeCGB("¡Muy bien! Amanda puso " + numeroRandom + " limones en la canasta. " + repite);   
+  
+  }
+  else if (numeroRandom == 1){
+   LeeCGB("¡Muy bien! Amanda puso un limón en la canasta. " + repite);  
+ 
+  }
+  PrimerS="";
+  ResCelda=0;
+  $('#Canasta').attr("src", "./../../../ResB/CanastaLimon" + numeroRandom + ".gif"  );
+          rutaAudio = "./../../../ResB/Amanda.mp3";
+          audio.volume=Volumen;
+          audio.src =  rutaAudio;
+          audio.load();
+             
+   audio.play();
+          
+}
+else{
+  let par = "";
+    if(numeroRandom % 2 == 0 ){par =" par, "}
+    else if(numeroRandom % 2 != 0 ){par =" impar, "} 
+
+  if (numeroRandom >  eval("P"+PrimerS)  &&  ResCelda == 1){
+    LeeCGB("es un número" + par + "mayor que " +  eval("P"+PrimerS) )
+    PrimerS="";
+    $(".etq").html('');
+    $("#Se .box").css("color","black");
+    $("#Se .box").css("background-color","white");
+  }else if (numeroRandom <  eval("P"+PrimerS)){
+    LeeCGB("es un número" + par + "menor que " +  eval("P"+PrimerS) );
+    PrimerS="";
+    $(".etq").html('');
+    $("#Se .box").css("color","black");
+    $("#Se .box").css("background-color","white");
+  }
+
+}
+
+} catch (error) {
+  console.log("no es un número");
+  LeeCGB("No es un número");
+   $(".etq").html('');
+   $("#Se .box").css("color","black");
+   $("#Se .box").css("background-color","white");
+   PrimerS="";
+   return;
+}
+
+
+
+}
+
+
+
+
+});
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+
+var comments = document.getElementsByClassName('Lt');
+var numComments = comments.length;
+
+
+
+
+aud = document.getElementById("myAudio");
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+ 
+  LeeCGB( "Escribe el número de limones que cosechará Amanda y pondrá en la canasta " );  
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+
+
+	</script>
+
+
+  </script>
+
+</body>
+
+</html>

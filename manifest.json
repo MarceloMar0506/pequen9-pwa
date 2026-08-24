@@ -1,0 +1,117 @@
+{
+	"id": "/P8/",
+	"short_name": "Pequén 9",
+	"name": "Pequén 9",
+	"lang": "es",
+	"description": "Pequén 9",
+	"start_url": "/P8/",
+	"scope": "/P8/",
+	"background_color": "#FFFFFF",
+	"theme_color": "#FFFFFF",
+	"dir": "auto",
+	"display": "standalone",
+	"orientation": "landscape",
+	"prefer_related_applications": false,
+	"icons": [
+		{
+			"src": "./ResB/icon/maskable_icon_x48.png",
+			"sizes": "48x48",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x72.png",
+			"sizes": "72x72",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x128.png",
+			"sizes": "128x128",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon.png",
+			"sizes": "400x400",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x384.png",
+			"sizes": "384x384",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x48.png",
+			"sizes": "48x48",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x72.png",
+			"sizes": "72x72",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x128.png",
+			"sizes": "128x128",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon.png",
+			"sizes": "400x400",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x384.png",
+			"sizes": "384x384",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "./ResB/icon/maskable_icon_x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "./ResB/screenshots/screenshot1.png",
+			"sizes": "1512x811",
+			"type": "image/png",
+			"form_factor": "wide",
+			"label": "Menú principal de Pequén 9 con las actividades disponibles"
+		},
+		{
+			"src": "./ResB/screenshots/screenshot2.png",
+			"sizes": "1512x810",
+			"type": "image/png",
+			"form_factor": "wide",
+			"label": "Sección de Braille Pequén con Braille integral, estenografía y musicografía"
+		}
+	]
+}

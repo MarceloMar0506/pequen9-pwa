@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Prácticas</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../ResB/Idb-Keyval.js"></script><script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script>
+<style>
+
+	.menuLista{
+		text-align: left;
+		margin-left: 2VW;
+	}
+	.itemS{
+	  font-size: 5vh;	   
+	}
+
+    img{width: 4vh;}
+ 
+ 
+	#titulo3{
+		margin-bottom: 0%;
+		margin-top: 0%;
+	}	
+	.f1 {
+     width: 5vh; 
+     z-index: 100;
+    
+  }   
+</style>
+<script>
+    var nlec =0;
+</script>
+</head>
+
+<body onkeyup="Npulsado(event)" >
+	<div id="contenedor" style="height:100%">
+	<div id="titulo3">
+		<div style="visibility: hidden;"  class="f1" ontouchend="Regresar()" onclick="Regresar()"><img class="f1" src="./../ResB/FizR.png" alt="regresar"></div> 
+		<span2 style="text-align: center;line-height: 7vw;font-size: 2.5vw;">PRÁCTICAS</span2>
+		<div style="visibility: hidden;" class="f1"  ontouchend="AyudaM()" onclick="AyudaM()"><img  class="f1" src="./../ResB/Ayuda.png" alt="Ayuda"></div>
+		</div>
+<div class="menuLista">
+<span4 id="P1" class="itemN" onclick="Abrir('1')"><img src="./../ResB/Melodia.png"/><span2 id="s1"  class="itemS">NOTAS FIGURAS Y SILENCIOS</span2></span4><p></p>
+<span4 id="P2" class="itemN" onclick="Abrir('1')"><img src="./../ResB/Melodia.png"/><span2 id="s2"  class="itemS">OTROS SIGNOS</span2></span4><p></p>
+<span4 id="P3" class="itemN" onclick="Abrir('1')"><img src="./../ResB/Melodia.png"/><span2 id="s3"  class="itemS">HIMNO DE LA ALEGRÍA</span2></span4><p>
+<span4 id="P4" class="itemN" onclick="Abrir('2')"><img src="./../ResB/Melodia.png"/><span2 id="s4"  class="itemS">CAMPANERO</span2></span4><p>
+<span4 id="P5" class="itemN" onclick="Abrir('3')"><img src="./../ResB/Melodia.png"/><span2 id="s5"  class="itemS">FELIZ CUMPLEAÑOS</span2></span4><p>
+
+</div>
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1vh;width: 70vws;margin-left: 15vw; "></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" ></div>
+
+ </div>
+
+ 
+<script>
+
+function Abrir(M)
+ {
+	var miVar3 = setTimeout(function(){ 				
+		  window.speechSynthesis.cancel();
+		   KEY = 'Melodia';
+           VALUE = M.toString();   
+           set();
+		}, 10);	
+	var miVar4 = setTimeout(function(){ 
+		window.open("./Practica.html","_self");
+	}, 200);	
+
+}
+ ////////////////////////////////////////   
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+
+	if (event.keyCode == 112) {
+    //$.getScript("./F1/Generales.js", function(){
+      movil = 0;
+	 // TecladoQ();
+	  AyudaM();     
+	  //LeeCGB(document.title + ". " + Gres.MenuActividad + ". ");     
+   // });
+  }
+
+
+if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+if (event.keyCode == 13) {
+//console.log("13 " + nlec);
+if (nlec != 0){
+	Abrir(nlec)
+}		
+}
+  }
+///Fin tecla pulsada
+function atras(){
+	
+	nlec--;
+	if (nlec < 1){
+	 nlec = 5;
+    }
+	
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + nlec).css("background-color", "black");
+    $("#s" + nlec).css("color", "white");
+    Lee($("#P" + nlec).text());
+	
+}
+
+function adelante(){
+	
+	nlec++;
+	if (nlec > 5){
+	 nlec = 1;
+    }
+	
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + nlec).css("background-color", "black");
+    $("#s" + nlec).css("color", "white");
+    Lee($("#P" + nlec).text());
+	
+}
+
+
+  function AyudaM()
+{
+  Lee(Gres.MenuPractica);
+}
+function Regresar()
+      {
+        window.open("./index.html","_self");
+      }
+$(document).ready(function() {
+
+  var  SinRaton = ". Si utiliza lector de pantalla para realizar Las prácticas de musicografía en computadoras de escritorio, tabletas y en dispositivos móviles se debe usar un teclado físico qwerty. En los dispositivos móviles y tabletas el teclado se puede conectar al puerto USB o bien utilizar un teclado inalámbrico. ";  
+
+
+DeterminaMotor("Lista de Prácticas. " + Gres.MenuPractica + SinRaton);
+
+if (movil == 0) {
+				$("#Pie").css("display", "none");
+			}
+// var miVar2 = setTimeout(function(){ 
+//       Lee();
+//    }, 1000);   
+});
+
+var nlec = 0;
+		var xPosVie = 0;
+		var yPosVie;
+		var xPosNew;
+		var yPosNew;
+		var DifX = 0;
+		var DifY = 0;
+
+		$(document).on("touchstart mousedown", function (e) {
+
+			xPosVie = 0;
+			yPosVie = 0;
+			var touchstart = e.type === 'touchstart',
+
+				e = touchstart ? e.originalEvent : e,
+				pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+				pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+			xPosVie = pageX;
+			yPosVie = pageY;
+			//////console.log(xPosVie);
+		});
+
+		$(document).on("mousemove touchmove", function (e) {
+			xPosNew = 0;
+			yPosNew = 0;
+			var touchstart = e.type === 'touchmove',
+				e = touchstart ? e.originalEvent : e,
+				pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+				pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+			xPosNew = pageX;
+			yPosNew = pageY;
+		});
+
+		$(document).on("touchend mouseup", function (e) {
+
+			if (e.target.className == "itemL") {
+				nlec = e.target.id;
+				ingresa();
+				return;
+			}
+			if (e.target.className === 'f1') { return }
+			if (e.target.className === 'esc') { return }
+
+			DifX = xPosNew - xPosVie;
+
+			////console.log(xPosNew);
+			//arrastró a la derecha
+			if (DifX > 200) {
+				////console.log( DifX + " derecha " + nlec );
+				adelante();
+			}
+
+			if (DifX < -200) {
+				////console.log(DifX + " izquierda " + nlec);
+				atras();
+			}
+
+			if (DifY > 100) {
+
+				//  ////console.log(" Baja #L"+ Quien + Opcion);
+
+
+				return;
+			}
+
+			if (DifY < -100) {
+
+				////console.log(DifY + " Sube #L"+ Quien + Opcion);
+
+
+
+				return;
+			}
+			return;
+
+		});
+
+   
+  </script>
+
+
+</body>
+
+</html>

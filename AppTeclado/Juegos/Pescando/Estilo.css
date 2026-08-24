@@ -1,0 +1,84 @@
+﻿@media only screen and (orientation:portrait){
+  body {
+    width: 100%;
+    height: auto;
+    transform: rotate(90deg);
+    overflow:hidden;
+  }
+}
+
+html, body {
+    /* transition-property: opacity, left, top, height;
+    transition-duration: 2s, 2s;
+    transition: background-color 2s ease; */
+    width: 130vw;
+    height: 130vh;
+    overflow:hidden;   
+}
+#encabeza{
+  font-family: Arial, Helvetica, sans-serif;
+  width: 90%;
+  float: left;
+  margin-left: 5%;
+  display: grid; 
+  grid-template-columns: 10% 80% 10%;      
+  justify-content: center;   
+  font-size: 2.5vw;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+}
+
+#gridPeces{
+  font-family: Arial, Helvetica, sans-serif;
+  width: 40%;
+  float: left;
+  margin-left: 10%;
+  display: grid; 
+  grid-template-columns: repeat(5,1fr);      
+  justify-content: center;
+}
+
+#gridPeces img{
+ width: 50%;
+ visibility: hidden;
+ -webkit-transition:-webkit-filter 0.4s ease-in-out;
+ -webkit-filter: drop-shadow(5px 5px 5px rgb(38, 39, 18));
+}
+
+
+
+.f1
+{
+text-align: right; 
+}
+#anzuelo{
+  position: absolute;
+  left: 80vw;
+  top: 35vh;
+}
+#linea{
+  position: absolute;
+  left: 80vw;
+  top: 31vh;
+}
+
+#pez{
+  position: absolute;
+  left: 0vw;
+  top: 80vh;
+  overflow:hidden;
+}
+
+#dos{
+  position: absolute;
+  top: 50vh;
+}
+#tres{
+  position: absolute;
+  top: 40vh;
+}
+#barco{
+  position: absolute;
+  left: 80vw;
+  top: 20vh; 
+}

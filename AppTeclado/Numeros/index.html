@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Números Pequén</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<link href="Estilo.css" type="text/css" rel="stylesheet"/>
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../../ResB/jquery.ui.touch-punch.js"></script>
+<script type="text/javascript" src="VariableL.js"></script>  
+<script type="text/javascript" src="./../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js">	
+</script><script type="text/javascript" src="LeeC.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="../../F1/Generales.js"></script>
+<script src="./../../ResB/sonidos.js"></script>
+<style>
+.gridQ {
+position: fixed;
+width: 80vw;
+left: 10vw;
+top: 2vh;
+display: grid;
+justify-content: center;
+margin: 0 auto;
+grid-template-rows:    repeat(1, 5vw);
+grid-template-columns: repeat(10, 5vw);
+grid-column-gap: 2vw;
+grid-row-gap: 2vw;
+font-size:3vw;
+justify-content: center;
+align-items: center;
+text-align:center;
+line-height: 5vw;
+}
+.zoomIn {
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes zoomIn {
+  0% {
+  opacity: 0;
+  -webkit-transform: scale3d(.3, .3, .3);
+  transform: scale3d(.3, .3, .3);
+  }
+  50% {
+  opacity: 1;
+  }
+  }
+  @keyframes zoomIn {
+  0% {
+  opacity: 0;
+  -webkit-transform: scale3d(.3, .3, .3);
+  transform: scale3d(.3, .3, .3);
+  }
+  50% {
+  opacity: 1;
+  }
+  }
+  #pieJ{
+	  display: grid;
+	  grid-template-columns: 45vw 10vw 45vw;
+	  text-align: center;
+  } 
+#info{
+  font-size: 3vw;
+}
+#cifra{
+	width: 100vw;
+	text-align: center;
+	font-size: 6vw;
+}
+
+</style>
+</head>
+
+<body onkeyup="Npulsado(event)">
+
+<script type="text/javascript" src="L.js"></script>  
+
+<div id="contenedor" style="width:100%;height:100%; top:40px; display:block; " class="auto-style1">
+	<div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div ></div> 
+		<span2 style="text-align: center;line-height: 8vh;font-size: 8vh;" id="LetraP">&zwnj;</span2>
+		<div></div>
+		</div>
+
+<div id="tri">
+<div id="izquierda" >
+	<label class="Netiqueta" id="EtiquetaUno">&zwnj;</label>
+</div>
+
+<div class="imagencentral" id="CEntroImagen" >
+	<label id="Numero"></label><img  id="mimg" src="./../../ResB/transparente.png"/>
+			<!-- &zwnj; -->
+</div>
+ <div id="derecha" >
+	<label class="Netiqueta" id="EtiquetaDos">&zwnj;</label>
+ </div>
+
+</div>
+	<div class="gridQ">
+		<div class="n" id="n1">1</div> 
+		<div class="n" id="n2">2</div> 
+		<div class="n" id="n3">3</div> 
+		<div class="n" id="n4">4</div> 
+		<div class="n" id="n5">5</div> 
+		<div class="n" id="n6">6</div> 
+		<div class="n" id="n7">7</div> 
+		<div class="n" id="n8">8</div> 
+		<div class="n" id="n9">9</div> 
+		<div class="n" id="n0">0</div> 
+	  </div> 
+	  <div id="cifra">&zwnj;</div>
+<div id="pieJ">
+	<div id="info"><img  class="f1" src="./../../ResB/CSonido.png" alt="Ayuda" onclick="pianos()"><br>Melodía</div>
+	  <div></div>
+	<div id="info"><img  class="f1" src="./../../ResB/COk.png" alt="Ayuda" onclick="cuanto()"><br>Cifra</div>
+</div>
+ <!-- globo -->
+ <script>
+	 	$(".label").css({"top":"auto","max-width":"80%","box-sizing":"inherit","padding":"3vh"});
+ </script>
+<div  class="label" style="visibility: hidden;margin-left: 10vw;bottom: 18vh;"></div>
+<!-- Pequen -->
+<div id="pequenG" class="esperaG"></div> 
+
+<script>
+  //Evita repeticiones
+var pulsado = false;
+	$("Body").keydown(function(e){ 
+           //if(pulsado) return false;
+			pulsado = true;
+			
+	}).keyup(function(e){
+		 // pulsado = false;
+		 if (e.which == 112 )
+		 {
+			 Ayuda();
+			 return;
+		 }
+		 if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}		 
+		 if (e.which == 32 )
+		 { 
+			 if (Valor == 0){
+				 if ($("#Numero").text() == 0){
+                   return;
+				 }
+				 else{
+				 Lee("ingresar uno o más números")
+				}
+			 }
+			 else if (Valor > 0){				
+			//console.log(Valor + " E1");
+			count = 0;
+			pianos();
+		    }
+	        return;
+		 }
+
+		 if (e.which == 13 )
+		 {
+            cuanto();
+			 return;
+		 }
+
+	      Tpulsada = e.key; 
+	     if (e.which != 37 && e.which != 39 && e.which != 27  && e.which != 38  && e.which != 40 )
+	     {  
+			Lee("");
+			//console.log("Numero???? n" + Tpulsada);
+			$(".n").css({"background-color": "AliceBlue"});
+            
+            $("#n" +Tpulsada).css({"background-color": "yellow"});
+           
+			
+			MostrarLetra(Tpulsada.trim());
+
+         }else  if (e.which == 27 )
+	     {
+			 Regresar();
+		 }
+	      
+           
+		}
+	);
+
+
+
+
+$(".n" ).mousedown(function() {
+  event.preventDefault();
+   //var Eid = $(this).html();// .attr('id');   
+   $('.n').css({'border-color':'black'});
+   ////console.log("mouseDown " + Eid);  
+});
+$(".n" ).click(function() {
+ event.preventDefault();
+   var Eid = $(this).html();// .attr('id'); 
+	$('#n'+ Eid).css({'border-color':'blue'}); 
+	//console.log("click "  + Eid); 
+    MostrarLetra(Eid);
+});
+function pianos(){
+	count = 0;
+	
+    Valor = parseInt($("#Numero").text());
+	if (isNaN(Valor)){
+		Lee("ingresar uno o más números");
+		return}
+	else {
+	 //console.log(Valor +  $("#Numero").text() + "distinto de NaN")
+	 NumeroS(Valor);
+    }
+}
+function cuanto()
+{   
+	resultado ="";
+	LeeCifra($("#cifra").text());
+		
+}
+	
+
+$(document).ready(function() {
+	Valor = 0;    
+  LeeIdbUsuario();
+  
+	DeterminaMotor(Gres.Numeros0);
+	 $('#LetraP').addClass('capital');
+	 
+	
+});
+
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+  LeeCGB(document.title + ". "  + Gres.Numeros);  
+}
+
+</script> 
+
+ 
+
+</body>
+
+</html>

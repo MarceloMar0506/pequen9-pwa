@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Práctica Secuencias</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="PracticaSig.css" type="text/css" rel="stylesheet" id="linkestilo"/>
+
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="UsuarioIngreso.js"></script> 
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Practicaes.js"></script>
+
+ <script>
+	 var indices = [];
+	 var PrimerS = "";
+	 var SegundoS = "";
+	 var LetraD = "";
+
+</script> 
+<script type="text/javascript" src="./PAUnSigno.js"></script> 
+  
+</head>
+
+<body>
+  <div id="contenedor" style="height:100%">
+
+<div id="titulo3">
+  <div></div> 
+  <div id="Mleccion" style="font-size: 8vw;top:0">_</div>
+  <div></div>
+  </div>
+  <div class="AyudaV">
+    <img class="imgAyudaFJ" src="./../../../ResB/qwertyFJ.png" alt="">
+    <img class="imgAyudaCN" src="./../../../ResB/qwertyCN.png" alt=""> 
+    <img class="imgAyudaPZ" src="./../../../ResB/PizarraTN.png" alt=""> 
+  </div>
+ 
+  <!-- Teclado Pulsado -->
+ <div id="gridcontenedorNoo" > 
+
+  <div class="gridPlantillaED" id="braille">    
+   <div id="Primera" class="teclasE">
+   <elem class="box" id="box1">1</elem>	
+   <elem class="box" id="box4">4</elem> 
+   <elem class="box" id="box2">2</elem>
+   <elem class="box" id="box5">5</elem>
+   <elem class="box" id="box3">3</elem>
+   <elem class="box" id="box6">6</elem>
+   </div>
+   
+   <div id="Segunda" class="teclasE">
+   <elem class="box" id="box01">1</elem>	
+   <elem class="box" id="box04">4</elem> 
+   <elem class="box" id="box02">2</elem>
+   <elem class="box" id="box05">5</elem>
+   <elem class="box" id="box03">3</elem>
+   <elem class="box" id="box06">6</elem>
+   </div>
+ 
+   <div id="Tercera" class="teclasE">
+     <elem class="box" id="box001">1</elem>	
+     <elem class="box" id="box004">4</elem> 
+     <elem class="box" id="box002">2</elem>
+     <elem class="box" id="box005">5</elem>
+     <elem class="box" id="box003">3</elem>
+     <elem class="box" id="box006">6</elem>
+     </div>
+ 
+   <div id="Cuarta" class="teclasE">
+     <elem class="box" id="box0001">1</elem>	
+     <elem class="box" id="box0004">4</elem> 
+     <elem class="box" id="box0002">2</elem>
+     <elem class="box" id="box0005">5</elem>
+     <elem class="box" id="box0003">3</elem>
+     <elem class="box" id="box0006">6</elem>
+     </div>	
+ </div> 
+ 
+ </div> 
+
+
+
+
+<!-- PIZARRA -->
+   <div class="gridPlantillaED"  id="Pbraille">
+    <div id="PCuarta" class="teclasE">
+      <elem class="box" id="pbox0004">4</elem> 
+      <elem class="box" id="pbox0001">1</elem>	
+      <elem class="box" id="pbox0005">5</elem>
+      <elem class="box" id="pbox0002">2</elem>
+      <elem class="box" id="pbox0006">6</elem>
+      <elem class="box" id="pbox0003">3</elem>
+    </div>	
+
+    <div id="PTercera" class="teclasE">
+      <elem class="box" id="pbox004">4</elem> 
+      <elem class="box" id="pbox001">1</elem>	
+      <elem class="box" id="pbox005">5</elem>
+      <elem class="box" id="pbox002">2</elem>
+      <elem class="box" id="pbox006">6</elem>
+      <elem class="box" id="pbox003">3</elem>
+    </div>
+
+    <div id="PSegunda" class="teclasE">
+      <elem class="box" id="pbox04">4</elem> 
+      <elem class="box" id="pbox01">1</elem>	
+      <elem class="box" id="pbox05">5</elem>
+      <elem class="box" id="pbox02">2</elem>
+      <elem class="box" id="pbox06">6</elem>
+      <elem class="box" id="pbox03">3</elem>
+    </div>
+
+    <div id="PPrimera" class="teclasE">
+      <elem class="box" id="pbox4">4</elem> 
+      <elem class="box" id="pbox1">1</elem>	
+      <elem class="box" id="pbox5">5</elem>
+      <elem class="box" id="pbox2">2</elem>
+      <elem class="box" id="pbox6">6</elem>
+      <elem class="box" id="pbox3">3</elem>
+    </div>
+    </div>
+
+
+ 
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 3vw;margin-left: 20vw;width: 60vw;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+
+ <div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv0"></h2>
+  <h2 class="etq" id="statusdiv02"></h2>
+  <h2 class="etq" id="statusdiv03"></h2>
+  <h2 class="etq" id="statusdiv04"></h2>
+  <h2 class="etq" id="statusdiv05"></h2>
+  <h2 class="etq" id="statusdiv06"></h2>
+   </div>
+
+
+<script src="FuncionesTVBDOS.js"></script>
+<script src="FuncionesMouseDOS.js"></script>
+<script>
+    $(document).ready(function() {     
+      
+       // DeterminaMotor("");       
+        KEY = 'UsuarioActual';
+        get().then(function (value) {
+            UsuarioActual = value;
+        });
+        KEY = 'Practica';
+        get().then(function (value) {
+            Practica = value;           
+        });
+        
+        
+      });
+    function Ayuda()
+    {
+      LeeCGB(Gres.PracticaAf);
+    }  
+
+</script>
+
+</body>
+
+</html>

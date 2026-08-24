@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Práctica de Secuencias</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./DosOmas.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+
+<script>
+
+var valBaseVec = "";
+var 	NumLec = '1';
+var MLec = " ";
+var cuentaErrores = 0;
+</script> 
+<style>
+	     .gridSec {
+         display: grid; 
+         justify-items: stretch; 
+         grid-template-columns: 1fr 1fr 1fr 1fr; 
+         grid-column-gap: 0px;      
+         width: 100%;    
+         justify-content: center; 
+         align-items: flex-start;
+         }
+</style>
+
+
+</head>
+
+<body  onkeyup="Npulsado(event)">	 
+
+	<script type="text/javascript" src="./PAUnSigno.js"></script> 
+
+	
+	<div id="contenedor" style="height:100%">
+	<div id="titulo3">
+<div></div> 
+<div id="titulo"></div>
+<div></div>
+</div>
+
+<div class="gridSec" style="margin-top:3vw">
+	<div id="1" class="Tl" onmouseup="ingresa('1')" ontouchend="ingresa('1')">ESTA</div>
+	<div id="2" class="Tl" onmouseup="ingresa('2')" ontouchend="ingresa('2')">QUE</div>
+	<div id="3" class="Tl" onmouseup="ingresa('3')" ontouchend="ingresa('3')">PARA</div>
+	<div id="4" class="Tl" onmouseup="ingresa('4')" ontouchend="ingresa('4')">ANTE</div>
+	
+	</div>
+
+
+<!-- <div id="Mleccion" class="Mleccion" style="font-size: 3vw;width: 70%;margin: auto;word-wrap: break-word;"></div> -->
+<div id="grillaLista" style="grid-template-columns: 10vw 80vw 10vw;">
+	<div id="Fiz" style="width: 7vh;"><img class="animated flash" src="./../../../ResB/Fiz.png" onclick="atras()" alt=""></div> 
+
+	<div id="Mleccion" class="Mleccion" style="font-size: 3vw;width: 100%;margin: auto;word-wrap: break-word;"></div>
+
+	<div id="Fder" style="width: 7vh;"><img class="animated flash" src="./../../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+
+</div>
+
+<div id="ettexto" style="text-align:center;float:left;width:100%;" >
+	<label class="etiquetaTexto" id="EtiquetaUnoTexto" style="text-align:center;width:100%;border-bottom:0; "></label>
+	</div>
+	<div  class="label" style="bottom: 5vh;margin-left: 20vw;width: 60vw;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+</div>
+<script>
+	var valBase = "";
+
+function ingresa(index)
+{
+
+sayTimeout = setTimeout(function () {	
+if (nlec == 0)
+{
+Lee(Gres.MenuPractica);
+return;
+	    }else{
+			var miVar3 = setTimeout(function(){ 	
+            window.speechSynthesis.cancel();
+            KEY = 'Practica';
+			VALUE =index;
+			set();
+			},10);
+			var miVar4 = setTimeout(function(){
+				window.open("PracticaSecuencias.html","_self");
+			},200);
+	    }
+	}, 500); 
+	
+
+}
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+if (keyCode == 112) {
+    //$.getScript("../../F1/Generales.js", function(){
+      movil = 0;
+	  //TecladoQ();
+	  LeeCGB(document.title + ". " + Gres.MenuPractica + ". ");
+    //});
+  }
+
+  }
+///Fin tecla pulsada
+function atras(){
+	
+	nlec--;
+	if (nlec < 1){
+	 nlec = 4
+	}
+	MLec = "";
+	MLec = eval("Practica" + (nlec) );
+
+MLec = MLec.toString().replace(/,/g , ", ")
+ 
+ $("#Mleccion").text(MLec);
+	
+
+LeePractica();
+
+    $("button").css("color","black");
+	$("button").css("background-color","lightsteelblue");
+	$(".Tl").css("color","black");
+    $(".Tl").css("background-color","lightsteelblue");
+
+    $("#" + nlec).css("background-color","black");
+    $("#" + nlec).css("color","white");
+    $("#" + nlec).focus();
+	
+	NumLec = nlec;
+ 	NumLec= NumLec.toString();	
+	
+}
+
+function adelante(){
+	
+	nlec++;
+	
+	////console.log(event.keyCode + " " + nlec);
+	if (nlec > 4){
+	 nlec = 1
+	}
+
+	
+
+LeePractica();
+
+    $("button").css("color","black");
+	$("button").css("background-color","lightsteelblue");
+	$(".Tl").css("color","black");
+    $(".Tl").css("background-color","lightsteelblue");
+
+    $("#" + nlec).css("background-color","black");
+    $("#" + nlec).css("color","white");
+    $("#" + nlec).focus();
+	
+	NumLec = nlec;
+ 	NumLec= NumLec.toString();	
+}
+
+</script>
+
+<script>
+	$(document).ready(function() {
+
+		var cuantos = 0;
+
+	KEY ="UsuarioActual";
+    get().then(function (value) {
+UsuarioActual = value;
+	});
+	
+	if (movil == 0) {
+	$("#Pie").css("display", "none");
+}
+
+	DeterminaMotor(document.title + ". " + Gres.MenuPractica + ". ");
+
+	});
+	var nlec = 0;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("./ListaPracticas.html","_self");
+	return;
+}
+
+if (e.keyCode == 32)
+	{		
+		var DiceN = $("#Mleccion").text().split(' ');
+		//console.log(cuentaErrores + valBase + "  " + DiceN.length + " " +  $("#Mleccion").text() );
+		if (cuentaErrores > 0  ){
+		   DiceN = DiceN + ". con error en: " +  valBase;
+		}
+		 //console.log(DiceN.toString());
+		 DiceN = DiceN.toString().replace(/,,/g , ", ");
+		// DiceN = DiceN.slice(1);
+		LeeCGB(DiceN.toString());
+
+
+	//	LeeCGB(MLec);
+	}
+
+
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+
+if (e.keyCode == 13) {
+    ingresa(nlec);
+}
+
+return;
+}
+function AyudaM()
+    {
+      LeeCGB(document.title + ". " + Gres.MenuPractica + ". ");
+    }
+	function Regresar()
+      {
+        window.open("./ListaPracticas.html","_self");º
+	  }
+
+function LeePractica()
+	  {	
+
+var IndiceL=0;
+var IndiceFin=0;
+  //esta
+  if (nlec ==1){
+        IndiceL =  keysSec.indexOf("estadio");
+        IndiceFin =  keysSec.indexOf("ballesta");
+    }            
+    //que
+    if (nlec == 2){
+        IndiceL =  keysSec.indexOf("queda");
+        IndiceFin =  keysSec.indexOf("paquete");}
+    //para          
+    if (nlec == 3){
+        IndiceL =  keysSec.indexOf("paraba");
+        IndiceFin =  keysSec.indexOf("depara");}
+    //ante    
+    if (nlec == 4){
+        IndiceL =  keysSec.indexOf("canten");
+        IndiceFin =  keysSec.indexOf("tanteas");}
+
+cuantos = 0;//  MLec.split(',').length;
+var i = 0;
+MLec="";
+keysSec.forEach(function() {
+
+	if (i > (IndiceL-1 )) {
+	   if (i < (IndiceFin  +1)){
+		//console.log(keysSec[i] + " ===== ?? " + i )
+	    MLec += keysSec[i] + ", "; 
+		cuantos++;
+	}
+    }
+	i++;
+});
+
+ 
+ $("#Mleccion").text(MLec);
+
+var dice = "'" + $("#" + nlec).text() +"'" ;
+var dice2 =  $("#Mleccion").text();
+if (nlec > 4){dice2 = ""} 
+KEY = UsuarioActual + 'Sec';
+get().then(function (value) {
+try {
+	valBase = eval("value.Leccion" + NumLec );
+   
+   if (valBase == undefined)
+   { 
+   // MLec = eval("Practica" + (nlec) );
+	
+    if (cuantos > 1){
+      Lee(cuantos +  " palabras con la secuencia " + dice + ": "  + Gres.sinrealizar + ". " + Gres.barraEscuchala);// + ". " + dice2);
+    }
+	else if (cuantos == 1){
+      Lee(cuantos +  " palabra con la secuencia " + dice  + ": " + Gres.sinrealizar + ". " + Gres.barraEscuchala);// + ". " + dice2);
+    }
+   
+   return;
+}else {
+	FcuentaErroresPP();
+}
+	
+} catch (error) {
+	
+//	MLec = eval("Practica" + (nlec) );
+	//console.log(error + " con que error ?????? " +  MLec);
+//	var cuantos = MLec.toString().split(',').length;
+	if (cuantos > 1){
+       Lee(cuantos +  " palabras con la secuencia " + dice + ": " + Gres.sinrealizar + ". " + Gres.barraEscuchala);
+	}
+	else if (cuantos == 1){
+       Lee(cuantos +  " palabra con la secuencia " + dice + ": " + Gres.sinrealizar + ". " + Gres.barraEscuchala);
+	}
+   return;
+}
+
+
+
+//fin del get
+});
+ }
+
+ function FcuentaErroresPP()
+ {
+	////console.log(valBase + " error??");
+var vectorE =[];
+vectorE = valBase.split(',');
+cuentaErrores = 0;
+for (let index = 0; index < vectorE.length; index++) {
+	////console.log(vectorE[index] + " AAAAA  error? " + vectorE[index].length);
+	if (vectorE[index].length > 0)
+	{
+	   cuentaErrores++;
+	}
+	hiliterPP(vectorE[index]);
+
+}
+//console.log("cuenta errores ?????????????????????????????????????? " +  cuentaErrores)
+if (cuentaErrores >  1){
+//	var cuantos = MLec.split(',').length;
+		  //console.log(MLec + " RRRR " + cuantos);
+	  if (cuantos > 1){
+        Lee(cuantos +  " palabras con la secuencia '" + $("#" + nlec).text() + "': " + Gres.realizadacon + cuentaErrores + Gres.errores + ". " + Gres.barraEscucharlos );
+	  }
+	  else if (cuantos == 1){
+        Lee(cuantos +  " palabra con la secuencia '" + $("#" + nlec).text() + "': " + Gres.realizadacon + cuentaErrores + Gres.errores + ". " + Gres.barraEscucharlos );
+	  }
+	  
+
+}else if (cuentaErrores ==  1){
+//	var cuantos = MLec.split(',').length;
+	 //console.log(MLec + " RRRR " + cuantos);
+	  if (cuantos > 1){
+         Lee(cuantos +  " palabras con la secuencia '" + $("#" + nlec).text() + "': " + Gres.conUnError + ". " + Gres.barraEscucharlo );
+	  }else if (cuantos == 1){
+         Lee("Una palabra con la secuencia '" + $("#" + nlec).text() + "': " + Gres.conUnError + ". " + Gres.barraEscucharlo );
+	  }
+
+
+}else if (cuentaErrores ==  0){
+ // var cuantos = MLec.split(',').length;
+  if (cuantos > 1){
+   Lee(cuantos +  " palabras con la secuencia '" + $("#" + nlec).text() + "': " + Gres.realizadaCorr);
+  }
+  else if (cuantos == 1){
+   Lee(cuantos +  " palabra con la secuencia '" + $("#" + nlec).text() + "': " + Gres.realizadaCorr);
+  }
+}
+
+ }
+
+
+
+  function hiliterPP(word) {
+	 word = word.trim();		
+	repl = '<span>'  + word +  '</span>';	
+	$("#Mleccion").html($("#Mleccion").html().replace(word,repl));
+	
+}
+	
+	</script> 
+
+</body>
+
+</html>

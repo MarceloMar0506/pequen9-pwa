@@ -1,0 +1,669 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Pesca en el Mar</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="Estilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+</script>
+
+
+</head>
+
+<body style="background-image: url('./../../../ResB/FondoBarco.jpg'); background-repeat: no-repeat;  background-position: center; background-size: cover; ">
+
+
+  <div id="encabeza">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		
+   </div>
+   <div id="gridPeces">
+    <img src="./../../../ResB/Pez1D.png" id="pz1">
+    <img src="./../../../ResB/Pez2D.png" id="pz2">
+    <img src="./../../../ResB/Pez3D.png" id="pz3">
+    <img src="./../../../ResB/Pez4D.png" id="pz4">
+    <img src="./../../../ResB/Pez5D.png" id="pz5"">
+
+   </div>
+
+     <img src="./../../../ResB/BarcoP.png" id="barco" alt="">
+     <img src="./../../../ResB/Anzuelo.png" id="anzuelo" alt="">
+     <img src="./../../../ResB/linea.png" id="linea" alt="">
+     <img src="./../../../ResB/Pez1D.png" id="pez" alt="">
+
+
+ <!-- globo -->
+ <div  class="label" style="position: fixed;bottom: 20px;margin-left: 10%;width:85vw"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+
+ </div>
+
+
+ 
+<script>
+    var audio = document.createElement('audio');
+    var audioB = document.createElement('audio');
+
+var direccion = "derecha";
+var diceDonde="";
+var diceP="";
+var audioF = false;
+var pez=1;
+var altura="";
+var lado="";
+var pecesCount=0;
+var encontro=false;
+var espera =false;
+var puntos = 0;
+var topeanzuelo=0;
+var fin = false;
+var primeraVuelta = 0;
+
+$(document).ready(function() {  
+
+  DeterminaMotor("Pesca en el mar. Con teclas de dirección  derecha e izquierda mueve el barco de pesca. Con teclas abajo y arriba mueve el anzuelo. Tienes que pescar 5 peces. Pulsa barra espaciadora para iniciar");
+
+
+
+  
+});
+
+$(document).keyup(function(event) {
+  encontro = false;
+
+  if (event.keyCode == 112){
+     Ayuda();
+      return;
+  }
+  if (event.keyCode == 27){
+    Regresar();
+    return;
+  }
+  
+  if(event.keyCode == 32){
+    
+   direccion = "derecha";
+   diceDonde="";
+   diceP="";
+   pecesCount=0;
+   audioF = false;
+   pez=0;
+   altura="";
+   lado="";  
+   audio.pause();
+   audio.volume=0.2;   
+   audio.play();
+   //puntos = 0;
+   topeanzuelo=0;
+   fin = false;
+   $("#pz1").css("visibility", "hidden");
+   $("#pz2").css("visibility", "hidden");
+   $("#pz3").css("visibility", "hidden");
+   $("#pz4").css("visibility", "hidden");
+   $("#pz5").css("visibility", "hidden");
+   $("#pez").css({"left": "100vw"})
+   $('#pez').attr("src", "./../../../ResB/Pez1D.png" ); 
+   $("#pez").css("visibility", "visible");
+    LeeCGB("mueve el anzuelo abajo");
+    animar();
+  }
+});
+  
+$(document).keydown(function(event) {
+
+  if (espera == true ){return}
+
+  //console.log("tope anzuelo " + $("#anzuelo").position().top.toFixed(0));
+
+
+  if(event.keyCode == 39){
+    if (primeraVuelta == 0){
+      inicia();
+      primeraVuelta =1;
+    }
+    if (diceDonde.includes() == "pescaste"){return};
+    if ($("#barco").position().left > document.documentElement.clientWidth - $("#barco").width()  ){return} 
+    if (fin == true){return}
+    if (topeanzuelo == 0){      
+      LeeCGB_S2("mueve el anzuelo abajo");
+      return}
+    $("#barco").css({"left":"+=10px"});
+    $("#anzuelo").css({"left":"+=10px"});
+    $("#linea").css({"left":"+=10px"});
+    if (pez < 6){
+      DetectarColision();
+    }
+
+  }
+  if(event.keyCode == 37){
+    if (primeraVuelta == 0){
+      inicia();
+      primeraVuelta =1;
+    }
+    if (diceDonde.includes() == "pescaste"){return};
+    if (fin == true){return}
+    if ($("#barco").position().left < 30 ){return} 
+    if (topeanzuelo == 0){
+      LeeCGB_S2("mueve el anzuelo abajo");
+      return}
+    $("#barco").css({"left":"-=10px"});
+    $("#anzuelo").css({"left":"-=10px"});
+    $("#linea").css({"left":"-=10px"});
+    if (pez < 6){
+      DetectarColision();
+    }
+
+  }
+  if(event.keyCode == 38){ 
+    if (primeraVuelta == 0){
+      inicia();
+      primeraVuelta =1;
+    }
+    if (encontro == true ){return}
+    //console.log($("#anzuelo").position().top + "  " + ($("#barco").position().top +  $("#barco").height() ));
+    if ($("#anzuelo").position().top > ($("#barco").position().top +  $("#barco").height()) ){
+      $("#anzuelo").css({"top":"-=10px"});
+      $("#linea").css({"height":"-=10px"});
+      DetectarColision();
+    }
+  }
+  if(event.keyCode == 40){ 
+    if (primeraVuelta == 0){
+      inicia();
+      primeraVuelta =1;
+    }
+    topeanzuelo= 1;
+    if (encontro == true ){return}
+    $("#anzuelo").css({"top":"+=10px"});
+    $("#linea").css({"height":"+=10px"});
+    $("#linea").css({"width":"16px"});
+    if (pez < 6){
+      DetectarColision();
+    }
+
+  }
+
+
+
+});
+function inicia(){
+  direccion = "derecha";
+   diceDonde="";
+   diceP="";
+   pecesCount=0;
+   audioF = false;
+   pez=0;
+   altura="";
+   lado="";  
+   audio.pause();
+   audio.volume=0.2;   
+   audio.play();
+   //puntos = 0;
+   topeanzuelo=0;
+   fin = false;
+   $("#pz1").css("visibility", "hidden");
+   $("#pz2").css("visibility", "hidden");
+   $("#pz3").css("visibility", "hidden");
+   $("#pz4").css("visibility", "hidden");
+   $("#pz5").css("visibility", "hidden");
+   $("#pez").css({"left": "100vw"})
+   $('#pez').attr("src", "./../../../ResB/Pez1D.png" ); 
+   $("#pez").css("visibility", "visible");
+    LeeCGB("mueve el anzuelo abajo");
+    //console.log("inicia");
+    audioFondo();
+    animar();
+}
+
+
+function DetectarColision(){
+
+  if (pez > 5){
+      
+      return;}  
+
+	/// "a" y "b" deben ser dos objetos HTMLElement
+  var a = $("#pez");
+  var b = $("#anzuelo");
+  
+  var a_pos = {t : a.position().top, 
+  						 l: a.position().left, 
+               r: a.position().left + a.width(), 
+               b: a.position().top + a.height()};
+  var b_pos =  {t : b.position().top, 
+  						 l: b.position().left, 
+               r: b.position().left + b.width(), 
+               b: b.position().top + b.height()};
+  
+ 
+var altAnz = b_pos.t;
+
+if (a_pos.t >  b_pos.t){ altura = "mueve el anzuelo abajo" }
+if (a_pos.t <  b_pos.t){ altura = "mueve el anzuelo arriba" }
+if (a_pos.t <  (altAnz + 10) &&  a_pos.t >  (altAnz  - 10) ){
+   altura = "Anzuelo en posición. mueve el barco ";
+  encontro= true; 
+}
+
+
+
+if (a_pos.r >  b_pos.r){ lado = "derecha" }
+if (a_pos.r <  b_pos.r){ lado = "izquierda" }
+                
+               //console.log(altura + " a la " +lado );
+              
+if (altura == "Anzuelo en posición. mueve el barco "){
+  diceDonde =  "Mueve el barco a la " + lado}
+else if (altura != "Anzuelo en posición. mueve el barco ") {
+
+  diceDonde=  altura;
+}
+                diceP= diceDonde;
+                LeeCGB(diceP); 
+
+ //Detecta si se superponen las áreas
+  if(   a_pos.l <= b_pos.r && a_pos.r >= b_pos.l 
+    && a_pos.b >= b_pos.t && a_pos.t <= b_pos.b ){
+ 		//console.log('colision');
+    
+     $("#anzuelo").css({"top":"35vh"});
+     $("#linea").css({"height":"41px"});
+     audioBlep();
+     LeeCGB_S2("pescaste al pez " + pez + ". mueve el anzuelo abajo");
+     topeanzuelo=0;
+     puntos = puntos + 10;
+     delayAnim();
+     $("#pz" + pez).css("visibility", "visible");
+    // $("#pz" + pez).css('box-shadow', '10px 10px 5px #888');
+
+     pecesCount++;
+     if (pez == 6){ 
+      $("#pez").css("visibility", "hidden")         
+      var dicePes="";        
+        if (pecesCount == 1){dicePes= "Pescaste un pez" }
+        if (pecesCount > 1 ){dicePes= "Pescaste " + pecesCount + " peces" }
+        dicePes = dicePes + " lograste " + puntos + " puntos";
+        
+        if (pecesCount == 0){
+          dicePes= "No pescaste peces" }
+       
+        LeeCGB("Fin del juego. " + dicePes + ". barra espaciadora para continuar con el juego o escape para salir ");
+        fin = true;
+    audio.pause();
+
+      pez++;
+      audio.pause();
+      return;
+    }
+
+
+
+     pez++;
+  if (pez == 6 ){
+    var dicePes="";
+       
+        if (pecesCount == 1){dicePes= "Pescaste un pez" }
+        if (pecesCount > 1 ){dicePes= "Pescaste " + pecesCount + " peces" }
+        dicePes = dicePes + " lograste " + puntos + " puntos";
+        LeeCGB("Fin del juego. " + dicePes + ". barra espaciadora para continuar con el juego o escape para salir ");
+        if (pecesCount == 0){
+          dicePes= "No pescaste peces" }
+       
+        fin = true;
+    audio.pause();
+    return;
+  }
+
+     if (direccion == "derecha") {
+      direccion ="izquierda"
+      $("#pez").css({"left": "100vw"})     
+      $('#pez').attr("src", "./../../../ResB/Pez" + pez +".png" );
+    } 
+     else if (direccion == "izquierda") {
+      direccion ="derecha"
+      $("#pez").css({"left": "0"})
+      $('#pez').attr("src", "./../../../ResB/Pez" + pez +"D.png" );
+    } 
+
+    
+    
+ 	}
+ 
+}
+
+
+
+function audioFondo(){
+
+       
+          rutaAudio = "./../../../ResB/Uele.mp3";
+          audio.src =  rutaAudio;
+          audio.load();
+          if (controlAudio == "con"){
+             audio.volume=0.2;
+          }
+          else{
+             audio.volume=0;
+          }
+          audio.pause();
+
+          setTimeout(function () {      
+            if (controlAudio == "con"){
+              audio.play();
+          }
+  
+          }, 500);
+          
+}
+
+function audioBlep(){
+          rutaAudio = "./../../../ResB/Blep.mp3";
+          audioB.src =  rutaAudio;
+          audioB.load();
+          if (controlAudio == "con"){
+             audio.volume=0.2;
+             audioB.play();
+          }
+          else{
+             audio.volume=0;
+          }
+         
+}
+
+
+function animar(){ 
+  window.setInterval(function(){     
+    DetectarColision2(); 
+     
+    var pezX = pez;
+    if (pezX == 0){pezX = 1}   
+
+    if (pez < 6){   
+     if (direccion== "izquierda")
+      {
+      $("#pez").css({"left":"-=1px"});
+      $('#pez').attr("src", "./../../../ResB/Pez" + pezX +".png" );
+     }
+     else  if (direccion== "derecha") {
+      $("#pez").css({"left":"+=1px"});
+      $('#pez').attr("src", "./../../../ResB/Pez" + pezX +"D.png" );
+     }
+     
+     if ($("#pez").position().left < 0){
+      $("#pez").css({"left": "100vw"});
+      pez++; 
+      if (pez == 6 ){
+        var dicePes="";
+        
+        if (pecesCount == 1){dicePes= "Pescaste un pez" }
+        if (pecesCount > 1 ){dicePes= "Pescaste " + pecesCount + " peces" }
+        dicePes = dicePes + " lograste " + puntos + " puntos";
+        if (pecesCount == 0){
+          dicePes= "No pescaste peces" }
+       
+        LeeCGB("Fin del juego. " + dicePes + ". barra espaciadora para continuar con el juego o escape para salir ");
+        fin = true;
+        audio.pause();
+        return;
+      }
+          
+
+    }else if ($("#pez").position().left >  document.documentElement.clientWidth){
+      $("#pez").css({"left": "0"}); 
+      pez++; 
+      
+      if (pez == 6 ){
+        var dicePes="";
+       
+        if (pecesCount == 1){dicePes= "Pescaste un pez" }
+        if (pecesCount > 1 ){dicePes= "Pescaste " + pecesCount + " peces" }
+        dicePes = dicePes + " lograste " + puntos + " puntos";
+        if (pecesCount == 0){
+          dicePes= "No pescaste peces" }
+       
+        LeeCGB("Fin del juego. " + dicePes + ". barra espaciadora para continuar con el juego o escape para salir ");
+        fin = true;
+        audio.pause();
+        return;
+      }
+
+    } 
+   
+  }
+
+  },50);
+}
+function delayAnim(){
+  espera = true;
+  window.setInterval(function(){     
+   espera=false;
+   //LeeCGB("mueve el anzuelo abajo");
+  },4000);
+}
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+  LeeCGB("Pesca en el mar. Con teclas de dirección  derecha e izquierda mueve el barco de pesca. Con teclas abajo y arriba mueve el anzuelo. Tienes que pescar 5 peces. Mueve el anzuelo o el barco para iniciar");
+}
+
+
+function DetectarColision2(){
+
+if (pez > 5){
+    
+    return;}  
+
+/// "a" y "b" deben ser dos objetos HTMLElement
+var a = $("#pez");
+var b = $("#anzuelo");
+
+var a_pos = {t : a.position().top, 
+             l: a.position().left, 
+             r: a.position().left + a.width(), 
+             b: a.position().top + a.height()};
+var b_pos =  {t : b.position().top, 
+             l: b.position().left, 
+             r: b.position().left + b.width(), 
+             b: b.position().top + b.height()};
+
+
+//Detecta si se superponen las áreas
+if(   a_pos.l <= b_pos.r && a_pos.r >= b_pos.l 
+  && a_pos.b >= b_pos.t && a_pos.t <= b_pos.b ){
+   //console.log('colision');
+  
+   $("#anzuelo").css({"top":"35vh"});
+   $("#linea").css({"height":"41px"});
+   audioBlep();
+   topeanzuelo=0;
+   LeeCGB_S2("pescaste al pez " + pez + ". mueve el anzuelo abajo");
+   delayAnim();
+   puntos = puntos + 10;   
+   $("#pz" + pez).css("visibility", "visible");
+   //$("#pz" + pez).css('box-shadow', '10px 10px 5px #888');
+   pecesCount++;
+   if (pez == 6){ 
+    $("#pez").css("visibility", "hidden");         
+    var dicePes="";
+        
+        if (pecesCount == 1){dicePes= "Pescaste un pez" }
+        if (pecesCount > 1 ){dicePes= "Pescaste " + pecesCount + " peces" }
+        dicePes = dicePes + " lograste " + puntos + " puntos";
+        if (pecesCount == 0){
+          dicePes= "No pescaste peces" }
+       
+        LeeCGB("Fin del juego. " + dicePes + ". barra espaciadora para continuar con el juego o escape para salir ");
+        fin = true;
+    audio.pause();
+
+    pez++;
+    return;
+  }
+
+
+
+   pez++;
+   if (pez == 6 ){
+    var dicePes="";
+        
+        if (pecesCount == 1){dicePes= "Pescaste un pez" }
+        if (pecesCount > 1 ){dicePes= "Pescaste " + pecesCount + " peces" }
+        dicePes = dicePes + " lograste " + puntos + " puntos";
+        if (pecesCount == 0){
+          dicePes= "No pescaste peces" }
+       
+        LeeCGB("Fin del juego. " + dicePes + ". barra espaciadora para continuar con el juego o escape para salir ");
+        fin = true;
+    audio.pause();
+    return;
+  }
+
+   if (direccion == "derecha") {
+    direccion ="izquierda"
+    $("#pez").css({"left": "100vw"})     
+    $('#pez').attr("src", "./../../../ResB/Pez" + pez +".png" );
+  } 
+   else if (direccion == "izquierda") {
+    direccion ="derecha"
+    $("#pez").css({"left": "0"})
+    $('#pez').attr("src", "./../../../ResB/Pez" + pez +"D.png" );
+  } 
+
+  
+  
+ }
+
+}
+
+
+function LeeCGB_S2(texto)
+{ 
+ diceDonde = texto;
+
+ window.speechSynthesis.cancel();
+ ////console.log(texto);
+
+TextoLargo[0] = texto;
+// if (texto.length > 5)
+// {//cortar en punto espacio ". "
+indEs=0;
+TextoLargo = texto.split(". ");
+
+//}
+$(".label").html(TextoLargo[0]);
+//$('.label').css('fontSize','2vw'); 
+$('.label').css('text-align','left');  
+$('#label').css('text-align','left'); 
+$(".label").css("visibility","visible");
+//window.speechSynthesis.cancel();
+
+msgNo = new SpeechSynthesisUtterance(TextoLargo[0]);
+msgNo.voice = speechSynthesis.getVoices()[Voz];
+msgNo.rate = Veloz;	
+msgNo.pitch = Tono;
+msgNo.volume=Volumen;
+	
+ msgNo.onboundary = function(event) { 
+    
+    //event.charIndex el indice de la palabra que lee
+  }	
+  
+ msgNo.onend = function(event) {
+  // $(".label").css("border","3px white");
+  var amISpeaking = speechSynthesis.speaking; 
+  ////console.log(amISpeaking);
+if (TextoLargo.length > 0)
+ {
+ indEs ++;
+ LeeSiguiente();
+ return;
+ }
+EsperaAnim();
+//$("#pequen").attr("src","Peque.png");
+}
+  
+//sayTimeout = setTimeout(function () { window.speechSynthesis.speak(msgNo);}, 500);     
+window.speechSynthesis.speak(msgNo);
+HablaAnim();
+
+} 
+
+function LeeSiguiente()
+{
+if (TextoLargo[indEs] == undefined){return}
+
+$(".label").html(TextoLargo[indEs]);
+//$('.label').css('fontSize','2vw'); 
+$('.label').css('text-align','left');  
+$('#label').css('text-align','left'); 
+
+
+msgNo = new SpeechSynthesisUtterance($(".label").text());
+msgNo.voice = speechSynthesis.getVoices()[Voz];
+msgNo.rate =Veloz;	
+msgNo.pitch = Tono;
+msgNo.volume=Volumen;
+	
+ msgNo.onboundary = function(event) { 
+ 
+    //event.charIndex el indice de la palabra que lee
+  }	
+  
+ msgNo.onend = function(event) {
+  // $(".label").css("border","3px white");
+if (TextoLargo.length > indEs )
+ {
+ indEs ++;
+ LeeSiguiente();
+ }
+EsperaAnim();
+//$("#pequen").attr("src","Peque.png");
+}
+HablaAnim();
+//sayTimeout = setTimeout(function () { window.speechSynthesis.speak(msgNo);}, 500); 
+window.speechSynthesis.speak(msgNo);    
+}
+
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

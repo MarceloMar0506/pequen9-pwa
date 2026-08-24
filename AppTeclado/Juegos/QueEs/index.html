@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>¿Qué Es?</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="Estilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="VariableDicta.js"></script> 
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+</script>
+
+</head>
+
+<body>
+
+
+
+ <script type="text/javascript" src="BDicta2.js"></script>  
+ <script type="text/javascript" src="L.js"></script>  
+
+
+<div id="contenedor">
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+    </div>
+    
+<div class="grid">
+<div id="izquierdaG">
+<!-- Letra Imprenta Mayúscula -->
+<label class="Netiqueta" id="EtiquetaUno" style="font-size: 30vh;">&zwnj;</label>
+</div>
+<!-- Imagen central-->
+<div id="CEntroImagenG" style="margin-top: 10vh;"><img  id="mimg" src="./../../../ResB/QE.png" style="width: 45vh;"></img></div>
+<div id="derechaG">
+<!-- Letra Imprenta Minúscula -->
+<label class="Netiqueta" id="EtiquetaDos" style="font-size: 30vh;">&zwnj;</label></div>
+</div>
+<!--Fin del Grid-->
+</div>
+
+
+<div class="TecladoTodo">
+	<div class="TecladoQ">
+		<a href="#"  class="Lt" id="Q" data="Q">Q</a>
+		<a href="#"  class="Lt" id="W" data="W">W</a>
+		<a href="#"  class="Lt" id="E" data="E">E</a>
+		<a href="#"  class="Lt" id="R" data="R">R</a>
+		<a href="#"  class="Lt" id="T" data="T">T</a>
+		<a href="#"  class="Lt" id="Y" data="Y">Y</a>
+		<a href="#"  class="Lt" id="U" data="U">U</a>
+		<a href="#"  class="Lt" id="I" data="I">I</a>
+		<a href="#"  class="Lt" id="O" data="O">O</a>
+		<a href="#"  class="Lt" id="P" data="P">P</a>
+	</div>
+		
+		<!-- <a href="#"  class="LtE" id="Enter" onclick="queHaceActual()"><img  class="animated flash2" id="suena" src="./../../ResB/Enter.png" /></a> -->
+	<div class="TecladoQ2">
+		<a href="#" id="A" class="Lt" data="A">A</a>
+		<a href="#" id="S" class="Lt" data="S">S</a>
+		<a href="#"  id="D" class="Lt" data="D">D</a>
+		<a href="#"  id="F" class="Lt" style="text-decoration: underline" data="F">F</a>
+		<a href="#"  id="G" class="Lt" data="G">G</a>
+		<a href="#"  id="H" class="Lt" data="H">H</a>
+		<a href="#"  id="J" class="Lt" style="text-decoration: underline" data="J">J</a>
+		<a href="#"  id="K" class="Lt" data="K">K</a>
+		<a href="#"  id="L" class="Lt" data="L">L</a>
+		<a href="#"  id="Ñ" class="Lt" data="Ñ">Ñ</a>
+	</div>
+
+	<div class="TecladoQ3">
+		<a href="#"  id="Z" class="Lt" data="Z">Z</a>
+		<a href="#"  id="X" class="Lt" data="X">X</a>
+		<a href="#"  id="C" class="Lt" data="C">C</a>
+		<a href="#"  id="V" class="Lt" data="V">V</a>
+		<a href="#"  id="B" class="Lt" data="B">B</a>
+		<a href="#"  id="N" class="Lt" data="N">N</a>
+		<a href="#"  id="M" class="Lt" data="M">M</a>
+		<a href="#"  id="Arr" class="Lf">&#9650;</a>		
+    </div>
+
+
+
+
+<div class="keyboard-row">
+   
+     <a href="#"  class="Lf" id="barra" data="">VOLVER A ESCUCHAR</a>
+   
+   </div>  
+ </div>
+</div> 
+
+
+
+</div>
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 2%;margin-left: 10%;width:85vw"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+
+ </div>
+
+
+ 
+<script>
+   var audio = document.createElement('audio');
+   posL=0;
+ 
+
+  $(document).ready(function() {
+
+
+  var texto ="¿Qué sonido es?. pulsar barra espaciadora para escuchar el sonido. luego pulsar la letra inicial de la palabra con la cual lo asocias.";
+  DeterminaMotor(texto);
+
+
+});
+
+document.body.addEventListener('keyup', function(e) {
+  if (e.keyCode == 112){
+     Ayuda();
+      return;
+ 
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+  if (e.keyCode == 32){  
+    //console.log("dicta????");
+    if (posL == 0)
+    {  DictaSonido()}
+    else{Escucha(); }    
+    return;
+  }
+  if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}
+//console.log('keyup:' + e.keyCode + " " + e.key);
+Tpulsada = e.key.toString().toUpperCase();
+//console.log(Tpulsada)
+EvaluaLetra(Tpulsada);
+});
+
+var rep = document.getElementById("barra");
+rep.addEventListener('mouseup', Repite, false);
+rep.addEventListener('touchend', Repite, false);
+
+
+var comments = document.getElementsByClassName('Lt');
+var numComments = comments.length;
+
+function pulsaAbajo()
+{
+  // pulsada =true;
+  // //console.log(pulsada);
+}
+
+function PulsaArriba(e) { 
+  //console.log($(this).attr('data') + " " + pulsada);
+//   if (pulsada == true){return} 
+//  else if (pulsada == false){ 
+//    pulsada = true;
+//console.log($(this).attr('data') + " " + pulsada);
+Tpulsada = $(this).attr('data');
+EvaluaLetra(Tpulsada);
+//}
+}
+
+for (var i = 0; i < numComments; i++) {
+// comments[i].addEventListener('mousedown', pulsaAbajo, false);  
+// comments[i].addEventListener('touchstart', pulsaAbajo, false); 
+comments[i].addEventListener('mouseup', PulsaArriba, false);
+comments[i].addEventListener('touchend', PulsaArriba, false);
+}
+
+function Regresar()
+{
+window.open( "../index.html","_self"); 
+}
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+ 
+  LeeCGB( "¿Qué sonido es?. "  + Gres.QueEs);  
+}
+
+
+  </script>
+
+</body>
+
+</html>

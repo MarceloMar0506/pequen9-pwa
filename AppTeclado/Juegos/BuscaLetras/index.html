@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Buscar las Letras</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./Estilo.css" type="text/css" rel="stylesheet"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script>
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="VariableDicta.js"></script> 
+<script type="text/javascript" src="Reloj.js"></script>
+<script type="text/javascript" src="progressbar.js"></script>
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+
+<script>
+  var Tpulsada = "";
+</script>
+
+<style type="text/css">
+
+
+.keyboard-row {
+     text-align: center;
+     margin-bottom: 0.8vw;
+     padding: 0.05vw;
+     width: 100%;
+   }
+   #virtual-keyboard {
+    position: relative;
+    margin-bottom: 0.38vw;
+
+   }
+   
+   #virtual-keyboard a {
+     text-transform: uppercase;;
+     font-family: Arial;
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     border-radius: 5px;
+     background: #ffffff;
+     padding:0.05vw 0.90vw;    
+     color:#020202;
+     text-align: center;
+     margin-right: 1vw;
+     margin-bottom: 0.05vw;     
+     height: 1vw; 
+     justify-content: center;
+     align-items: stretch;
+     border: solid 2px blue;
+     font-size: 2.5vw;
+   }
+   
+   #virtual-keyboard a:hover {
+     /* text-decoration: none; */
+     /* opacity: 0.8; */
+     background-color: cornflowerblue;
+   }
+   #virtual-keyboard {
+   bottom: -20vh;
+   }
+   #Palabra{
+    position: fixed;
+	font-size: 10vh;
+  text-transform:uppercase;
+  width: 100vw;
+  text-align: center;
+  left: 0;
+  ;font-family: Arial, Helvetica, sans-serif;
+  bottom: 10vh;
+}
+
+
+
+</style>
+
+
+</head>
+
+<body>
+
+
+ <script type="text/javascript" src="BDicta.js"></script>  
+ <script type="text/javascript" src="L.js"></script>  
+
+<div id="contenedor" style="width:100%;height:100%; top:40px; display:block; " class="auto-style1">
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div class="esc"></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+		</div>
+
+<div id="izquierda" style="float:left; width:20%;height:40%; margin-left:2em; margin-top: 2em;text-align:center;font-family: Arial, Helvetica, sans-serif;">
+ <!-- Letra Imprenta Mayúscula -->
+ <div style="float:left; font-size:18vw; top:2vw; margin-top:0;width:100% " ><label class="Netiqueta" id="EtiquetaUno"
+	>&zwnj;</label>
+</div>                
+</div>
+
+<!-- Imagen central-->
+<div class="imagencentralSup" id="CEntroImagen" >
+<img  id="mimg" src="./../../../ResB/transparente.png" style="position: absolute;width: 30vw;left: 35vw;top: 0;"></img>
+</div>
+
+
+<div id="derecha" style="float:left; width:20%;height:40%; margin-left:2em; margin-top: 2em;font-family: Arial, Helvetica, sans-serif;">
+<!-- Letra Imprenta Minúscula -->
+<div style="float:left; font-size:14vw;  top:2vw; margin-top:0;margin-left:2vw  " ><label class="Netiqueta" id="EtiquetaDos">
+	&zwnj;</label></div>
+</div>
+</div>
+
+<!-- Imagen Teclado-->
+<div class="imagencentral" id="CEntroImagen" style="float:left; width:100%;height:70%;text-align:center">
+
+<div  style="position: fixed;margin-bottom: 15vh;height: 15vh; width: 100%;text-align: center;padding: 5vh;bottom: 4vh;">
+  <div id="virtual-keyboard" style="margin-left: -7vw;">
+   
+   <div class="keyboard-row">
+		<a href="#"  class="Lt" id="Q" data="Q">Q</a>
+		<a href="#"  class="Lt" id="W" data="W">W</a>
+		<a href="#"  class="Lt" id="E" data="E">E</a>
+		<a href="#"  class="Lt" id="R" data="R">R</a>
+		<a href="#"  class="Lt" id="T" data="T">T</a>
+		<a href="#"  class="Lt" id="Y" data="Y">Y</a>
+		<a href="#"  class="Lt" id="U" data="U">U</a>
+		<a href="#"  class="Lt" id="I" data="I">I</a>
+		<a href="#"  class="Lt" id="O" data="O">O</a>
+		<a href="#"  class="Lt" id="P" data="P">P</a>
+   </div>
+   <div class="keyboard-row" style="margin-left: 2vw;">
+    <a href="#" id="A" class="Lt" data="A">A</a>
+		<a href="#" id="S" class="Lt" data="S">S</a>
+		<a href="#"  id="D" class="Lt" data="D">D</a>
+		<a href="#"  id="F" class="Lt" style="text-decoration: underline" data="F">F</a>
+		<a href="#"  id="G" class="Lt" data="G">G</a>
+		<a href="#"  id="H" class="Lt" data="H">H</a>
+		<a href="#"  id="J" class="Lt" style="text-decoration: underline" data="J">J</a>
+		<a href="#"  id="K" class="Lt" data="K">K</a>
+		<a href="#"  id="L" class="Lt" data="L">L</a>
+		<a href="#"  id="Ñ" class="Lt" data="Ñ">Ñ</a>
+   </div>
+   <div class="keyboard-row" style="margin-left: -3vw;">
+		<a href="#"  id="Z" class="Lt" data="Z">Z</a>
+		<a href="#"  id="X" class="Lt" data="X">X</a>
+		<a href="#"  id="C" class="Lt" data="C">C</a>
+		<a href="#"  id="V" class="Lt" data="V">V</a>
+		<a href="#"  id="B" class="Lt" data="B">B</a>
+		<a href="#"  id="N" class="Lt" data="N">N</a>
+		<a href="#"  id="M" class="Lt" data="M">M</a>
+   </div>
+
+ </div>
+ <div id="Palabra"></div>
+ </div>
+
+
+</div>
+
+
+<!-- globo -->
+<div  class="label" style="margin-left: 12vw;width: 85vw;"></div>
+<!-- Pequen -->
+<div id="pequenG" class="esperaG"></div>
+
+ <div id="ayudaF1">
+  <ul  style="float:left" id="myList">
+  
+</ul>
+
+ </div>
+ 
+
+<div>BARRA ESPACIADORA REPITE LA LETRA DICTADA</div>
+
+ <div id="progreso">
+<div id="progressBar" class="default">
+
+<div>
+</div>
+<script>progressBar(0, $('#progressBar'));</script> 
+</div>	
+</div>
+
+ <script>
+$(document).ready(function() {
+
+  var miVar2 = setTimeout(function(){ 
+      DeterminaMotor("Sonidos en las letras");
+     // $.getScript("."./../../F1/General" + langB + ".js");         
+     }, 100); 
+
+
+  var miVar3 = setTimeout(function(){     
+  Dictar(); 
+},1000);
+
+});
+
+document.body.addEventListener('keyup', function(e) {
+  if (e.keyCode == 112){
+    Ayuda();
+    return;   
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+  //console.log('keyup:' + e.keyCode + " " + e.key);
+  Tpulsada = e.key.toString().toUpperCase();
+  //console.log(Tpulsada);
+  if (e.keyCode != 112){
+   EvaluaLetra(Tpulsada);
+  }
+});
+
+var comments = document.getElementsByClassName('Lt');
+var numComments = comments.length;
+
+function showComment(e) {
+//console.log($(this).attr('data'));
+Tpulsada = $(this).attr('data');
+EvaluaLetra(Tpulsada);
+}
+
+//for (var i = 0; i < numComments; i++) {
+ // comments[i].addEventListener('click', showComment, false);
+ // comments[i].addEventListener('touchend', showComment, false);
+//}
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+  LeeCGB(Gres.BuscaLetra);  
+}
+
+</script> 
+
+
+</body>
+
+</html>

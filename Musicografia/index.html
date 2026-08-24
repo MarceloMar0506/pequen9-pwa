@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Musicografía Braille</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script>
+<script src="./../pulsador.js"></script>
+
+<style>
+	.menuGrid{
+		position: absolute;
+		top: 2vh;
+	  width: 100vw;
+	  float: left;
+	  display: grid;
+	  grid-template-rows:repeat(3,1fr);
+	  grid-template-columns: repeat(5,1fr);
+	  justify-items: center;
+	  text-align: center;   
+	}
+	.itemS{
+	  font-size: 3vh;     
+	}
+  img{width: 10vh;}
+ 
+ 
+	#titulo3{
+		margin-bottom: 0%;
+		margin-top: 0%;
+	}	
+	.f1 {
+     width: 5vh; 
+     z-index: 100;
+    
+  }   
+</style>
+<script>
+    var nlec =0;
+</script>
+</head>
+
+<body onkeyup="Npulsado(event)" >
+	<div id="contenedor" style="height:100%">
+	<div id="titulo3">
+		<div><span2 id="s10" class="itemS" style="font-size: small;"> <img src="./../ResB/Fiz.png" alt="regresar" style="width: 5vh;"/><br>REGRESAR</span2></div> 
+		<span2 style="text-align: center;line-height: 4vw;font-size: 2vw;">MUSICOGRAFÍA BRAILLE</span2>
+		<div></div>
+		</div>
+<div class="menuGrid">
+<div></div>
+<div>
+<span4 id="P1" class="itemN" onclick="Abre(1)"><img src="./../ResB/Notas.png"/><br><span2 id="s1"  class="itemS">NOTAS</span2></span4></div>
+<div></div>
+<div>
+<span4 id="P2" class="itemN" onclick="Abre(2)"><img src="./../ResB/Figuras.png"/><br><span2 id="s2"  class="itemS">FIGURAS Y SILENCIOS</span2></span4></div>
+<div></div>
+<div>
+<span4 id="P3" class="itemN" onclick="Abre(3)"><img src="./../ResB/RepetB.png"/><br><span2 id="s3"  class="itemS">REPETICIONES</span2></span4></div>
+	<div></div>
+<div>
+<span4 id="P4" class="itemN" onclick="Abre(4)"><img src="./../ResB/Alteracciones.png"/><br><span2 id="s4"  class="itemS">ALTERACIONES</span2></span4>
+</div>
+<div></div>
+<div>
+<span4 id="P5" class="itemN" onclick="Abre(5)"><img src="./../ResB/Octavas.png"/><br><span2 id="s5"  class="itemS">OCTAVAS</span2></span4>
+</div>
+<div></div>
+<div>
+<span4 id="P6" class="itemN" onclick="Abre(6)"><img src="./../ResB/Compas.png"/><br><span2 id="s6"  class="itemS">COMPÁS</span2></span4>
+</div><div></div>
+<div>
+<span4 id="P7" class="itemN" onclick="Abre(7)"><img src="./../ResB/Barras.png"/><br><span2 id="s7"  class="itemS">BARRAS DE COMPÁS</span2></span4></div>
+<div></div>
+<div>
+	<span4 id="P8" class="itemN" onclick="Abre(8)"><img src="./../ResB/LigaduraB.png"/><br><span2 id="s8"  class="itemS">LIGADURAS</span2></span4></div>
+	<div></div>
+	<div>
+		<!-- <span4 id="P10" class="itemN" onclick="Abre('Voz')"><img src="./../ResB/ElSoftware.png"/><br><span2 id="s10"  class="itemS">CONFIGURAR VOZ</span2></span4> -->
+	</div>	
+	<div></div>	
+<span4 id="P9" class="itemN" onclick="Abre(9)"><img src="./../ResB/PracticaM.png"/><br><span2 id="s9"  class="itemS">PRÁCTICAS</span2></span4>
+</div>
+<div>
+</div>	
+</div>
+ <!-- globo -->
+ <div  class="label" style="bottom: 1vh;width: 70vws;margin-left: 15vw; "></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" ></div>
+ </div>
+ 
+<script>
+        function Abre(q)
+        {		
+        if (q == 1)
+          {
+            window.open("./Notas.html","_self");
+          }
+          else if (q == 2)
+          {
+            window.open("./Figuras.html","_self");
+		  }
+		  else if (q == 3)
+          {
+            window.open("./Repeticiones.html","_self");
+		  }
+		  else if (q == 4)
+          {
+            window.open("./Alteraciones.html","_self");
+		  }
+		  else if (q == 5)
+          {
+            window.open("./Octavas.html","_self");
+		  }
+		  else if (q == 6)
+          {
+            window.open("./Compas.html","_self");
+		  }		
+		  else if (q == 7)
+          {
+            window.open("./Barras.html","_self");
+		  }
+		  else if (q == 8)
+          {
+            window.open("./Ligaduras.html","_self");
+		  }
+		  else if (q == 9)
+          {// 1 a 17 A - F
+            window.open("./ListaPracticas.html","_self");
+          }
+		  else if (q == 10)
+          {
+             Regresar();
+		  }
+
+        }
+ ////////////////////////////////////////   
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+
+	if (event.keyCode == 112) {    
+      movil = 0;
+	  //TecladoQ();     
+	  LeeCGB(document.title + ". " + Gres.MenuActividad + ". ");        
+  }
+
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+if (event.keyCode == 27) {Regresar()}
+if (event.keyCode == 13) {
+	Abre(nlec);
+}
+  }
+///Fin tecla pulsada
+function atras(){
+	
+	nlec--;
+	if (nlec < 1){
+	 nlec = 10
+    }
+	p=nlec;
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + nlec).css("background-color", "black");
+    $("#s" + nlec).css("color", "white");
+    Lee($("#P" + nlec).text());
+	
+}
+
+function adelante(){	
+	nlec++;
+	if (nlec > 10){
+	 nlec = 1
+    }
+	p=nlec;	
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + nlec).css("background-color", "black");
+    $("#s" + nlec).css("color", "white");
+    Lee($("#P" + nlec).text());	
+}
+function Regresar()
+  {
+     window.open( "../AppBraille/index.html","_self"); 
+  }
+
+  function AyudaM()
+{ 
+
+  LeeCGB(document.title + ". Seleccionar una actividad " );
+}
+
+$(document).ready(function() {
+    
+	// var mensaje =   "Musicografía Braille.  Si usa lector de pantalla silenciarlo y  usar esta aplicación con un teclado qwerty. Con teclas de dirección seleccionar una opción y luego pulsar enter";   
+    // DeterminaMotor(mensaje);            
+	var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){           
+           var  mensaje2 = document.title + ". con pulsador recorrer el menú. para ingresar a una opción mantener pulsado por unos segundos " ;
+            DeterminaMotor(mensaje2);  
+          }
+          else{
+            var mensaje= document.title + ". "  + Gres.MenuActividad;            
+            DeterminaMotor(mensaje);  
+          }
+
+    document.title="Musicografía Braille Pequén"
+
+  });  
+
+
+
+var nlec = 0;
+var p =0;
+		var xPosVie = 0;
+		var yPosVie;
+		var xPosNew;
+		var yPosNew;
+		var DifX = 0;
+		var DifY = 0;
+
+		$(document).on("touchstart mousedown", function (e) {
+
+			xPosVie = 0;
+			yPosVie = 0;
+			var touchstart = e.type === 'touchstart',
+
+				e = touchstart ? e.originalEvent : e,
+				pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+				pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+
+			xPosVie = pageX;
+			yPosVie = pageY;
+			//////console.log(xPosVie);
+		});
+
+		$(document).on("mousemove touchmove", function (e) {
+			xPosNew = 0;
+			yPosNew = 0;
+			var touchstart = e.type === 'touchmove',
+				e = touchstart ? e.originalEvent : e,
+				pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+				pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+			xPosNew = pageX;
+			yPosNew = pageY;
+		});
+
+		$(document).on("touchend mouseup", function (e) {
+
+			if (e.target.className == "itemL") {
+				nlec = e.target.id;
+				ingresa();
+				return;
+			}
+			if (e.target.className === 'f1') { return }
+			if (e.target.className === 'esc') { return }
+
+			DifX = xPosNew - xPosVie;
+
+			////console.log(xPosNew);
+			//arrastró a la derecha
+			if (DifX > 200) {
+				////console.log( DifX + " derecha " + nlec );
+				adelante();
+			}
+
+			if (DifX < -200) {
+				////console.log(DifX + " izquierda " + nlec);
+				atras();
+			}
+
+			if (DifY > 100) {
+
+				//  ////console.log(" Baja #L"+ Quien + Opcion);
+
+
+				return;
+			}
+
+			if (DifY < -100) {
+
+				////console.log(DifY + " Sube #L"+ Quien + Opcion);
+
+
+
+				return;
+			}
+			return;
+
+		});
+
+   
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+.gridPlantillaED {
+    display: grid;   
+    grid-template-columns: 30%;
+    grid-column-gap: 0%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30%; 
+    }

@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head> 
+<title>Braille Pequén</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="theme-color" content="#E8FFCC">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#E8FFCC">
+
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<link rel="apple-touch-icon" href="./../ResB/icon/android/android-launchericon-192-192.png">
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script>
+<script src="./../pulsador.js"></script>
+
+<script>
+    var nlec =0;
+
+ </script> 
+ <style>
+.circulo { 
+  width: 100%;
+      float: left;
+      display: grid; 
+      justify-items: center;  
+      grid-template-columns: 1fr 1fr 1fr;      
+      justify-content: center; 
+  height: 60vh;  
+  margin-top:20vh;
+  top: 16vh;
+}
+	.circulo a.itemM {
+		display: block;
+		text-decoration: none;
+		border-radius: 100%;		
+		text-align: center;		
+    height:10vh;		
+		color:black;
+		padding:0.5vh;
+		font-size: 3vh;	
+		transition:all 0.5s;
+		-moz-transition:all 0.5s;
+		-webkit-transition:all 0.5s;
+		-o-transition:all 0.5s;          
+	}
+
+  img{width: 30vh;}
+  
+  .f1 {
+     width: 5vh; 
+     z-index: 70;
+    
+  }
+ 
+
+ </style>
+
+
+</head>
+
+<body  >
+  
+<div id="contenedor">
+
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+    <div><span2 id="s4" class="itemS" style="font-size: small;"> <img src="./../ResB/Fiz.png" alt="regresar" style="width: 5vh;"/><br>REGRESAR</span2></div>
+    <div></div>     
+    <div ></div>
+  </div>
+
+  <div class="circulo" >
+   
+   <div style="display: contents;text-align: center;">
+    <a  style="top:5vh;" id="L1" class="itemM"><img src="./../ResB/Integral.png"/><br><span2 id="s1" class="itemS">BRAILLE INTEGRAL</span2></a>  
+  </div>
+  
+  <div style="display: contents;text-align: center;">
+    <a  style="left: 40%;top:5vh;" id="L2" class="itemM"><img src="./../ResB/Estenografico.png"/><br><span2 id="s2"  class="itemS">ESTENOGRAFÍA BRAILLE</span2></a>  
+  </div>  
+
+  <div style="display: contents;text-align: center;">
+    <a  style="left: 40%;top:5vh;" id="L3" class="itemM"><img src="./../ResB/Musica.png"/><br><span2 id="s3"  class="itemS">MUSICOGRAFÍA BRAILLE</span2></a>  
+  </div>  
+
+</div>
+
+</div>
+
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" ></div>
+  <!-- globo -->
+  <div  class="label" style="bottom: 12%; z-index: 170;"></div>
+ <p></p>
+ 
+ <script>
+  $(document).ready(function() {   
+       // DeterminaMotor(document.title + ". "  + Gres.MenuActividad);               
+       	
+  var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 = document.title + ". "  + Gres.MenuActividadP;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje= document.title + ". "  + Gres.MenuActividad;
+            DeterminaMotor(mensaje);  
+     }
+
+  });  
+  function SinMouse(){
+    LeeCGB(Gres.SinMouse);
+  }
+  
+  function Abre(n)
+  { 
+    if (n ==1){
+     window.open("./Integral/index.html","_self"); 
+    }
+    else if (n==2){
+     window.open("./Estenografia/index.html","_self");
+     }
+    else if (n==3){
+     window.open("../Musicografia/index.html","_self");
+     }
+     else if (n==4){
+      Regresar();
+     }
+  }
+  
+  var s, p=0;
+  
+  
+  function test(s) {
+  
+  d=document.getElementById('s'+ s);
+  if(d === null || typeof d === 'undefined'){
+      return;}
+  //d.focus();
+  //console.log(s);
+  var dice = d.innerText;
+  Lee(dice.toLowerCase() );
+  $(".itemS").css({"background-color": "white"});
+  $(".itemS").css({"color": "black"});
+  $(d).css({"background-color": "black"});
+  $(d).css({"color": "white"});
+  p=s;
+  }
+  
+  function adelante(){
+     p++;
+     if (p > 4) {p=1 }
+     test(p)
+  }
+  
+  function prev() {
+    p--;
+    if (p < 0) {p=4} 
+    test(p)
+  }
+  
+  document.onkeyup=function(e) {
+  //e.preventDefault();
+  
+  
+  e = e || window.event;
+  if (e.keyCode == 112) { 
+    movil = 0; 
+    //TecladoQ();
+    Ayuda();
+  }
+   
+  //console.log(e.keyCode); 
+
+  if (e.keyCode == 37) {prev()}
+  if (e.keyCode == 38) {prev()}
+  if (e.keyCode == 39) {adelante()}
+  if (e.keyCode == 40) {adelante()}
+  if (e.keyCode == 27) {Cerrar()}
+  if (e.keyCode == 13) {
+     //console.log(p);
+     Abre(p)
+  }
+  
+  return;
+  }
+ // test(p);
+
+  function Cerrar(){
+    window.open("../index.html","_self"); 
+}
+  
+  function Regresar()
+  {
+     window.open( "../index.html","_self"); 
+  }
+  function Ayuda()
+  {
+    LeeCGB(document.title + ". "  + Gres.MenuActividad);  
+  }   
+  </script> 
+  </body>
+  </html>
+  

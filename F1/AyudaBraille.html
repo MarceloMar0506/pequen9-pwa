@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Información sobre Pequén</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../ResB/favico.png" sizes="32x32"/>
+<link href="../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../ResB/Habla.js"></script>
+<script type="text/javascript" src="../ResB/AnimP.js"></script>
+<script src="../F1/Generales.js"></script>
+<script src="./../pulsador.js"></script>
+<script>
+    var p =0;
+</script>
+<style>
+    .menuGrid{
+     width: 100vw;
+     float: left;
+     display: grid;
+     grid-template-rows: repeat(3,1fr);
+     grid-template-columns: repeat(3,1fr);
+     justify-items: center;
+     text-align: center;   
+   }
+   .itemS{
+     font-size: 3vh;     
+   }
+   .im{
+    width: 30%;
+  } 
+
+
+  img{width: 20vh;}
+  .f1 {
+     width: 5vh; 
+     z-index: 100;
+    
+  }
+  .imgA{
+    display: none;
+    position: fixed;
+    top: 1vh;
+    left: 0;
+    width: 100vw;
+  }
+  a, a:visited{
+     color: black;
+}
+#imgAyudaPz{
+  width: 30vw;
+}
+</style>
+</head>
+
+<body onkeyup="Npulsado(event)" >
+  
+  <div class="AyudaV"></div> 
+    <img class="imgA" id="imgAyudaFJ" src="../ResB/qwertyFJ.png" alt=""/>
+    <img class="imgA" id="imgAyudaCN" src="../ResB/qwertyCN.png" alt=""/> 
+    <img class="imgA" id="imgAyudaPZ" src="../ResB/PizarraTN.png" alt=""/> 
+    <img class="imgA" id="imgTactil" src="../ResB/qwertyAdaptadoConS.png" alt=""/> 
+  </div>
+
+  <div id="contenedor">
+
+    <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+      <div><span2 id="s5" class="itemS" style="font-size: small;"> <img src="../ResB/Fiz.png" alt="regresar" style="width: 5vh;"/><br>REGRESAR</span2></div> 
+      <div ></div>
+      <div ></div>
+      </div>
+
+
+    <!-- <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+      <div ></div> 
+    <span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+    <div ></div>
+    </div> -->
+
+  <div class="menuGrid">
+    <div></div>
+  <div>
+    <span4 id="P1"><img src="../ResB/ElSoftware.png"/><br><span2 id="s1"  class="itemS">APLICACIONES <br>BRAILLE PEQUÉN</span2></span4>
+  </div>
+  <div></div>
+  <div>
+    <span4 id="P2" class="itemN"><img src="../ResB/Tvirtual.png"/><br><span2 id="s2"  class="itemS">TECLADO VIRTUAL</span2></span4>
+  </div>
+  <div></div>
+  <div>
+    <span4 id="P3" class="itemN"><img src="../ResB/PizarraP.png"/><br><span2 id="s3"  class="itemS">PIZARRA VIRTUAL</span2></span4> 
+  </div>
+  <div></div>
+  <div>
+     <span4 id="P4" class="itemN"><img src="../ResB/BTacto.png"/><br><span2 id="s4" class="itemS">LECTURA AL TACTO</span2></span4> 
+  </div>
+ 
+</div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+  <!-- globo -->
+  <div  class="label" style="width: 70vw;margin-left: 15vw;"></div>
+
+
+
+ 
+<script>
+
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+if (keyCode == 112) {
+   // $.getScript("../F1/Generales.js", function(){
+      movil = 0;
+      //TecladoQ();
+      $(".AyudaV").css("display","none");
+      AyudaM();
+   // });
+  }
+
+if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+
+
+if (event.keyCode == 13)
+{
+  if (p == 1)
+  {LeeCGB(Gres.PBraille)}
+  if (p == 2)
+  {LeeCGB(Gres.TVBraille)}
+  if (p == 4)
+  {LeeCGB(Gres.Ltacto)}
+  if (p == 3)
+  {LeeCGB(Gres.Pizarra)}
+ 
+
+}
+
+  }
+///Fin tecla pulsada
+function atras(){
+	
+  $("#imgTactil").css("display","none");
+  $("#imgAyudaPZ").css("display","none");
+  $("#imgAyudaCN").css("display","none");
+  $("#imgAyudaFJ").css("display","none");  
+  $(".AyudaV").css("display","none"); 
+	
+	p--;
+	if (p < 1){
+	 p = 5;
+    }
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+    $("#s"+p).css({"background-color": "black"});
+    $("#s"+p).css({"color": "white"});
+    Lee($("#P" + p).text());
+	
+}
+
+function adelante(){
+
+  $("#imgTactil").css("display","none");
+  $("#imgAyudaPZ").css("display","none");
+  $("#imgAyudaCN").css("display","none");
+  $("#imgAyudaFJ").css("display","none");  
+  $(".AyudaV").css("display","none"); 
+	
+	p++;
+	if (p > 5){
+	 p = 1
+    }
+    $(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});
+    $("#s"+p).css({"background-color": "black"});
+    $("#s"+p).css({"color": "white"});
+    Lee($("#s" + p).text());
+   
+	
+}
+
+function AyudaM()
+      {
+        LeeCGB(document.title + ". "  + Gres.MenuOpcion);
+      }
+function LAyuda(q)
+{
+  if (q == 'aplicacion')
+  {LeeCGB(Gres.PBraille)}
+  if (q == 'tecladoB')
+  {LeeCGB(Gres.TVBraille)}
+  if (q == 'Pizarra')
+  {LeeCGB(Gres.Pizarra)}
+  if (q == 'tacto')
+  {LeeCGB(Gres.Ltacto)}
+
+}
+
+function Regresar()
+      {
+        window.open("./Ayuda.html","_self");
+      }
+   
+  $(document).ready(function() {
+  
+    //DeterminaMotor("Menú Ayuda Braille Pequén. " +  Gres.MenuOpcion);
+    var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 ="Menú ayuda braille Pequén. "  + Gres.MenuActividadP;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje=  "Menú ayuda braille Pequén. "  + Gres.MenuActividad;
+            DeterminaMotor(mensaje);  
+     }
+ 
+});
+function Mail()
+{window.open('mailto:?subject=App Braille Pequén&body=https://www.pequen.info/Pequen6/');}
+
+
+function Abre(n)
+          { 
+            if (n ==1){
+              LeeCGB(Gres.PBraille);
+            }
+            else if (n==2){
+              LeeCGB(Gres.TecladoQ)
+             }
+            else if (n==3){
+             // window.open("../F1/AyudaBraille.html","_self");
+             }    
+             else if (n==4){
+             }   
+             else if (n==5){
+             Regresar();
+             }   
+                 
+          }
+
+
+  </script>
+
+
+</body>
+
+</html>

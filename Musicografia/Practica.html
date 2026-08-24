@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <title>Práctica</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+ 
+  
+  <meta content="Capacitación de Mediadores Tecnológicos Digitales" name="SUBJECT" />
+  <meta content="Educación" name="RATING" />
+  <meta content="Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+  <meta
+    content="Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora"
+    name="ABSTRACT" />
+  <meta
+    content="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual"
+    name="KEYWORDS" />
+  <link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32" />
+
+
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+ 
+  
+  <link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+  <script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script> 
+  <script src="./../ResB/Idb-Keyval.js"></script>  
+
+
+  <script type="text/javascript" src="./../ResB/Habla.js"></script> 
+
+  <script type="text/javascript" src="./../ResB/AnimP.js"></script>
+  <script type="text/javascript" src="./DictaP.js"> </script>
+  <script src="./EvaluaMelodia.js"></script>
+  <script src="./../F1/Practicaes.js"></script>
+  <script src="./ImprMusic.js"></script>
+  <script src="./print.js"></script>
+  <script src="./piano.js"></script>
+  <script src="./BraToPeq.js"></script>
+  <script src="./../ResB/Tone.js"></script> 
+  <script>
+    var audio = document.createElement('audio');
+    var LeccionActual = 0;
+    var Indexletra = 0;
+    var IndexPalabra = 0;
+    var pulsada = "";
+    var contenidoP = "";
+    var cadena = "";
+    var compasActual = 1;
+    var xAnterior =0;
+    var xActual = 0;
+    var nuevaCadena ="";
+    var anterior=0;
+    var indiceNota =0;
+    var cadenaSuena="";
+
+
+
+    </script>
+    <style>
+  body{
+    font-family: 'Courier New', Courier, monospace; 
+  }
+#titulo3{
+  justify-items: center;  
+}
+
+
+#PieInfo{    
+    position: absolute;   
+    bottom: 0;
+    right: 1vw;
+    width: 30vw;
+    height: 20vh;
+    padding: 1vw;    
+    margin-left: 1vw;
+    font-size: 2vw;
+  }
+   /* .grid{
+   position: absolute;
+  } */
+.gridPlantilla{
+  grid-template-columns: 1fr;
+  width: 45vw;
+  /* position: absolute; */
+  top: 5vh;
+}
+  
+  #espacio{
+    text-align: center;  
+    margin-top: 4vh;
+    background-color: white;  
+    border-radius: 5px;
+    grid-area: 4 / 1 / 4 / 3;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: small;   
+  }
+  
+  .box{z-index:40}
+  .separador{
+    padding: 10vh;
+  }
+  #pass{
+    font-size: xx-large;  
+    text-transform: uppercase;
+  }
+  #letra{
+    font-size: 10vw;
+  }
+    </style>
+   
+</head>
+
+<body onkeydown="pulsado(event)" >
+<div id="contenedor"> 
+   <div id="titulo3">
+		 <div class="esc" style="visibility: hidden;"  ontouchend="Regresar()" onclick="Regresar()"><img src="./../ResB/FizR.png" alt="regresar"></div>         
+    <div id="pass"></div>  
+	<div></div>
+    </div>    
+  <!-- Teclado Pulsado -->
+ <div class="grid">
+    <div style="line-height: 0.5;margin-left: 6vw; line-height:0.5;" id="letra">.</div>
+  
+    <div class="gridPlantilla">   
+    <!--  <div id="Sgenerador"> -->
+    <div id="Primerac" class="teclasE">
+    <elem class="box" id="box1" onclick="punto('1')" >1</elem>
+    <elem class="box" id="box4" onclick="punto('4')" >4</elem> 
+    <elem class="box" id="box2" onclick="punto('2')" >2</elem>     
+    <elem class="box" id="box5" onclick="punto('5')" >5</elem> 
+    <elem class="box" id="box3" onclick="punto('3')" >3</elem>   
+    <elem class="box" id="box6" onclick="punto('6')" >6</elem>            
+    </div>
+
+    <div id="Segundac" class="teclasE" style="display: none;">
+      <elem class="box" id="box01" onclick="punto2('1')">1</elem>	
+      <elem class="box" id="box04" onclick="punto2('4')">4</elem> 
+      <elem class="box" id="box02" onclick="punto2('2')">2</elem>
+      <elem class="box" id="box05" onclick="punto2('5')">5</elem>
+      <elem class="box" id="box03" onclick="punto2('3')">3</elem>
+      <elem class="box" id="box06" onclick="punto2('6')">6</elem>
+      </div>
+  
+      <div id="Tercerac" class="teclasE" style="display: none;">
+      <elem class="box" id="box001" onclick="punto3('1')">1</elem>	
+      <elem class="box" id="box004" onclick="punto3('4')">4</elem> 
+      <elem class="box" id="box002" onclick="punto3('2')">2</elem>
+      <elem class="box" id="box005" onclick="punto3('5')">5</elem>
+      <elem class="box" id="box003" onclick="punto3('3')">3</elem>
+      <elem class="box" id="box006" onclick="punto3('6')">6</elem>
+      </div>
+    </div> 
+
+    <div style="position: absolute; right: 0;">
+      <img id="FiguraImg" src="./../ResB/Nada.png" style="width: 24vw; margin-right: 4vw;"></span2><br>
+      <span2 id="EtiquetaDosTexto" style="margin-bottom: 25vw;font-size: 10vw;"></span2> 
+    </div>
+    <!-- //segunda fila -->
+    <!-- <div></div> -->
+    <div id="separador">&nbsp; </div>
+    <div id="separador">&nbsp; </div>
+    <div> <button  style="visibility: hidden;" onclick="espacio()" id="espacio" >ESPACIO</button> </div>
+    <div></div>
+
+  </div>
+
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+   </div>
+
+    <div class=grid2>
+  
+
+    <!-- <div id="ettexto" style="text-align:center;width:100%; height: 6vw;"> -->
+       <label id="EtiquetaInicio" style="display: none; text-align:center;width:100%; font-size:3vw;border-bottom:0;"></label>
+    </div>
+    <div id="ayudaF1" style="width:100%;z-index:4;background-color:white">  
+    </div>
+    <div id="progreso">
+      <div id="progressBar" class="default">
+        <div>
+        </div>
+       
+      </div>
+    </div>
+    <button  style="visibility: hidden;"  id="Smelodia" onclick="piano()">Melodia</button>  
+
+  <div id="PieInfo" style="text-align: right;" > 
+ <!-- <button style="background-color: cornflowerblue;margin-top: 10vh;font-size: 3vh;" onclick="Imprime()">Imprimir en Braille</button> -->
+</div>
+<div id="separador">&nbsp; </div>
+<div id="divImprimir" style="text-align: left;" ></div>
+<div  style="bottom: 90%;border: solid 1px;visibility: hidden" contentEditable="true" id="musica"></div><p></p>
+<!-- globo -->
+   <div  class="label" style="bottom: 1%;margin-left: 15%"></div>
+   <!-- Pequen -->
+   <div id="pequenG" class="esperaG"></div>
+<!-- </div>
+</div> -->
+
+</div>
+
+  <script>
+
+ function Regresar()
+  {   
+     sayTimeout3 = setTimeout(function () {	
+        window.open("./ListaPracticas.html","_self");
+  }, 500);  
+    
+       
+        
+     
+      }
+
+  function pulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+ 
+ 
+
+  if (keyCode == 27)
+  {
+    Regresar();
+    return;
+  }
+	if (keyCode == 112) {    
+	  Ayuda();     	  
+  }
+  
+    }
+function Imprime()
+{
+  ImprimeDiv('divImprimir');
+}
+
+
+function ImprimeDiv(nombreDiv) {
+  var contenido= document.getElementById(nombreDiv).innerHTML;
+  var contenidoOriginal= document.body.innerHTML;
+
+  document.body.innerHTML = contenido;
+
+  window.print();
+
+  document.body.innerHTML = contenidoOriginal;
+}
+
+
+
+function Ayuda()
+    {
+      Lee(Gres.PracticaMusica);
+    }
+
+function AyudaM()
+    {
+      Lee("realiza la práctica con el teclado virtual Braille");              
+    }
+
+    
+function ActualizaUsuLec()
+    {      
+    $('#FiguraImg').attr("src","./../ResB/Nada.png");
+    $("#letra").text('');
+    
+}
+
+$(document).ready(function() {
+        DeterminaMotor("realiza la práctica con el teclado virtual Braille");              
+       
+       
+        // isTouchDevice();
+        valorO = "";
+        notaD = "";
+        error = 0;
+        Elcompas="";
+        Celda = 0;
+        notaD="";
+        Nnota="";
+        tiempo="";
+        fueKUp=false;
+        cuentaSpa = 0;
+        fin = false;
+        var tempo ="0.25";
+    
+        
+sayTimeout = setTimeout(function () {		
+	        if (movil == 1){
+$(".info").html("Ver estado de la Práctica")
+        }
+        else   if (movil == 0){
+$(".info").html("Barra Espaciadora:<br>Estado de la Práctica")
+        }
+        KEY = 'UsuarioActual';
+        get().then(function (value) {
+  UsuarioActual = value;
+        });
+      }, 500); 
+sayTimeout2 = setTimeout(function () {	    
+  KEY = 'Melodia';
+  get().then(function (value) {
+  LeccionActual =(value-1);
+  palabra = eval("Melodia" + LeccionActual);
+  //console.log(LeccionActual + " " + palabra);  
+  $("#pass").html(eval("TituloM"+LeccionActual));  
+   });
+
+  }, 800);
+  sayTimeout3 = setTimeout(function () {	
+    crearImpreso();
+    cargarPartitura();
+    Lpalabras =  eval(palabra.length);
+    DictarPrimera();
+  }, 5000);  
+
+
+
+
+
+ 
+});
+
+// function espacio()
+// {
+//   if (palabra[Dicta] == "Spa"){
+//     evaluaTNota("Spa");
+//   }
+// }
+
+function punto(px){
+  if (fin == true) {return}
+  if (Celda != 0){
+    Lee("completar la celda " + parseInt(Celda + 1));
+  }
+  ////console.log("evalua Primera");  
+           if (palabra[Dicta].substring(0,1)== "C"){ notaD = "DO"}
+            else if (palabra[Dicta].substring(0,1)== "D"){ notaD = "RE"}
+            else if (palabra[Dicta].substring(0,1)== "E"){ notaD = "MI"}
+            else if (palabra[Dicta].substring(0,1)== "F"){ notaD = "FA"}
+            else if (palabra[Dicta].substring(0,1)== "G"){ notaD = "SOL"}
+            else if (palabra[Dicta].substring(0,1)== "A"){ notaD = "LA"}
+            else if (palabra[Dicta].substring(0,1)== "B"){ notaD = "SI"}
+            else if (palabra[Dicta].substring(0,3)== "Sos"){ notaD = "SOSTENIDO"}
+            else if (palabra[Dicta].substring(0,3)== "Vem"){ notaD = "BEMOL"}
+            else if (palabra[Dicta].substring(0,3)== "Vec"){ notaD = "BECUADRO"}
+            else if (palabra[Dicta].substring(0,2)== "Sr"){ notaD = "Sr"}
+            else if (palabra[Dicta].substring(0,2)== "Sb"){ notaD = "Sb"}
+            else if (palabra[Dicta].substring(0,2)== "Sn"){ notaD = "Sn"}
+            else if (palabra[Dicta].substring(0,2)== "Sc"){ notaD = "Sc"}
+        
+            if (palabra[Dicta].substring(3,4) == "r"){ notaD = notaD + "REDONDA"}
+            else if (palabra[Dicta].substring(3,4) == "b"){ notaD = notaD + "BLANCA"}
+            else if (palabra[Dicta].substring(3,4) == "n"){ notaD = notaD + "NEGRA"}
+            else if (palabra[Dicta].substring(3,4) == "c"){ notaD = notaD + "CORCHEA"}
+            else if (palabra[Dicta].substring(0,3) == "lig"){ notaD =  "lig"}
+            else if (palabra[Dicta].substring(0,3) == "pun"){ notaD =  "pun"}
+
+            if (palabra[Dicta].substring(0,1)== "O"){
+              notaD = "N"+ valorO;            
+            }
+
+            if (palabra[Dicta] == "Spa"){
+              Lee("pulsar espacio");
+              return;
+              //notaD = "N"+ valorO;            
+            }
+            if (palabra[Dicta] == "salto"){
+              Lee("pulsar enter");
+              return;
+            }
+            
+
+           console.log(px + " pxxxxxxxxxxxxxxxxxxxxx");     
+
+     $("#box" + px).css("background-color","black");
+     $("#box" + px).css("color","white");
+    
+
+      //No es compas!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+  if (palabra[Dicta].substring(0,6) != "Compas" && palabra[Dicta].substring(0,3) != "bir" && palabra[Dicta].substring(0,3) != "bfr" && palabra[Dicta].substring(0,2) != "lm" ){
+
+    
+    ////console.log( palabra[Dicta].substring(0,6) + " No es compás");
+     //recorrer los puntos siestan pintados poner el valor en numero
+     NuevoNumero = "";
+    // console.log( palabra[Dicta - 1 ] + " ccccccccccc " +  eval(notaD).toString());
+
+     for (let index = 1; index < 7; index++) {       
+       ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+            if (eval(notaD).toString().includes(index) == false )
+            { 
+              console.log("evalua está mal?");             
+              evaluaTNota(NuevoNumero);
+              return;
+            }     
+     }  
+    
+
+    if (NuevoNumero.length == eval(notaD).length)
+      if (NuevoNumero != eval(notaD))
+      {                    
+        console.log("evalua está mal 2222222?");             
+        evaluaTNota(NuevoNumero);
+        return;
+      } 
+  
+      
+    //  if (fueKUp ==true && PrimerS != eval(notaD).toString())
+    //   {
+    //     //console.log("keyUp " + fueKUp + " " +  PrimerS + "<>" + eval(notaD).toString());
+       
+    //    }
+   
+    } //fin del for valida nota  
+
+
+    //console.log(palabra[Dicta - 1]+ " xxxxxxxxxxx " + NuevoNumero + " != " + eval(notaD))
+    // if (NuevoNumero != eval(notaD))
+    //   { 
+//    console.log("evalua bien?");   
+     if (PrimerS != "salto" && PrimerS != "Sb"){  
+      console.log("evalua está mal? 33333333 " + NuevoNumero + " <<<<<<< " + PrimerS); 
+      evaluaTNota(NuevoNumero);
+     }
+   //     return;
+   //   } 
+
+
+
+    }//fin no es compás
+    else if (palabra[Dicta].substring(0,6) == "Compas") {
+      //es compás     
+     ////console.log("es compás");
+      NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+            if (SignoN.toString().includes(index) == false )
+            { 
+              Lee("no es el signo número pulsar '3, 4, 5, 6,'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              }
+
+              return;
+            }     
+     }
+    // ////console.log(NuevoNumero + " es = " + SignoN + " ooo " + SignoN.toString().includes(NuevoNumero));
+        if (NuevoNumero.length == SignoN.length)
+      {      
+        Lee("segunda celda ");
+        Celda = 1;
+        ////console.log("bien");
+        return;
+      }
+
+     if (fueKUp ==true && PrimerS != SignoN.toString())
+      {
+        Lee("no es el signo número pulsar '3, 4, 5, 6,'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              }
+       }
+    } //fin del for valida nota       
+     
+        }
+
+    else if (palabra[Dicta].substring(0,3) == "bir") {
+    //es Barra inicio de repetición
+    barraRiP1();
+
+   // } //fin del for valida bir       
+     
+        }
+   else if (palabra[Dicta].substring(0,3) == "lma") {
+    //ligadura mayor abriendo
+    lmaP1();   
+    }
+    else if (palabra[Dicta].substring(0,3) == "lmc") {
+    //ligadura mayor cerrando
+    lmcP1();   
+    }
+    else if (palabra[Dicta].substring(0,3) == "lmp") {
+    //ligadura de prolongacion
+    lmpP1();   
+    }
+
+
+
+ else if (palabra[Dicta].substring(0,3) == "bfr") {
+    //es Barra fin de 
+   
+    
+    
+      NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+        //console.log(NuevoNumero + ">>>>>>>>>>>>>>>>>>>>> es = " +  bfr[1]  + " oo " + index);
+            if ( bfr[1].toString().includes(index) == false )
+            {
+               for (let index = 1; index < 7; index++) {  
+                 $("#box" + index).css("color","black");
+                 $("#box" + index).css("background-color","white");
+               }
+               Lee("No es 1, 2, 6");
+               return;
+            }  
+          }   
+     }
+    
+        if (NuevoNumero == bir[1])
+      {      
+        Lee("segunda celda ");
+        Celda = 1;
+        ////console.log("bien");
+        return;
+      }
+
+     if (fueKUp ==true && NuevoNumero != bfr[1].toString())
+      {
+        Lee("no es el primer signo de la barra de fin de repetición pulsar '1, 2, 6,'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              }
+              return;
+       }
+
+       DictarNuevaL();   
+   // } //fin del for valida bfr       
+     
+        }
+
+
+
+
+}
+
+function punto2(px){
+  
+  if (Celda != 1){
+    Lee("completar la celda " + parseInt(Celda + 1));
+  }
+// alert("segunda");
+  ////console.log("segunda");
+  //Segunda celda
+     $("#box0" + px).css("background-color","black");
+     $("#box0" + px).css("color","white");
+    //recorrer los puntos si estan pintados poner el valor en numero
+     NuevoNumero = "";
+  if (palabra[Dicta].substring(0,6) == "Compas") {
+      Elcompas =  palabra[Dicta];
+     for (let index = 1; index < 7; index++) {       
+       ////console.log($("#box0" + index).css("background-color") + index);
+       if ($("#box0" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+            if (eval(Elcompas)[1].toString().includes(index) == false )
+            {  
+              let espacioP =  eval(Elcompas)[0].toString().indexOf(" ");
+              ////console.log("error " +  eval(Elcompas)[1].toString() + "  " +  eval(Elcompas)[0].toString().substring(0,espacioP) );
+              var puntos =  eval(Elcompas)[1].toString().split('');
+                puntos = puntos.toString().replace(/,/g,", " );
+
+              Lee("no es el signo " + eval(Elcompas)[0].toString().substring(0,espacioP) + ". pulsar  '" +  puntos + ",'");
+              for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+              }                            
+              return;
+            } 
+           
+     }     
+        if (NuevoNumero.length == eval(Elcompas)[1].length)
+      {  
+        Lee("tercera celda ");
+        PrimerS="";
+        Celda = 2;        
+        return;
+      }    
+     if (fueKUp ==true && PrimerS != eval(Elcompas)[1].toString() && PrimerS !="")
+      {
+        let espacioP =  eval(Elcompas)[0].toString().indexOf(" ");
+              ////console.log("error " +  eval(Elcompas)[1].toString() + "  " +  eval(Elcompas)[0].toString().substring(0,espacioP) );
+              var puntos =  eval(Elcompas)[1].toString().split('');
+                puntos = puntos.toString().replace(/,/g,", " );
+        Lee("no es el signo " + eval(Elcompas)[0].toString().substring(0,espacioP) + ". pulsar  '" +  puntos + ",'");
+              for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+              }
+       }
+
+    } //fin del for valida Compás
+  }
+  else if (palabra[Dicta].substring(0,3) == "bir") {
+    //es Barra inicio de repetición    
+    barraRiP2();
+   }
+   else if (palabra[Dicta].substring(0,3) == "lma") {
+    //fin ligadura mayor abriendo
+    lmaP2();
+   }
+   else if (palabra[Dicta].substring(0,3) == "lmc") {
+   //fin ligadura mayor cerrando
+       lmcP2();
+   }
+   else if (palabra[Dicta].substring(0,3) == "lmp") {
+    //fin ligadura prolongacion
+     lmpP2();
+   }
+
+
+    else if (palabra[Dicta].substring(0,3) == "bfr") {
+    //es Barra inicio de repetición
+    
+      NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box0" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+        //console.log(NuevoNumero + " segunda >>>>>>>>>>>>>>>>>>>>> es = " +  bfr[2]  + " oo " + index);
+            if ( bfr[2].toString().includes(index) == false )
+            {
+               for (let index = 1; index < 7; index++) {  
+                 $("#box0" + index).css("color","black");
+                 $("#box0" + index).css("background-color","white");
+               }
+               Lee("No es 2, 3");
+               return;
+            }  
+          }   
+     }
+    
+     if (NuevoNumero == bfr[2])
+      { 
+        for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              } 
+         $("#Segundac").css("display","none"); 
+         $(".gridPlantilla").css("grid-template-columns","1fr");
+         $(".gridPlantilla").css("grid-column-gap","1vw");
+        $(".gridPlantilla").css("width","32vw"); 
+        Celda = 0;         
+        Dicta++;   
+        DictarNuevaL();
+        return;
+      }
+
+     if (fueKUp ==true && NuevoNumero != bfr[2].toString())
+      {
+        Lee("no es '2, 3' " );
+              for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+              }
+       }
+    }
+    //fin del for valida bfr       
+
+
+
+}
+
+
+
+function punto3(px){
+  
+  if (Celda != 2){
+    Lee("completar la celda " + parseInt(Celda + 1));
+  }  
+  //Tercera celda
+     $("#box00" + px).css("background-color","black");
+     $("#box00" + px).css("color","white");
+    //recorrer los puntos si estan pintados poner el valor en numero
+     NuevoNumero = "";
+      Elcompas =  palabra[Dicta];
+     for (let index = 1; index < 7; index++) {       
+     
+       if ($("#box00" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+            if (eval(Elcompas)[2].toString().includes(index) == false )
+            {  
+              let espacioP =  eval(Elcompas)[0].toString().indexOf(" ");
+              var puntos =  eval(Elcompas)[2].toString().split('');
+                puntos = puntos.toString().replace(/,/g,", " );
+
+              Lee("no es el signo " + eval(Elcompas)[0].toString().substring(espacioP) + ". pulsar  '" +  puntos + ",'");
+             
+              for (let index = 1; index < 7; index++) {  
+                $("#box00" + index).css("color","black");
+                $("#box00" + index).css("background-color","white");
+              }                            
+              return;
+            }     
+     }   
+        if (NuevoNumero.length == eval(Elcompas)[2].length)
+      {  
+        //Lee("bien escribir la tercera celda ");
+        Celda = 0;
+        ////console.log("bien");         
+        $("#Segundac").css("display","none"); 
+        $("#Tercerac").css("display","none"); 
+        $(".gridPlantilla").css("grid-template-columns","1fr");
+        $(".box").css("background-color","white");
+        $(".box").css("color","black");
+        Dicta++;
+        DictarNuevaL();
+        return;
+      
+      }
+      
+     if (fueKUp ==true && PrimerS != eval(Elcompas)[2].toString() && PrimerS !="")
+      {
+        let espacioP =  eval(Elcompas)[0].toString().indexOf(" ");
+              ////console.log("error " +  eval(Elcompas)[1].toString() + "  " +  eval(Elcompas)[0].toString().substring(0,espacioP) );
+              var puntos =  eval(Elcompas)[2].toString().split('');
+                puntos = puntos.toString().replace(/,/g,", " );
+        Lee("no es el signo " + eval(Elcompas)[0].toString().substring(espacioP) + ". pulsar  '" +  puntos + ",'");
+              for (let index = 1; index < 7; index++) {  
+                $("#box00" + index).css("color","black");
+                $("#box00" + index).css("background-color","white");
+              }
+       }
+
+
+
+    } //fin del for valida nota 
+
+}
+function crearImpreso()
+{
+
+  /////  " Crear impreso equivalentes signos braille";
+
+  
+  var valorM = "";
+
+  for (let index = 0; index < eval("Melodia" + LeccionActual).length; index++) {
+   // ////console.log(eval("Melodia" + LeccionActual)[index]); 
+    if (eval("Melodia" + LeccionActual)[index].substring(0,6) == "Compas" )
+    {
+      valorM = eval("Melodia" + LeccionActual)[index];   
+      cadena += "#" +  String.fromCharCode(eval("A" + eval(valorM)[1])) +   String.fromCharCode(eval("A" + eval(valorM)[2]));// + " ";
+    }
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,1) == "O" )
+    {
+      valorM = eval("Melodia" + LeccionActual)[index];     
+      cadena +=  String.fromCharCode(eval("A" + eval(valorM)));
+    }   
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "Sos" )
+    {
+      valorM = "146";     
+      cadena +=  String.fromCharCode(eval("A" + valorM));
+    }   
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "Vem" )
+    {
+      valorM = "126";            
+      cadena += String.fromCharCode(eval("A" + valorM));      
+    }    
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "Vec" )
+    {
+      valorM = "16";     
+      cadena +=   "1";// Becuadro = 1     String.fromCharCode(eval("A" + valorM));
+    }
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "rep" )
+    {
+      valorM = "2356";     
+      cadena += "=";//  String.fromCharCode(eval("A" + valorM));
+    }
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "Sr" )
+    {
+      valorM = "134";     
+      cadena += "m";//  String.fromCharCode(eval("A" + valorM));
+    }
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "Sn" )
+    {
+      valorM = "1236";     
+      cadena += "v";//  String.fromCharCode(eval("A" + valorM));
+    }
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "Sc" )
+    {
+      valorM = "1346";     
+      cadena += "x";//  String.fromCharCode(eval("A" + valorM));
+    }
+    else if (eval("Melodia" + LeccionActual)[index].substring(0,3) == "Sb" )
+    {
+      valorM = "136";     
+      cadena += "u";//  String.fromCharCode(eval("A" + valorM));
+    }  
+   
+
+    else if (eval("Melodia" + LeccionActual)[index]  == "Spa" )
+    {    
+        cadena += " ";     
+    }
+    else if (eval("Melodia" + LeccionActual)[index]  == "salto" )
+    {    
+        cadena += "ç";     
+    }                    
+    else if (eval("Melodia" + LeccionActual)[index]  == "bir" )
+    {    
+        cadena += "2=";         
+      }
+    else if (eval("Melodia" + LeccionActual)[index]  == "bfr" )
+    {    
+        cadena += "2;";     
+    }
+    else if (eval("Melodia" + LeccionActual)[index]  == "lma" )
+    {    
+        cadena += '"b';     
+    }
+    else if (eval("Melodia" + LeccionActual)[index]  == "lmc" )
+    {    
+        cadena += "^;";     
+    }    
+    else if (eval("Melodia" + LeccionActual)[index]  == "lmp" )
+    {    
+        cadena += "'c";     
+    }
+    else if (eval("Melodia" + LeccionActual)[index]  == "lig" )
+    {    
+        cadena += "c";     
+    }
+    else if (eval("Melodia" + LeccionActual)[index]  == "pun" )
+    {    
+        cadena += ".";           
+    }    
+    else if (eval("Melodia" + LeccionActual)[index]  != "Spa" )
+    {
+      valorM = eval("Melodia" + LeccionActual)[index];      
+     try {  
+      Nnota = eval("Melodia" + LeccionActual)[index].substring(0,1);
+      if (Nnota== "C"){ Nnota ="DO" }
+      if (Nnota== "D"){ Nnota ="RE"}
+      if (Nnota== "E"){ Nnota ="MI"}
+      if (Nnota== "F"){ Nnota ="FA"}
+      if (Nnota== "G"){ Nnota ="SOL"}
+      if (Nnota== "A"){ Nnota ="LA"}
+      if (Nnota== "B"){ Nnota ="SI"}
+
+      tiempo ="";
+      tiempo = eval("Melodia" + LeccionActual)[index].substring(3,4); 
+      if (tiempo == "r"){Nnota  = Nnota + "REDONDA"}
+      if (tiempo == "b"){Nnota  = Nnota + "BLANCA"}
+      if (tiempo == "n"){Nnota  = Nnota + "NEGRA"}
+      if (tiempo == "c"){Nnota  = Nnota + "CORCHEA"}
+      cadena +=  String.fromCharCode(eval("A" + eval(Nnota)));
+
+      //console.log(String.fromCharCode(eval("A" + eval(Nnota)) )   + Nnota.toString() +  " ???????");
+
+     } catch (error) {
+        //console.log("error " + valorM);  
+     }
+      
+    }
+
+   
+    
+
+  }
+
+ console.log(cadena);
+ contenidoP = cadena;
+
+  cadena = cadena.replace(/</g, '&lt;');
+  cadena = cadena.split('');
+
+for (let index = 0; index < cadena.length; index++) {
+//console.log("s" + cadena[index] + "s")
+
+
+   if(cadena[index] == 'ç'){
+     // console.log(cadena[index] + " saltaaaa");
+      cadena[index] =  "<br>";
+      cuentaSpa=0;
+    } 
+
+
+  if (cadena[index] == " ")
+  {
+         
+    cuentaSpa++;
+    console.log(cuentaSpa);
+
+     if (LeccionActual == 0 || LeccionActual == 1 ){        
+         cadena[index] =  "<br>";
+      } 
+     
+     else if (cuentaSpa % 4 == 0 && index > 2 && cuentaSpa > 0  ){
+        cadena[index] =  "<br>";
+        console.log(cuentaSpa + " salta");
+      }
+   
+     
+
+
+  }  
+     
+}
+
+cadena = cadena.toString().replace(/,/g , "");
+  $("#divImprimir").html(cadena);
+}
+
+function barraRiP1(){
+ 
+    
+    
+      NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+        //console.log(NuevoNumero + ">>>>>>>>>>>>>>>>>>>>> es = " +  bir[1]  + " oo " + index);
+            if ( bir[1].toString().includes(index) == false )
+            {
+               for (let index = 1; index < 7; index++) {  
+                 $("#box" + index).css("color","black");
+                 $("#box" + index).css("background-color","white");
+               }
+               Lee("No es 1, 2, 6");
+               return;
+            }  
+          }   
+     }
+    
+        if (NuevoNumero == bir[1])
+      {      
+        Lee("segunda celda ");
+        Celda = 1;
+        ////console.log("bien");
+        return;
+      }
+     if (fueKUp ==true && NuevoNumero != bir[1].toString())
+      {
+        Lee("no es  el primer signo de la barra de inicio de repetición pulsar '1, 2, 6,'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              }
+              
+            return;
+
+       }
+
+       DictarNuevaL();
+}
+
+function barraRiP2(){
+  NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box0" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;  
+        //console.log(NuevoNumero + " segunda >>>>>>>>>>>>>>>>>>>>> es = " +  bir[2]  + " oo " + index);
+            if ( bir[2].toString().includes(index) == false )
+            {
+               for (let index = 1; index < 7; index++) {  
+                 $("#box0" + index).css("color","black");
+                 $("#box0" + index).css("background-color","white");
+               }
+             Lee("No es 2, 3, 5, 6");
+               return;
+            }  
+          }   
+     }
+    
+     if (NuevoNumero == bir[2])
+      { 
+        for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              } 
+         $("#Segundac").css("display","none"); 
+         $(".gridPlantilla").css("grid-template-columns","1fr");
+         $(".gridPlantilla").css("grid-column-gap","1vw");
+        $(".gridPlantilla").css("width","32vw"); 
+        Celda = 0;         
+        Dicta++;   
+        DictarNuevaL();
+        return;
+      }
+
+     if (fueKUp ==true && NuevoNumero != bir[2].toString())
+      {
+        Lee("no es '2, 3, 5, 6'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+              }
+       }
+}
+
+
+
+
+function lmaP1(){
+
+ NuevoNumero = "";
+for (let index = 1; index < 7; index++) {       
+ // ////console.log($("#box" + index).css("background-color") + index);
+  if ($("#box" + index).css("background-color")  == "rgb(0, 0, 0)")
+  {
+   NuevoNumero = NuevoNumero + index;     
+       if ( lma[1].toString().includes(index) == false )
+       {
+          for (let index = 1; index < 7; index++) {  
+            $("#box" + index).css("color","black");
+            $("#box" + index).css("background-color","white");
+          }
+          Lee("No es 5, 6");
+          return;
+       }  
+     }   
+}
+
+   if (NuevoNumero == lma[1])
+ {      
+   Lee("segunda celda ");
+   Celda = 1;
+   ////console.log("bien");
+   return;
+ }
+if (fueKUp ==true && NuevoNumero != lma[1].toString())
+ {
+   Lee("no es  el primer signo de la ligadura mayor o de frase abriendo. pulsar '5, 6'" );
+         for (let index = 1; index < 7; index++) {  
+           $("#box" + index).css("color","black");
+           $("#box" + index).css("background-color","white");
+         }
+         
+       return;
+
+  }
+
+ // DictarNuevaL();
+}
+
+
+function lmaP2(){
+  NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box0" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;          
+            if ( lma[2].toString().includes(index) == false )
+            {
+               for (let index = 1; index < 7; index++) {  
+                 $("#box0" + index).css("color","black");
+                 $("#box0" + index).css("background-color","white");
+               }
+             Lee("No es 1, 2");
+               return;
+            }  
+          }   
+     }    
+     if (NuevoNumero == lma[2])
+      { 
+        for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              }       
+        Celda = 0;         
+        Dicta++;   
+        DictarNuevaL();
+        return;
+      }
+
+     if (fueKUp ==true && NuevoNumero != lma[2].toString())
+      {
+        Lee("no es '1, 2'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+              }
+       }
+}
+
+
+
+
+function lmcP1(){
+
+NuevoNumero = "";
+for (let index = 1; index < 7; index++) {       
+// ////console.log($("#box" + index).css("background-color") + index);
+ if ($("#box" + index).css("background-color")  == "rgb(0, 0, 0)")
+ {
+  NuevoNumero = NuevoNumero + index;     
+      if ( lmc[1].toString().includes(index) == false )
+      {
+         for (let index = 1; index < 7; index++) {  
+           $("#box" + index).css("color","black");
+           $("#box" + index).css("background-color","white");
+         }
+         Lee("No es 4, 5");
+         return;
+      }  
+    }   
+}
+
+  if (NuevoNumero == lmc[1])
+{      
+  Lee("segunda celda ");
+  Celda = 1;
+  ////console.log("bien");
+  return;
+}
+if (fueKUp ==true && NuevoNumero != lmc[1].toString())
+{
+  Lee("no es  el primer signo de la ligadura mayor o de frase cerrando. pulsar '4, 5'" );
+        for (let index = 1; index < 7; index++) {  
+          $("#box" + index).css("color","black");
+          $("#box" + index).css("background-color","white");
+        }
+        
+      return;
+
+ }
+
+ //DictarNuevaL();
+}
+
+
+function lmcP2(){
+  NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box0" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;          
+            if ( lmc[2].toString().includes(index) == false )
+            {
+               for (let index = 1; index < 7; index++) {  
+                 $("#box0" + index).css("color","black");
+                 $("#box0" + index).css("background-color","white");
+               }
+             Lee("No es 2, 3");
+               return;
+            }  
+          }   
+     }    
+     if (NuevoNumero == lmc[2])
+      { 
+        for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              }       
+        Celda = 0;         
+        Dicta++;   
+        DictarNuevaL();
+        return;
+      }
+
+     if (fueKUp ==true && NuevoNumero != lmc[2].toString())
+      {
+        Lee("no es '2, 3'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+              }
+       }
+}
+
+
+
+function lmpP1(){
+
+NuevoNumero = "";
+for (let index = 1; index < 7; index++) {       
+// ////console.log($("#box" + index).css("background-color") + index);
+ if ($("#box" + index).css("background-color")  == "rgb(0, 0, 0)")
+ {
+  NuevoNumero = NuevoNumero + index;     
+      if ( lmp[1].toString().includes(index) == false )
+      {
+         for (let index = 1; index < 7; index++) {  
+           $("#box" + index).css("color","black");
+           $("#box" + index).css("background-color","white");
+         }
+         Lee("No es 4");
+         return;
+      }  
+    }   
+}
+
+  if (NuevoNumero == lmp[1])
+{      
+  Lee("segunda celda ");
+  Celda = 1;
+  ////console.log("bien");
+  return;
+}
+if (fueKUp ==true && NuevoNumero != lmp[1].toString())
+{
+  Lee("no es  el primer signo de la ligadura de prolongación. pulsar '4'" );
+        for (let index = 1; index < 7; index++) {  
+          $("#box" + index).css("color","black");
+          $("#box" + index).css("background-color","white");
+        }
+        
+      return;
+
+ }
+
+ //DictarNuevaL();
+}
+
+
+function lmpP2(){
+  NuevoNumero = "";
+     for (let index = 1; index < 7; index++) {       
+      // ////console.log($("#box" + index).css("background-color") + index);
+       if ($("#box0" + index).css("background-color")  == "rgb(0, 0, 0)")
+       {
+        NuevoNumero = NuevoNumero + index;          
+            if ( lmp[2].toString().includes(index) == false )
+            {
+               for (let index = 1; index < 7; index++) {  
+                 $("#box0" + index).css("color","black");
+                 $("#box0" + index).css("background-color","white");
+               }
+             Lee("No es 1, 4");
+               return;
+            }  
+          }   
+     }    
+     if (NuevoNumero == lmp[2])
+      { 
+        for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+                $("#box" + index).css("color","black");
+                $("#box" + index).css("background-color","white");
+              }       
+        Celda = 0;         
+        Dicta++;   
+        DictarNuevaL();
+        return;
+      }
+
+     if (fueKUp ==true && NuevoNumero != lmp[2].toString())
+      {
+        Lee("no es '1, 4'" );
+              for (let index = 1; index < 7; index++) {  
+                $("#box0" + index).css("color","black");
+                $("#box0" + index).css("background-color","white");
+              }
+       }
+}
+
+function cargarPartitura(){
+
+  // var contenido = "";
+   var partitura = []; 
+  // for(var linea of lineas) {
+  //  // console.log('[linea]', linea);
+  //   contenido += linea + " "  ; 
+  // }
+
+//  $("#pass").text(contenidoP);
+//return;
+  palabra="";
+ // cadena = "";
+ console.log(cadena + " carga cadena");
+  nuevaCadena="";
+//  $("#musica").html(palabra); 
+
+  
+  contenidoP =contenidoP.toString().replace(/ /g , "ª");
+  console.log(contenidoP);
+  contenido = contenidoP;
+
+  for (let x = 0; x < contenido.length; x++) {
+    //verificar sostenidos o bemoles en este compas y repetirlos si hay
+    if (contenido[(x)] == "ª" ){
+        xAnterior = xActual; 
+        xActual = x; 
+        var notasActuales = contenido.substring(xAnterior,contenido.indexOf("ª",xAnterior+1) );
+        
+        var indiceBecuadro = notasActuales.indexOf("1");         
+        
+        //repite sostenidos en el compás 
+         var indiceSostenido = notasActuales.indexOf("3");         
+         if (indiceSostenido > -1 && indiceBecuadro == -1){
+            var notaA = notasActuales.substring(indiceSostenido + 1 , indiceSostenido + 2);
+            //console.log("compas actual con sostenido " + compasActual +  " ////  " + notasActuales + " " + notaA);
+            var re = new RegExp(notaA, 'g')    
+            notasActuales= notasActuales.replace(re,"3"+notaA);
+            notasActuales= notasActuales.replace(/33/g,"3");
+           // console.log(compasActual + "<<<<<< " + notasActuales + " >>>>>>>>>>> " +  indiceSostenido + " incide del sostenido " + notaA);
+         }
+
+          //repite Bemoles en el compás
+         var indiceBemol = notasActuales.indexOf("2");         
+         if (indiceBemol > -1 && indiceBecuadro == -1){
+            var notaB = notasActuales.substring(indiceBemol + 1 , indiceBemol + 2);
+         //   console.log("compas actual con Bemol " + compasActual +  " ////  " + notasActuales + " " + notaB);
+            var re = new RegExp(notaB, 'g')    
+            notasActuales= notasActuales.replace(re,"2"+notaB);
+            notasActuales= notasActuales.replace(/22/g,"2");
+
+        //    console.log(compasActual + "<<<<<< " + notasActuales + " >>>>>>>>>>> " +  indiceSostenido + " incide del sostenido " + notaA);
+         }
+         
+         nuevaCadena+=notasActuales;
+         compasActual++;          
+       }
+  }
+nuevaCadena+=contenido.substring(contenido.lastIndexOf("ª"));
+nuevaCadena = nuevaCadena.replace(/ª/g,"");
+//console.log(contenido);
+//console.log(nuevaCadena + " Nueva " + contenido.substring(contenido.lastIndexOf("ª")));
+contenido = nuevaCadena;
+
+  var octava=0;
+  var element="";
+  var elementA="";
+  var elemento = "";
+   var elementoa = "";
+  
+ // console.log(contenido);
+  //contenido =contenido.toString().replace(/ /g , "");
+  for (let x = 0; x < contenido.length; x++) {
+    element = contenido[x].toString();
+  
+   // console.log(notaIndex.indexOf(element) + " <<< " + x);
+
+   try {
+     
+      elementA = contenido[x-1].toString();
+      elemento =  eval("n" + element);  
+      elementoa =  eval("n" + elementA);  
+
+      
+     
+      //si el anterior es nota      
+      if (notaIndex.indexOf(elementoa.charAt(0)) > 0  ){
+         anterior = notaIndex.indexOf(elementoa.charAt(0)); 
+         //console.log(elementoa + " <<<<<<->>>>>>>>>>>>>> " + anterior + " " + elementA);
+      }
+   } catch (error) {
+  //  console.log (elemento + " <<<<<<<<< " +  error + " " + element + " " + elementA + x);
+    anterior = indiceNota;
+   }
+  
+  // console.log(element + " " + x.toString() + "!!!!!!!!!!!!!!!!! >>>>>>>>> " +   elemento);
+   if (element == "'"){
+      partitura[x]="'";
+      octava = 1;     
+    }
+   else if (element == "^"){
+      partitura[x]="^";
+      octava = 2;     
+    }   
+   else if (element == "%"){
+      partitura[x]="%";
+      octava = 3;    
+    } 
+   else if (element == "@"){
+      octava = 4;
+      partitura[x]="@";    
+    }
+    else if (element == "{"){
+      partitura[x]="{";
+      octava = 5;      
+    }    
+    else if (element == '"'){
+      partitura[x]='"';
+      octava = 6;
+    }
+    else if (element == "_"){
+      partitura[x]="_";
+      octava = 7;
+    }
+    else if (element == "."){
+      //puntillo
+      partitura[x]="pun";
+    }
+    else if (element == "m"){      
+      partitura[x]="0r";
+     }
+     else if (element == "u"){    
+      partitura[x]="0b";
+    } 
+    else if (element == "v"){    
+      partitura[x]="0n";
+    }
+    else if (element == "x"){    
+      partitura[x]="0c";
+    }
+
+
+    
+    
+   //              1                  2                  3                  4                 5                  6                  7   
+   if (element != "'"  && element != "^"  && element != "%"  && element != "@" && element != "{"  && element != '"'  && element != '_'  && element != "¿"   && element.trim().length != 0 && element != "." ){
+  //if (notaIndex.indexOf(elemento.charAt(0)) > 0)
+ 
+    try {
+      element = eval("n" + element); 
+    } catch (error) {
+     console.log(element + " ingresa con error!!!!!!!!!!!!");
+   
+    if (element == "="){
+         element = "Fr";//Fa Redonda Fr      
+         elemento = element;
+    }  
+    else if (element == "("){
+         element = "Gr";//Sol Redonda Gr      
+         elemento = element;
+     }
+    else if (element == "!"){
+         element = "Ar";//La Redonda Ar      
+         elemento = element;
+     }     
+    else if (element == ")"){
+         element = "Br";//Si Redonda Br      
+         elemento = element;
+     }       
+    else if (element == '&'){
+         element = "Er";//Mi Redonda Er
+         elemento = element;    
+    }
+    else if (element == "?"){
+         element = "Cn";//Do negra      
+         elemento = element;
+     }         
+    else if (element == ":"){
+         element = "Dn";//Re negra      
+         elemento = element;
+     }   
+     else if (element == "$"){
+         element = "En";//Mi negra      
+         elemento = element;
+     }    
+     else if (element == "}"){
+         element = "Fn";//Fa negra      
+         elemento = element;
+     }  
+     else if (element == "\\"){
+         element = "Gn";//Sol negra      
+         elemento = element;
+     }    
+     else if (element == "["){
+         element = "An";//La negra      
+         elemento = element;
+     }
+     else if (element == "u"){
+         element = " r";//silencio de redonda
+         elemento = element;
+     }      
+
+
+
+   // console.log(element + " ingresa con error!!!!!!!!!!!!");
+   // console.log(element + " cual es el que tira error?? " + elemento + " Error: " + error );  
+     
+    } 
+
+    
+     
+   
+indiceNota = notaIndex.indexOf(elemento.charAt(0));
+
+
+var octavaExplicita = false;
+if (contenido[(x-1)] == "'" || contenido[(x-1)] == "^" || contenido[(x-1)] == "%" || contenido[(x-1)] == "@" || contenido[(x-1)] == "{"  ){
+  octavaExplicita=true;
+}
+//console.log("compas  " + x +  " ////  " + contenido[(x)] + " " + contenido);
+
+
+ if ( element != "Sostenido" &&  element != "Bemol" && element != "Becuadro" && !element.toString().includes("S de")   )
+   {  
+  //  console.log(contenido[(x-1)] + " !== " + contenido[x] + " >>  " +  element + " element ???? " +  octava.toString()  + " ////// " +  anterior + " menor mayor?  " +  indiceNota );
+   if (anterior - indiceNota < - 4    && octavaExplicita == false  ){   
+    
+       //si es bemol
+       if (contenido[(x-1)] == "2"){
+        element= element.charAt(0)+"b"+ (octava  - 1).toString()+ element.substring(1);
+      //
+     }
+     //si es sostenido
+     else if (contenido[(x-1)] == "3"){
+        element= element.charAt(0)+"s"+ (octava  - 1).toString()+ element.substring(1);
+      //  console.log("es sotenido y baja una octava??? "  + anterior - indiceNota < - 4);
+       }else{
+        element= element.charAt(0)+(octava  - 1).toString()+ element.substring(1);          
+       }
+      
+     // console.log(elemento.charAt(0)+(octava -1).toString()+ elemento.substring(1)  + " Armó bien Resta? ????????? " + anterior + "-  " + indiceNota)  ;
+      octava = parseInt(octava - 1);
+      partitura[x]= element; 
+    
+    }
+   else  if (anterior - indiceNota > 4 && octavaExplicita == false ){   
+       
+        //si es bemol
+       if (contenido[(x-1)] == "2"){
+        element= element.charAt(0)+"b"+(octava + 1).toString()+ element.substring(1);
+       }
+      //si es sostenido
+     else if (contenido[(x-1)] == "3"){
+        element= element.charAt(0)+"s"+ (octava  + 1).toString()+ element.substring(1);
+       }else{
+        element= element.charAt(0)+(octava + 1).toString()+ element.substring(1);
+      }
+      //  console.log(anterior + " - " + indiceNota + " > 3 ???? ");
+      //   console.log(elemento.charAt(0)+(octava +1).toString()+ elemento.substring(1)  + " Armó bien Suma ??????????")  ;
+         octava =  parseInt(octava  + 1);
+         partitura[x]= element; 
+      }
+    else{
+
+        //si es bemol
+        if (contenido[(x-1)] == "2"){
+       //   console.log("le pone bemol?????? " + octavaExplicita + " " + (anterior  - indiceNota).toString() + " vale??")
+          element= element.charAt(0)+"b"+ (octava).toString()+ element.substring(1);
+        }
+        //si es sostenido
+       else if (contenido[(x-1)] == "3"){
+        element= element.charAt(0)+"s"+ (octava).toString()+ element.substring(1);
+       }else{
+       // console.log("elemento" + elemento + " ------------------- " + element)
+        element= element.charAt(0)+(octava).toString()+ element.substring(1);
+       }
+
+    partitura[x]= element; 
+    }
+   
+
+  }
+
+
+   if ( contenido[(x)] != "." &&  contenido[(x)] != "'"  && contenido[(x)] != "^"  && contenido[(x)] != "%"  && contenido[(x)] != "@" && contenido[(x)] != "{"  && contenido[(x)] != '"'  && contenido[(x)] != '_'  && contenido[(x)] != "¿"  && contenido[(x)] != "ª" && element.trim().length != 0 && contenido[(x)] !="1" && contenido[(x)] !="2"  && contenido[(x)] != "3"){
+     // console.log("anterior " +elemento.charAt(0) + " " + contenido[(x)]  );
+     // anterior=  notaIndex.indexOf(elemento.charAt(0));
+     }
+
+    } 
+    else if (element.trim() == "ª"){        
+        partitura[x]= "Spa"; 
+    }else if (element == "¿"){
+        element = "Salto";
+        partitura[x]= element; 
+    }     
+    
+  }
+  console.log(partitura);
+  var filtrados = partitura.filter(item => item != ' ' && item != "Sostenido"   && item != "Bemol" && item != "'"  && item != "^"  && item != "%"  && item != "@" && item != "{" && item != "%3" && item != "%2"  && item != "@4" && item != "^2" && item != "{5" );
+  cadena = filtrados;
+
+  palabra = eval("Melodia" + LeccionActual + "E");
+
+  //puntillo
+  palabra = palabra.toString().replace(/c,pun/g , "=");
+  palabra = palabra.toString().replace(/n,pun/g , "-");
+  palabra = palabra.toString().replace(/b,pun/g , ":");
+  palabra = palabra.toString().replace(/r,pun/g , ".");
+
+  //Silencio de redonda
+  //palabra = palabra.toString().replace(/u,pun/g , " r");
+  
+  cadenaSuena = cadena;
+
+ // palabra = eval("Melodia" + LeccionActual + "E");
+ 
+//si hay un salto Enter es por que está el Compás y no hay que mostrarlo en Musica
+ if (cadena.indexOf("ç")> -1){
+  let desde = cadena.indexOf('ç') + 3; 
+  cadenaSuena = cadena.substring(desde);
+}
+ // console.log(palabra);  
+ 
+ $("#musica").text(palabra);  
+
+}
+
+function playSound(){
+  if (controlAudio == "con" ) {
+    rutaAudio = "./../ResB/Ding.mp3"
+    audio.src =  rutaAudio;
+    audio.load();       
+   audio.play();
+  }
+}  
+
+</script>
+  </body>
+  </html>
+  

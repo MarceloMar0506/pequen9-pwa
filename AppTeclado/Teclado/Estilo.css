@@ -1,0 +1,329 @@
+﻿@media only screen and (orientation:portrait){
+  body {
+    width: 100%;
+    height: auto;
+    transform: rotate(90deg);
+  }
+}
+
+html, body {
+    transition-property: opacity, left, top, height;
+    transition-duration: 2s, 2s;
+    transition: background-color 2s ease;
+}
+
+
+#mimg
+{
+  width: 30vh;
+ 
+}
+
+
+#pie{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;
+
+  
+}
+
+#EtiquetaDos
+{
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;	
+}
+
+#EtiquetaUnoTexto
+{
+/*text-transform:uppercase;*/
+font-size:8vw;
+font-weight: bold;
+}
+
+#EtiquetaUno
+{
+text-transform:uppercase;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+}
+
+#EtiquetaDos
+{
+text-transform:lowercase;
+}
+
+
+
+#formulario
+{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;  
+
+top: -999em;
+}
+
+
+#ayudaF1 {
+  display:none
+}
+
+#Pie {
+    
+     text-align:right;
+     width:90%;
+      /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+     position:fixed;
+     bottom:0;
+     padding:1vw;
+     font-size:1vw;
+}
+
+#F1
+{
+/* float:left;
+width:100%; */
+text-decoration:underline;
+cursor:pointer;
+/* text-align:center; */
+bottom:0%;
+	
+}
+.BotonesNav
+{
+    
+    position:fixed;
+    cursor:pointer;
+    text-decoration: none;
+    text-transform:uppercase;
+    padding: 0.3vw;
+    font-size: 1.5vw;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 16px;
+    border: 2px solid #0016b0;
+    width:5%;
+    margin-left:2%;
+margin-right:0;
+margin-bottom:0.3vw;
+padding-left:0;
+padding-right:0;
+display:block;
+text-align:center;
+   
+	
+}
+.grid {
+  display: grid;
+   justify-items: stretch;
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr; 
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+  justify-content: center;
+  align-items: center;  
+ }
+ .TecladoTodo{
+  position: fixed;
+  bottom: 3vh;
+  display: grid;
+  width: 80vw;
+  height: 30vh;
+  margin-left: 10vw;
+  justify-items: stretch;
+  grid-template-columns:  1fr; 
+  grid-template-rows: repeat(4, 1fr); 
+  grid-column-gap: 3px; 
+  justify-content: center;
+  align-items: center; 
+
+ }
+ .TecladoQ {  
+  display: grid;
+  width: 80vw; 
+  margin-left: 10vw;
+  justify-items: stretch;
+  grid-template-columns: repeat(10, 1fr);  
+  grid-column-gap: 3px; 
+  justify-content: center;
+  align-items: center; 
+ }
+
+ .TecladoQ2 { 
+  display: grid;
+  width: 80vw;  
+  margin-left: 15vw;
+  justify-items: stretch;
+  grid-template-columns: repeat(10, 1fr);  
+  grid-column-gap: 3px; 
+  justify-content: center;
+  align-items: center; 
+ }
+
+
+ .TecladoQ3 { 
+  display: grid;
+  width: 80vw;
+  margin-left: 20vw;
+  justify-items: stretch;
+  grid-template-columns: repeat(10, 1fr);   
+  grid-column-gap: 3px; 
+  justify-content: center;
+  align-items: center; 
+ }
+
+ .TecladoBarraFlechas{  
+  display: grid;
+  width: 60vw; 
+  margin-left: 20vw;
+  justify-items: stretch;
+  grid-template-columns:  0.1fr 0.1fr 0.1fr 0.1fr; 
+  grid-template-rows: repeat(3, 1fr); 
+  grid-column-gap: 3px; 
+  justify-content: center;
+  align-items: center; 
+
+ }
+
+
+
+ .TecladoQ  a {
+  text-transform: uppercase;;
+  font-family: Arial;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 0.5vw;    
+  color:#020202;
+  text-align: center;
+  margin-right: 1vw;
+  margin-bottom: 0.5vw;    
+  justify-content: center;
+  align-items: stretch;
+  border: solid 2px blue;
+  font-size: 1vw;
+}
+.TecladoQ2  a {
+  text-transform: uppercase;;
+  font-family: Arial;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 0.5vw;    
+  color:#020202;
+  text-align: center;
+  margin-right: 1vw;
+  margin-bottom: 0.5vw;    
+  justify-content: center;
+  align-items: stretch;
+  border: solid 2px blue;
+  font-size: 1vw;
+}
+.TecladoQ3  a {
+  text-transform: uppercase;;
+  font-family: Arial;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 0.5vw;    
+  color:#020202;
+  text-align: center;
+  margin-right: 1vw;
+  margin-bottom: 0.5vw;    
+  justify-content: center;
+  align-items: stretch;
+  border: solid 2px blue;
+  font-size: 1vw;
+}
+
+
+#Enter{
+  height: 20vh;
+  margin-top: 7vh;
+  grid-column: 11 / 12;
+  grid-row: 1 / 3;  
+  font-size: 3vh;
+  /* line-height: 6vh; */
+}
+
+#Barra{ 
+  text-transform: uppercase;;
+  font-family: Arial;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 0.5vw;    
+  color:#020202;
+  text-align: center;
+  margin-right: 1vw;
+  margin-bottom: 0.5vw;    
+  justify-content: center;
+  align-items: stretch;
+  border: solid 2px blue;
+  font-size: 1vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+ @font-face {
+  font-family: "Kunstler-Script";
+  src: url("./Kunstler Script.ttf");     
+}
+.capitalise
+{
+    text-transform:capitalize;
+    font-weight: bold;
+}
+.capital
+{
+    text-transform:uppercase;
+}
+#Viz, #Vde, #Ab, #Arr {
+  font-size: 3vh;
+  color: #0016b0;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  padding: 0.2vw;    
+  color:#020202;
+  text-align: center;
+  margin-right: 1vw;
+  margin-bottom: 0.5vw;    
+  justify-content: center;
+  align-items: stretch;
+  border: solid 2px blue;
+}
+#suena{
+  visibility:hidden;
+}
+#tri {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  float: left;
+  display: grid; 
+  justify-items: center;  
+  grid-template-columns: 10% 45% 10%;      
+  justify-content: center; 
+  font-size: 30vh;
+  }

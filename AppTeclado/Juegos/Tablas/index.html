@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ES">
+
+<head>
+<title>Juego de Tablas</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<link href="Estilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../../ResB/jQuery v1.7.2.js"></script>
+<!-- <script type="text/javascript" src="./../../../ResB/jQuery UI 1.8.17.js"></script> -->
+<script type="text/javascript" src="./../../../ResB/jquery.ui.touch-punch.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+
+<script type="text/javascript" src="./../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="./../../../F1/Generales.js"></script>
+<script>
+  pulsada = false;
+  var aud;
+  var reproduciendo =false;
+</script>
+
+</head>
+
+<body style="background-image: url('./../../../ResB/FondoEsc.jpg'); background-repeat: no-repeat;  background-position: center;">
+
+  <div id="contenedor">
+  <div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+		<div></div> 
+		<span2 style="text-align: center;line-height: 15vh;font-size: 15vh;" id="LetraP"></span2>
+		<div></div>
+   </div>
+
+  
+
+<!-- Imagen central-->
+<div id="Amanda">
+ 
+ 
+  <div>
+  <img  class="img" id="imgLimonero" src="./../../../ResB/limonero.gif" ></img> 
+   </div>
+ 
+  <div>
+    <img  class="img" id="imgQ" src="./../../../ResB/Qe.png" ></img> 
+  <img  class="img" id="imgA" src="./../../../ResB/AmandaA2.png" ></img> 
+  </div>
+  <div id="cuentaG"><label id="cuenta"></label></div>
+  <div></div>
+ 
+
+<div>
+<div id="Canastas">  
+  <img  class="imgC" id="Canasta1" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta2" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta3" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta4" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta5" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta6" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta7" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta8" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+  <img  class="imgC" id="Canasta9" src="./../../../ResB/CanastaLimon0.gif" ></img> 
+</div>
+</div>
+
+
+</div>
+
+ <!-- globo -->
+ <div  class="label" style="height: 13vh;top: 15px;margin-left: 10%;width:85vw;font-size: 5vh;""></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ 
+
+ <!-- <div id="ayudaF1">
+  <ul  style="float:left" id="myList">
+  
+</ul> -->
+
+ </div>
+
+ <audio id="myAudio" >
+</audio>
+ 
+<script>
+  var numeroRandom = (getRandomInt(9) + 1);
+  var numeroRandomN = 0;
+  var audio = document.createElement('audio');
+  var audioBlep = document.createElement('audio');
+  var canastas =0;
+  var cuantosL =0;
+  var resultado 
+  var resultadoR= 0;
+  var np="";
+
+$(document).ready(function() {
+
+ 
+audio.addEventListener("timeupdate", function() {
+  
+if (audio.currentTime - audio._startTime >= audio.value){    
+   audio.pause();  
+  LeeCGB("Amanda puso en " + canastas + " canastas " + cuantosL + " limones,  va a regalar a sus amigos: " + canastas * cuantosL + " limones. pulsa barra espaciadora para jugar de nuevo o escape para salir");
+  $("#cuenta").text(canastas + " x " + cuantosL + "=" + canastas * cuantosL ) ;
+  $("#imgQ").css("display", "none");
+
+ };
+
+});
+
+
+
+var x = 0;
+var arrayOfImages = ['./../../../ResB/AmandaA1.png', './../../../ResB/AmandaA2.png'];
+var arrayOfImagesQ = ['./../../../ResB/QE.png', './../../../ResB/QE2.png'];
+
+ // DeterminaMotor("");
+
+
+var miVar3 = setTimeout(function(){ 
+//console.log(Gres.MenuActividad) 
+animar();             
+},3000);
+
+
+function animar(){ 
+  window.setInterval(function(){
+      $('#imgA').attr("src", arrayOfImages[x]);
+      $('#imgQ').attr("src", arrayOfImagesQ[x]);  
+      x++;
+      if (x > 1 ) {x = 0;}      
+  }, 1000);
+}
+
+DeterminaMotor("Amanda quiere regalar limones de su árbol a sus amigas y amigos. Escribe Cuántas canastas va a usar");
+
+});
+
+document.body.addEventListener('keyup', function(e) {
+  if (e.keyCode == 112){
+     Ayuda();
+      return;
+  }
+  if (e.keyCode == 27){
+    Regresar();
+    return;
+  }
+  if (e.keyCode == 113 || e.keyCode == 114 || e.keyCode == 115 || e.keyCode == 119 ){return}
+//blq num
+var active = event.getModifierState('NumLock');
+  var keyCode = e.keyCode;
+
+  if (keyCode == 144)
+  {
+  if (active == false){LeeCGB(Gres.TnNh );return;}
+  if (active == true){LeeCGB(Gres.TnH );return;}
+  }
+  
+  
+  
+  //Blq num no bloqueado
+  if (keyCode >= 33 && keyCode <= 40)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+  
+  if (keyCode ==  12 || keyCode == 45)
+  {
+  if (active == false){LeeCGB(Gres.NBtN);return;}
+  }
+ 
+  if (canastas == 0 && $.isNumeric(e.key) == true && e.key > 1 ){
+    canastas = e.key;
+
+    for (i=0;i<=(canastas-1);i++) { 
+       $("#Canasta" + (i+1)).attr("src", "./../../../ResB/CanastaLimon0.gif");
+    }
+
+    for (i=0;i<(canastas);i++) { 
+       $("#Canasta" + (i+1)).css("display","block");
+       //console.log(i + " canasta");
+    }
+
+    LeeCGB("Ahora escribe cuántos limones colocará en cada una de las " + canastas + " canastas");
+   
+    return;
+  }
+  if (canastas > 1 && $.isNumeric(e.key) == true && cuantosL < 2){
+    cuantosL = e.key;
+    if (cuantosL < 2){
+      LeeCGB("hay que colocar más de 1 limón");
+      return;
+    }
+         
+          
+        
+
+    for (i=0;i<=(canastas-1);i++) { 
+       $("#Canasta" + (i+1)).attr("src", "./../../../ResB/CanastaLimon" + cuantosL + ".gif");
+    }
+
+    LeeCGB( "Amanda puso " + cuantosL + " limones en cada una de las " + canastas + " canastas. ¿Cuántos limones va a regalar Amanda?");
+    $("#cuenta").text(canastas + " x " + cuantosL);
+    resultadoR= (canastas * cuantosL);
+    //$("#imgQ").css("display","block");
+   
+    //console.log(resultadoR + " resultador??????????????")
+
+          audio.volume=Volumen;
+          rutaAudio = "./../../../ResB/Amanda.mp3";
+          audio.src =  rutaAudio;
+          audio.load();
+          play_audio(rutaAudio,0,17);
+          subeQ();
+
+    return;
+  }
+//evalua resultado
+  if (cuantosL > 1){
+
+    $("#imgQ").css("display","none");
+    
+    np += e.key.toString().toUpperCase()
+    resultado=np;
+    
+    resultadoR= (canastas * cuantosL);
+    
+ //console.log(np + " cccccccccc" + resultado + " mide " + resultado.toString().length + " =????????????????????????????= " + resultadoR + " mide " + resultadoR.toString().length)
+     
+    if(resultado.toString().length  == resultadoR.toString().length && resultado != resultadoR){
+      audio.pause();
+      LeeCGB(canastas + " por " + cuantosL + " no es " +  np+  ".  " + canastas + "  por " + cuantosL + "  es: " + canastas * cuantosL + ". pulsa barra espaciadora para jugar de nuevo o escape para salir");
+      $("#cuenta").text(canastas + " x " + cuantosL + "=" + canastas * cuantosL ) ;
+     return;
+    }
+
+     if (resultado == resultadoR)
+       {  
+         
+        LeeCGB("¡Muy bien!. Amanda puso en " + canastas + " canastas " + cuantosL + " limones,  va a regalar a sus amigos: " + canastas * cuantosL + " limones. pulsa barra espaciadora para jugar de nuevo o escape para salir");
+      $("#cuenta").text(canastas + " x " + cuantosL + "=" + canastas * cuantosL ) ;
+
+         audio.pause();
+       }
+
+
+  }
+
+  if (e.keyCode == 32){
+    canastas=0;
+    cuantosL=0;
+    resultado="";
+    resultadoR=0;
+    np="";
+    for (i=0;i<=8;i++) { 
+       $("#Canasta" + (i+1)).css("display","none");
+    }
+    $("#cuenta").text("");
+
+    LeeCGB("Amanda quiere regalar limones de su árbol a sus amigas y amigos. Escribe Cuántas canastas va a usar");
+    return;
+    
+  }
+
+if  ($.isNumeric(e.key) == false) {
+  LeeCGB("No es un número");
+  return;
+}
+
+Tpulsada = e.key.toString().toUpperCase();
+//console.log(Tpulsada)
+//EvaluaLetra(Tpulsada);
+});
+
+
+
+var comments = document.getElementsByClassName('Lt');
+var numComments = comments.length;
+
+
+
+function Regresar()
+{
+window.open( "../index.html","_self"); 
+}
+
+aud = document.getElementById("myAudio");
+
+function Regresar()
+{
+   window.open( "../index.html","_self"); 
+}
+function Ayuda()
+{
+ 
+  LeeCGB( " se debe ingresar el número de canastas que usara Amanda y luego el número de limones que contendrá cada una. El juego se resuelve escribiendo el número resultante de la multiplicación.");  
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+
+function play_audio(audio_element,time_start,duration){
+
+audio.value=duration;
+audio._startTime=time_start;
+audio.currentTime = time_start;  
+   
+   audio.play();
+}
+function blep(){
+  rutaAudio = "./../../../ResB/Blep.mp3";
+      audioBlep.load();
+      audioBlep.play();
+}
+
+function subeQ(){  
+  $('#imgQ').attr('style','display: block !important');
+}
+
+	</script>
+
+
+  </script>
+
+</body>
+
+</html>

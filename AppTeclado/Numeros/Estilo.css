@@ -1,0 +1,226 @@
+﻿@media only screen and (orientation:portrait){
+  body {
+    width: 100%;
+    height: auto;
+    transform: rotate(90deg);
+  }
+}
+
+html, body {
+    transition-property: opacity, left, top, height;
+    transition-duration: 2s, 2s;
+    transition: background-color 2s ease;
+}
+@font-face {
+  font-family: "Kunstler-Script";
+  src: url("./Kunstler Script.ttf");     
+}
+
+
+#mimg
+{
+  width: 30vh;
+  display: none;
+ 
+}
+#Numero
+{
+ font-size: 36vh;
+ 
+}
+
+
+#pie{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;
+
+  
+}
+
+#EtiquetaDos
+{
+font-family: "Kunstler-Script";
+font-weight: bold;
+text-transform:lowercase;
+font-size: 25vh;	
+}
+
+#EtiquetaUnoTexto
+{
+/*text-transform:uppercase;*/
+font-size:8vw;
+font-weight: bold;
+}
+
+#EtiquetaUno
+{
+text-transform:uppercase;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+font-style: italic;
+font-size: 10vh;
+line-height: 25vh;
+}
+.n{
+  border: solid 3px black;
+  border-radius: 15px;
+  background-color: rgba(250,165,35);
+}
+
+
+#ayudaF1 {
+  display:none
+}
+
+#Pie {    
+text-align:right;
+width:90%;    
+right: 0;
+left: 0;
+margin-right: auto;
+margin-left: auto;
+position:fixed;
+bottom:0;
+padding:1vw;
+font-size:1vw;
+}
+
+#F1
+{
+/* float:left;
+width:100%; */
+text-decoration:underline;
+cursor:pointer;
+/* text-align:center; */
+bottom:0%;
+	
+}
+.BotonesNav
+{    
+position:fixed;
+cursor:pointer;
+text-decoration: none;
+text-transform:uppercase;
+padding: 0.3vw;
+font-size: 1.5vw;
+color: #ffffff;
+background-color: #1883ba;
+border-radius: 16px;
+border: 2px solid #0016b0;
+width:5%;
+margin-left:2%;
+margin-right:0;
+margin-bottom:0.3vw;
+padding-left:0;
+padding-right:0;
+display:block;
+text-align:center;
+   
+	
+}
+.grid {
+  display: grid;
+   justify-items: stretch;
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr; 
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+  justify-content: center;
+  align-items: center;  
+ }
+ .TecladoQ {
+  position: fixed;
+  bottom: 3vh;
+  display: grid;
+  width: 80vw;
+  height: 40vh;
+  margin-left: 10vw;
+  justify-items: stretch;
+  grid-template-columns: repeat(11, 1fr); 
+  grid-template-rows: repeat(4, 1fr); 
+  grid-column-gap: 3px;
+  grid-row-gap: 3px; 
+  justify-content: center;
+  align-items: center; 
+ }
+
+ .TecladoQ  a {
+  text-transform: uppercase;;
+  font-family: Arial;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  padding:1vw;    
+  color:#020202;
+  text-align: center;
+  margin-right: 1vw;
+  margin-bottom: 0.5vw;     
+  height: 3.5vh; 
+  justify-content: center;
+  align-items: stretch;
+  border: solid 2px blue;
+  font-size: 2.5vw;
+}
+#Enter{
+  height: 20vh;
+  margin-top: 7vh;
+  grid-column: 11 / 12;
+  grid-row: 1 / 3;  
+  font-size: 3vh;
+  /* line-height: 6vh; */
+}
+
+#Barra{ 
+  grid-column: 3/ 9;
+  grid-row: 4 / 4;   
+}
+
+.capitalise
+{
+    text-transform:capitalize;
+    font-weight: bold;
+}
+.capital
+{
+    text-transform:uppercase;
+}
+#Viz, #Vde, #Ab, #Arr {
+  font-size: 6vh;
+  color: #0016b0;
+}
+#suena{
+  visibility:hidden;
+}
+#pieJ{
+  display: grid;
+  position: fixed;
+  bottom: 1vh;
+  width: 100vw;
+  text-align: center;
+  font-size: 12vh;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+#tri {
+  /* position: fixed; */
+  top: 15vh;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  float: left;
+  display: grid; 
+  justify-items: center;  
+  grid-template-columns: 10% 55% 10%;      
+  justify-content: center; 
+ 
+  }

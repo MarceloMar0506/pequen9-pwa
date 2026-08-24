@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista de Figuras</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../ResB/Idb-Keyval.js"></script>
+
+
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script>
+<script src="./../pulsador.js"></script>
+<script src="./../ResB/Tone.js"></script> 
+
+<script>
+   var nlec = -1;
+   var figurasT = ["2","1","0.5","0.25","0"];
+var Nd4 = "0";
+var Nd3 = "6";
+var Nd2 = "3";
+var Nd1 = "36";
+
+var Sr = "134";
+var Sb = "136";
+var Sn = "1236";
+var Sc = "1346";
+
+var audio = document.createElement('audio');
+audio.setAttribute("id", "General");
+var mN = 0;
+var nota;
+
+</script>
+<style>
+   
+ 
+	#Primera{
+		padding: 0;
+	}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .key {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
+
+        .white {
+            width: 9%;
+            min-width: 60px;
+            height: 70%;
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #000;
+        }
+
+        .black {
+            width: 8%;
+            height: 45%;
+            margin-left: -4%;
+            margin-right: -4%;
+            z-index: 2;
+            background-color: black;
+            color: #fff;
+        }
+
+        .white.active {
+            background-color: #ccc;
+        }
+
+        .black.active {
+            background-color: #333;
+        }
+    </style>
+   
+</head>
+
+<body onkeyup="Npulsado(event)"></body>
+<div id="contenedor" style="height:90%">
+    <div id="titulo3">
+       <div></div>     
+       <span2 id="nota" style="font-size: 2.5vw;">_</span2>	
+        <div></div>
+       </div>
+ 
+
+    <audio class="piano"  id="d"></audio>
+
+
+    <div id="grillaLista" style="grid-auto-columns: 1fr 1fr 1fr;">
+        <div id="Fiz"><img class="animated flash" src="./../ResB/Fiz.png" onclick="atras()" alt=""></div>     
+<!-- Teclado Pulsado -->
+<div class="gridPlantilla" style="grid-template-columns: 1fr;">
+    
+    <!--  <div id="Sgenerador"> -->
+    <div id="Primera" class="teclas">
+     <elem class="box" id="box1">1</elem>	
+     <elem class="box" id="box4">4</elem> 
+     <elem class="box" id="box2">2</elem>
+     <elem class="box" id="box5">5</elem>
+     <elem class="box" id="box3">3</elem>
+     <elem class="box" id="box6">6</elem>
+     </div>
+ 
+     <div style="padding-right: 20vw;" id="Segunda" class="teclas" style="visibility: hidden;" >
+     <elem class="box" id="box01">1</elem>	
+     <elem class="box" id="box04">4</elem> 
+     <elem class="box" id="box02">2</elem>
+     <elem class="box" id="box05">5</elem>
+     <elem class="box" id="box03">3</elem>
+     <elem class="box" id="box06">6</elem>
+     </div>
+ 
+  
+ </div>
+  <div id="Fder"><img class="animated flash" src="./../ResB/Fder.png" onclick="adelante()" alt=""></div>
+ </div> 
+ 
+
+ <div id="superior">  
+   <div class="etq" id="d"></div>
+   <h2 class="etq" id="statusdiv"></h2>
+   <h2 class="etq" id="statusdiv2"></h2>
+   <h2 class="etq" id="statusdiv3"></h2>
+   <h2 class="etq" id="statusdiv4"></h2>
+   <h2 class="etq" id="statusdiv5"></h2>
+   <h2 class="etq" id="statusdiv6"></h2>
+    </div>
+ 
+
+  <!-- Pequen -->
+  <div id="pequenG" class="esperaG"></div>
+  
+  <!-- globo -->
+  <div  class="label" ></div>
+ 
+
+    </div>
+    <script>
+	$(document).ready(function() {		
+   
+	//	DeterminaMotor(Gres.MenuFiguras);
+  var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){      
+            DeterminaMotor(Gres.MenuFigurasP);  
+          }
+          else{
+            var mensaje= document.title + ". "  + Gres.MenuFiguras;            
+            DeterminaMotor(mensaje);  
+          }
+
+
+
+        t=1;		
+		$("#Primera").css("display","inline-grid");
+	    $("#EtiquetaDosTexto").text("");		
+		
+       
+        var playerD = document.getElementById("d");   
+    
+       
+
+	});
+
+    function Ayuda()
+    {		
+		Lee(Gres.MenuFiguras);
+    }
+    function AyudaM()
+    {
+	  Lee(" pulsar las flechas para recorrer los signos que representan a las figuras, el puntillo y los silencios. ");		
+    }
+
+	function Regresar()
+      {
+        window.open("./index.html","_self");
+      }
+	
+	
+
+function Npulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+  if (keyCode == 27) {
+    Regresar();
+  }
+ 
+  //Ayuda
+  if (keyCode == 112) {
+    //$.getScript("./F1/Generales.js", function(){
+      movil = 0;
+      Ayuda();
+      TecladoQ();
+    //});
+  }
+
+     }
+
+
+var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+$(document).on("touchstart mousedown", function( e ) {		
+  xPosVie = 0;
+  yPosVie = 0;
+    var touchstart = e.type === 'touchstart',
+    e = touchstart ? e.originalEvent : e,
+    pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+    pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+    xPosVie = pageX;
+yPosVie = pageY;
+});    
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+ // //console.log(xPosNew);
+});
+
+$(document).on("touchend", function(e) {
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return}     
+      DifX =  xPosNew  - xPosVie ;
+      //console.log(DifX);
+  		if (DifX > 200){        
+	 		adelante();        
+    	}
+        if (DifX < -200){      		
+			atras();      
+        }
+        if (DifY > 100){
+                      //  ////console.log(" Baja #L"+ Quien + Opcion);                
+          return;
+        }
+        if (DifY < -100){
+         ////console.log(DifY + " Sube #L"+ Quien + Opcion);          
+          return;
+        }
+    return;
+
+});
+
+
+$(document).keyup(function(e) { 
+  e.preventDefault();
+
+
+if (e.keyCode == 37 || e.keyCode == 40 )
+{
+    atras();
+    return;
+}
+if (e.keyCode == 39 || e.keyCode == 38)
+{
+    adelante();
+    return;
+}
+}
+);
+
+
+         
+function atras(){
+    window.speechSynthesis.cancel();    
+  nlec--;
+  if (nlec  < 0 ) {    
+    nlec=0
+  } 
+  if (nlec  < 4 ) {    
+    var MLec = figurasT[nlec];
+    t = parseFloat(MLec);
+    if (t == 0.25) {Nt =  Nd4; notaSrc ="./../ResB/CORCHEA.mp3"  }
+    if (t == 0.50) {Nt =  Nd3; notaSrc ="./../ResB/NEGRA.mp3"}
+    if (t == 1) {Nt =  Nd2; notaSrc ="./../ResB/BLANCA.mp3"}
+    if (t == 2) {Nt =  Nd1; notaSrc ="./../ResB/REDONDA.mp3"}  
+    //console.log(MLec + " Figura " + figurasT[nlec] + " tiempo " + t + " src " + notaSrc);   
+
+    if (t == 0.25) {Nt =  Nd4 }
+    if (t == 0.50) {Nt =  Nd3}
+    if (t == 1) {Nt =  Nd2}
+    if (t == 2) {Nt =  Nd1} 
+    //console.log("t " + t + " Nt " + Nt)  
+     let numeroP = Nt.split('');
+     Nd= Nt;
+     //console.log(numeroP);
+     Qfigura();
+
+     $(".box").css("background-color","white");
+     $(".box").css("color","black");                      
+     for (let index = 0; index < numeroP.length; index++) {          
+         $("#box" + numeroP[index] ).css("color","white");
+         $("#box" + numeroP[index] ).css("background-color","black");          
+     }
+   }
+     else if (nlec  == 4 ) {
+    
+
+      $(".box").css("background-color","white");
+      $(".box").css("color","black");                      
+
+
+       $("#box3").css("color","white");
+       $("#box3").css("background-color","black");
+       $("#nota").html("PUNTILLO");  
+
+       LeeCGB("PUNTILLO  PUNTO 3");  
+     }
+
+   else if (nlec > 4){
+
+       if (nlec == 5) {Nt =  Sr }
+       if (nlec == 6) {Nt =  Sb }
+       if (nlec == 7) {Nt =  Sn }
+       if (nlec == 8) {Nt =  Sc }
+       
+       //console.log( " Silencio " + Nt)  
+        let numeroP = Nt.split('');
+        Nd= Nt;
+        //console.log(numeroP);
+        //Qfigura();
+  
+        $(".box").css("background-color","white");
+        $(".box").css("color","black");                      
+        for (let index = 0; index < numeroP.length; index++) {          
+            $("#box" + numeroP[index] ).css("color","white");
+            $("#box" + numeroP[index] ).css("background-color","black");          
+        }
+     
+        if (nlec == 5) {
+           var NMLec = Nd.split('');
+           NMLec = NMLec.toString().replace(/,/g,", " );
+           $("#nota").html("SILENCIO DE REDONDA O SEMICORCHEA " );
+           LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+        }
+        else if (nlec == 6) {
+           var NMLec = Nd.split('');
+           NMLec = NMLec.toString().replace(/,/g,", " );
+           $("#nota").html("SILENCIO DE BLANCA O FUSA " );
+           LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+        }
+        else if (nlec == 7) {
+           var NMLec = Nd.split('');
+           NMLec = NMLec.toString().replace(/,/g,", " );
+           $("#nota").html("SILENCIO DE NEGRA O SEMIFUSA " );
+           LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+        }
+        else if (nlec == 8) {
+           var NMLec = Nd.split('');
+           NMLec = NMLec.toString().replace(/,/g,", " );
+           $("#nota").html("SILENCIO DE CORCHEA O GARRAPATEA " );
+           LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+        }
+}
+}
+function adelante(){  
+    window.speechSynthesis.cancel(); 
+    nlec++;
+
+    var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){      
+            if (nlec  > 8 ) {nlec = 0 }  
+          }
+          else{
+            if (nlec  > 8 ) {nlec = 8 }  
+         }
+     
+     if (nlec  < 4 ) {
+
+     var MLec = figurasT[nlec];
+     t = parseFloat(MLec);
+     if (t == 0.25) {
+      Nt =  Nd4;
+        notaSrc = "./../ResB/CORCHEA.mp3" 
+       }
+     if (t == 0.50) {Nt =  Nd3; notaSrc ="./../ResB/NEGRA.mp3"}
+     if (t == 1) {Nt =  Nd2; notaSrc ="./../ResB/BLANCA.mp3"}
+     if (t == 2) {Nt =  Nd1; notaSrc ="./../ResB/REDONDA.mp3"}  
+     //console.log(MLec + " Figura " + figurasT[nlec] + " tiempo " + t + " src " + notaSrc);   
+
+     if (t == 0.25) {Nt =  Nd4 }
+     if (t == 0.50) {Nt =  Nd3}
+     if (t == 1) {Nt =  Nd2}
+     if (t == 2) {Nt =  Nd1} 
+     //console.log("t " + t + " Nt " + Nt)  
+      let numeroP = Nt.split('');
+      Nd= Nt;
+      //console.log(numeroP);
+      Qfigura();
+
+      $(".box").css("background-color","white");
+      $(".box").css("color","black");                      
+      for (let index = 0; index < numeroP.length; index++) {          
+          $("#box" + numeroP[index] ).css("color","white");
+          $("#box" + numeroP[index] ).css("background-color","black");          
+      }
+    }
+      else if (nlec  == 4 ) {
+
+        
+        $(".box").css("background-color","white");
+        $(".box").css("color","black"); 
+
+        $("#box3").css("color","white");
+        $("#box3").css("background-color","black");
+        $("#nota").html("PUNTILLO");  
+        Lee("PUNTILLO  PUNTO 3");  
+      }
+
+    else if (nlec > 4){
+
+        if (nlec == 5) {Nt =  Sr }
+        if (nlec == 6) {Nt =  Sb }
+        if (nlec == 7) {Nt =  Sn }
+        if (nlec == 8) {Nt =  Sc }
+        
+        //console.log( " Silencio " + Nt)  
+         let numeroP = Nt.split('');
+         Nd= Nt;
+         //console.log(numeroP);
+         //Qfigura();
+   
+         $(".box").css("background-color","white");
+         $(".box").css("color","black");                      
+         for (let index = 0; index < numeroP.length; index++) {          
+             $("#box" + numeroP[index] ).css("color","white");
+             $("#box" + numeroP[index] ).css("background-color","black");          
+         }
+      
+         if (nlec == 5) {
+          var NMLec = Nd.split('');
+          NMLec = NMLec.toString().replace(/,/g,", " );
+          $("#nota").html("SILENCIO DE REDONDA O SEMICORCHEA " );
+          LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+       }
+       else if (nlec == 6) {
+          var NMLec = Nd.split('');
+          NMLec = NMLec.toString().replace(/,/g,", " );
+          $("#nota").html("SILENCIO DE BLANCA O FUSA " );
+          LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+       }
+       else if (nlec == 7) {
+          var NMLec = Nd.split('');
+          NMLec = NMLec.toString().replace(/,/g,", " );
+          $("#nota").html("SILENCIO DE NEGRA O SEMIFUSA " );
+          LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+       }
+       else if (nlec == 8) {
+          var NMLec = Nd.split('');
+          NMLec = NMLec.toString().replace(/,/g,", " );
+          $("#nota").html("SILENCIO DE CORCHEA O GARRAPATEA " );
+          LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec );
+       }
+    }
+
+//console.log(nlec + " " +  $("#nota").text());
+
+}
+
+function Qfigura()
+ {
+  
+  var NMLec = Nd.split('');
+        NMLec = NMLec.toString().replace(/,/g,", " );
+        var Qf ="";
+        if (t == 0.25) {Qf ="CORCHEA O GARRAPATEA"}
+        if (t == 0.50) {Qf ="NEGRA O SEMIFUSA"}
+        if (t == 1) {Qf ="BLANCA O FUSA"}
+        if (t == 2) {Qf ="REDONDA O SEMICORCHEA"}
+       
+        if (t == 2) {
+           $("#nota").html(Qf);
+           LeeF(Qf +   " LOS PUNTOS DE  LA NOTA CON LOS PUNTOS " + NMLec );
+        }
+        else if (t == 0.5 ||  t == 1) {
+           $("#nota").html(Qf);
+           LeeF(Qf +   " LOS PUNTOS DE  LA NOTA CON EL PUNTO " + NMLec);
+        }                        
+        else if (t == 0.25 ) {
+           $("#nota").html(Qf);
+           LeeF(Qf +   " LOS PUNTOS DE  LA NOTA SIN PUNTOS ADICIONALES ")
+        }                        
+           
+
+ }
+
+ function LeeF(texto)
+ { 
+ $(".label").html(texto);
+ $(".label").css("visibility","visible");
+ if (texto == ""){
+   $(".label").css("visibility","hidden");
+   return;
+ }
+ window.speechSynthesis.cancel();
+ msgNo = new SpeechSynthesisUtterance(texto);
+ msgNo.voice = speechSynthesis.getVoices()[Voz];
+ msgNo.rate =Veloz;	
+ msgNo.pitch = Tono;
+ msgNo.volume= Volumen;
+ msgNo.onend = function(event) {
+ EsperaAnim();
+ primerEnter =false;
+ }
+		   
+ HablaAnim();
+ window.speechSynthesis.speak(msgNo);
+ msgNo.onend = function(event) {   
+    Suena();
+ }
+     
+ } 
+ 
+ function Suena(){
+  if (controlAudio == "con" ) {
+  Tone.Transport.stop();    
+  console.log(t + " " + nlec);
+  const synth = new Tone.Synth().toDestination();   
+  synth.triggerAttackRelease(  "C4", t/2);
+  }
+}
+
+
+
+
+
+    </script>
+
+
+</body></html>

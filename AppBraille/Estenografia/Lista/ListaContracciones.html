@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista Contracciones</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./PTC.js"></script>
+<script type="text/javascript" src="./../../../ResB/AnimP.js"></script>
+<script src="../../../F1/Generales.js"></script>
+<script src="./LeeUnS.js"></script>
+<script src="./../../../pulsador.js"></script>
+<style>
+	.Tl {width: 15vw;}
+</style>
+<style>
+	#Primera{
+		padding: 0;
+		padding-bottom: 3vh;
+	}
+	#Segunda{
+		padding: 0;
+		margin-left: 12vw;
+		padding-bottom: 3vh;
+	}
+	</style>
+
+</head>
+
+<body>	
+<div id="contenedor" style="height:100%">
+	<div id="titulo3">
+	   <div></div> 
+	   <span2 id="EtiquetaUnoTexto" style="font-size: 10vw;">_</span2>	
+	   <div "></div>
+	 </div>
+
+<div id="grillaListaE">
+	<div id="Fiz"><img class="animated flash2" src="./../../../ResB/Fiz.png" onclick="atras()" alt=""></div> 	
+
+	<div class="gridPlantillaE">
+    
+   <!--  <div id="Sgenerador"> -->
+   <div id="Primera" class="teclasE">
+	<elem class="box" id="box1">1</elem>	
+	<elem class="box" id="box4">4</elem> 
+	<elem class="box" id="box2">2</elem>
+	<elem class="box" id="box5">5</elem>
+	<elem class="box" id="box3">3</elem>
+	<elem class="box" id="box6">6</elem>
+	</div>
+
+	<!-- <div style="padding-right: 20vw;" id="Segunda" class="teclas" style="visibility: hidden;" ></div> -->
+	<div id="Segunda" class="teclasE">
+	<elem class="box" id="box01">1</elem>	
+	<elem class="box" id="box04">4</elem> 
+	<elem class="box" id="box02">2</elem>
+	<elem class="box" id="box05">5</elem>
+	<elem class="box" id="box03">3</elem>
+	<elem class="box" id="box06">6</elem>
+	</div>
+
+	<div id="Tercera" class="teclasE">
+		<elem class="box" id="box001">1</elem>	
+		<elem class="box" id="box004">4</elem> 
+		<elem class="box" id="box002">2</elem>
+		<elem class="box" id="box005">5</elem>
+		<elem class="box" id="box003">3</elem>
+		<elem class="box" id="box006">6</elem>
+		</div>
+
+	<div id="Cuarta" class="teclasE">
+		<elem class="box" id="box0001">1</elem>	
+		<elem class="box" id="box0004">4</elem> 
+		<elem class="box" id="box0002">2</elem>
+		<elem class="box" id="box0005">5</elem>
+		<elem class="box" id="box0003">3</elem>
+		<elem class="box" id="box0006">6</elem>
+		</div>	
+</div>
+<div id="Fder"><img class="animated flash2" src="./../../../ResB/Fder.png" onclick="adelante()" alt=""></div>
+</div>  
+<!-- Letras -->
+<div id="letrasAlfa" style="margin-top:3vw;grid-template-columns:1fr 1fr 1fr 1fr 1fr;" >
+
+<div class="Tl" id="c1">ab</div>
+<div class="Tl" id="c2">ad</div>
+<div class="Tl" id="c3">al</div>
+<div class="Tl" id="c4">an</div>
+<div class="Tl" id="c5">ar</div>
+<div class="Tl" id="c6">as</div>
+<div class="Tl" id="c7">br</div>
+<div class="Tl" id="c8">cr</div>
+<div class="Tl" id="c9">dr</div>
+<div class="Tl" id="c10">em</div>
+<div class="Tl" id="c11">en</div>
+<div class="Tl" id="c12">er</div>
+<div class="Tl" id="c13">es</div>
+<div class="Tl" id="c14">gr</div>
+<div class="Tl" id="c15">im</div>
+<div class="Tl" id="c16">in</div>
+<div class="Tl" id="c17">ion</div>
+<div class="Tl" id="c18">ll</div>
+<div class="Tl" id="c19">om</div>
+<div class="Tl" id="c20">on</div>
+<div class="Tl" id="c21">or</div>
+<div class="Tl" id="c22">os</div>
+<div class="Tl" id="c23">pr</div>
+<div class="Tl" id="c24">qu</div>
+<div class="Tl" id="c25">tr</div>
+<div class="Tl" id="c26">ue</div>
+
+
+
+
+<div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+   </div>
+
+
+ <!-- globo -->
+ <div  class="label"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div> 
+<script>
+
+function adelante(){
+	$(".label").css("display","none");
+	$("#pequenG").css("display","none");
+	$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	
+	
+	nlec++;	
+	if (nlec > 26) {nlec = nlec-1}
+	var MLec = eval("contraccion"+ (nlec) );
+	//console.log(MLec.toString());
+	var cadena = MLec;
+	var DiceL = MLec;
+	var vecP = eval("contraccion" + nlec )[0].split(',');
+	DiceL =  vecP[0];	
+//	$(".Tl").css("background-color","lightsteelblue");
+//	$("#c"+ nlec).css("background-color","blue");
+	
+	var signosE =  vecP[1];
+	MLec = MLec.toString().replace(/,/g , ", ");
+//	$(".box").css("color","black");
+//	$(".box").css("background-color","white");	
+	var PrimM =  vecP[1].toString().indexOf("_");
+	
+	if (PrimM > 0 ){
+	var PrimeraC =  vecP[1].substring(0,PrimM);
+	}else {PrimeraC = vecP[1]}
+
+	var SegM =  vecP[1].toString().indexOf("-");
+    
+	if (SegM > 0){
+		var SegundaC = vecP[1].substring(PrimM + 1,SegM);
+	}
+	else  if (SegM < 0){
+		var SegundaC = vecP[1].substring(PrimM + 1);
+	}
+	
+	var TerM =  vecP[1].toString().indexOf("=");
+	
+	if (TerM > 0){
+	 var TerceraC = vecP[1].substring(SegM + 1,TerM);
+	}
+	else  if (TerM < 0){
+	  var TerceraC = vecP[1].substring(SegM + 1);
+      var TerM =  vecP[1].toString().indexOf("-" + TerceraC);
+
+	}
+
+	var CuarM =  vecP[1].toString().indexOf("=");
+	
+	if (CuarM > 0){
+	 var CuartoC = vecP[1].substring(CuarM + 1);
+	}
+		$("#Segunda").css("visibility","visible");
+	var regex = /(\d+)/g;	
+	PrimeraC  = PrimeraC.match(regex);
+	for (let index = 0; index < PrimeraC.toString().trim().length; index++)
+	{
+		const element = PrimeraC.toString().trim().substring(index,index + 1);
+		
+		$("#box" + element).css("background-color","black");
+		$("#box" + element).css("color","white");
+	}
+		 SegundaC  = SegundaC.match(regex);	
+		for (let index = 0; index < SegundaC.toString().trim().length; index++)
+		{
+			const element = SegundaC.toString().trim().substring(index,index + 1);
+			$("#box0" + element).css("background-color","black");
+			$("#box0" + element).css("color","white");
+		}
+	
+ 	if (TerM > 0){
+	   $("#Tercera").css("display","grid");
+		 TerceraC  = TerceraC.match(regex);	
+		for (let index = 0; index < TerceraC.toString().trim().length; index++)
+		{
+			const element = TerceraC.toString().trim().substring(index,index + 1);
+			$("#box00" + element).css("background-color","black");
+			$("#box00" + element).css("color","white");
+		}	
+	}
+	else if (TerM < 0){
+	 $("#Tercera").css("display","none");	 
+	}
+
+
+	if (CuarM > 0){
+		$("#Cuarta").css("display","grid");
+		CuartoC  = CuartoC.match(regex);	
+	   for (let index = 0; index < CuartoC.toString().trim().length; index++)
+	   {
+		   const element = CuartoC.toString().trim().substring(index,index + 1);
+		   $("#box000" + element).css("background-color","black");
+		   $("#box000" + element).css("color","white");
+	   }   
+   }
+   else if (CuarM < 0){
+	 $("#Cuarta").css("display","none");	
+	 
+	}
+
+
+		$("#EtiquetaUnoTexto").text(vecP[0]);
+		signosE = signosE.toString().split("");
+	
+	signosE = signosE.toString().replace(/,/g , "? ");
+
+	signosE = signosE.replace("_"," segunda celda ");
+	signosE = signosE.replace("-"," tercera celda ");
+	signosE = signosE.replace("="," cuarta celda ");	
+
+	var DiceLSplit = "";
+	DiceLSplit = DiceL;
+	if (DiceL != "entre" && DiceL != "sobre" ) {
+	//	DiceLSplit = "deletreo. " + DiceL.split("");
+		DiceLSplit = DiceL.split("");
+		DiceLSplit  = DiceLSplit.toString().replace(/,/g , ". ");
+	}
+	
+	signosE = signosE.toString().replace(/,/g , ", ");
+
+	signosE = signosE.replace("_"," segunda celda ");
+	signosE = signosE.replace("-"," tercera celda ");
+	signosE = signosE.replace("="," cuarta celda ");
+	//DiceL = "'" + DiceL + "?'. " + DiceLSplit + ". " +  signosE;
+	DiceL  = DiceLSplit + ". " +  signosE;
+	
+	LeeCGB(DiceL);
+
+
+
+
+
+}
+function atras(){
+	$(".label").css("display","none");
+	$("#pequenG").css("display","none");
+	$("#Primera").css("visibility","visible");
+	$("#EtiquetaDosTexto").text("");
+	nlec--;
+	if (nlec < 1){
+	 nlec = 1
+	}
+	if (nlec > 0){
+		var MLec = eval("contraccion"+ (nlec) );
+	var cadena = MLec;
+	var vecP = eval("contraccion" + nlec )[0].split(',');
+	DiceL =  vecP[0];
+//	$(".Tl").css("background-color","lightsteelblue");
+//	$("#c"+ nlec).css("background-color","blue");
+	
+	var signosE =  vecP[1];
+	MLec = MLec.toString().replace(/,/g , ", ");
+//	$(".box").css("color","black");
+//	$(".box").css("background-color","white");	
+	var PrimM =  vecP[1].toString().indexOf("_");
+	
+	if (PrimM > 0 ){
+	var PrimeraC =  vecP[1].substring(0,PrimM);
+	}else {PrimeraC = vecP[1]}
+
+	var SegM =  vecP[1].toString().indexOf("-");
+    
+	if (SegM > 0){
+		var SegundaC = vecP[1].substring(PrimM + 1,SegM);
+	}
+	else  if (SegM < 0){
+		var SegundaC = vecP[1].substring(PrimM + 1);
+	}
+	
+	var TerM =  vecP[1].toString().indexOf("=");
+	
+	if (TerM > 0){
+	 var TerceraC = vecP[1].substring(SegM + 1,TerM);
+	}
+	else  if (TerM < 0){
+	  var TerceraC = vecP[1].substring(SegM + 1);
+      var TerM =  vecP[1].toString().indexOf("-" + TerceraC);
+
+	}
+
+	var CuarM =  vecP[1].toString().indexOf("=");
+	
+	if (CuarM > 0){
+	 var CuartoC = vecP[1].substring(CuarM + 1);
+	}
+	$("#Segunda").css("visibility","visible");
+	var regex = /(\d+)/g;	
+	PrimeraC  = PrimeraC.match(regex);
+	for (let index = 0; index < PrimeraC.toString().trim().length; index++)
+	{
+		const element = PrimeraC.toString().trim().substring(index,index + 1);
+		
+		$("#box" + element).css("background-color","black");
+		$("#box" + element).css("color","white");
+	}
+		 SegundaC  = SegundaC.match(regex);	
+		for (let index = 0; index < SegundaC.toString().trim().length; index++)
+		{
+			const element = SegundaC.toString().trim().substring(index,index + 1);
+			$("#box0" + element).css("background-color","black");
+			$("#box0" + element).css("color","white");
+		}
+	
+ 	if (TerM > 0){
+	   $("#Tercera").css("display","grid");
+		 TerceraC  = TerceraC.match(regex);	
+		for (let index = 0; index < TerceraC.toString().trim().length; index++)
+		{
+			const element = TerceraC.toString().trim().substring(index,index + 1);
+			$("#box00" + element).css("background-color","black");
+			$("#box00" + element).css("color","white");
+		}	
+	}
+	else if (TerM < 0){
+	 $("#Tercera").css("display","none");	 
+	}
+
+
+	if (CuarM > 0){
+		$("#Cuarta").css("display","grid");
+		CuartoC  = CuartoC.match(regex);	
+	   for (let index = 0; index < CuartoC.toString().trim().length; index++)
+	   {
+		   const element = CuartoC.toString().trim().substring(index,index + 1);
+		   $("#box000" + element).css("background-color","black");
+		   $("#box000" + element).css("color","white");
+	   }   
+   }
+   else if (CuarM < 0){
+	 $("#Cuarta").css("display","none");	
+	 
+	}
+
+
+		$("#EtiquetaUnoTexto").text(vecP[0]);
+		signosE = signosE.toString().split("");
+	
+	signosE = signosE.toString().replace(/,/g , ", ");
+
+	signosE = signosE.replace("_"," segunda celda ");
+	signosE = signosE.replace("-"," tercera celda ");
+	signosE = signosE.replace("="," cuarta celda ");
+	
+	var DiceLSplit = "";
+	DiceLSplit = DiceL;
+	if (DiceL != "entre" && DiceL != "sobre" ) {
+	//	DiceLSplit = "deletreo. " + DiceL.split("");
+		DiceLSplit = DiceL.split("");
+		DiceLSplit  = DiceLSplit.toString().replace(/,/g , ". ");
+	}
+	
+	signosE = signosE.toString().replace(/,/g , ", ");
+
+	signosE = signosE.replace("_"," segunda celda ");
+	signosE = signosE.replace("-"," tercera celda ");
+	signosE = signosE.replace("="," cuarta celda ");
+	//DiceL = "'" + DiceL + "?'. " + DiceLSplit + ". " +  signosE;
+	DiceL  = DiceLSplit + ". " +  signosE;
+	
+	LeeCGB(DiceL);
+
+
+
+	}
+	
+}
+function ingresa()
+{
+	var NumLec = parseInt(nlec) - 1;
+	NumLec= NumLec.toString();
+	sayTimeout = setTimeout(function () {		
+		if (nlec == 0)
+		{
+			Lee(Gres.MenuPractica);
+			return;
+	    }else{
+			var miVar2 = setTimeout(function(){ 
+			window.speechSynthesis.cancel();
+		   KEY = 'Practica';
+           VALUE = NumLec;   
+           set();
+		   },10);
+		   var miVar3 = setTimeout(function(){ 
+		   window.open("indexBPalabras.html","_self"); 
+		   },200);
+	    }
+	}, 500); 
+}
+
+</script>
+
+<script>
+	$(document).ready(function() {
+		
+
+$("#Primera").css("visibility","visible");
+$("#EtiquetaDosTexto").text("");
+$("#Primera").css("display","grid");
+$("#Segunda").css("display","none");  
+if (movil == 0){
+	$("#Pie").css("display","none");
+}
+//DeterminaMotor(Gres.ListaContracciones);
+
+var pulsaTrue = localStorage.getItem("Pulsador");
+  if (pulsaTrue == "true" ){
+         var  mensaje2 = Gres.ListaContraccionesP;            
+         DeterminaMotor(mensaje2);  
+    }
+    else{
+            var mensaje= Gres.ListaContracciones;            
+            DeterminaMotor(mensaje);  
+     }
+
+ 
+	});
+	var nlec = 0;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+
+
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+
+if (e.keyCode == 112) {
+      movil = 0; 
+      Ayuda();
+}
+
+
+d.innerHTML =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+     PrimerS =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+     $(".etq").html('');
+
+return;
+}
+function evaluaTVB(numeros)
+    {  
+		//console.log("L" + numeros);
+		if ( "L" + numeros in window){
+			//console.log(eval("L" + numeros));
+			nlec = eval("L" + numeros) - 1;
+			adelante();
+	    }
+	}
+
+function Ayuda()
+    {
+	  $(".label").css("display","block");
+	  $("#pequenG").css("display","block");
+      LeeCGB(Gres.ListaContracciones);
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+
+	  $(document).keydown(function(e) { 
+
+
+if (e.keyCode == 70) {statusdiv.innerHTML = '1'; number = 1;} //F
+if (e.keyCode == 68) {statusdiv2.innerHTML = '2'; number = 2;} //D
+if (e.keyCode == 83) {statusdiv3.innerHTML = '3'; number = 3;} //S		
+if (e.keyCode == 74) {statusdiv4.innerHTML = '4'; number = 4;} //J
+if (e.keyCode == 75) {statusdiv5.innerHTML = '5'; number = 5;} //K
+if (e.keyCode == 76) {statusdiv6.innerHTML = '6'; number = 6;} //L
+	  }
+	  );
+
+	  function ml(val)
+	  {
+		nlec = parseInt(val) - 1;
+		adelante();
+	  }
+
+
+
+</script>
+
+</body>
+
+</html>

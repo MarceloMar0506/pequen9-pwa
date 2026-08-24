@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista de Octavas</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../ResB/Idb-Keyval.js"></script>
+
+
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script> 
+<!-- <script src="./Octavas.js"></script> -->
+<script src="./../pulsador.js"></script>
+<script>
+var NPRIMERA = "4";
+var NSEGUNDA = "45";
+var NTERCERA = "456";
+var NCUARTA = "5";
+var NQUINTA = "46";
+var NSEXTA = "56";
+var NSEPTIMA = "6";
+var Mlec;
+var nlec = -1;
+var Soctava = ["PRIMERA","SEGUNDA","TERCERA","CUARTA","QUINTA","SEXTA","SEPTIMA","USO"];  
+</script>
+<style>
+	#Primera{
+		padding: 0;
+	}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .key {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
+
+        .white {
+            width: 9%;
+            min-width: 60px;
+            height: 70%;
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #000;
+        }
+
+        .black {
+            width: 8%;
+            height: 45%;
+            margin-left: -4%;
+            margin-right: -4%;
+            z-index: 2;
+            background-color: black;
+            color: #fff;
+        }
+
+        .white.active {
+            background-color: #ccc;
+        }
+
+        .black.active {
+            background-color: #333;
+        }
+    </style>
+   
+</head>
+
+<body onkeyup="Npulsado(event)">
+<div id="contenedor" style="height:90%">
+    <div id="titulo3">
+        <div></div> 
+       <span2 id="nota"  style="font-size: 2.5vw;">_</span2>	
+       <div></div>      
+       </div> 
+
+
+    <div id="grillaLista" style="grid-auto-columns: 1fr 1fr 1fr;">
+        <div id="Fiz"><img class="animated flash" src="./../ResB/Fiz.png" onclick="atras()" alt=""></div>     
+<!-- Teclado Pulsado -->
+<div class="gridPlantilla" style="grid-template-columns: 1fr;">
+    
+    <!--  <div id="Sgenerador"> -->
+    <div id="Primera" class="teclas">
+     <elem class="box" id="box1">1</elem>	
+     <elem class="box" id="box4">4</elem> 
+     <elem class="box" id="box2">2</elem>
+     <elem class="box" id="box5">5</elem>
+     <elem class="box" id="box3">3</elem>
+     <elem class="box" id="box6">6</elem>
+     </div>
+ 
+     <div style="padding-right: 20vw;" id="Segunda" class="teclas" style="visibility: hidden;" >
+     <elem class="box" id="box01">1</elem>	
+     <elem class="box" id="box04">4</elem> 
+     <elem class="box" id="box02">2</elem>
+     <elem class="box" id="box05">5</elem>
+     <elem class="box" id="box03">3</elem>
+     <elem class="box" id="box06">6</elem>
+     </div>
+ 
+  
+ </div>
+  <div id="Fder"><img class="animated flash" src="./../ResB/Fder.png" onclick="adelante()" alt=""></div>
+ </div> 
+ 
+
+ <div id="superior">  
+   <div class="etq" id="d"></div>
+   <h2 class="etq" id="statusdiv"></h2>
+   <h2 class="etq" id="statusdiv2"></h2>
+   <h2 class="etq" id="statusdiv3"></h2>
+   <h2 class="etq" id="statusdiv4"></h2>
+   <h2 class="etq" id="statusdiv5"></h2>
+   <h2 class="etq" id="statusdiv6"></h2>
+    </div>
+ 
+ 
+  <!-- Pequen -->
+  <div id="pequenG" class="esperaG"></div>
+  
+  <!-- globo -->
+  <div  class="label" ></div>
+ <!-- <audio src="./../ResB/Notas/C4.mp3" id="General"></audio> -->
+ 
+
+    </div>
+    <script>
+	$(document).ready(function() {		
+	//	DeterminaMotor(Gres.MenuOctavas);
+    var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){      
+            DeterminaMotor(Gres.MenuOctavasP);  
+          }
+          else{
+            var mensaje=  document.title + ". "  + Gres.MenuOctavas;            
+            DeterminaMotor(mensaje);  
+          }
+
+        t=1;		
+		$("#Primera").css("display","inline-grid");
+	    $("#EtiquetaDosTexto").text("");		
+		// var miVar2 = setTimeout(function(){ 
+		// 	Lee();			
+        // }, 1000); 
+	});
+
+    function Ayuda()
+    {
+	  Lee(Gres.MenuOctavas);
+    }
+	function Regresar()
+      {
+        window.open("./index.html","_self");
+      }
+	
+	
+
+function Npulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+ 
+  //Ayuda
+  if (keyCode == 112) {   
+      movil = 0;
+      //TecladoQ();
+      Ayuda();   
+  }
+  if (keyCode == 27) {
+    Regresar();
+  }
+ }
+ ////////////////
+ var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+$(document).on("touchstart mousedown", function( e ) {		
+  xPosVie = 0;
+  yPosVie = 0;
+    var touchstart = e.type === 'touchstart',
+    e = touchstart ? e.originalEvent : e,
+    pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+    pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+    xPosVie = pageX;
+yPosVie = pageY;
+});    
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+  ////console.log(xPosNew);
+});
+
+$(document).on("touchend", function(e) {
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return}     
+      DifX =  xPosNew  - xPosVie ;
+      //console.log(DifX);
+  		if (DifX > 200){        
+	 		adelante();        
+    	}
+        if (DifX < -200){      		
+			atras();      
+        }
+        if (DifY > 100){
+                      //  ////console.log(" Baja #L"+ Quien + Opcion);                
+          return;
+        }
+        if (DifY < -100){
+         ////console.log(DifY + " Sube #L"+ Quien + Opcion);          
+          return;
+        }
+    return;
+
+});
+function AyudaM()
+    {
+	  Lee("pulsar las flechas para recorrer la representación de las octavas ");		
+    }
+
+    $(document).keyup(function(e) { 
+  e.preventDefault();
+
+if (e.keyCode == 37 || e.keyCode == 40 )
+{
+    atras();
+    return;
+}
+if (e.keyCode == 39 || e.keyCode == 38)
+{
+    adelante();
+    return;
+}
+}
+);
+
+        
+function atras(){                
+  nlec--;
+  if (nlec < 0){
+   nlec = 0;
+  }
+  $(".box").css("background-color","white");
+  $(".box").css("color","black");                      
+  
+  // for (let index = 0; index < numeroP.length; index++) {      
+  //     $("#box" + numeroP[index] ).css("color","white");
+  //     $("#box" + numeroP[index] ).css("background-color","black");      
+  // }
+
+  if (Soctava[nlec] == "USO"){
+    $("#nota").text("REGLAS DE USO DE LAS OCTAVAS");
+    LeeCGB("Reglas de uso de las Octavas. La primera nota de una pieza o de un párrafo debe estar precedida de su signo de octava. Para las demás notas deben aplicarse las reglas siguientes. (a) Si dos notas forman un intervalo de segunda o tercera ascendente o descendente, la segunda de ellas no lleva signo de octava, incluso si pertenece a una octava distinta  la nota anterior. (b) Si forman un intervalo de cuarta o quinta ascendente o descendente, la segunda sólo lleva signo de octava si pertenece a octava distinta de la primera. (c) Si forman un intervalo de sexta o mayor, la segunda debe llevar siempre signo de octava.");
+      return;
+  }
+  
+  var MLec = eval("N" + Soctava[nlec]);
+
+  //console.log(MLec + " letra " + Soctava[nlec]);
+  let numeroP = MLec.split('');
+  //console.log(numeroP);
+  // $(".box").css("background-color","white");
+  // $(".box").css("color","black");                      
+  for (let index = 0; index < numeroP.length; index++) {
+      
+      $("#box" + numeroP[index] ).css("color","white");
+      $("#box" + numeroP[index] ).css("background-color","black");
+      
+  }
+  var NMLec = MLec.split('');
+  NMLec = NMLec.toString().replace(/,/g,", " );
+  if (Soctava[nlec] != "SEPTIMA" && Soctava[nlec] != "PRIMERA" && Soctava[nlec] != "CUARTA"){
+    $("#nota").text( Soctava[nlec] +  " OCTAVA " );
+    LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec);
+  }
+  else if (Soctava[nlec] == "PRIMERA" || Soctava[nlec] == "CUARTA"){
+    $("#nota").text( Soctava[nlec] +  " OCTAVA");
+    LeeCGB($("#nota").text() + ". PUNTO " + NMLec);
+  }
+ else if (Soctava[nlec] == "SEPTIMA"){
+      $("#nota").text("SÉPTIMA OCTAVA");
+      LeeCGB($("#nota").text() + ". PUNTO " + NMLec);
+  }
+  
+}
+function adelante(){                
+    nlec++;
+   
+    var pulsaTrue = localStorage.getItem("Pulsador");
+         if (pulsaTrue == "true" ){      
+            if (nlec + 1 > Soctava.length ) {nlec = 0 }  
+          }
+          else{
+            if (nlec + 1 > Soctava.length ) {nlec = Soctava.length -1 }    
+         }
+   
+    $(".box").css("background-color","white");
+    $(".box").css("color","black");                      
+   
+
+    if (Soctava[nlec] == "USO"){
+      $("#nota").text("REGLAS DE USO DE LAS OCTAVAS");
+      LeeCGB("Reglas de uso de las Octavas. La primera nota de una pieza o de un párrafo debe estar precedida de su signo de octava. Para las demás notas deben aplicarse las reglas siguientes. (a) Si dos notas forman un intervalo de segunda o tercera ascendente o descendente, la segunda de ellas no lleva signo de octava, incluso si pertenece a una octava distinta  la nota anterior. (b) Si forman un intervalo de cuarta o quinta ascendente o descendente, la segunda sólo lleva signo de octava si pertenece a octava distinta de la primera. (c) Si forman un intervalo de sexta o mayor, la segunda debe llevar siempre signo de octava.");
+      return;
+    }
+
+    var MLec = eval("N" + Soctava[nlec]);
+
+    //console.log(MLec + " letra " + Soctava[nlec]);
+    let numeroP = MLec.split('');
+    //console.log(numeroP);
+    // $(".box").css("background-color","white");
+    // $(".box").css("color","black");                      
+    for (let index = 0; index < numeroP.length; index++) {
+        
+        $("#box" + numeroP[index] ).css("color","white");
+        $("#box" + numeroP[index] ).css("background-color","black");
+        
+    }
+    var NMLec = MLec.split('');
+    NMLec = NMLec.toString().replace(/,/g,", " );
+    if (Soctava[nlec] != "SEPTIMA" && Soctava[nlec] != "PRIMERA" && Soctava[nlec] != "CUARTA"){
+      $("#nota").text( Soctava[nlec] +  " OCTAVA " );
+      LeeCGB($("#nota").text() + ".  PUNTOS " + NMLec);
+    }
+    else if (Soctava[nlec] == "PRIMERA" || Soctava[nlec] == "CUARTA"){
+      $("#nota").text( Soctava[nlec] +  " OCTAVA");
+      LeeCGB($("#nota").text() + ". PUNTO " + NMLec);
+    }
+   else if (Soctava[nlec] == "SEPTIMA"){
+        $("#nota").text("SÉPTIMA OCTAVA");
+        LeeCGB($("#nota").text() + ". PUNTO " + NMLec);
+    } 
+}
+
+
+    </script>
+
+
+</body></html>

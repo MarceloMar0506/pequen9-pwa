@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Estenografía Braille</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<meta content="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Generales.js"></script>
+<script src="./../../pulsador.js"></script>
+
+<style>
+	.menuGrid{
+	  width: 100vw;
+	  height: 80vh;
+	  float: left;
+	  display: grid;
+	  grid-template-rows:repeat(3,1fr);
+	  grid-template-columns: repeat(5,1fr);
+	  justify-items: center;
+	  text-align: center;   
+	}
+	.itemS{
+	  font-size: 3vh;     
+	}
+  img{width: 10vh;}
+ 
+ 
+	#titulo3{
+		margin-bottom: 0%;
+		margin-top: 0%;
+	}	
+	.f1 {
+     width: 5vh; 
+     z-index: 100;
+    
+  }   
+</style>
+</head>
+
+<body onkeyup="Npulsado(event)" >
+	<div id="contenedor" style="height:100%">
+		<div id="titulo3" style="margin-top: 1vw;margin-bottom: 1vw;">
+			<div><span2 id="s11" class="itemS" style="font-size: small;"> <img src="./../../ResB/Fiz.png" alt="regresar" style="width: 5vh;"/><br>REGRESAR</span2></div> 
+			<span2 style="text-align: center;">ESTENOGRAFÍA BRAILLE</span2>
+			<div ></div>
+		  </div>
+
+	
+<div class="menuGrid">
+<div>
+<span4 id="P1" class="itemN" onclick="teclado()"><img src="./../../ResB/UnSigno.png"/><br><span2 id="s1"  class="itemS">PALABRAS ABREVIADAS<br> CON UN SIGNO </span2></span4>
+</div><div></div>
+<div>
+<span4 id="P2" class="itemN" onclick="teclado()"><img src="./../../ResB/GeneroN.png"/><br><span2 id="s2"  class="itemS">GÉNERO Y NÚMERO</span2></span4>
+</div><div></div>
+<div>
+<span4 id="P3" class="itemN" onclick="teclado()"><img src="./../../ResB/DosOM.png"/><br><span2 id="s3"  class="itemS">PALABRAS ABREVIADAS<br> CON DOS O MÁS SIGNOS </span2></span4>
+</div><div></div>
+<div>
+<span4 id="P4" class="itemN" onclick="teclado()"><img src="./../../ResB/Principios.png"/><br><span2 id="s4"  class="itemS">PRINCIPIOS</span2></span4>
+</div><div></div>
+<div>
+<span4 id="P5" class="itemN" onclick="teclado()"><img src="./../../ResB/Contracciones.png"/><br><span2 id="s5"  class="itemS">CONTRACCIONES</span2></span4>
+</div><div></div>
+<div>
+<span4 id="P6" class="itemN" onclick="teclado()"><img src="./../../ResB/Terminaciones.png"/><br><span2 id="s6"  class="itemS">TERMINACIONES</span2></span4>
+</div><div></div>
+<div>
+		<span4 id="P7" class="itemN" onclick="teclado()"><img src="./../../ResB/Secuencias.png"/><br><span2 id="s7"  class="itemS">SECUENCIAS</span2></span4>
+</div><div></div>	
+<div>
+	<span4 id="P8" class="itemN" onclick="teclado()"><img src="./../../ResB/BPunto5.png"/><br><span2 id="s8"  class="itemS">PUNTO 5</span2></span4>
+</div><div></div>	
+<div>
+	<span4 id="P9" class="itemN" onclick="teclado()"><img src="./../../ResB/Terminaciones.png"/><br><span2 id="s9"  class="itemS">NORMAS</span2></span4>
+</div><div></div>	
+<div>	
+   <span4 id="P10" class="itemN" onclick="teclado()"><img src="./../../ResB/DosOM.png"/><br><span2 id="s10"  class="itemS">PRÁCTICAS</span2></span4>
+</div>
+<div></div>	
+<div></div>	
+<div></div>	
+<div></div>	
+
+</div>	
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1vh;width: 70vws;margin-left: 15vw; "></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" ></div>
+
+ </div>
+
+ 
+<script>
+
+var s, p=0;
+        function teclado(){
+			LeeCGB( Gres.usarTeclado + ". ");     
+			return;
+		}
+		function Abre(q)
+        {
+			
+        if (q == 1)// Un Signo
+          {
+            window.open("./Lista/Lista.html","_self");
+          }
+          else if (q == 2)// Génnero y Número
+          {
+            window.open("./Lista/ListaGN.html","_self");
+		  }
+		  else if (q == 3)// Dos o Más
+          {
+            window.open("./Lista/Lista2oM.html","_self");
+		  }
+		  else if (q ==4)// Principios
+          {// Principios
+            window.open("./Lista/ListaPrincipios.html","_self");
+		  }
+		  else if (q == 5)
+          {// Contacciones
+            window.open("./Lista/ListaContracciones.html","_self");
+		  }
+		  else if (q == 6)
+          {// Terminaciones
+            window.open("./Lista/ListaTerminaciones.html","_self");
+          }
+		  else if (q == 7)// "SECUENCIAS")
+          {			
+            window.open("./Lista/ListaSecuencias.html","_self");
+          }
+		  else if (q == 8)// "PUNTO5")
+          {			
+            window.open("./Lista/ListaPunto5.html","_self");
+          }
+		  else if (q == 9)// "NORMAS")
+          {			
+            window.open("./Lista/ListaNormas.html","_self");
+          }
+		  else if (q == 10)// "PRACTICA")
+          {
+            window.open("./Lista/Ingreso.html","_self");
+          }
+		  else if (q == 11)// Regresar
+          {			
+            Regresar();
+          }
+
+        }
+ ////////////////////////////////////////   
+///Numero pulsado
+function Npulsado(event)
+{
+event.preventDefault();
+var number = String.fromCharCode(event.which);
+var keyCode = event.keyCode || event.which;
+//Ayuda
+
+	if (event.keyCode == 112) {
+   // $.getScript("../F1/Generales.js", function(){
+
+      movil = 0;
+	  //TecladoQ();     
+	  LeeCGB(document.title + ". " + Gres.MenuActividad + ". ");     
+    //});
+  }
+
+
+if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+if (event.keyCode == 37) {atras()}
+if (event.keyCode == 38) {atras()}
+if (event.keyCode == 39) {adelante()}
+if (event.keyCode == 40) {adelante()}
+if (event.keyCode == 13) {
+//console.log("13 " + p)
+Abre(p);
+		// if (p == 1 ){Abrir("LISTA")}
+		// if (p == 2 ){Abrir("LISTA2")}	
+		// if (p == 3 ){Abrir("LISTA3")}	
+		// if (p == 4 ){Abrir("LISTA4")}	
+		// if (p == 5 ){Abrir("LISTA5")}	
+		// if (p == 6 ){Abrir("LISTA6")}	
+		// if (p == 7 ){Abrir("SECUENCIAS")}		
+		// if (p == 8 ){Abrir("PUNTO5")}			
+		// if (p == 9 ){Abrir("NORMAS")}				
+		// if (p == 10 ){Abrir("PRACTICA")}	
+		// if (p == 11 ){
+		// 	Regresar();
+		// }			
+}
+  }
+///Fin tecla pulsada
+function atras(){
+	
+	p--;
+	if (p < 1){
+	 p = 11
+    }
+	
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + p).css("background-color", "black");
+    $("#s" + p).css("color", "white");
+    Lee($("#P" + p).text());
+	
+}
+
+function adelante(){
+	
+	p++;
+	if (p > 11){
+	 p = 1
+    }
+	
+	$(".itemS").css({"background-color": "white"});
+    $(".itemS").css({"color": "black"});   
+    $("#s" + p).css("background-color", "black");
+    $("#s" + p).css("color", "white");
+    Lee($("#P" + p).text());
+	
+}
+
+
+  function AyudaM()
+{
+  LeeCGB(document.title + ". " + Gres.MenuActividad + ". ");
+}
+function Regresar()
+      {
+        window.open("../index.html","_self");
+      }
+$(document).ready(function() {
+
+//DeterminaMotor(document.title + ". " + Gres.MenuActividad);
+
+var pulsaTrue = localStorage.getItem("Pulsador");
+if (pulsaTrue == "true" ){
+    var  mensaje2 = document.title + ". " + Gres.MenuActividadP;            
+     DeterminaMotor(mensaje2);  
+     }
+else{
+    var mensaje= document.title + ". " + Gres.MenuActividad;            
+        DeterminaMotor(mensaje);  
+    }
+
+
+  
+ });
+
+   
+  </script>
+
+
+</body>
+
+</html>

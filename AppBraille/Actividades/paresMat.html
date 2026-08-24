@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>PequénTablaM</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<!-- <link href="PracticaSig.css" type="text/css" rel="stylesheet" id="linkestilo"/> -->
+
+
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+
+
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./PuntosAlfa.js"></script> 
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Practicaes.js"></script>
+<script src="./../../ResB/Tone.js"></script> 
+<style>
+  body{
+    display: block;
+   width: 100%;
+   height: 100%;
+  }
+ 
+ #pie{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 20vw;
+  text-align: center;
+  border: 1px solid blue;
+ }
+ #errorPie{
+  position: absolute;
+  bottom: 5px;
+ display: none;
+  left: 25vw;
+   background-color: white;
+  width: 50vw;
+  text-align: center;
+  border: 1px solid blue;
+  z-index: 1000;
+  font-size: 3vw;
+  text-transform: uppercase;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+ }
+  #DescripcionC{
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vh;
+    width: 100%; 
+    height: 35vh;     
+  }
+
+  .img{      
+    overflow: hidden;
+  }
+  #grillaEncabezado{  
+  display: grid; 
+  grid-template-columns: repeat(4,20vw); 
+  row-gap: 10px;
+  column-gap: 14px;
+  margin-bottom: 6px;
+  }
+
+  #grillaDosSup{  
+  display: grid;  
+  grid-template-columns: 3% 80%;
+  }
+
+  #grillaDos{  
+  display: grid;  
+  grid-template-columns: 3% 80%;
+  }
+
+
+  #grillaLateral{  
+  float: left;  
+  display: grid; 
+  grid-template-rows: repeat(4,5vw); 
+  row-gap: 10px;
+  width: 2vw;
+  }
+
+
+  #grilla{  
+  display: grid;
+  grid-template-rows:repeat(4,1fr);
+  grid-template-columns: repeat(4,20vw); 
+  row-gap: 12px;
+  column-gap: 14px;
+  }
+  .celda{
+    border: 1px solid black;
+    width: 20vw;
+    font-size: 3vw;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(235, 235, 226);
+    /* color: rgb(155, 157, 157); */
+    align-content: center;
+  }
+  .celdaE{       
+    font-size: 2vw;
+    font-family: Arial, Helvetica, sans-serif;
+    align-content: center;
+  }
+  #contGrid{
+   text-align: center;
+   margin-top: 3px; 
+   padding-left: 10px;
+   padding-right: 10px; 
+  }
+  .celdaR{       
+    font-size: 3vw;
+    font-family: Arial, Helvetica, sans-serif;
+    align-content: center;  
+    border: 3px solid  blue;
+    border-radius: 0px;
+    background-color: #d0ffc0;  
+  }
+  .pieAyuda{
+    margin-left: 3vw;
+    margin-right: 3vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1vw;
+  } 
+
+
+ 
+</style>
+
+ <script>
+ 	 var PrimerS = "";
+     var c_Columna = 0;
+     var c_Fila =0;
+     var cuenta_selec =0;
+     var seleccionado1="";
+     var seleccionado2="";
+     var seleccionado = "";
+     var valorS = 0;
+     var key="";
+     var value ="";
+     var pares = 8;
+     var objK = "";
+     var objV = "";
+</script> 
+
+
+</head>
+
+<body>
+  
+  <!-- <div data-c="a1"  class="celda" id="titulo3">
+    <div></div>
+    <div></div>
+    <div></div>
+    </div>        -->
+ 
+    
+<div  id="contGrid">
+
+
+
+  <div id="grillaDosSup">    
+  <div>.</div>
+  <div id="grillaEncabezado">   
+    <div id="Col1" class="celdaE">A</div>
+    <div id="Col2" class="celdaE">B</div>
+    <div id="Col3" class="celdaE">C</div>
+    <div id="Col4" class="celdaE">D</div>
+  </div>  
+
+ </div>
+
+  <div id="grillaDos">    
+
+  <div id="grillaLateral">   
+    <div id="Fil1"  class="celdaE">1</div>
+    <div id="Fil2" class="celdaE">2</div>
+    <div id="Fil3" class="celdaE">3</div>
+    <div id="Fil4" class="celdaE">4</div>
+  </div>     
+
+
+
+  <div id="grilla">
+<!-- //F1                            C F   -->
+<div data-c="a1"  class="celda" id="C11">a1</div>
+<div data-c="b1"  class="celda" id="C21">b1</div>
+<div data-c="c1"  class="celda" id="C31">c1</div>
+<div data-c="d1"  class="celda" id="C41">d1</div>
+
+<!-- //F2 -->
+<div data-c="a2"  class="celda" id="C12">a2</div>
+<div data-c="b2"  class="celda" id="C22">b2</div>
+<div data-c="c2"  class="celda" id="C32">c2</div>
+<div data-c="d2"  class="celda" id="C42">d2</div>
+
+<!-- //F3 -->
+<div data-c="a3"  class="celda" id="C13">a3</div>
+<div data-c="b3"  class="celda" id="C23">b3</div>
+<div data-c="c3"  class="celda" id="C33">c3</div>
+<div data-c="d3"  class="celda" id="C43">d3</div>
+
+<!-- //F4 -->
+<div data-c="a4"  class="celda" id="C14">a4</div>
+<div data-c="b4"  class="celda" id="C24">b4</div>
+<div data-c="c4"  class="celda" id="C34">c4</div>
+<div data-c="d4"  class="celda" id="C44">d4</div>
+
+</div>
+
+</div>
+
+</div>
+
+<P class="pieAyuda">F1 AYUDA</P>
+<div id="F1ayuda" class="pieAyuda">
+TABLA DE CUATRO FILAS NUMERADAS Y 4 COLUMNAS: A, B, C, D. <br>
+CONTIENE 8 CORRESPONDENCIAS, SIGNO Y PUNTOS QUE LOS FORMAN. <br>   
+CON TECLAS DE DIRECCIÓN DERECHA E IZQUIERDA RECORRER LAS COLUMNAS. <br>
+CON TECLAS DE DIRECCIÓN ARRIBA Y ABAJO RECORRER LAS FILAS. <br>
+PULSAR ENTER PARA SELECCIONAR UNA CELDA LUEGO BUSCAR LA CELDA CORRESPONDIENTE Y PULSAR ENTER PARA SELECCIONAR Y EVALUAR.  <br>
+PULSAR BARRA ESPACIADORA PARA CONOCER EL CONTENIDO DE UNA CELDA. <br>
+PULSAR ESCAPE PARA SALIR.
+
+
+</div>
+
+
+
+
+ <!-- Pequen -->
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 1px;margin-left: 20vw;margin-bottom: 8px; width: 75vw;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+
+<script>
+ $(document).ready(function() {  
+  var mensaje="tabla con 16 celdas.  8 contienen signos de matemática, geometría y lógica. otras 8 contienen los puntos que forman esos signos.  Con teclas de dirección recorrerla y con enter seleccionar una celda. luego buscar y seleccionar la celda con el  signo o puntos que le corresponde para confirmar la relación. pulsar f1 para escuchar la ayuda";
+    DeterminaMotor(mensaje);  
+    
+    //console.log(signosMatema.size +  " " +  keysAlfa)
+   
+    // var ra =  shuffle(keysAlfa);
+    
+    var ra =  shuffle(keysMatema);
+
+    
+    var ncol=0;
+    var nfil = 0;
+    var col =0;
+    var indice = -1;
+
+
+ 
+
+  console.log("Ra " +  ra);
+ // console.log(signosMatema.get('=='))
+
+  //rellena las celdas
+  var element = "";
+  for (let fla = 0; fla < 4; fla++) {     
+    for (col = 0; col < 4; col++) {
+          indice++ 
+      element = ra[indice];
+  
+      if(indice == 8){
+        indice = 0;
+        //vuelve a mezclar
+       
+        nRa = ra[0]+ ra[1] + ra[2]+ ra[3]+ ra[4]+ ra[5]+ ra[6]+ ra[7];
+        nRa = nRa.split('');
+        nRa =  shuffle(nRa);
+        ra = nRa;
+        //console.log("nuevo ra " + ra);
+        element = ra[indice];
+      }
+
+      
+     
+      if (fla < 2 ){  
+        if (element == "$"){element = "=="}           
+        $("#C" + (col+1)+  (fla +1) ).text(element)   
+      }else  if (fla > 1 )
+      {      
+       // $("#C" + (col+1) + (fla +1) ).text(signosMatema.get(element))    
+
+       var mNumeros = signosMatema.get(ra[indice]);
+       console.log(mNumeros + " element " + element + " xx " +  ra[indice])
+       mNumeros =mNumeros.replace(",",".");
+       $("#C" + (col+1) + (fla +1) ).text(mNumeros)    
+      }
+      
+    }
+  }
+         
+ 
+
+
+
+});
+
+function Regresar()
+  {
+      window.open( "./menuGrillas.html","_self"); 
+  }
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+
+
+
+$(document).keyup(function(e) { 
+    e.preventDefault();
+
+    if (event.keyCode == 27)
+   {
+    Regresar()
+  }
+
+    if (pares < 1){
+      LeeCGB("Muy bien. Todas las celdas fueron relacionadas. pulsar escape para salir. ");
+      return;
+    }
+
+
+  if (event.keyCode == 112)
+    {
+ 	  LeeCGB($("#F1ayuda").text());
+    }
+
+if (event.keyCode == 37)
+{
+ 	C_atras();	
+}
+
+if (event.keyCode == 39)
+{
+  C_adelante();	
+}
+
+if (event.keyCode == 38)
+{
+ 	F_arriba();	
+}
+
+if (event.keyCode == 40)
+{
+  F_abajo();	
+}
+
+
+
+if (event.keyCode == 32)
+{
+  //leeCeldaActual();	
+  var diceContenido = $("#C" + c_Columna + c_Fila  ).text();  
+  if ($.isNumeric( $("#C" + c_Columna + c_Fila  ).text())){      
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");
+      console.log(diceContenido);
+      seleccionado = "";
+   valorS =  parseInt( $("#C" + c_Columna + c_Fila  ).css('borderWidth'));
+  if (valorS == 5) {
+   seleccionado = "ya está seleccionado";
+  }
+  else if (valorS == 3) {       
+    diceContenido =  $("#C" + c_Columna + c_Fila  ).text();
+  //  console.log(diceContenido)
+    diceContenido=  diceContenido.toString().replace("." , ",");
+  //  console.log(diceContenido)
+   var  NdiceContenido =  KeyByValue(signosMatema, diceContenido);  
+  
+ var diceContenido = $("#C" + c_Columna + c_Fila  ).text();   
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");  //console.log(diceContenido);   
+  LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ", ya resuelto, " + leeSignos(NdiceContenido)  + ", puntos " + diceContenido);
+
+  }
+  else{
+    var quBusca ="";
+    if (key != ""){
+      var nKey  =  leeSignos(key);
+      quBusca= "estás buscando los puntos que representan a. " + nKey +". ";
+    }
+    else if (value != ""){     
+      var nValue = value.split('');
+      nValue = nValue.toString().replace(/,/g , ", ");
+      nValue = nValue.toString().replace(", .,", "; ");
+
+      quBusca= "estás buscando el signo que se forma con " + nValue }
+    diceContenido =  leeSignos(diceContenido);
+  LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ". "  +  diceContenido  + ". " + seleccionado + ". " + quBusca);
+  }
+  //regresa de son solo numeros   
+   return   
+    }
+    else{
+ 
+    seleccionado = "";
+   valorS =  parseInt( $("#C" + c_Columna + c_Fila  ).css('borderWidth'));
+  if (valorS == 5) {
+  // seleccionado = "ya está seleccionado";
+  diceContenido =  leeSignos(diceContenido);
+  LeeCGB(diceContenido +   ", ya está seleccionado");
+  return;
+  }
+  else if (valorS == 3) {
+    var qBusca =  $("#C" + c_Columna + c_Fila  ).text();
+    console.log(qBusca);
+    if (qBusca == "=="){qBusca="$"}
+
+    console.log(qBusca);
+    var puntos =  signosMatema.get(qBusca);
+      puntos = puntos.split('');
+      puntos = puntos.toString().replace(/,/g , ", ");
+      puntos = puntos.toString().replace(", .,", "; ");
+      puntos = puntos.toString().replace(", , ,", "; ");     
+      diceContenido =  leeSignos(diceContenido);
+      LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ". ya resuelto. "  +  diceContenido  + ": " + puntos );
+  }
+  else{
+    
+    
+    var quBusca ="";    
+    if (key != ""){
+      var nKey  =  leeSignos(key);
+      quBusca= "estás buscando los puntos que representan a. " + nKey +". ";
+     
+    }
+    else if (value != ""){     
+      var nValue = value.split('');
+      nValue = nValue.toString().replace(/,/g , ", ");
+      nValue = nValue.toString().replace(", .,", "; ");
+
+      quBusca= "estás buscando el signo que se forma con " + nValue }
+    diceContenido =  leeSignos(diceContenido);
+  LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ". "  +  diceContenido  + ". " + seleccionado + ". " + quBusca);
+  }
+  
+}
+
+}
+
+
+
+
+
+if (event.keyCode == 13)
+{
+
+ valorS =  parseInt( $("#C" + c_Columna + c_Fila  ).css('borderWidth'));
+  if (valorS == 5) {
+    LeeCGB(" ya está seleccionado");
+    return;}
+  else if (valorS == 3) {
+    LeeCGB( " ya Resuelto");
+    return; }
+  else if (valorS == 2) {
+    LeeCGB( "Celda con su par ya Resuelto");
+    return;       
+  } else{
+
+if (cuenta_selec == 0){
+   cuenta_selec=2;
+    seleccionado1="C"+ c_Fila.toString() + c_Columna.toString();   
+    $("#C" + c_Columna + c_Fila  ).css("border","5px solid  blue");  
+    $("#C" + c_Columna + c_Fila ).css('box-shadow','1px 6px 44px 8px rgba(114,129,232,1)');
+  var diceContenido = $("#C" + c_Columna + c_Fila  ).text();  
+    if ($.isNumeric( $("#C" + c_Columna + c_Fila  ).text())){ 
+      value =diceContenido; 
+      objV= "#C" + c_Columna + c_Fila;
+
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");
+      LeeCGB(diceContenido  + "  seleccionado.  buscar el signo que se forma con estos puntos " );
+    
+    }else{
+      
+      if (diceContenido == "=="){diceContenido = "$"}
+      key = diceContenido;
+      objK= "#C" + c_Columna + c_Fila;
+
+      diceContenido =  leeSignos(diceContenido);
+      LeeCGB(diceContenido +  " seleccionado.  buscar los puntos que  representa a " + diceContenido );    
+    }
+
+
+} else if (cuenta_selec == 2){
+    seleccionado2="C"+ c_Fila.toString() + c_Columna.toString(); 
+   var diceContenido = $("#C" + c_Columna + c_Fila  ).text();
+   if ($.isNumeric( $("#C" + c_Columna + c_Fila  ).text())){ 
+      if (value == ""){       
+        $("#C" + c_Columna + c_Fila  ).css("border","5px solid  blue");  
+        $("#C" + c_Columna + c_Fila ).css('box-shadow','1px 6px 44px 8px rgba(114,129,232,1)'); 
+      value =diceContenido;  
+      objV= "#C" + c_Columna + c_Fila;
+
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");
+    }else{
+      //LeeCGB("Seleccionar la clave")   
+      diceContenido = value;
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");       
+      LeeCGB("Estás buscando el signo que se representa con los puntos " + diceContenido );    
+      return
+    }
+    }else{
+      if (key == ""){      
+        $("#C" + c_Columna + c_Fila  ).css("border","5px solid  blue");  
+      key = diceContenido;
+      objK= "#C" + c_Columna + c_Fila;
+      }else{
+        diceContenido =  leeSignos(key);
+        LeeCGB("seleccionar los puntos que corresponden a " + diceContenido)
+        return
+      }    
+    }
+    diceContenido =  leeSignos(diceContenido);
+   LeeCGB(diceContenido  + " seleccionado. Evaluando la relación. ");
+   ultimoDialogo = "Evaluando la relación";
+   //comparaMatema() En onend de habla.js  
+
+var miVar3 = setTimeout(function(){    
+  comparaMatema();     
+ },7000); 
+  
+
+
+}
+}
+    
+}
+ 
+
+
+}); 
+
+
+
+function KeyByValue(map, KeyValue) {
+    let result;
+    map.forEach((value, key) => {
+        result = value === KeyValue ? key : result;
+    });
+    return result;
+}
+
+
+function comparaMatema(){
+  value = value.replace(".",",");
+  console.log(key + "<<<< " +  signosMatema.get(key) + " ==  " + value );
+  if (key == "==") {
+     key = "$"
+  }
+
+if (signosMatema.get(key) == value ){
+  diceContenido = value;
+  diceContenido = diceContenido.split('');
+  diceContenido = diceContenido.toString().replace(/,/g , ", ");
+  diceContenido = diceContenido.toString().replace(", .,", "; ");
+  diceContenido = diceContenido.toString().replace(", , ,","; ");
+  pares--
+
+  if (pares < 1){
+    LeeCGB("Muy bien. Todas las celdas fueron relacionadas. pulsar escape para salir. ");
+      $(".celdaR").css('font-weight', 'bold');
+      $(".celdaR").css("color","black");    
+      valorS = 0;
+      seleccionado=0;
+      seleccionado1="";
+      seleccionado2="";
+      cuenta_selec=0;
+      value="";
+      key="";
+      
+     $("#C" + c_Columna + c_Fila  ).removeClass("celda");
+     $("#C" + c_Columna + c_Fila).addClass("celdaR");
+
+
+     $(objK).css("border","3px solid  blue");
+     $(objK).css('border-radius', '0px');
+     $(objK).css("background-color","#d0ffc0");  
+  
+     $(objV).css("border","3px solid  blue");
+     $(objV).css('border-radius', '0px');
+     $(objV).css("background-color","#d0ffc0");  
+
+
+      return;
+    }
+
+  var nKey =  leeSignos(key);
+  LeeCGB("bien.  " + nKey + ": " + diceContenido + ". quedan  " + (pares * 2) + " celdas para relacionar");
+
+  $(objV).removeClass("celda");
+    $(objV).addClass("celdaR");
+    
+    $(objK).removeClass("celda");
+    $(objK).addClass("celdaR");
+
+   valorS = 0;
+   seleccionado=0;
+   seleccionado1="";
+   seleccionado2="";
+   cuenta_selec=0;
+   value="";
+   key="";
+
+  $(objK).css("border","3px solid  blue");
+  $(objK).css('border-radius', '0px');
+  $(objK).css("background-color","#d0ffc0");  
+  
+  $(objV).css("border","3px solid  blue");
+  $(objV).css('border-radius', '0px');
+  $(objV).css("background-color","#d0ffc0");  
+
+
+}else{
+  diceContenido = value;
+  diceContenido = diceContenido.split('');
+  diceContenido = diceContenido.toString().replace(/,/g , ", ");
+  diceContenido = diceContenido.toString().replace(", .,", "; ");
+  var nKey =  leeSignos(key);
+  LeeCGB( nKey + ", no corresponde a los puntos: " + diceContenido + ". Volver a crear una relación " ); 
+  valorS = 0;
+   seleccionado=0;
+   seleccionado1="";
+   seleccionado2="";
+   cuenta_selec=0;
+   value="";
+    key="";
+    console.log(valorS + " está seleccionado Va a recorrer los Divs????" );
+   $(".celda").css("border","1px solid  black");
+   $(".celda").css('border-radius', '0px');  
+}    
+
+}
+
+
+
+
+
+
+function C_adelante(){
+    $(".celda").css("background-color","rgb(235, 235, 226)"); 
+    $(".celda").css("border-radius","0px");   
+    $(".celdaR").css("border-radius","0px");      
+   // $(".celda").css("color","rgb(155, 157, 157");
+    $(".celda").css('font-weight', 'normal');
+    //$(".celdaR").css('font-weight', 'normal');
+    $(".celdaE").css("background-color","white");       
+    c_Columna++
+
+    if (c_Columna > 4){c_Columna = 4}
+    if (c_Fila == 0){c_Fila = 1}
+
+    console.log( $("#C" + c_Columna + c_Fila  ).hasClass("celdaR"));
+    if (! $("#C" + c_Columna + c_Fila  ).hasClass("celdaR")){
+       $("#C" + c_Columna + c_Fila  ).css("background-color","white");     
+    }
+    $("#C" + c_Columna + c_Fila  ).css('border-radius', '25px');
+    
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+  
+    $("#C" + c_Columna + c_Fila  ).css("color","black");     
+   
+   $("#Fil" + c_Fila ).css("background-color","palegreen"); 
+   $("#Col" + c_Columna ).css("background-color","palegreen"); 
+
+   valorS =  parseInt( $("#C" + c_Columna + c_Fila  ).css('borderWidth'));
+   seleccionado="";
+    if (valorS == 5) {seleccionado = "Ya Seleccionado"}
+    if (valorS == 3) {seleccionado = "Ya resuelto"}
+
+    var diceContenido = $("#C" + c_Columna + c_Fila  ).text();
+    if ($.isNumeric( $("#C" + c_Columna + c_Fila  ).text())){      
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");
+      console.log(diceContenido)
+    }else{
+    //  console.log( $("#C" + c_Columna + c_Fila  ).text() + " No es número")
+    }
+    diceContenido =  leeSignos(diceContenido);
+    LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ". "  +  diceContenido  + ". " + seleccionado);
+
+   
+}
+
+function C_atras(){
+    $(".celda").css("background-color","rgb(235, 235, 226)");   
+    $(".celda").css("border-radius","0px");   
+    $(".celdaR").css("border-radius","0px");    
+   // $(".celda").css("color","rgb(155, 157, 157)");
+    $(".celda").css('font-weight', 'normal');
+   // $(".celdaR").css('font-weight', 'normal');
+    $(".celdaE").css("background-color","white");       
+    c_Columna--
+
+    if (c_Columna < 1){c_Columna = 1}
+    if (c_Fila == 0){c_Fila = 1}
+    if ( !$("#C" + c_Columna + c_Fila  ).hasClass("celdaR")){
+       $("#C" + c_Columna + c_Fila  ).css("background-color","white"); 
+    }
+    $("#C" + c_Columna + c_Fila  ).css("color","black"); 
+    $("#C" + c_Columna + c_Fila  ).css('border-radius', '25px');   
+   
+    $("#Fil" + c_Fila ).css("background-color","palegreen"); 
+    $("#Col" + c_Columna ).css("background-color","palegreen"); 
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+
+
+
+    
+   
+   valorS =  parseInt( $("#C" + c_Columna + c_Fila  ).css('borderWidth'));
+   seleccionado="";
+    if (valorS == 5) {seleccionado = "Seleccionado"}
+    if (valorS == 3) {seleccionado = "Ya resuelto"}
+
+    var diceContenido = $("#C" + c_Columna + c_Fila  ).text();
+    if ($.isNumeric( $("#C" + c_Columna + c_Fila  ).text())){      
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");
+    }else{
+    //  console.log( $("#C" + c_Columna + c_Fila  ).text() + " No es número")
+    }
+    diceContenido =  leeSignos(diceContenido);
+    LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ". "  +  diceContenido  + ". " + seleccionado);
+    
+
+}
+
+function F_abajo(){
+    $(".celda").css("background-color","rgb(235, 235, 226)");  
+    $(".celda").css("border-radius","0px");
+    $(".celdaR").css("border-radius","0px");        
+   // $(".celda").css("color","rgb(155, 157, 157)");
+    $(".celdaE").css("background-color","white");  
+  //  $(".celda").css('font-weight', 'normal');
+   // $(".celdaR").css('font-weight', 'normal'); 
+    c_Fila++
+
+   
+    if (c_Fila > 4){c_Fila = 4}
+    if (c_Columna == 0){c_Columna = 1}
+    if (! $("#C" + c_Columna + c_Fila  ).hasClass("celdaR")){
+       $("#C" + c_Columna + c_Fila  ).css("background-color","white"); 
+    }
+
+    $("#C" + c_Columna + c_Fila  ).css('border-radius', '25px');
+    $("#C" + c_Columna + c_Fila  ).css("color","black");   
+
+    $("#Fil" + c_Fila ).css("background-color","palegreen"); 
+    $("#Col" + c_Columna ).css("background-color","palegreen"); 
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+    
+    
+   valorS =  parseInt( $("#C" + c_Columna + c_Fila  ).css('borderWidth'));
+   seleccionado="";
+    if (valorS == 5) {seleccionado = "Seleccionado"}
+    if (valorS == 3) {seleccionado = "Ya resuelto"}
+
+    var diceContenido = $("#C" + c_Columna + c_Fila  ).text();
+    if ($.isNumeric( $("#C" + c_Columna + c_Fila  ).text())){      
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");
+    }else{
+    //  console.log( $("#C" + c_Columna + c_Fila  ).text() + " No es número")
+    }
+    diceContenido =  leeSignos(diceContenido);
+    LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ". "  +  diceContenido  + ". " + seleccionado);
+
+
+    
+}
+
+function F_arriba(){
+    $(".celda").css("background-color","rgb(235, 235, 226)");     
+    $(".celda").css("border-radius","0px");  
+    $(".celdaR").css("border-radius","0px");   
+   // $(".celda").css("color","rgb(155, 157, 157)");
+    $(".celdaE").css("background-color","white"); 
+    $(".celda").css('font-weight', 'normal');
+   // $(".celdaR").css('font-weight', 'normal');  
+    c_Fila--
+
+
+    if (c_Fila <1){c_Fila = 1}
+    if (c_Columna == 0){c_Columna = 1}
+    if ( !$("#C" + c_Columna + c_Fila  ).hasClass("celdaR")){
+       $("#C" + c_Columna + c_Fila  ).css("background-color","white"); 
+    }
+    $("#C" + c_Columna + c_Fila  ).css('border-radius', '25px');
+    $("#C" + c_Columna + c_Fila  ).css("color","black");   
+
+    $("#Fil" + c_Fila ).css("background-color","palegreen"); 
+    $("#Col" + c_Columna ).css("background-color","palegreen"); 
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+    $("#C" + c_Columna + c_Fila  ).css('font-weight', 'bold');
+    
+    
+   valorS =  parseInt( $("#C" + c_Columna + c_Fila  ).css('borderWidth'));
+   seleccionado="";
+    if (valorS == 5) {seleccionado = "Seleccionado"}
+    if (valorS == 3) {seleccionado = "Ya resuelto"}
+
+    var diceContenido = $("#C" + c_Columna + c_Fila  ).text();
+    if ($.isNumeric( $("#C" + c_Columna + c_Fila  ).text())){      
+      diceContenido = diceContenido.split('');
+      diceContenido = diceContenido.toString().replace(/,/g , ", ");
+      diceContenido = diceContenido.toString().replace(", .,", "; ");
+    }else{
+    //  console.log( $("#C" + c_Columna + c_Fila  ).text() + " No es número")
+    }
+    diceContenido =  leeSignos(diceContenido);
+    LeeCGB($("#C" + c_Columna.toString() + c_Fila.toString()  ).attr("data-c") + ". "  +  diceContenido  + ". " + seleccionado);   
+    
+}
+
+
+
+
+function leeSignos(l) {
+    if (l =="@"){ return "ampersand";}
+    if (l  == "~"){return  "aproximadamente igual ";}
+    if (l  == "≠"){return  "desigual o diferente ";}
+    if (l  == "«"){return  "mucho menor ";}
+    if (l  == "»"){return  "mucho mayor ";}
+    if (l  == "%"){return  "porciento ";}
+    if (l  == "$"){return  "exactamente igual ";}
+    if (l  == "=="){return  "exactamente igual ";}
+    if (l  == "○"){return  "círculo ";}
+    if (l  == "□"){return  "cuadrado ";}
+    if (l  == "▌"){return  "rectángulo ";}
+    if (l  == "⌂"){return  "polígono ";}
+    if (l  == "⊿"){return  "triángulo rectángulo ";}
+    if (l  == "△"){return  "triángulo equilátero ";}
+    // if (l  == "/"){return  "barra oblicua ";}
+    if (l  == "@"){return  "arroba o prefijo de minúscula o interruptor estenográfico ";}
+    if (l  == "#"){return  "signo número ";}
+    if (l  == "<"){return  "menor ";}
+    if (l  == ">"){return  "mayor ";}
+    if (l  == "≥"){return  "mayor o igual ";}
+    if (l  == "≤"){return  "menor o igual ";}
+    if (l  == "="){return  "igual ";}
+    if (l  == "+"){return  "suma ";}
+    if (l  == "-"){return  "resta ";}
+    if (l  == "*"){return  "multiplicar ";}
+    if (l  == "/"){return  "dividir ";}
+    if (l  == "%"){return  "porciento ";}
+ else {return l }
+}
+
+</script>
+
+</body>
+</html> 

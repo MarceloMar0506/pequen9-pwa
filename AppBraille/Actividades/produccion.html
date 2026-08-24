@@ -1,0 +1,1262 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Pequén Cocina</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../../ResB/favico.png" sizes="32x32"/>
+
+<link href="./../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<!-- <link href="PracticaSig.css" type="text/css" rel="stylesheet" id="linkestilo"/> -->
+
+
+<script type="text/javascript" src="./../../ResB/jquery-3.3.1.min.js"></script>
+
+
+<script src="./../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="./PuntosAlfa.js"></script> 
+<script type="text/javascript" src="./../../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../../ResB/AnimP.js"></script>
+<script src="./../../F1/Practicaes.js"></script>
+<script src="./../../ResB/Tone.js"></script> 
+<style>
+  body{
+    display: block;
+   width: 100%;
+   height: 100%;
+  }
+ #pie{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 20vw;
+  text-align: center;
+  border: 1px solid blue;
+ }
+ #errorPie{
+  position: absolute;
+  bottom: 5px;
+ display: none;
+  left: 25vw;
+   background-color: white;
+  width: 50vw;
+  text-align: center;
+  border: 1px solid blue;
+  z-index: 1000;
+  font-size: 3vw;
+  text-transform: uppercase;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+ }
+  #DescripcionC{
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vh;
+    height: 35vh;  
+    margin: 10px;   
+  }
+
+  .img{      
+    overflow: hidden;
+  }
+
+  Resalta{
+    font-weight: bold;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4.5vh;
+  }
+  #portaImagen{  
+    display: flex;
+    justify-content: center; 
+    position: absolute;    
+    left: 50vw;    
+    height: 55vh;
+    width: auto;
+    height: fit-content;
+    z-index: 10;
+    /* bottom: 10vh; */
+  }
+  #DescripcionC::first-letter {     
+    font-size: 4.5vh;
+    font-weight: bold;
+  } 
+    #imgVec{
+      position: absolute;
+    
+      height: 55vh;
+      width: auto;   
+  }
+
+  #imgVecA{
+     position: absolute;
+     z-index: 999;
+     height: 55vh;
+     width: auto;   
+    
+  }
+</style>
+
+ <script>
+   var receta = ""; // "compra"; // 
+	 var indices = [];
+	 var PrimerS = "";
+	 var SegundoS = "";
+	 var LetraD = "";
+   var diceDes ="";
+   var diceDes2 ="";
+   var inicial ="";
+   var inicialAnt ="";
+   var imgSrc = "";
+   var imgSrc2 = "";
+   var instruccionM ="";
+   var queComando ="";
+
+   var audio = document.createElement('audio');
+   var audioF = document.createElement('audio');
+   var NumPulsar = "";
+   var MLec = "";
+   var soloNumeros1TVB = "";
+   var soloNumeros2TVB = "";
+   var indices = [];
+   var errorD = [];
+   var ResCelda= 0;
+   var dioOrden =false;
+   var Timbre =["C4n","D4n","E4n","C4n"];
+
+
+ 
+   receta = localStorage.getItem("receta");
+
+ 
+   if (receta == "compra"){
+   var j1 =[["c1"," &amina dos pasos a la puerta de calle","puertaL.png"],
+           ["g1","estás en la vereda de tu casa; &ira a la derecha. G + D","giraD.png"], 
+           ["d1"," &erecha","giraD.png"],     
+           ["c1","  &amina cinco pasos hasta el semáforo de la esquina","semaforoC.png" ],         
+           ["c1","llegaste al semáforo; Para cruzar la calle, &amina tres pasos cuando esté en verde. Se escuchará el sonido que habilita cruzar","semaforoLl.png"],
+           ["g1","&ira a la derecha para dirigirte a la tienda de alimentos. G + D","CartelSuper.png"],
+           ["d1"," &erecha","CartelSuper.png"],
+           ["c1"," &amina cinco pasos para llegar a la tienda de alimentos ","CartelSuper.png"],
+           ["g1","&ira a la izquierda para entrar a la tienda de alimentos. G + I","CartelSuper.png"],
+           ["i1"," &zquierda","CartelSuper.png"],
+           ["c1","entra  a la tienda de alimentos. &amina dos pasos","supermercadoPuerta.png"],
+           ["s1", "hay un mostrador y Detrás está la vendedora; &aluda a la vendedora ","dentroSuper.png"],
+           ["e1","&ntrega a la vendedora la lista de compra ","dentroSuper.png"],
+           ["p1","la vendedora carga en una bolsa el pedido de la lista y te dice el importe que debes pagar; &aga  el importe de la compra ","dentroSuper.png"],
+           ["r1","&etira la bolsa del mostrador ","dentroSuper.png"], 
+           ["s1","&aluda para despedirte de la vendedora ","dentroSuper.png"],
+           ["f1","&in de la compra ","dentroSuper.png"],
+          ];     
+        }
+ else if (receta == "panlactal"){
+          var j1 =[   
+          // ["c2","estamos en la cocina. &aminar dos pasos a la mesada. ","cocina.png","cocinaA"],                
+           ["b1","&uscar un bol y ponerlo sobre la  mesada. ","cocinaA.png","bowl0"],
+           ["i1","&ncorporar en el bol un paquete de un kilo de harina ","bowl0.png","harina"],
+           ["a1","hacer un hueco en el centro y &gregar tres tazas de leche","bowl0.png","taza"],
+           ["i1","&ncorporar dos cucharaditas de levadura seca" ,"bowl0.png","cucharita"],
+           ["a1","&gregar tres cucharadas de manteca fundida o aceite " ,"bowl0.png","cucharita"],
+           ["i1","&ncorporar una cucharada de miel " ,"bowl0.png","cucharita"],
+           ["m1","&ezclar tres minutos con una espátula de madera ","bowl0.png","cucharaRe"],                    
+           ["r1","tapar y dejar &eposar hasta que duplique el volumen ","bowl0.png","tapado"],
+           ["C1","Nota de elaboración: el paso  anterior puede ser modificado y llevar el bol tapado a la heladera para que repose y leve toda la noche; hay que tener en cuenta que la masa duplica su volumnen y el recipiente debe ser de medidas apropiadas. &ontinuar","tapado.png","nada"],
+           ["v1","Destapar el bol y &olcar la masa en la mesada ","tapado.png","masaMesada"], 
+           ["f1","&raccionar la masa en cuatro ","masaMesada.png","masaMCortada"],
+           ["h1","con las manos &acer cuatro bollos con la masa fraccionada ","masaMCortadaS.png","bollosF"],
+           ["t1","con ayuda de una espátula &rasnsladar cada uno de los bollos a moldes de pan o budín  ","bollos.png","masaMoldes"],
+           ["e1","en el lado izquierdo de la mesada está el horno. &ncenderlo y precalentar durante 30 minutos " ,"masaMoldes.png","nada"], 
+           ["a1","Ya pasaron 30 minutos y el horno está caliente. &brir el horno y poner dentro los cuatro moldes de pan lactal " ,"masaMoldes.png","nada"],           
+           ["C1","&errar el horno y cocinar durante 20 minutos ","hornoC.png","nada"],
+           ["C1","Nota de elaboración: el tiempo de horneado puede variar por dos factores: Temperatura del horno y tamaño de los moldes. &ontinuar","hornoCSin.png","nada"],           
+           ["a1","Ya pasaron 20 minutos y el pan está listo. &brir el horno sacar los moldes y dejar enfriar sobre la mesada ","hornoCSin.png","nada"],
+           ["e1","sacar los panes de los moldes y dejarlos &nfriar sobre una rejilla ","panMolde.png","nada"],
+           ["s10","Fin de la elaboración del pan lactal pulsar escape  o e&e para salir ","panLRejilla.png","nada"]
+          
+           ];
+           }
+
+   else if (receta == "brioche"){       
+
+    var j1 =[
+          // ["c2","estamos en la cocina. &aminar dos pasos a la mesada. ","cocina.png","cocinaA"],           
+           ["b1","&uscar un bol y ponerlo sobre la  mesada. ","cocinaA.png","bowl0"],
+           ["i1","&ncorporar en el bol una taza de agua ","bowl0.png","taza"],
+           ["a1","&gregar dos cucharaditas de levadura seca","bowl0.png","cucharita"],
+           ["i1","&ncorporar tres cucharaditas de azúcar" ,"bowl0.png","cucharita"],
+           ["b1","con un batidor &atir y dejar reposar 10 minutos " ,"bowl0.png","batir"],
+           ["r1","en otro bol &omper un huevo " ,"bowl0.png","huevo1"],           
+           ["C1","Nota de elaboración: Se recomienda romper el huevo dentro de una taza, inspeccionar que esté en buen estado y sin restos de cáscara, luego incorporar a la preparación. &ontinuar","bowl0.png","nada"],
+           ["a1","&gregar tres cucharadas de azúcar ","bowl0.png","cucharita"],                    
+           ["i1","&ncorporar nueve cucharadas de aceite ","bowl0.png","cucharita"],
+           ["b1","&atir dos minutos con un batidor " ,"bowl0.png","batir"],
+           ["i1","&ncorporar en este bol el contenido del primero con agua levadura y azúcar ","bowl0.png","bowl1"],
+           ["m1","&ezclar un minuto con un batidor ","bowl0.png","batir"],
+           ["a1","&gregar tres tazas de harina ","bowl0.png","taza"],    
+           ["m1","&ezclar tres minutos con una espátula de madera ","bowl0.png","cucharaRe"], 
+           ["t1","&apar y dejar reposar hasta que duplique el volumen ","bowl0.png","tapado"],
+           ["C1","Nota de elaboración: el paso  anterior puede ser modificado y llevar el bol tapado a la heladera para que repose y leve toda la noche; hay que tener en cuenta que la masa duplica su volumen y el recipiente debe ser de medidas apropiadas. &ontinuar","tapado.png","nada"],
+           ["v1","destapar el bol y &olcar la masa en la mesada ","tapado.png","masaMesada"], 
+           ["f1","&raccionar la masa en dos ","masaMesada.png","masaMCortada2"],
+           ["h1","&acer con las manos dos bollos ","masaMCortadaS2.png","bollosF2"],
+
+           ["C1","Nota de elaboración: cada bollo se colocará en un molde de pan o budinera, otra opción es dividir nuevamente cada uno en 5, obteniendo de esta manera 10 bollitos; en este caso se colocaran cinco bollos juntos por molde. &ontinuar","bollos2_5.png","nada"],
+           ["t1","con ayuda de una espátula &rasnsladar cada uno de los bollos a moldes de pan  ","bollos2.png","masaMoldes2"],
+           ["p1","usando un pincel &intar con huevo cada uno de los bollos ","masaMoldes2.png","masaMoldesP"],
+           ["e1","en el lado izquierdo de la mesada está el horno. &ncenderlo y precalentar durante 30 minutos " ,"masaMoldes2.png","nada"], 
+           ["a1","Ya pasaron 30 minutos y el horno está caliente. &brir el horno y poner dentro los dos moldes de pan brioche " ,"masaMoldes2.png","nada"],
+           ["C1","&errar el horno y cocinar durante 20 minutos ","hornoC.png","nada"],
+           ["C1","Nota de elaboración: el tiempo de horneado puede variar por dos factores: Temperatura del horno y tamaño de los moldes. &ontinuar","hornoCSin.png","nada"],
+           ["a1","Ya culminó el tiempo de cocción y el pan está listo. &brir el horno sacar los moldes y dejar enfriar sobre la mesada ","hornoCSin.png","nada"], 
+           ["e1","sacar los panes de los moldes y dejarlos &nfriar sobre una rejilla ","panMolde2.png","nada"],
+           ["s10","Fin de la elaboración del pan lactal pulsar escape  o e&e para salir ","panLRejilla2.png","nada"]          
+          ]
+         }  
+  else if (receta == "dqueso"){
+          var j1 =[                
+          ["b1","&uscar un bol y ponerlo sobre la  mesada. ","cocinaA.png","bowl0"],
+           ["i1","&ncorporar en el recipiente, dos tazas de fécula de mandioca ","bowl0.png","taza"],  
+           ["a1","&gregar una cucharadita de polvo de hornear ","bowl0.png","cucharita"],
+           ["i1","&ncorporar una taza de queso semiduro rallado grueso ","bowl0.png","taza"],
+           ["a1","&gregar opcionalmente una cucharadita de sal ","bowl0.png","cucharita"],
+           ["m1","&ezclar tres minutos con una espátula de madera ","bowl0.png","cucharaRe"],
+           ["i1","&ncorporar tres cucharadas de aceite o manteca fundida ","bowl0.png","cucharita"],
+           ["r1","&omper un huevo y agregarlo a la preparación " ,"bowl0.png","huevo1"],
+           ["C1","Nota de elaboración: Se recomienda romper el huevo dentro de una taza, inspeccionar que esté en buen estado y sin restos de cascara, luego incorporar a la preparación. &ontinuar","bowl0.png","nada"],
+           ["a1","&gregar ocho cucharadas de leche ","bowl0.png","cucharita"],
+           ["m1","&ezclar tres minutos con una espátula de madera ","bowl0.png","cucharaRe"],
+           ["i1","&ntegrar con las manos, hasta obtener una masa homogénea ","bowl0.png", "manos"],          
+           ["v1","&olcar la masa sobre la mesada ","bowl0.png","bolloMesada"], 
+           ["f1","&ormar bolitas de tres o cuatro centímetros de diámetro con las manos ","bolloMesada.png","manosA"],
+           ["C1","Nota de elaboración: se pueden formar entre 10 y 20 chipas de acuerdo al tamaño de los bollitos. &ontinuar","bollos18.png","nada"],
+           ["t1","&rasladar cada uno de los bollitos a una placa para horno  ","bollos18.png","bollos18A"],
+           ["C1","Nota de elaboración: no es necesario engrasar la placa de horno. los bollitos tienen que estar separados y  se deberá usar una o dos placas de acuerdo a la cantidad de chipas obtenidos. &ontinuar","bollos18TC.png","nada"],
+           ["e1","en el lado izquierdo de la mesada está el horno. &ncenderlo y precalentar durante 30 minutos " ,"bollos18TC.png","nada"], 
+           ["a1","Ya pasaron 30 minutos y el horno está caliente. &brir el horno y poner dentro las placas con las bollitos " ,"hornoCSin.png","hornoAbierto"],
+           ["C1","&errar el horno y cocinar durante 20 minutos ","hornoCChipa.png","nada"],
+           ["C1","Nota de elaboración: el tiempo de horneado puede variar por dos factores: Temperatura del horno y tamaño de las chipas. &ontinuar","hornoCSin.png","nada"],
+           ["a1","Ya culminó el tiempo de cocción y los bollitos de queso están listas. &brir el horno sacar las placas y dejar enfriar sobre la mesada ","hornoCSin.png","nada"],
+           ["s10","Fin de la elaboración pulsar  escape o e&e para salir ","bollos18T.png","nada"]
+           //["f1","Fin de la elaboración de las chipas pulsar escape para salir ","panLRejilla2.png","nada"]
+
+           ];    }
+
+        else if (receta == "galletasmiel"){
+          var j1 =[                
+          ["b1","&uscar un bol y ponerlo sobre la  mesada. ","cocinaA.png","bowl0"],
+           ["i1","&ncorporar en el recipiente, 150 gramos de aceite ","bowl0.png","taza"],  
+           ["a1","&gregar 185 gramos de azúcar moreno ","bowl0.png","taza"],
+           ["i1","&ncorporar una cucharadita de escencia de vainilla ","bowl0.png","cucharita"],
+           ["r1","en otro bol &omper un huevo " ,"bowl0.png","huevo1"],           
+           ["C1","Nota de elaboración: Se recomienda romper el huevo dentro de una taza, inspeccionar que esté en buen estado y sin restos de cáscara, luego incorporar a la preparación. &ontinuar","bowl0.png","nada"],
+           ["a1","&gregar 65 gramos de miel ","bowl0.png","cucharita"], 
+           ["b1","&atir dos minutos con un batidor " ,"bowl0.png","batir"],
+           ["i1","&ncorporar 230 gramos de harina ","bowl0.png","taza"],
+           ["a1","&gregar una cucharadita de bicarbonato de sodio ","bowl0.png","cucharita"], 
+           ["m1","&ezclar tres minutos con una espátula de madera ","bowl0.png","cucharaRe"],
+           ["i1","&ntegrar con las manos, hasta obtener una masa homogénea ","bowl0.png", "manos"],   
+           ["e1","en el lado izquierdo de la mesada está el horno. &ncenderlo y precalentar durante 30 minutos " ,"bowl0.png","nada"],            
+           ["v1","&olcar la masa sobre la mesada ","bowl0.png","bolloMesada"], 
+           ["f1","&ormar bolitas de tres o cuatro centímetros de diámetro con las manos ","bolloMesada.png","manosA"],
+           ["C1","Nota de elaboración: se pueden formar entre 10 y 20 galletas de acuerdo al tamaño de los bollitos. &ontinuar","bollos18.png","nada"],
+           ["t1","&rasladar cada uno de los bollitos a una placa para horno  ","bollos18.png","bollos18A"],
+           ["C1","Nota de elaboración: no es necesario engrasar la placa de horno. los bollitos tienen que estar separados y se deberá usar una o dos placas de acuerdo a la cantidad de galletas obtenidas. &ontinuar","bollos18TC.png","nada"],
+           ["a1","&plastar cada bollito para formar una galleta de un centímetro de espesor ","bollos18TC.png","gMiel"], 
+           ["e1","&sparcir sobre cada galleta azúcar blanca ","gMiel.png","cucharita"],            
+           ["a1","&brir el horno y poner dentro las placas con las galletas " ,"hornoCSin.png","hornoAbierto"],
+           ["C1","&errar el horno y cocinar durante 20 minutos ","hornoAMiel.png","nada"],
+           ["C1","Nota de elaboración: el tiempo de horneado puede variar por dos factores: Temperatura del horno y tamaño de las galletas. &ontinuar","hornoCSin.png","nada"],
+           ["a1","Ya culminó el tiempo de cocción y las galletas de miel están listas. &brir el horno sacar las placas y dejar enfriar sobre la mesada ","hornoCSin.png","nada"],
+           ["s10","Fin de la elaboración pulsar  escape o e&e para salir ","gMiel.png","nada"]
+           ];    }
+
+        
+        //    var bavena =[
+        //   ["Media taza de azúcar "],
+        //   ["Dos cucharadas de miel "],
+        //   ["Un huevo"],
+        //   ["Un cuarto taza de aceite "],
+        //   ["Tres cuartos taza de harina"],
+        //   ["Una cucharita de polvo de hornear "],
+        //   ["Una taza de avena aplastada"],          
+        //   ["Media taza de pasas de uva y nueces"]
+        // ]      
+
+
+          else if (receta == "bavena"){
+          var j1 =[                
+          ["b1","&uscar un bol y ponerlo sobre la  mesada. ","cocinaA.png","bowl0"],
+           ["i1","&ncorporar en el recipiente, media taza de azúcar ","bowl0.png","taza"],  
+           ["a1","&gregar dos cucharadas de miel ","bowl0.png","cucharita"],
+           ["r1","en una taza &omper un huevo " ,"bowl0.png","huevo1"],           
+           ["C1","Nota de elaboración: Se recomienda romper el huevo dentro de una taza, inspeccionar que esté en buen estado y sin restos de cáscara, luego incorporar a la preparación. &ontinuar","bowl0.png","nada"],
+           ["i1","&ncorporar un cuarto taza de aceite ","bowl0.png","taza"],   
+           ["m1","&ezclar tres minutos con una espátula de madera ","bowl0.png","cucharaRe"],        
+           ["i1","&ncorporar tres cuartos taza de harina ","bowl0.png","taza"],           
+           ["a1","&gregar una cucharita de polvo de hornear ","bowl0.png","cucharita"], 
+           ["i1","&ncorporar una taza de avena ","bowl0.png","taza"],           
+           ["a1","&gregar media taza de pasas de uva y nueces ","bowl0.png","taza"], 
+           ["m1","&ezclar con una espátula de madera hasta lograr una masa homogénea","bowl0.png","cucharaRe"],        
+           
+           ["e1","en el lado izquierdo de la mesada está el horno. &ncenderlo y precalentar durante 30 minutos " ,"bowl0.png","nada"],            
+           ["v1","&olcar la masa sobre un molde aceitado o antiadherente ","bowl0.png","avenaMesada"], 
+           
+           ["e1","&xtrender la preparación en el molde logrando un espesor uniforme de un centímetro ","avenaMesada.png","avenaExt"], 
+           
+           ["a1","&brir el horno y poner dentro el molde " ,"hornoCSin.png","hornoAbierto"],
+           ["C1","&errar el horno y cocinar durante 20 minutos ","hornoAvena.png","nada"],
+           ["C1","Nota de elaboración: el tiempo de horneado puede variar por dos factores: Temperatura del horno y tamaño de las galletas. &ontinuar","hornoCSin.png","nada"],
+           ["a1","Ya culminó el tiempo de cocción y el pan de arroz ya está listo. &brir el horno sacar el molde y dejar enfriar sobre la mesada ","hornoCSin.png","nada"],
+           ["s10","Fin de la elaboración pulsar  escape o e&e para salir ","avenaExt.png","nada"]
+           ];    }
+
+
+
+
+
+
+           
+// j1  = j1.concat(r1);
+
+   var paso=0;
+   var pasosA = 0;
+   var orden = "";
+   var comando = "";
+   var instruccion ="";
+   var avilitaPaso = false;
+
+   var pr = -1;
+
+
+  var  width;
+  var height; 
+
+   
+   orden =  j1[0][0].toString().substring(1,j1[0][0].toString().length + 1);
+   var instruccion =  j1[0][1];  
+
+</script> 
+<!-- <script type="text/javascript" src="./Alfab.js"></script> -->
+
+</head>
+
+<body>
+  
+  <div id="titulo3">
+    <!-- <div id="LetraComando" style="font-size: 8vw;top:0">_</div>  -->
+    <div></div>
+    </div>
+  <!-- <script type="text/javascript" src="Tabla.js"> </script> -->
+  <!-- <div id="contenedor" style="height:100%"> -->
+    <div id="contenedor">
+
+
+ <div id="DescripcionC" ></div>
+ <br>
+ 
+
+<div id="portaImagen">   
+ <img class="img" id="imgVecA"  src="./../../ResB/Panadero/cocina.png">
+ <img class="img" id="imgVec">
+</div>
+
+  <!-- Teclado Pulsado -->
+ <div id="gridcontenedorNo" > 
+  <!-- style="grid-template-columns: 1fr" ;top: 12vw;left: 25% -->
+  <div class="gridPlantillaED" id="braille">
+    
+   <div id="Primera" class="teclasE">
+   <elem class="box" id="box1">1</elem>	
+   <elem class="box" id="box4">4</elem> 
+   <elem class="box" id="box2">2</elem>
+   <elem class="box" id="box5">5</elem>
+   <elem class="box" id="box3">3</elem>
+   <elem class="box" id="box6">6</elem>
+   </div>
+   
+   <div id="Segunda" class="teclasE" style="display: none;">
+   <elem class="box" id="box01">1</elem>	
+   <elem class="box" id="box04">4</elem> 
+   <elem class="box" id="box02">2</elem>
+   <elem class="box" id="box05">5</elem>
+   <elem class="box" id="box03">3</elem>
+   <elem class="box" id="box06">6</elem>
+   </div>
+ 
+   <div id="Tercera" class="teclasE">
+     <elem class="box" id="box001">1</elem>	
+     <elem class="box" id="box004">4</elem> 
+     <elem class="box" id="box002">2</elem>
+     <elem class="box" id="box005">5</elem>
+     <elem class="box" id="box003">3</elem>
+     <elem class="box" id="box006">6</elem>
+     </div>
+ 
+   <div id="Cuarta" class="teclasE">
+     <elem class="box" id="box0001">1</elem>	
+     <elem class="box" id="box0004">4</elem> 
+     <elem class="box" id="box0002">2</elem>
+     <elem class="box" id="box0005">5</elem>
+     <elem class="box" id="box0003">3</elem>
+     <elem class="box" id="box0006">6</elem>
+     </div>	
+ </div> 
+ 
+</div> 
+
+<label id="pie">Imágenes<br>Diseñadas por Freepik</label>
+
+ <!-- Pequen -->
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 3vw;margin-left: 20vw;width: 60vw;display: none;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+   
+  <div  id="errorPie">Hola</div>
+
+ <div id="superior">  
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv"></h2>
+  <h2 class="etq" id="statusdiv2"></h2>
+  <h2 class="etq" id="statusdiv3"></h2>
+  <h2 class="etq" id="statusdiv4"></h2>
+  <h2 class="etq" id="statusdiv5"></h2>
+  <h2 class="etq" id="statusdiv6"></h2>
+
+  <div class="etq" id="d"></div>
+  <h2 class="etq" id="statusdiv0"></h2>
+  <h2 class="etq" id="statusdiv02"></h2>
+  <h2 class="etq" id="statusdiv03"></h2>
+  <h2 class="etq" id="statusdiv04"></h2>
+  <h2 class="etq" id="statusdiv05"></h2>
+  <h2 class="etq" id="statusdiv06"></h2>
+   </div>
+
+  </div>
+
+
+<script>
+    $(document).ready(function() {  
+     
+   
+   //console.log(receta + " ?????????????????????????????????????????????????????????????????")    
+
+    if (receta == "compra"){
+       var mensaje =   "Tenemos que ir a la tienda de alimentos a comprar.  para obtener ayuda pulsar F1";   
+    }
+    else if (receta == "panlactal"){
+      var mensaje = "Pequén Cocina. vamos a elaborar pan lactal. "
+      $("#DescripcionC").text("PAN LACTAL");
+    } 
+    else if (receta == "brioche"){       
+      var mensaje = "Pequén Cocina. vamos a elaborar pan brióche. "
+      $("#DescripcionC").text("PAN BRIOCHE");
+    }
+    else if (receta == "bavena"){       
+      var mensaje = "Pequén Cocina. vamos a elaborar bizcochitos de avena y miel. "
+      $("#DescripcionC").text("BIZCOCHITOS DE AVENA Y MIEL");
+    }
+    else if (receta == "dqueso"){       
+      var mensaje = "Pequén Cocina. vamos a elaborar pan de queso. "
+      $("#DescripcionC").text("PAN DE QUESO O CHIPA");
+    } 
+    else if (receta == "galletasmiel"){       
+      var mensaje = "Pequén Cocina. vamos a elaborar galletas de miel. "
+      $("#DescripcionC").text("GALLETAS DE MIEL");
+    }    
+    
+    
+    
+     DeterminaMotor(mensaje);  
+     //LeeCGB(mensaje );
+     ultimoDialogo= "vamos a elaborar"
+     ultimoD = "vamos a elaborar" 
+   
+  //  orden =  j1[0][0].toString().substring(1,j1[0][0].toString().length + 1);
+  //  console.log(orden + " cuanto de orden??");
+   instruccion =  j1[0][1];     
+     cargarNuevaImg();  
+    var miVar3 = setTimeout(function(){    
+      inicial =  j1[0].toString().substring(0,1);    
+      nuevaOrden();      
+       $('#imgVec').show('9000'); 
+   },6000); 
+   
+     });
+
+      
+    function Ayuda()
+    {
+     // LeeCGB(Gres.PracticaAfL);
+      LeeCGB("usando el teclado virtual braille pulsar las letras correspondientes nombradas como comandos. si se pulsa de forma incorrecta será indicada la forma de hacerlo. para volver a escuchar la instrucción  actual, pulsar barra espaciadora. si se desea avanzar o retroceder en los pasos de elaboración omitiendo los comandos: pulsar teclas adelante o atrás. para salir pulsar escape. ");
+    }
+
+    function isNumeric(value) {
+     return /^-?\d+$/.test(value);
+    }
+    
+
+    function adelante(){
+      paso++
+      if (paso + 1 > j1.length ){
+        paso--
+        nuevaOrden(); 
+        $('#imgVecA').css("visibility","visible");    
+       imgSrc2  =  j1[paso][3];
+       $('#imgVecA').attr('src', "./../../ResB/Panadero/"+ imgSrc2 + "G.png");
+
+       var miVar3 = setTimeout(function(){    
+        $('#imgVecA').attr('src', "./../../ResB/Panadero/"+ imgSrc2 + ".png");       
+       },500);        
+        return
+      }
+      nuevaOrden();
+      cargarNuevaImg();
+      $('#imgVecA').css("visibility","visible");    
+       imgSrc2  =  j1[paso][3];
+       $('#imgVecA').attr('src', "./../../ResB/Panadero/"+ imgSrc2 + "G.png");
+
+       var miVar3 = setTimeout(function(){    
+        $('#imgVecA').attr('src', "./../../ResB/Panadero/"+ imgSrc2 + ".png");       
+       },500); 
+    }
+
+    function atras(){
+      paso--
+      if (paso < 0) {
+        paso = 0
+      }
+      nuevaOrden();
+      cargarNuevaImg();
+    }
+
+    $(document).keydown(function(e) { 
+
+     if(e.keyCode == 27 )
+     {
+          return;
+     }  
+    
+    if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
+    if(e.keyCode != 83 && e.keyCode != 68 && e.keyCode != 70 && e.keyCode != 74 && e.keyCode != 75 && e.keyCode != 76 &&  e.keyCode != 32 )
+    {
+     LeeCGB("Usar el teclado virtual Braille");
+     return;
+    }
+  }
+  var comando = ""
+    PrimerS =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+
+    if (PrimerS != ""){
+ 
+    try {
+    comando = eval("P"+ PrimerS);
+      }
+    catch{
+  
+    }
+   if (inicial ==  comando) {
+     imgSrc2  =  j1[paso][3];
+     $('#imgVecA').attr('src', "./../../ResB/Panadero/"+ imgSrc2 + "G.png");
+    }
+   }
+
+   
+
+     if (ResCelda == 0){        
+     if (e.keyCode == 70) {statusdiv.innerHTML = '1'; number = 1;
+         $("#box1").css("background-color","black");          
+         $("#box1").css("color","white");
+         pulsada = ""; pulsada = "";} //F
+ 
+     
+     if (e.keyCode == 68) {statusdiv2.innerHTML = '2'; number = 2;
+         $("#box2").css("background-color","black");          
+         $("#box2").css("color","white"); pulsada = "";} //D
+     if (e.keyCode == 83) {statusdiv3.innerHTML = '3'; number = 3;
+         $("#box3").css("background-color","black");          
+         $("#box3").css("color","white"); pulsada = "";} //S		
+ 
+     if (e.keyCode == 74) {statusdiv4.innerHTML = '4'; number = 4;
+         $("#box4").css("background-color","black");          
+         $("#box4").css("color","white"); pulsada = "";} //J
+ 
+   
+     if (e.keyCode == 75) {statusdiv5.innerHTML = '5'; number = 5;
+         $("#box5").css("background-color","black");          
+         $("#box5").css("color","white"); pulsada = "";} //K
+ 
+         
+     if (e.keyCode == 76) {statusdiv6.innerHTML = '6'; number = 6;
+         $("#box6").css("background-color","black");          
+         $("#box6").css("color","white"); pulsada = "";} //L
+ 
+   
+ 
+     }
+   
+   
+ });
+ 
+function cargarNuevaImg(){   
+ 
+  $("#imgVec").css({"height":"55vh" });
+  $("#imgVec").css({"width":"auto" });
+  $('#imgVecA').attr('src', "./../../ResB/Panadero/nada.png");
+
+  audioF.pause();
+  audioF.currentTime = 0;
+  avilitaPaso = false;
+ 
+  
+  imgSrc  =  j1[paso][2];
+  //console.log( " imagen < " +  imgSrc);
+
+  $('#imgVec').attr('src', "./../../ResB/Panadero/" + imgSrc);
+
+
+  if (j1[paso][1].toString().includes("llegaste al semáforo"))
+       {       
+       var imagen = "semaforo"; 
+       // $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+        avilitaPaso = false;
+        setTimeout(function(){     
+          rutaAudio = "./../../ResB/Panadero/beep.mp3"
+          audioF.volume=Volumen;
+          audioF.src =  rutaAudio;    
+          audioF.load();       
+          audioF.play();    
+        }, 5000);
+        
+    audioF.addEventListener('ended', verdePlay);
+
+        
+      }
+
+
+
+  return;
+
+  if (j1[paso][0].toString().substring(0,1) != "x" ){
+
+    inicial =  j1[paso][0].toString().substring(0,1);
+  
+  
+    var diceComando = "";
+   
+    if (inicial == "f"){
+      var imagen =  "flecha Derecha";    
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }
+   
+    else  if (inicial == "S"){
+      var imagen ="semaforoC";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      
+    }
+    
+    else  if (inicial == "e"){      
+      var imagen =  "semaforo";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');      
+     rutaAudio = "./../../ResB/Panadero/beep.mp3"
+     audioF.volume=Volumen;
+     audioF.src =  rutaAudio;   
+     audioF.load();       
+     audioF.play();
+    
+    audioF.addEventListener('ended', verdePlay);
+
+    }   
+    else  if (inicial == "c"){     
+      if (j1[paso][1].toString().includes("entra  a la tienda de alimentos"))
+      {
+       
+      var imagen = "supermercadoPuerta"; 
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      }
+     else if (j1[paso][1].toString().includes("semáforo de la esquina"))
+      {
+       
+      var imagen = "semaforoC"; 
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      }
+      else if (j1[paso][1].toString().includes("llegaste al semáforo"))
+       {       
+       var imagen = "semaforo"; 
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+        setTimeout(function(){     
+          rutaAudio = "./../../ResB/Panadero/beep.mp3"
+          audioF.volume=Volumen;
+          audioF.src =  rutaAudio;    
+          audioF.load();       
+          audioF.play();    
+        }, 5000);
+        
+    audioF.addEventListener('ended', verdePlay);
+
+        
+      }
+      else if (j1[paso][1].toString().includes("llegar a la tienda de alimentos"))
+      {
+       
+      var imagen = "CartelSuper"; 
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      }
+      else if (j1[paso][1].toString().includes("ompra un"))
+      {
+        var imagen ="dentroSuper";
+        $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');  
+     
+      }
+
+
+
+      
+
+
+      else{
+          
+          var imagen = "puertaL"; 
+          $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+       }
+      
+  }else  if ( j1[paso][0].toString() == "g1"){
+   if ( j1[paso][1].toString().includes("entrar a la tienda de alimentos")){
+    console.log("cartel Super");
+    return;
+   }else{
+     var imagen = "giraD";
+     $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+   }
+     
+   
+    }
+    else  if ( j1[paso][0].toString()== "i1"){ 
+      //A la Izquierda        
+      var imagen =  "giraI";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+    }
+
+   else  if (inicial == "r"){      
+      var imagen = "lago";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+      rutaAudio = "./../../ResB/Panadero/arroyo.mp3"
+      audioF.volume=Volumen;
+      audioF.src =  rutaAudio;
+      audioF.loop = true;
+      audioF.load();       
+      audioF.play();        
+  }
+
+
+
+
+ 
+}
+}
+
+
+function  verdePlay()
+   {
+    avilitaPaso = true;
+    rutaAudio = "./../../ResB/Panadero/beepBeep.mp3"
+    audioF.volume=Volumen/2;
+    audioF.src =  rutaAudio;
+    audioF.loop = true;
+    audioF.load();       
+    audioF.play();
+    var imagen = "semaforoV";
+      $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');
+   } 
+
+
+
+function camina(){ 
+  LeeCGB("");
+
+  if (pasosA % dos == 0){
+      //("es derecho");
+    rutaAudio = "./../../ResB/Panadero/paso1.mp3"
+    audio.volume=Volumen;
+    audio.src =  rutaAudio;
+    audio.load();       
+    audio.play();
+  }else if (pasosA % dos != 0){
+      //("es izquierdo");
+      rutaAudio = "./../../ResB/Panadero/paso2.mp3"
+    audio.volume=Volumen;
+    audio.src =  rutaAudio;
+    audio.load();       
+    audio.play();
+    }
+  
+
+  if (pasosA == orden){
+   paso++;
+   pasosA=0;
+  
+  agranda();
+  
+  setTimeout(function(){   
+    cargarNuevaImg();   
+    nuevaOrden();
+  
+   audioF.loop = false;
+}, 1000);
+
+   audioF.loop = false;
+   return;
+  }
+else{
+   agranda();
+  }
+
+
+
+}
+
+
+
+
+function comprar(){
+  paso++
+  nuevaOrden();
+}
+
+function agranda(){
+
+  audioF.loop = false;
+
+  objeto =  j1[paso][0].toString().substring(0,1);
+  comando =  j1[paso][0].toString().substring(1,2);
+   $('#imgVec').css("width", "+=15px");
+   $('#imgVec').css("height", "+=15px");
+
+
+}
+
+
+function nuevaOrden()
+{
+  dioOrden=true;
+  pasosA=0; 
+//  $('#K').empty();
+//  $('#K').remove();
+//  $('#imgVecA').css("visibility","hidden");   
+//  console.log(inicial + "Nueva Orden  Anterior??")
+  inicial =  j1[paso][0].toString().substring(0,1);
+  comando =  j1[paso][0].toString().substring(1,2);
+
+  instruccion =  j1[paso][1];
+
+  queComando = "Comando " + inicial;
+  var diceComando="";
+  instruccionM =""; 
+
+    instruccionM = instruccion.replace("&",inicial);   
+    LeeCGB( instruccionM +  ". " + queComando ) 
+    diceDes = instruccion + ". " + queComando;
+    diceDes = diceDes.toString().replace(/\./g , '<br>'); 
+    diceDes = diceDes.replace("&","<Resalta>" + inicial + "</Resalta>");   
+    $("#DescripcionC").html(diceDes);
+    LeeCGB(instruccionM +  ". " + queComando );
+  
+   }
+
+
+$(document).keyup(function(e) { 
+  e.preventDefault();
+
+  console.log(e.keyCode.toString() + " tecla?" + j1[paso][1].toString());
+
+  if (dioOrden== false){
+    return;
+  }
+ //Ayuda
+ if (e.keyCode == 112) {    
+      movil = 0;
+      //TecladoQ();  
+      Ayuda();   
+  }
+  
+  if (event.keyCode == 27)
+{
+	Regresar();
+	return;
+}
+
+
+
+ 
+if (event.keyCode == 37)
+{
+ 	atras();
+	return;
+}
+
+if (event.keyCode == 39)
+{
+  adelante();
+	return;
+}
+
+  if (e.keyCode == 32) {    
+      
+      LeeCGB($("#DescripcionC").text());     
+      return;
+  }
+ 
+if (j1.length ==  (paso)){
+  if (receta == "compra"){
+      LeeCGB("Ya tenemos lo necesario para elaborar el pan ciabatta. pulsa escape para salir");
+      $("#DescripcionC").html("Ya tenemos lo necesario para elaborar el pan ciabatta <br> pulsa escape para salir");     
+  }else  if (receta == "ciabatta1"){
+    LeeCGB("El primer día de elaboración fue completado con éxito. la masa quedará en reposo en la heladera hasta mañana. pulsa escape para salir");
+    $("#DescripcionC").html("la masa quedrá en reposo en la heladera hasta mañana <br> pulsa escape para salir");
+  }  else  if (receta == "ciabatta2"){
+    LeeCGB("¡Felicitaciones!. ya terminamos de elaborar el pan ciabatta. pulsar escape para salir"); 
+    $("#DescripcionC").text(ultimoDialogo); 
+    var imagen ="panRejilla";      
+    $('#imgVec').attr('src', "./../../ResB/Panadero/" + imagen + '.png');       
+
+  }  
+
+  return;
+}
+
+
+  PrimerS =  statusdiv.innerHTML + statusdiv2.innerHTML + statusdiv3.innerHTML + statusdiv4.innerHTML + statusdiv5.innerHTML + statusdiv6.innerHTML;
+
+  if (PrimerS != ""){
+   
+    try {
+      var comando = eval("P"+ PrimerS);
+      //LeeCGB( comando );
+      console.log(comando + " keyup ");
+      $("#errorPie").css("display","none");
+
+      if (j1[paso][1].toString().includes("Fin de la ") && comando == "s" ){         
+        Regresar();
+        return;
+     }
+
+
+      //orden =  j1[paso][0].toString().substring(1,2);
+      orden =  j1[paso][0].toString().substring(1,j1[0][0].toString().length + 1);
+      console.log(orden + " cuanto ???? ")
+      var  Ninicial =  j1[paso][0].toString().substring(0,1);
+
+      if (isNumeric(orden) && Ninicial.toLocaleLowerCase() == comando.toLocaleLowerCase()  ){
+     
+        if (inicial == "c" &&  avilitaPaso == false && j1[paso][1].toString().includes("Se escuchará ")){
+         LeeCGB("No está el semáforo en verde");
+         $(".etq").html('');
+           return;
+        }
+        
+       if (comando == "c" && Ninicial == "c"){
+         pasosA++  
+         if (orden != "1"){        
+          $("#DescripcionC").html(diceDes + "  ["  + pasosA + "]");       
+         }else if (orden == "1"){        
+          $("#DescripcionC").html(diceDes);       
+         }      
+        camina();
+         $(".etq").html('');
+         return;
+        } 
+        else {      
+        pasosA++   
+        if (orden != "1"){        
+          $("#DescripcionC").html(diceDes + "  ["  + pasosA + "]");       
+        }else if (orden == "1"){        
+          $("#DescripcionC").html(diceDes);       
+        }
+       $('#imgVecA').css("visibility","visible");    
+       imgSrc2  =  j1[paso][3];
+       $('#imgVecA').attr('src', "./../../ResB/Panadero/"+ imgSrc2 + "G.png");
+
+       var miVar3 = setTimeout(function(){    
+        $('#imgVecA').attr('src', "./../../ResB/Panadero/"+ imgSrc2 + ".png");       
+       },500); 
+   
+
+   
+
+         ingrediente();
+         $(".etq").html('');
+         return;
+
+
+        }  
+
+    }  
+     else{
+      
+   //console.log(orden + " <vvvvvvvvvvvv> " + comando);
+      var puntos =  eval("L"+  inicial.toLowerCase());
+    puntos = puntos.split("");
+    puntos = puntos.toString().replace(/,/g , ", ");
+
+
+
+    //  LeeCGB("Pulsaste " + eval("P"+ PrimerS) +      ".  No es el comando " +  inicial  +  ".  pulsar " + puntos);
+    //  diceDes2 = ultimoDialogo.toString().replace(/\./g , '<br>'); 
+    //  $("#errorPie").html("bbb aa a  " +  diceDes2);     
+    //  $("#errorPie").css("display","block");
+
+     }
+
+    } catch (error) {
+      LeeCGB("No es un comando");   
+     // console.log(error);  
+    }
+   
+  }
+
+   if (isNumeric(orden) && Ninicial != comando ){ 
+    var puntos =  eval("L"+  inicial.toLowerCase());
+    puntos = puntos.split("");
+    puntos = puntos.toString().replace(/,/g , ", ");
+    
+   if (paso > 0){
+     inicialAnt =  j1[paso-1][0].toString().substring(0,1);
+   }
+    if (inicialAnt ==  eval("P"+ PrimerS)){
+    
+    // nuevaOrden();
+    // instruccion =  j1[paso][1];
+    //  LeeCGB("Pulsaste " + inicialAnt + ". escucha la nueva instrucción. " + diceDes );// $("#DescripcionC").text());//     $("#errorPie").text() );
+    //  $("#errorPie").html("Pulsaste " + inicialAnt + ". escucha la nueva instrucción. " + diceDes);
+    //  $("#errorPie").css("display","block");
+    // console.log("siguió con la misma");
+     $(".etq").html('');
+     return;
+    }else{
+     console.log(inicialAnt + " inicial Ant")
+     LeeCGB("Pulsaste " + eval("P"+ PrimerS) +      ".  No es el comando " +  inicial  +  ".  pulsar " + puntos);
+      diceDes2 = ultimoDialogo.toString().replace(/\./g , '<br>'); 
+     $("#errorPie").html(diceDes2);
+     $("#errorPie").css("display","block");
+     $(".etq").html('');
+
+    }
+   }
+
+
+   $(".etq").html('');
+
+});
+
+
+function Regresar()
+  {
+    window.open( "./Recetas.html","_self"); 
+  }
+
+// function TocaTimbre(){
+
+// var Melodia4E = "";
+
+// Melodia4E = Timbre;
+
+//  var notas = [];
+//  var ntiempo = 0;
+
+// for (let index = 0; index < Melodia4E.length; index++) {
+//     let nota =Melodia4E[index].substring(0,Melodia4E[index].length - 1);
+//     var tiempo =Melodia4E[index].substring(Melodia4E[index].length - 1,Melodia4E[index].length + 1);
+
+//   if (tiempo == "c"){tiempo = 0.125}
+//   if (tiempo == "n"){tiempo = 0.25}
+//   if (tiempo == "b"){tiempo = 0.50}
+//   if (tiempo == "r"){tiempo = 1}
+
+//   if (tiempo == "="){tiempo = 0.1875}
+//   if (tiempo == "-"){tiempo = 0.175}
+//   if (tiempo == ":"){tiempo = 0.75}
+//   if (tiempo == "."){tiempo = 1.5}
+
+  
+//     notas[index]={'note': nota,'duration': tiempo,'time': ntiempo};
+//     ntiempo += tiempo;
+    
+// }
+
+//      Tone.Transport.stop();      
+//       const synth = new Tone.Synth().toDestination();     
+//       synth.volume.value = -10;
+//       const part = new Tone.Part((time, value) => {     
+//         synth.triggerAttackRelease(value.note, value.duration, time);    
+    
+//       }, notas).start(0);
+//       Tone.Transport.start();
+ 
+//  paso++;
+//  cargarNuevaImg(); 
+//  nuevaOrden();
+
+
+// }
+
+// function ingrediente2(valor){
+//  console.log( j1.length + " == " +  paso );
+
+// if (j1.length ==  (paso+1)){
+//   LeeCGB("ya tenemos todo lo necesario para hacer el pan. pulsa escape para salir");
+//   return;
+// }
+
+//   if  ( j1[paso][0].toString().substring(0,1)  == valor)   
+//   {
+//  paso++;
+// cargarNuevaImg();   
+// nuevaOrden();   } 
+
+// else {
+//   LeeCGB("No es el comando " + j1[paso][0].toString().substring(0,1) )
+// }
+
+  
+
+// }
+
+// function siguienteG(){
+
+// //alert(inicial + " " + comando);
+
+// comando =  j1[paso][0].toString().substring(1,2);
+// inicial =comando ;//  "d";
+// //Ding();              
+// $(".etq").html('');
+//  return;
+
+// }
+
+
+
+function siguiente(){
+  
+  if (orden.trim() != "1"){      
+    console.log("/"+orden+"/ "+ orden.length )
+   LeeCGB( pasosA.toString() + " de " + orden   );
+ }
+
+
+ if (pasosA == orden){
+  paso++;
+ 
+  if (j1.length ==  (paso+1)){
+  LeeCGB("ya tenemos todo lo necesario para hacer el pan. pulsa escape para salir");
+  return;
+}
+
+
+
+  pasosA=0;
+  dioOrden=false;
+
+ setTimeout(function(){     
+    nuevaOrden();
+    cargarNuevaImg();
+    audioF.loop = false;
+}, 2000);
+
+  return;
+}
+
+}
+
+
+ function Ding(){
+    $(".label").css("visibility","hidden");
+    if (controlAudio == "con" ) {
+    rutaAudio = "./../../ResB/Ding.mp3"
+    audio.src =  rutaAudio;
+    audio.load();
+   audio.play();
+    }
+}  
+
+function DingFin(){
+  if (orden.trim() != "1"){     
+    LeeCGB( pasosA.toString() + " de " + orden   );   
+  }
+  
+    $(".label").css("visibility","hidden");
+    if (controlAudio == "con" ) {
+    rutaAudio = "./../../ResB/Ding.mp3"
+    audioF.src =  rutaAudio;
+    audioF.load();
+    audioF.play();  
+  }
+  audioF.onended = (event) => {
+  
+    console.log("pasa por finDing??");
+    // paso++;
+    // pasosA=0; 
+    cargarNuevaImg();  
+    nuevaOrden();}  
+}  
+
+
+
+
+function ingrediente(){
+  
+ 
+ if (pasosA == orden){
+
+
+  if (orden.trim() != "1"){     
+   // console.log("/"+orden+"/ "+ orden.length )
+   //  LeeCGB( pasosA.toString() + " de " + orden   );
+  }
+  else{
+    LeeCGB( "");
+  }
+  DingFin();  
+   paso++;
+   pasosA=0; 
+// setTimeout(function(){ 
+//   console.log("carga nueva imagen")
+//   cargarNuevaImg();  
+//   nuevaOrden();
+//   audioF.loop = false;
+ 
+// }, 2000);
+
+  return;
+}   
+console.log("/"+orden+"/ "+ orden.length + " orden " + instruccionM )
+if ( !instruccionM.includes("Fin de la elaboración")){
+   LeeCGB( pasosA.toString() + " de " + orden   );   
+   Ding();
+}
+
+
+}
+
+
+   
+
+
+
+    
+
+
+</script>
+
+</body>
+
+</html>

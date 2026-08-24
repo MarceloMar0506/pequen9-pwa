@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Lista de Compaces</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./../ResB/favico.png" sizes="32x32"/>
+<link href="./../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="./../ResB/jquery-3.3.1.min.js"></script>
+<script src="./../ResB/Idb-Keyval.js"></script>
+
+
+<script type="text/javascript" src="./../ResB/Habla.js"></script>
+<script type="text/javascript" src="./../ResB/AnimP.js"></script>
+<script src="./../F1/Generales.js"></script>
+<script src="./../pulsador.js"></script>
+<!-- <script src="./TeclasP.js"></script> -->
+<script>
+   var Compas1 = ["DOS CUARTOS","12","256"];
+   var Compas2 = ["TRES CUARTOS","14","256"];
+   var Compas3 = ["CUATRO CUARTOS","145","256"];
+   var Compas4 = ["COMPASILLO","46","14"];
+   var Compas5 = ["SEIS CUARTOS","124","256"];
+   var Compas6 = ["DOS MEDIOS","12","23"];
+   var Compas7 = ["COMPAS DE COMPASILLO","456","14"];
+   var Compas8 = ["TRES MEDIOS","14","23"];
+   var Compas9 = ["SEIS OCTAVOS","124","236"];
+   var Compas10 = ["NUEVE OCTAVOS","24","236"];
+   var Compas11 = ["DOCE OCTAVOS","1","12","236"]; 
+
+
+
+   //var Compas24 = ["DOS CUARTOS,3456_12-1235=1456"];
+</script>
+<style>
+	#Primera{
+		padding: 0;
+	}
+  
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    #grillaLista {
+    /* position: fixed; */
+    left: 0;
+    top: 28vh;
+    display: grid;
+    justify-items: center;
+    /* grid-template-columns: 20vw 60vw 20vw; */
+    grid-template-columns: 30vw 40vw 30vw;
+    margin-top: 2%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10%;
+    width: 100%;
+     }
+     #box3, #box4, #box5, #box6 {
+         background-color: black;
+         color: white;
+     }
+
+        .key {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
+
+        .white {
+            width: 9%;
+            min-width: 60px;
+            height: 70%;
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #000;
+        }
+
+        .black {
+            width: 8%;
+            height: 45%;
+            margin-left: -4%;
+            margin-right: -4%;
+            z-index: 2;
+            background-color: black;
+            color: #fff;
+        }
+
+        .white.active {
+            background-color: #ccc;
+        }
+
+        .black.active {
+            background-color: #333;
+        }
+    </style>
+   
+</head>
+
+<body onkeyup="Npulsado(event)"></body>
+<div id="contenedor" style="height:90%">
+    <div id="titulo3">
+       <div></div> 
+       <span2 id="nota"  style="font-size: 2.5vw;">_</span2>	
+       <div></div>
+       </div>
+
+
+
+    <div id="grillaLista" style="grid-auto-columns: 10vw 80vw 10vw;">
+        <div id="Fiz"><img class="animated flash" src="./../ResB/Fiz.png" onclick="atras()" alt=""></div>     
+
+<div class="gridPlantilla" style="grid-template-columns: 1fr 1fr 1fr">
+    
+    <div id="Primerac" class="teclasE">
+        <elem class="box" id="box1">1</elem>	
+        <elem class="box" id="box4">4</elem> 
+        <elem class="box" id="box2">2</elem>
+        <elem class="box" id="box5">5</elem>
+        <elem class="box" id="box3">3</elem>
+        <elem class="box" id="box6">6</elem>
+        </div>
+    
+        <div id="Segundac" class="teclasE">
+        <elem class="box" id="box01">1</elem>	
+        <elem class="box" id="box04">4</elem> 
+        <elem class="box" id="box02">2</elem>
+        <elem class="box" id="box05">5</elem>
+        <elem class="box" id="box03">3</elem>
+        <elem class="box" id="box06">6</elem>
+        </div>
+    
+        <div id="Tercerac" class="teclasE">
+        <elem class="box" id="box001">1</elem>	
+        <elem class="box" id="box004">4</elem> 
+        <elem class="box" id="box002">2</elem>
+        <elem class="box" id="box005">5</elem>
+        <elem class="box" id="box003">3</elem>
+        <elem class="box" id="box006">6</elem>
+        </div>
+    
+        <div id="Cuartac" class="teclasE" style="display: none;">
+        <elem class="box" id="box0001">1</elem>	
+        <elem class="box" id="box0004">4</elem> 
+        <elem class="box" id="box0002">2</elem>
+        <elem class="box" id="box0005">5</elem>
+        <elem class="box" id="box0003">3</elem>
+        <elem class="box" id="box0006">6</elem>
+        </div>
+  
+ </div>
+  <div id="Fder"><img class="animated flash" src="./../ResB/Fder.png" onclick="adelante()" alt=""></div>
+ </div> 
+ 
+
+ <!-- <button onclick="SonMp3();">Son</button> -->
+
+ <div id="superior">  
+   <div class="etq" id="d"></div>
+   <h2 class="etq" id="statusdiv"></h2>
+   <h2 class="etq" id="statusdiv2"></h2>
+   <h2 class="etq" id="statusdiv3"></h2>
+   <h2 class="etq" id="statusdiv4"></h2>
+   <h2 class="etq" id="statusdiv5"></h2>
+   <h2 class="etq" id="statusdiv6"></h2>
+    </div>
+ 
+ 
+  <!-- Pequen -->
+  <div id="pequenG" class="esperaG"></div>
+  
+  <!-- globo -->
+  <div  class="label"></div>
+ <!-- <audio src="./../ResB/Notas/C4.mp3" id="General"></audio> -->
+ 
+
+    </div>
+    <script>
+	$(document).ready(function() {		
+	//	DeterminaMotor(Gres.Compas);        
+    var textoCompas ="El compás se representa en Braille por el signo de número: puntos 3, 4, 5, y 6, seguido por el 'numerador' en posición 'normal'. utilizando los puntos: 1, 2, 4, 5, según corresponda.  luego el 'denominador' colocado en la quinta serie Braille utilizando los puntos 2, 3, 5, 6, también según corresponda. "
+    var pulsaTrue = localStorage.getItem("Pulsador");
+          if (pulsaTrue == "true" ){      
+            var mensaje= document.title + ". "  + textoCompas + ". " + Gres.CompasP;            
+            DeterminaMotor(mensaje);  
+            // DeterminaMotor(Gres.CompasP);  
+          }
+          else{
+            var mensaje= document.title + ". "  + textoCompas + ". " + Gres.Compas;            
+            DeterminaMotor(mensaje);  
+          }
+
+        nlec=0;
+		 
+		$("#Primera").css("display","inline-grid");
+	    $("#EtiquetaDosTexto").text("");		
+      
+	});
+
+    function Ayuda()
+    {
+	  Lee(Gres.Compas);		
+    }
+    function AyudaM()
+    {
+	  Lee("pulsar las flechas para recorrer la representación de los compases ");		
+    }
+
+	function Regresar()
+      {
+        window.open("./index.html","_self");
+      }
+	
+	
+
+function Npulsado(event)
+  {
+  event.preventDefault();
+  
+  var number = String.fromCharCode(event.which);
+  
+  var keyCode = event.keyCode || event.which;
+  if (keyCode == 27) {
+    Regresar();
+  }
+  //Ayuda
+  if (keyCode == 112) {    
+      movil = 0;
+      Ayuda();
+      TecladoQ();
+  }
+
+     }
+
+
+
+/////////////////
+    var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+$(document).on("touchstart mousedown", function( e ) {		
+  xPosVie = 0;
+  yPosVie = 0;
+    var touchstart = e.type === 'touchstart',
+    e = touchstart ? e.originalEvent : e,
+    pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+    pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+    xPosVie = pageX;
+yPosVie = pageY;
+});    
+$(document).on("mousemove touchmove", function( e ) {  
+  xPosNew = 0;
+  yPosNew = 0;
+  var touchstart = e.type === 'touchmove',
+  e = touchstart ? e.originalEvent : e,
+  pageX = touchstart ? e.targetTouches[0].pageX : e.pageX,
+  pageY = touchstart ? e.targetTouches[0].pageY : e.pageY;
+  xPosNew = pageX;
+  yPosNew = pageY;
+ 
+});
+
+$(document).on("touchend", function(e) {
+    if (e.target.className === 'f1'){return} 
+    if (e.target.className === 'esc'){return}     
+      DifX =  xPosNew  - xPosVie ;
+      ////console.log(DifX);c
+  		if (DifX > 200){        
+	 		adelante();        
+    	}
+        if (DifX < -200){      		
+			atras();      
+        }
+        if (DifY > 100){
+                      //  ////console.log(" Baja #L"+ Quien + Opcion);                
+          return;
+        }
+        if (DifY < -100){
+         ////console.log(DifY + " Sube #L"+ Quien + Opcion);          
+          return;
+        }
+    return;
+
+});
+
+
+function adelante(){                
+    nlec++;
+    
+    var pulsaTrue = localStorage.getItem("Pulsador");
+         if (pulsaTrue == "true" ){      
+            if (nlec  > 11 ) {nlec = 1 }  
+          }
+          else{
+            if (nlec  > 11 ) {nlec = 11 }  
+         }
+              
+    var MLec = eval("Compas" + nlec);
+ 
+    var Nnumeros="";
+    //console.log("texto " + eval("Compas"+nlec)[0] + " segunda " + eval("Compas"+nlec)[1] + " tercera " + eval("Compas"+nlec)[2] ); 
+   if (nlec != 4 && nlec != 7 ){
+      Nnumeros = "PRIMERA CELDA '3, 4, 5, 6,'. ";
+   }
+    
+    $(".gridPlantilla").css("grid-template-columns","1fr 1fr 1fr");
+    $("#grillaLista").css("grid-template-columns","30vw 40vw 30vw"); 
+    $("#Cuartac").css("display","none");
+
+    $(".box").css("background-color","white");
+    $(".box").css("color","black");
+    
+    $("#box3").css("color","white");
+    $("#box3").css("background-color","black");
+    $("#box4").css("color","white");
+    $("#box4").css("background-color","black"); 
+    $("#box5").css("color","white");
+    $("#box5").css("background-color","black"); 
+    $("#box6").css("color","white");
+    $("#box6").css("background-color","black"); 
+
+
+    var numeros = eval("Compas"+nlec)[1].toString(); 
+    let numeroP = numeros.split(''); 
+
+    NMLec = numeroP.toString().replace(/,/g,", " ); 
+    if (nlec != 4 && nlec != 7 ){
+      Nnumeros = Nnumeros + " SEGUNDA CELDA '" +  NMLec + ",'. ";  
+      $("#Primerac").css("display","grid"); 
+    }else  {   
+        Nnumeros = "PRIMERA CELDA '" +  NMLec + ",'. ";   
+        $("#Primerac").css("display","none"); 
+        $("#grillaLista").css("grid-template-columns","35vw 30vw 35vw");         
+        $(".gridPlantilla").css("grid-template-columns","1fr 1fr");     
+    }
+
+    for (let index = 0; index < numeroP.length; index++) {        
+        $("#box0" + numeroP[index] ).css("color","white");
+        $("#box0" + numeroP[index] ).css("background-color","black");        
+    } 
+    numeros = eval("Compas"+nlec)[2].toString(); 
+    let numeroP2 = numeros.split('');
+    NMLec = numeroP2.toString().replace(/,/g,", " );   
+
+
+    if (nlec != 4 && nlec != 7 ){
+      Nnumeros = Nnumeros + " TERCERA CELDA '" +  NMLec + ",'. ";  
+    }else{
+        Nnumeros = Nnumeros + " SEGUNDA CELDA '" +  NMLec + ",'. ";    
+    } 
+        
+    for (let index = 0; index < numeroP2.length; index++) {        
+        $("#box00" + numeroP2[index] ).css("color","white");
+        $("#box00" + numeroP2[index] ).css("background-color","black");        
+    }   
+    
+    if (nlec == 11){
+        $("#grillaLista").css("grid-template-columns","20vw 60vw 20vw"); 
+        
+        $(".gridPlantilla").css("grid-template-columns","1fr 1fr 1fr 1fr");
+        $("#Cuartac").css("display","grid");
+        numeros = eval("Compas"+nlec)[3].toString(); 
+    let numeroP3 = numeros.split(''); 
+    NMLec = numeroP3.toString().replace(/,/g,", " );    
+    Nnumeros = Nnumeros + " CUARTA CELDA '" +  NMLec + ",'. ";        
+    for (let index = 0; index < numeroP3.length; index++) {        
+        $("#box000" + numeroP3[index] ).css("color","white");
+        $("#box000" + numeroP3[index] ).css("background-color","black");        
+    } 
+
+    }
+
+
+    $("#nota").html(eval("Compas"+nlec)[0]);
+    var tambien="";
+    if (nlec == 4  ){
+        tambien = " equivale a cuatro cuartos. "
+    }
+    if (nlec == 7  ){
+        tambien = " equivale a dos medios. "
+    }
+
+    LeeCGB($("#nota").text() +  ". " + tambien + Nnumeros);
+    }
+
+
+
+
+function atras(){                
+    nlec--;
+    if (nlec < 1 ) {nlec = 0 }                
+    var MLec = eval("Compas" + nlec);
+    var Nnumeros="";
+    //console.log("texto " + eval("Compas"+nlec)[0] + " segunda " + eval("Compas"+nlec)[1] + " tercera " + eval("Compas"+nlec)[2] ); 
+   if (nlec != 4 && nlec != 7 ){
+      Nnumeros = "PRIMERA CELDA '3, 4, 5, 6,'. ";
+   }
+    
+    $(".gridPlantilla").css("grid-template-columns","1fr 1fr 1fr");
+    $("#grillaLista").css("grid-template-columns","30vw 40vw 30vw"); 
+    $("#Cuartac").css("display","none");
+
+    $(".box").css("background-color","white");
+    $(".box").css("color","black");
+    
+    $("#box3").css("color","white");
+    $("#box3").css("background-color","black");
+    $("#box4").css("color","white");
+    $("#box4").css("background-color","black"); 
+    $("#box5").css("color","white");
+    $("#box5").css("background-color","black"); 
+    $("#box6").css("color","white");
+    $("#box6").css("background-color","black"); 
+
+
+    var numeros = eval("Compas"+nlec)[1].toString(); 
+    let numeroP = numeros.split(''); 
+
+    NMLec = numeroP.toString().replace(/,/g,", " ); 
+    if (nlec != 4 && nlec != 7 ){
+      Nnumeros = Nnumeros + " SEGUNDA CELDA '" +  NMLec + ",'. ";  
+      $("#Primerac").css("display","grid"); 
+    }else  {   
+        Nnumeros = "PRIMERA CELDA '" +  NMLec + ",'. ";   
+        $("#Primerac").css("display","none"); 
+        $("#grillaLista").css("grid-template-columns","35vw 30vw 35vw");         
+        $(".gridPlantilla").css("grid-template-columns","1fr 1fr");     
+    }
+
+    for (let index = 0; index < numeroP.length; index++) {        
+        $("#box0" + numeroP[index] ).css("color","white");
+        $("#box0" + numeroP[index] ).css("background-color","black");        
+    } 
+    numeros = eval("Compas"+nlec)[2].toString(); 
+    let numeroP2 = numeros.split('');
+    NMLec = numeroP2.toString().replace(/,/g,", " );   
+
+
+    if (nlec != 4 && nlec != 7 ){
+      Nnumeros = Nnumeros + " TERCERA CELDA '" +  NMLec + ",'. ";  
+    }else{
+        Nnumeros = Nnumeros + " SEGUNDA CELDA '" +  NMLec + ",'. ";    
+    } 
+        
+    for (let index = 0; index < numeroP2.length; index++) {        
+        $("#box00" + numeroP2[index] ).css("color","white");
+        $("#box00" + numeroP2[index] ).css("background-color","black");        
+    }   
+    
+    if (nlec == 11){
+        $("#grillaLista").css("grid-template-columns","20vw 60vw 20vw"); 
+        
+        $(".gridPlantilla").css("grid-template-columns","1fr 1fr 1fr 1fr");
+        $("#Cuartac").css("display","grid");
+        numeros = eval("Compas"+nlec)[3].toString(); 
+    let numeroP3 = numeros.split(''); 
+    NMLec = numeroP3.toString().replace(/,/g,", " );    
+    Nnumeros = Nnumeros + " CUARTA CELDA '" +  NMLec + ",'. ";        
+    for (let index = 0; index < numeroP3.length; index++) {        
+        $("#box000" + numeroP3[index] ).css("color","white");
+        $("#box000" + numeroP3[index] ).css("background-color","black");        
+    } 
+
+    }
+ 
+    $("#nota").html(eval("Compas"+nlec)[0]);
+    var tambien="";
+    if (nlec == 4  ){
+        tambien = " equivale a cuatro cuartos. "
+    }
+    if (nlec == 7  ){
+        tambien = " equivale a dos medios. "
+    }
+
+    LeeCGB($("#nota").text() +  ". " + tambien + Nnumeros);
+    
+    }
+
+
+$(document).keyup(function(e) { 
+  e.preventDefault();
+
+if (e.keyCode == 37 || e.keyCode == 40 )
+{
+    atras();
+    return;
+}
+if (e.keyCode == 39 || e.keyCode == 38)
+{
+    adelante();
+    return;
+} 
+   
+}
+);
+
+</script>
+
+
+</body></html>
