@@ -1,11 +1,11 @@
 {
-	"id": "/P8/",
+	"id": "/",
 	"short_name": "Pequén 9",
 	"name": "Pequén 9",
 	"lang": "es",
 	"description": "Pequén 9",
-	"start_url": "/P8/",
-	"scope": "/P8/",
+	"start_url": "/",
+	"scope": "/",
 	"background_color": "#FFFFFF",
 	"theme_color": "#FFFFFF",
 	"dir": "auto",
@@ -112,6 +112,12 @@
 			"type": "image/png",
 			"form_factor": "wide",
 			"label": "Sección de Braille Pequén con Braille integral, estenografía y musicografía"
+		}
+	],
+	"related_applications": [
+		{
+			"platform": "webapp",
+			"id": "https://p9.pequen.info/manifest.json"
 		}
 	]
 }
