@@ -117,11 +117,7 @@
 	"related_applications": [
 		{
 			"platform": "webapp",
-<<<<<<< HEAD
 			"id": "https://p9.pequen.info/manifest.json"
-=======
-			"url": "https://p9.pequen.info/manifest.json"
->>>>>>> 8cf8e6939ca671e27d1e0cfa1fbfbedb46e18599
 		}
 	]
 }
