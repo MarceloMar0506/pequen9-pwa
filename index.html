@@ -196,7 +196,7 @@ registerServiceWorker();
  
 
 <div id="install-overlay" style="
-    display: flex;
+    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.75);
@@ -257,13 +257,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-
-  window.addEventListener('load', () => {
-  if (instalarOverlayVisible()) {
-    mostrarInstallOverlay();
-  }
-});
-
     function mostrarBotonInstalar() {
       const esInstalada = window.matchMedia("(display-mode: standalone)").matches;
       if (esInstalada) return;
@@ -293,13 +286,50 @@ document.addEventListener('keydown', (e) => {
   </script>
 
 
-
-
-
  <script>
-$(document).ready(function() {  
-    
-  esPWA(); //document.title="Si usa lector de pantalla silenciarlo para usar esta aplicación. Con teclas de dirección seleccionar una opción"
+
+  // Detecta, vía getInstalledRelatedApps(), si Pequén 9 ya está instalada
+  // aunque se esté navegando desde una pestaña normal del navegador
+  // (no desde la app instalada). Requiere que el manifest.json tenga
+  // "related_applications" apuntando a sí mismo.
+  async function yaEstaInstalada() {
+    if ('getInstalledRelatedApps' in navigator) {
+      try {
+        const apps = await navigator.getInstalledRelatedApps();
+        return apps.length > 0;
+      } catch (e) {
+        return false;
+      }
+    }
+    return false; // navegador sin soporte: no podemos saberlo, seguimos con el flujo normal
+  }
+
+  async function esPWA(){
+
+    // Caso 1: ya se está ejecutando dentro de la app instalada
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      document.title = "Si usa lector de pantalla silenciarlo para usar esta aplicación. Con teclas de dirección seleccionar una opción y luego pulsar enter";
+      document.getElementById('install-overlay').style.display = 'none';
+      return;
+    }
+
+    // Caso 2: no está en modo standalone, pero puede que ya esté instalada
+    // (por ejemplo, el usuario la cerró y volvió a entrar por una pestaña normal)
+    const yaInstalada = await yaEstaInstalada();
+    if (yaInstalada) {
+      document.title = "Pequén 9 ya está instalada. Buscala en tu menú Inicio o escritorio.";
+      document.getElementById('install-overlay').style.display = 'none';
+      return;
+    }
+
+    // Caso 3: no está instalada — mostrar el overlay de instalación
+    document.title = "Para que funcione correctamete Pequén 9 debe instalarlo. Si usa lector de pantalla silenciarlo. Con teclas de dirección seleccionar una opción y luego pulsar enter ";
+    document.getElementById('install-overlay').style.display = 'flex';
+  }
+
+$(document).ready(async function() {  
+
+  await esPWA(); // esperamos a que determine si corresponde mostrar el overlay
 
   var overlay = document.getElementById('install-overlay');
   var mostrandoInstall = overlay && window.getComputedStyle(overlay).display !== 'none';
@@ -451,21 +481,6 @@ function navegarOverlay(direccion) {
   enfocarBotonOverlay();
 }
 
-
-
-
-  function esPWA(){
-    if (window.matchMedia('(display-mode: standalone)').matches) {      
-      document.title="Si usa lector de pantalla silenciarlo para usar esta aplicación. Con teclas de dirección seleccionar una opción y luego pulsar enter" 
-      document.getElementById('install-overlay').style.display = 'none';     
-// Entró con PWA
-
-}
-else{ 
-
-  document.title="Para que funcione correctamete Pequén 9 debe instalarlo. Si usa lector de pantalla silenciarlo. Con teclas de dirección seleccionar una opción y luego pulsar enter "
-}
-  }
 
   function Abre(n)
   { 
@@ -664,4 +679,5 @@ function leerMensajeInstall() {
   </body>
  
   </html>
+
   
