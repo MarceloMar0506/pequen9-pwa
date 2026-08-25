@@ -88,29 +88,7 @@ function activarNuevaVersion(worker) {
   worker.postMessage({ type: "SKIP_WAITING" });
 }
 
-// Cuando el nuevo SW toma control, recargamos para que se vea la versión nueva
-// let recargando = false;
-// navigator.serviceWorker.addEventListener("controllerchange", () => {
-//   if (recargando) return;
-//   recargando = true;
-//   window.location.reload();
-// });
-
 registerServiceWorker();
-
-// self.addEventListener('activate', function(event) {
-//     event.waitUntil(caches.keys().then(function(names) {
-//         return Promise.all(
-//             names.filter(function(name) {
-//                 return name !== cacheName;
-//             }).map(function(name) {
-//                 return caches.delete(name);
-//             })
-//         );
-//     }).then(function() {
-//         return self.clients.claim();
-//     }));
-// });
 
  </script> 
  <style>
@@ -122,7 +100,6 @@ registerServiceWorker();
       grid-template-columns: 50% 50%;      
       justify-content: center; 
   height: 60vh;  
-  /*margin: auto;*/
   top: 6vh;
 }
 	.circulo a.itemM {
@@ -131,13 +108,9 @@ registerServiceWorker();
 		border-radius: 100%;		
 		text-align: center;		
     height:20vh;
-		/* background-color:#c8cee4;
-		box-shadow: 15px 15px 20px rgba(9, 97, 60, 0.5) inset;  */
 		color:black;
 		padding:0.5vh;
-		
 		font-size: 3vh;
-		/* line-height: 10vh; */
 		transition:all 0.5s;
 		-moz-transition:all 0.5s;
 		-webkit-transition:all 0.5s;
@@ -148,7 +121,6 @@ registerServiceWorker();
   .f1 {
      width: 5vh; 
      z-index: 70;
-    
   }
 
  </style>
@@ -178,8 +150,6 @@ registerServiceWorker();
    
   <a  id="L3"  class="itemM"><img src="./ResB/ElSoftware.png" style="width: 14vh;"/><br><span2 id="s3"  class="itemS" style="font-size: small;">ACERCA DE Pequén 9<br> Configuración</span2></a>  <P>
  
-  <!-- <a  id="L4" class="itemM"><img id="pinza" src="./ResB/pinza.png" style="width: 5vw;display: none"/><br><span2 id="s4"   class="itemS" style="font-size: small;width: auto;display: none;">INSTALAR Pequén 9</span2></a> -->
-
   </div>
 
 
@@ -253,45 +223,14 @@ window.addEventListener("appinstalled", () => {
 
 document.addEventListener('keydown', (e) => {
   if (instalarOverlayVisible() && e.keyCode === 13) {
-    e.preventDefault(); // evita que el navegador dispare su propio click nativo al soltar Enter
+    e.preventDefault();
   }
 });
-
-    function mostrarBotonInstalar() {
-      const esInstalada = window.matchMedia("(display-mode: standalone)").matches;
-      if (esInstalada) return;
-      const section = document.getElementById("install-section");
-      if (!section) return;
-      section.style.display = "block";
-      document.getElementById("btn-instalar").onclick = () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then(() => { deferredPrompt = null; section.style.display = "none"; });
-        } else {
-          alert("Para instalar: hacé click en el ícono ⊕ en la barra de direcciones del navegador.");
-        }
-      };
-    }
-
-    function mostrarBotonInstalarFallback() {
-      const esInstalada = window.matchMedia("(display-mode: standalone)").matches;
-      if (esInstalada) return;
-      const section = document.getElementById("install-section");
-      if (!section) return;
-      section.style.display = "block";
-      document.getElementById("btn-instalar").onclick = () => {
-        alert("Para instalar: hacé click en el ícono ⊕ en la barra de direcciones del navegador.");
-      };
-    }
   </script>
 
 
  <script>
 
-  // Detecta, vía getInstalledRelatedApps(), si Pequén 9 ya está instalada
-  // aunque se esté navegando desde una pestaña normal del navegador
-  // (no desde la app instalada). Requiere que el manifest.json tenga
-  // "related_applications" apuntando a sí mismo.
   async function yaEstaInstalada() {
     if ('getInstalledRelatedApps' in navigator) {
       try {
@@ -305,38 +244,56 @@ document.addEventListener('keydown', (e) => {
         return false;
       }
     }
-    return false; // navegador sin soporte: no podemos saberlo, seguimos con el flujo normal
+    return false;
   }
 
   async function esPWA(){
+    console.log("[esPWA] iniciando chequeo...");
 
-    // Caso 1: ya se está ejecutando dentro de la app instalada
     if (window.matchMedia('(display-mode: standalone)').matches) {
+      console.log("[esPWA] Caso 1: corriendo en modo standalone (ya instalada y abierta desde ahí)");
       document.title = "Si usa lector de pantalla silenciarlo para usar esta aplicación. Con teclas de dirección seleccionar una opción y luego pulsar enter";
       document.getElementById('install-overlay').style.display = 'none';
       return;
     }
 
-    // Caso 2: no está en modo standalone, pero puede que ya esté instalada
-    // (por ejemplo, el usuario la cerró y volvió a entrar por una pestaña normal)
-    const yaInstalada = await yaEstaInstalada();
+    let yaInstalada = false;
+    try {
+      yaInstalada = await yaEstaInstalada();
+    } catch (e) {
+      console.error("[esPWA] Error en yaEstaInstalada():", e);
+      yaInstalada = false;
+    }
+    console.log("[esPWA] yaEstaInstalada() devolvió:", yaInstalada);
+
     if (yaInstalada) {
+      console.log("[esPWA] Caso 2: detectada como instalada, ocultando overlay");
       document.title = "Pequén 9 ya está instalada. Buscala en tu menú Inicio o escritorio.";
       document.getElementById('install-overlay').style.display = 'none';
       return;
     }
 
-    // Caso 3: no está instalada — mostrar el overlay de instalación
+    console.log("[esPWA] Caso 3: mostrando overlay de instalación");
     document.title = "Para que funcione correctamete Pequén 9 debe instalarlo. Si usa lector de pantalla silenciarlo. Con teclas de dirección seleccionar una opción y luego pulsar enter ";
-    document.getElementById('install-overlay').style.display = 'flex';
+    const overlayEl = document.getElementById('install-overlay');
+    overlayEl.style.display = 'flex';
+    console.log("[esPWA] overlay.style.display ahora es:", overlayEl.style.display, "| computado:", getComputedStyle(overlayEl).display);
   }
 
 $(document).ready(async function() {  
 
-  await esPWA(); // esperamos a que determine si corresponde mostrar el overlay
+  console.log("[ready] DOM listo, llamando a esPWA()");
+
+  try {
+    await esPWA();
+  } catch (e) {
+    console.error("[ready] esPWA() lanzó un error, aplicando comportamiento por defecto:", e);
+    document.getElementById('install-overlay').style.display = 'flex';
+  }
 
   var overlay = document.getElementById('install-overlay');
   var mostrandoInstall = overlay && window.getComputedStyle(overlay).display !== 'none';
+  console.log("[ready] mostrandoInstall:", mostrandoInstall);
 
   var miVar2 = setTimeout(function(){ 
         
@@ -378,7 +335,6 @@ function mostrarInstallOverlay() {
   if (contenedor) contenedor.setAttribute('inert', '');
 
   overlayIndex = 0;
-  // Ya NO llamamos acá a enfocarBotonOverlay() ni a Lee()
 }
 
 function cerrarInstallOverlay() {
@@ -418,7 +374,7 @@ function hablarYluego(texto, callback) {
   const utterance = new SpeechSynthesisUtterance(texto);
   utterance.lang = "es-ES";
   utterance.onend = callback;
-  utterance.onerror = callback; // por si falla la síntesis, igual continuamos
+  utterance.onerror = callback;
   window.speechSynthesis.speak(utterance);
 }
 
@@ -441,7 +397,7 @@ function enfocarBotonOverlay() {
   const boton = botones[overlayIndex];
   boton.focus();
 
-  const esInstalar = boton.id === 'btnInstalarAhora'; // ajustá al id real
+  const esInstalar = boton.id === 'btnInstalarAhora';
 
   if (esInstalar) {
     avisoInstalarListo = false;
@@ -452,26 +408,19 @@ function enfocarBotonOverlay() {
       () => { avisoInstalarListo = true; }
     );
   } else {
-    avisoInstalarListo = true; // otros botones no tienen esta restricción
+    avisoInstalarListo = true;
     Lee(boton.innerText.trim());
   }
 }
 
 function activarOverlaySeleccion() {
- 
   const botones = botonesOverlay();
   const boton = botones[overlayIndex];
   if (!boton) return;
-  
-   // console.log( 'btnInstalarAhora' &&  && !avisoInstalarListo);
-
-  // if (boton.id === 'btnInstalarAhora' && !avisoInstalarListo) return;
-
- 
 
   if (boton.id === 'btnInstalarAhora') {
     Lee("Instalar")
-    instalarApp(true); // true = vino por teclado (Enter)
+    instalarApp(true);
   } else if (boton.id === 'btnContinuarSinInstalar') {
     cerrarInstallOverlay();
   }
@@ -511,7 +460,6 @@ function navegarOverlay(direccion) {
   d=document.getElementById('s'+ s);
   if(d === null || typeof d === 'undefined'){
       return;}
-  //console.log(s);
   var dice = d.innerText;
   Lee(dice);
   $(".itemS").css({"background-color": "white"});
@@ -523,17 +471,7 @@ function navegarOverlay(direccion) {
   
   function adelante(){
      p++;
-  //   var custS = document.getElementById("s4");
-
-  //   console.log(p + ">>>>>>>>>>><<<<<<<<<  " +  custS.style.display);
- 
-  //if (custS.style.display === "none") {
     Cbot= 3;
-  // }else
-  // {
-  //  Cbot=3;
-   //}
-
      if (p > Cbot) {p=1 }
       test(p)
   }
@@ -552,15 +490,13 @@ function navegarOverlay(direccion) {
 
 
     if (instalarOverlayVisible()) {
-    if (e.keyCode == 37 || e.keyCode == 38) { navegarOverlay(-1); return; } // izquierda/arriba
-    if (e.keyCode == 39 || e.keyCode == 40) { navegarOverlay(1); return; }  // derecha/abajo
-    if (e.keyCode == 13) { activarOverlaySeleccion(); return; }             // Enter
-    return; // cualquier otra tecla queda bloqueada mientras el modal esté abierto
+    if (e.keyCode == 37 || e.keyCode == 38) { navegarOverlay(-1); return; }
+    if (e.keyCode == 39 || e.keyCode == 40) { navegarOverlay(1); return; }
+    if (e.keyCode == 13) { activarOverlaySeleccion(); return; }
+    return;
   }
 
   const activeTextarea = document.activeElement;
-  //console.log( "Recibí: " + activeTextarea.innerText);
-
 
 
   if (e.keyCode == 112) { 
@@ -573,9 +509,8 @@ function navegarOverlay(direccion) {
   if (e.keyCode == 39) {adelante()}
   if (e.keyCode == 40) {adelante()}
   if (e.keyCode == 27) {Cerrar()}
-  if (e.keyCode == 120) {Navegador()}//F9
+  if (e.keyCode == 120) {Navegador()}
   if (e.keyCode == 13) {
-     //console.log(p);
      Abre(p)
   }
   
@@ -584,19 +519,15 @@ function navegarOverlay(direccion) {
 
  
  function SinMouse(){
-  //console.log("sin mouse")
     LeeCGB(Gres.SinRaton);
   }
 
   function Cerrar(){     
-
   LeeCGB("Menú principal. Pequén 9");
-
 }
   
   function Regresar()
   {
-    //  window.open( "../index.html","_self,status=yes,scrollbars=yes,toolbar=yes,"); 
   }
   function Ayuda()
   {
@@ -605,7 +536,6 @@ function navegarOverlay(direccion) {
   
   
   window.addEventListener("orientationchange", ()=> {
-    //console.log(getOrientation());
 });
 
 function getOrientation() {
@@ -623,22 +553,6 @@ function getOrientation() {
 };
 
 
-
-// let prompt; // Estableces una variable
-
-// document.addEventListener('DOMContentLoaded', function () { //Al terminar de cargar la pagina
-  
-// window.addEventListener('beforeinstallprompt', (e) => { //Disparas al escucha del evento beforeinstallprompt 
-  
-//     prompt=e; //Le pasamos el evento a la variable
-//     s4.style.display='block'; // hacemos visible el button
-//     pinza.style.display='inline'; // hacemos visible el button
-// }); 
-
-
-
-// });
-
 function leerMensajeInstall() {
   var mensajeInstall = "Se muestra una ventana para instalar Pequén 9. " +
     "Esta aplicación tiene su propio sistema de voz. Si tiene un lector de pantalla activado, " +
@@ -646,32 +560,6 @@ function leerMensajeInstall() {
     "y la tecla Enter para confirmarla.";
   DeterminaMotor(mensajeInstall);
 }
-
-
-// function instalarApp() {
-//   if (!deferredPrompt) {
-//     cerrarInstallOverlay();
-//     DeterminaMotor("Este navegador no ofrece instalación automática en este momento. " +
-//         "Puede intentar instalar la aplicación desde el menú del navegador, " +
-//         "buscando la opción Instalar aplicación o Agregar a pantalla de inicio.");
-//     return;
-//   }
-
-//   const audio = document.getElementById('audioAvisoInstalar');
-//   audio.currentTime = 0;
-//   audio.play().catch(() => {}); // si el navegador lo bloquea por algún motivo, seguimos igual
-
-//   esperandoDialogoSistema = true;
-
-//   // Debe llamarse de inmediato, dentro del mismo gesto del usuario (click/Enter)
-//   deferredPrompt.prompt();
-//   deferredPrompt.userChoice.then(() => {
-//     deferredPrompt = null;
-//     esperandoDialogoSistema = false;
-//     cerrarInstallOverlay();
-//   });
-// }
-
 
   </script> 
   <!-- Cierra SuperC  -->
@@ -683,4 +571,3 @@ function leerMensajeInstall() {
   </body>
  
   </html>
-
