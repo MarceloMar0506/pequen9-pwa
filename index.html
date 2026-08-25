@@ -2,572 +2,601 @@
 <html lang="es">
 <head>
   <!-- silenciar el lector de pantalla. esta aplicación tiene motor de voz propio -->
-<title>Pequén 9</title>
-<link rel="manifest" href="./manifest.json">
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <title>Pequén 9</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-<meta content="Educación" name="RATING" />
-<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
-<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
-<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+  <meta content="Educación" name="RATING" />
+  <meta content="Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+  <meta content="Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+  <meta content="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
 
-<meta name="theme-color" content="#E8FFCC">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#E8FFCC">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- No mostrar el titulo de la pagina y Si mostrar la barra de navegacion Android Ios -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes"> 
+  <!-- No mostrar el titulo de la pagina y Si mostrar la barra de navegacion Android Ios -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
 
-<meta name="theme-color" content="#E8FFCC">
+  <link rel="icon" type="image/png" href="./ResB/favico.png" sizes="32x32"/>
+  <link rel="apple-touch-icon" href="/ResB/icon/maskable_icon.png">
+  <link href="./ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+  <script type="text/javascript" src="./ResB/jquery-3.3.1.min.js"></script>
+  <script src="./ResB/Idb-Keyval.js"></script>
+  <script type="text/javascript" src="./ResB/Habla.js"></script>
+  <script type="text/javascript" src="./ResB/AnimP.js"></script>
+  <script src="./F1/Generales.js"></script>
+  <script src="./pulsador.js"></script>
 
-<link rel="icon" type="image/png" href="./ResB/favico.png" sizes="32x32"/>
-<link rel="apple-touch-icon" href="/ResB/icon/maskable_icon.png">
-<link href="./ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="./ResB/jquery-3.3.1.min.js"></script>
-<script src="./ResB/Idb-Keyval.js"></script>
-<script type="text/javascript" src="./ResB/Habla.js"></script>
-<script type="text/javascript" src="./ResB/AnimP.js"></script>
-<script src="./F1/Generales.js"></script>
-<script src="./pulsador.js"></script>
-
-<script>
-    var nlec =0;
-    var Cbot= 4;
-    var isPwa="";
-
-
-const registerServiceWorker = async () => {
-  if ("serviceWorker" in navigator) {
-    try {
-      const registration = await navigator.serviceWorker.register("./sw.js");
-
-      // Si ya había una versión nueva esperando de una visita anterior,
-      // esperamos a que la página termine de cargar antes de activarla
-      if (registration.waiting) {
-        window.addEventListener("load", () => {
-          activarNuevaVersion(registration.waiting);
-        });
-      }
-
-      // Detección de actualización mientras el usuario ya está navegando
-      registration.addEventListener("updatefound", () => {
-        const nuevoWorker = registration.installing;
-        nuevoWorker.addEventListener("statechange", () => {
-          if (nuevoWorker.state === "installed" && navigator.serviceWorker.controller) {
-            activarNuevaVersion(nuevoWorker);
-          }
-        });
-      });
-
-    } catch (error) {
-      console.error(`Registration failed with ${error}`);
-    }
-  }
-};
-
-function activarNuevaVersion(worker) {
-  worker.postMessage({ type: "SKIP_WAITING" });
-}
-
-// Freno anti-loop: solo recargamos una vez, y solo si la página ya cargó
-let recargando = false;
-navigator.serviceWorker.addEventListener("controllerchange", () => {
-  if (recargando) return;
-  if (!document.hasFocus && document.readyState !== "complete") return; // evita recargar en medio de la carga
-  const yaRecargue = sessionStorage.getItem("swRecargado");
-  if (yaRecargue) return; // ya recargamos en esta sesión, no lo repetimos
-  recargando = true;
-  sessionStorage.setItem("swRecargado", "1");
-  window.location.reload();
-});
-
-registerServiceWorker();
-
-function activarNuevaVersion(worker) {
-  worker.postMessage({ type: "SKIP_WAITING" });
-}
-
-registerServiceWorker();
-
- </script> 
+  <script>
+    var nlec = 0;
+    var Cbot = 4;
+    var isPwa = "";
+  </script> 
  <style>
 .circulo { 
   width: 100%;
-      float: left;
-      display: grid; 
-      justify-items: center;  
-      grid-template-columns: 50% 50%;      
-      justify-content: center; 
+  float: left;
+  display: grid; 
+  justify-items: center;  
+  grid-template-columns: 50% 50%;      
+  justify-content: center; 
   height: 60vh;  
   top: 6vh;
 }
-	.circulo a.itemM {
-		display: block;
-		text-decoration: none;
-		border-radius: 100%;		
-		text-align: center;		
-    height:20vh;
-		color:black;
-		padding:0.5vh;
-		font-size: 3vh;
-		transition:all 0.5s;
-		-moz-transition:all 0.5s;
-		-webkit-transition:all 0.5s;
-		-o-transition:all 0.5s;          
-	}
+.circulo a.itemM {
+  display: block;
+  text-decoration: none;
+  border-radius: 100%;		
+  text-align: center;		
+  height:20vh;
+  color:black;
+  padding:0.5vh;
+  font-size: 3vh;
+  transition:all 0.5s;
+  -moz-transition:all 0.5s;
+  -webkit-transition:all 0.5s;
+  -o-transition:all 0.5s;          
+}
 
-  img{width: 35vh;}
-  .f1 {
-     width: 5vh; 
-     z-index: 70;
-  }
-
+img { width: 35vh; }
+.f1 {
+  width: 5vh; 
+  z-index: 70;
+}
  </style>
 </head>
-<body >  
+<body>  
 
   <audio id="audioAvisoInstalar" src="./ResB/instalar.mp3" preload="auto"></audio>
 
   <div id="SuperC">
-  <div id="contenedor">
-    
-    <div id="titulo3" style="margin-top: 0;margin-bottom: 1vw;" >
-		<div></div> 
-		<span2 style="text-align: center;"></span2>	
-		<div></div>
-    </div>    
+    <div id="contenedor">
+      <div id="titulo3" style="margin-top: 0;margin-bottom: 1vw;" >
+        <div></div> 
+        <span2 style="text-align: center;"></span2>	
+        <div></div>
+      </div>    
 
-  <div class="circulo" >   
-   <div style="display: contents;text-align: center;">
-    <a  style="top:5vh;" id="L1" class="itemM"><img src="./ResB/Dactilo.png"/><br><span2 id="s1" class="itemS">TECLADO QWERTY</span2></a>  
-  </div>  
-  <div style="display: contents;text-align: center;">
-    <a  style="left: 40%;top:5vh;" id="L2" class="itemM"><img src="./ResB/Integral.png"/><br><span2 id="s2"  class="itemS">BRAILLE</span2></a>  
-  </div> 
-  </div>
-  <div style="position: fixed;bottom: 20vh;right: 2vw;text-align:center;">
-   
-  <a  id="L3"  class="itemM"><img src="./ResB/ElSoftware.png" style="width: 14vh;"/><br><span2 id="s3"  class="itemS" style="font-size: small;">ACERCA DE Pequén 9<br> Configuración</span2></a>  <P>
- 
-  </div>
-
-
-</div>
-
- <!-- Pequen -->
- <div id="pequenG" class="esperaG" ></div>
-  <!-- globo -->
-  <div  class="label" style="bottom: 12%; z-index: 170;"></div>
-
- 
- <div id="Pie" style="width: 100%;text-align: center;"><SPAN2 style="font-size: xx-large;" id="peqsitio">www.pequen.info</SPAN2></b></div>
- <p></p> 
- 
-
-<div id="install-overlay" style="
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    z-index: 200000;
-    align-items: center;
-    justify-content: center;
-">
-  <div id="install-banner" style="
-      display: grid;
-      background: #2c3e50;
-      color: white;
-      padding: 36px 40px;
-      font-family: Arial, sans-serif;
-      border-radius: 14px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      width: 50%;
-      min-width: 320px;
-      max-width: 480px;
-      text-align: center;
-      box-sizing: border-box;
-  ">
-      <div style="font-size: 52px; margin-bottom: 14px;">📖</div>
-      <h2 style="margin: 0 0 12px; font-size: 40px; line-height: 1.3;">Instalá Pequén 9</h2>
-      <p style="margin: 0 0 26px; font-size: 30px; color: #d0d5db; line-height: 1.6;">
-        Instalá la app para acceder más rápido, sin conexión y desde tu pantalla de inicio.
-      </p>
-      <div style="display:flex; flex-direction:column; gap:12px;">
-        <button id="btnInstalarAhora" onclick="instalarApp(false)"
-          style="background:#27ae60;color:white;border:none;padding:16px 24px;border-radius:8px;cursor:pointer;font-size:32px;font-weight:600;width:100%;">
-          ⬇️ Instalar ahora
-        </button>
-        <button id="btnContinuarSinInstalar" onclick="cerrarInstallOverlay()"
-          style="background:transparent;color:#b8c0c9;border:none;padding:10px;cursor:pointer;font-size:32px;width:100%;">
-          Continuar sin instalar
-        </button>
+      <div class="circulo">   
+        <div style="display: contents;text-align: center;">
+          <a style="top:5vh;" id="L1" class="itemM"><img src="./ResB/Dactilo.png"/><br><span2 id="s1" class="itemS">TECLADO QWERTY</span2></a>  
+        </div>  
+        <div style="display: contents;text-align: center;">
+          <a style="left: 40%;top:5vh;" id="L2" class="itemM"><img src="./ResB/Integral.png"/><br><span2 id="s2" class="itemS">BRAILLE</span2></a>  
+        </div> 
       </div>
-  </div>
-</div>
+      <div style="position: fixed;bottom: 20vh;right: 2vw;text-align:center;">
+        <a id="L3" class="itemM"><img src="./ResB/ElSoftware.png" style="width: 14vh;"/><br><span2 id="s3" class="itemS" style="font-size: small;">ACERCA DE Pequén 9<br> Configuración</span2></a>
+      </div>
+    </div>
 
- <script src="js/wakelock.js"></script>
+    <!-- Pequen -->
+    <div id="pequenG" class="esperaG"></div>
+    <!-- globo -->
+    <div class="label" style="bottom: 12%; z-index: 170;"></div>
+
+    <div id="Pie" style="width: 100%;text-align: center;"><SPAN2 style="font-size: xx-large;" id="peqsitio">www.pequen.info</SPAN2></div>
+  </div>
+
+  <!-- Modal/Overlay de Instalación -->
+  <div id="install-overlay" style="
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 200000;
+      align-items: center;
+      justify-content: center;
+  ">
+    <div id="install-banner" style="
+        display: grid;
+        background: #2c3e50;
+        color: white;
+        padding: 36px 40px;
+        font-family: Arial, sans-serif;
+        border-radius: 14px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        width: 50%;
+        min-width: 320px;
+        max-width: 480px;
+        text-align: center;
+        box-sizing: border-box;
+    ">
+        <div style="font-size: 52px; margin-bottom: 14px;">📖</div>
+        <h2 style="margin: 0 0 12px; font-size: 40px; line-height: 1.3;">Instalá Pequén 9</h2>
+        <p style="margin: 0 0 26px; font-size: 30px; color: #d0d5db; line-height: 1.6;">
+          Instalá la app para acceder más rápido, sin conexión y desde tu pantalla de inicio.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <button id="btnInstalarAhora" onclick="instalarApp(false)"
+            style="background:#27ae60;color:white;border:none;padding:16px 24px;border-radius:8px;cursor:pointer;font-size:32px;font-weight:600;width:100%;">
+            ⬇️ Instalar ahora
+          </button>
+          <button id="btnContinuarSinInstalar" onclick="cerrarInstallOverlay()"
+            style="background:transparent;color:#b8c0c9;border:none;padding:10px;cursor:pointer;font-size:32px;width:100%;">
+            Continuar sin instalar
+          </button>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal/Overlay de Descarga de Contenido (73 MB) -->
+  <div id="download-overlay" style="
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #1e272c;
+      color: white;
+      z-index: 300000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+  ">
+    <div style="font-size: 52px; margin-bottom: 14px;">📦</div>
+    <h1 style="font-size: 36px; margin-bottom: 10px;">Preparando Pequén 9</h1>
+    <p id="txtDescarga" style="font-size: 24px; color: #a0aec0; max-width: 500px;">
+      Descargando recursos para uso sin conexión a internet...
+    </p>
+    
+    <!-- Barra de Progreso Visual -->
+    <div style="width: 80%; max-width: 400px; background: #4a5568; height: 30px; border-radius: 15px; overflow: hidden; margin: 20px 0;">
+      <div id="progresoBarra" style="width: 0%; height: 100%; background: #27ae60; transition: width 0.3s;"></div>
+    </div>
+
+    <span id="txtPorcentaje" style="font-size: 32px; font-weight: bold; color: #2ecc71;">0%</span>
+  </div>
+
+  <script src="js/wakelock.js"></script>
 
   <script>
-let deferredPrompt = null;
+    // Variables de estado
+    let deferredPrompt = null;
+    let usuarioAceptoInstalar = false;
+    let descargandoRecursos = false;
+    let ultimoHablado = 0;
 
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-});
+    window.addEventListener("beforeinstallprompt", (e) => {
+      console.log("[PWA] Evento beforeinstallprompt capturado");
+      e.preventDefault();
+      deferredPrompt = e;
+    });
 
-window.addEventListener("appinstalled", () => {
-  cerrarInstallOverlay();
-  deferredPrompt = null;
-});
+    window.addEventListener("appinstalled", () => {
+      console.log("[PWA] App instalada con éxito");
+      cerrarInstallOverlay();
+      deferredPrompt = null;
+    });
 
-document.addEventListener('keydown', (e) => {
-  if (instalarOverlayVisible() && e.keyCode === 13) {
-    e.preventDefault();
-  }
-});
-  </script>
+    document.addEventListener('keydown', (e) => {
+      if (instalarOverlayVisible() && e.keyCode === 13) {
+        e.preventDefault();
+      }
+    });
 
-
- <script>
-
-  async function yaEstaInstalada() {
-    if ('getInstalledRelatedApps' in navigator) {
-      try {
-        const timeout = new Promise((resolve) => setTimeout(() => resolve([]), 1500));
-        const apps = await Promise.race([
-          navigator.getInstalledRelatedApps(),
-          timeout
-        ]);
-        return apps.length > 0;
-      } catch (e) {
-        return false;
+    // Helper de voz seguro con fallbacks
+    function hablarSeguro(texto, callback) {
+      console.log("[Voz] Hablando:", texto);
+      if (typeof DeterminaMotor === "function") {
+        DeterminaMotor(texto);
+        if (callback) callback();
+      } else if (typeof Lee === "function") {
+        Lee(texto, callback);
+      } else if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = "es-ES";
+        if (callback) {
+          utterance.onend = callback;
+          utterance.onerror = callback;
+        }
+        window.speechSynthesis.speak(utterance);
+      } else {
+        console.warn("[Voz] No hay motor de voz disponible:", texto);
       }
     }
-    return false;
-  }
 
-  async function esPWA(){
-    console.log("[esPWA] iniciando chequeo...");
+    // Control de Pantalla de Descarga de Recursos (73 MB)
+    function mostrarOverlayDescarga() {
+      descargandoRecursos = true;
 
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      console.log("[esPWA] Caso 1: corriendo en modo standalone (ya instalada y abierta desde ahí)");
-      document.title = "Si usa lector de pantalla silenciarlo para usar esta aplicación. Con teclas de dirección seleccionar una opción y luego pulsar enter";
-      document.getElementById('install-overlay').style.display = 'none';
-      return;
+      const overlay = document.getElementById('download-overlay');
+      if (overlay) overlay.style.display = 'flex';
+      
+      const contenedor = document.getElementById('contenedor');
+      if (contenedor) contenedor.setAttribute('inert', '');
+
+      const installOverlay = document.getElementById('install-overlay');
+      if (installOverlay) installOverlay.style.display = 'none';
     }
 
-    let yaInstalada = false;
-    try {
-      yaInstalada = await yaEstaInstalada();
-    } catch (e) {
-      console.error("[esPWA] Error en yaEstaInstalada():", e);
-      yaInstalada = false;
-    }
-    console.log("[esPWA] yaEstaInstalada() devolvió:", yaInstalada);
+    function ocultarOverlayDescarga() {
+      descargandoRecursos = false;
 
-    if (yaInstalada) {
-      console.log("[esPWA] Caso 2: detectada como instalada, ocultando overlay");
-      document.title = "Pequén 9 ya está instalada. Buscala en tu menú Inicio o escritorio.";
-      document.getElementById('install-overlay').style.display = 'none';
-      return;
+      const overlay = document.getElementById('download-overlay');
+      if (overlay) overlay.style.display = 'none';
+
+      const contenedor = document.getElementById('contenedor');
+      if (contenedor) contenedor.removeAttribute('inert');
+
+      hablarSeguro("Descarga completa. Pequén 9 ya está listo para ser usado sin conexión a internet.");
+      setTimeout(leerMensajeMenu, 2500);
     }
 
-    console.log("[esPWA] Caso 3: mostrando overlay de instalación");
-    document.title = "Para que funcione correctamete Pequén 9 debe instalarlo. Si usa lector de pantalla silenciarlo. Con teclas de dirección seleccionar una opción y luego pulsar enter ";
-    const overlayEl = document.getElementById('install-overlay');
-    overlayEl.style.display = 'flex';
-    console.log("[esPWA] overlay.style.display ahora es:", overlayEl.style.display, "| computado:", getComputedStyle(overlayEl).display);
-  }
+    function cerrarInstallOverlay() {
+      const overlay = document.getElementById('install-overlay');
+      if (overlay) overlay.style.display = 'none';
 
-$(document).ready(async function() {  
+      if (!descargandoRecursos) {
+        const contenedor = document.getElementById('contenedor');
+        if (contenedor) contenedor.removeAttribute('inert');
+        leerMensajeMenu();
+      }
+    }
 
-  console.log("[ready] DOM listo, llamando a esPWA()");
+    // Escuchar mensajes provenientes del Service Worker (Progreso 0% -> 100%)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'SW_PROGRESS') {
+          const pct = event.data.porcentaje;
 
-  try {
-    await esPWA();
-  } catch (e) {
-    console.error("[ready] esPWA() lanzó un error, aplicando comportamiento por defecto:", e);
-    document.getElementById('install-overlay').style.display = 'flex';
-  }
+          const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
-  var overlay = document.getElementById('install-overlay');
-  var mostrandoInstall = overlay && window.getComputedStyle(overlay).display !== 'none';
-  console.log("[ready] mostrandoInstall:", mostrandoInstall);
+          // Si el usuario pulsó instalar o la app ya corre instalada, mostramos la barra de progreso
+          if ((usuarioAceptoInstalar || isStandalone) && pct < 100) {
+            mostrarOverlayDescarga();
+          }
 
-  var miVar2 = setTimeout(function(){ 
-        
-      if (mostrandoInstall) {
-      leerMensajeInstall();
+          const barra = document.getElementById('progresoBarra');
+          const txtPct = document.getElementById('txtPorcentaje');
+          if (barra) barra.style.width = pct + '%';
+          if (txtPct) txtPct.innerText = pct + '%';
+
+          if ((usuarioAceptoInstalar || isStandalone) && pct >= ultimoHablado + 25 && pct < 100) {
+            ultimoHablado = pct;
+            hablarSeguro("Descarga de recursos al " + pct + " por ciento.");
+          }
+        }
+
+        if (event.data && event.data.type === 'SW_COMPLETE') {
+          if (descargandoRecursos) {
+            ocultarOverlayDescarga();
+          }
+        }
+      });
+    }
+
+    // Registro seguro de Service Worker
+    const registerServiceWorker = async () => {
+      if ("serviceWorker" in navigator) {
+        try {
+          const registration = await navigator.serviceWorker.register("./sw.js");
+
+          if (registration.installing) {
+            console.log("[SW] Instalación de Service Worker iniciada en segundo plano");
+          }
+
+          if (registration.waiting) {
+            window.addEventListener("load", () => {
+              activarNuevaVersion(registration.waiting);
+            });
+          }
+
+          registration.addEventListener("updatefound", () => {
+            const nuevoWorker = registration.installing;
+            if (nuevoWorker) {
+              nuevoWorker.addEventListener("statechange", () => {
+                if (nuevoWorker.state === "installed" && navigator.serviceWorker.controller) {
+                  activarNuevaVersion(nuevoWorker);
+                }
+              });
+            }
+          });
+        } catch (error) {
+          console.error(`[SW] Registration failed:`, error);
+        }
+      }
+    };
+
+    function activarNuevaVersion(worker) {
+      if (worker) worker.postMessage({ type: "SKIP_WAITING" });
+    }
+
+    let recargando = false;
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (recargando) return;
+        if (!document.hasFocus() && document.readyState !== "complete") return;
+        const yaRecargue = sessionStorage.getItem("swRecargado");
+        if (yaRecargue) return;
+        recargando = true;
+        sessionStorage.setItem("swRecargado", "1");
+        window.location.reload();
+      });
+    }
+
+    async function yaEstaInstalada() {
+      if ('getInstalledRelatedApps' in navigator) {
+        try {
+          const timeout = new Promise((resolve) => setTimeout(() => resolve([]), 1500));
+          const apps = await Promise.race([
+            navigator.getInstalledRelatedApps(),
+            timeout
+          ]);
+          return Array.isArray(apps) && apps.length > 0;
+        } catch (e) {
+          console.warn("[yaEstaInstalada] Exception en getInstalledRelatedApps:", e);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    async function esPWA() {
+      console.log("[esPWA] Iniciando chequeo de PWA...");
+
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                           window.navigator.standalone === true ||
+                           document.referrer.includes('android-app://');
+
+      if (isStandalone) {
+        console.log("[esPWA] Caso 1: Corriendo en modo standalone (ya instalada)");
+        document.title = "Si usa lector de pantalla silenciarlo para usar esta aplicación. Con teclas de dirección seleccionar una opción y luego pulsar enter";
+        const overlayEl = document.getElementById('install-overlay');
+        if (overlayEl) overlayEl.style.display = 'none';
+        return false;
+      }
+
+      let yaInstalada = false;
+      try {
+        yaInstalada = await yaEstaInstalada();
+      } catch (e) {
+        console.error("[esPWA] Error en yaEstaInstalada():", e);
+        yaInstalada = false;
+      }
+      console.log("[esPWA] yaEstaInstalada() devolvió:", yaInstalada);
+
+      if (yaInstalada) {
+        console.log("[esPWA] Caso 2: Detectada como instalada, ocultando overlay");
+        document.title = "Pequén 9 ya está instalada. Buscala en tu menú Inicio o escritorio.";
+        const overlayEl = document.getElementById('install-overlay');
+        if (overlayEl) overlayEl.style.display = 'none';
+        return false;
+      }
+
+      console.log("[esPWA] Caso 3: No instalada. Mostrando overlay de instalación");
+      document.title = "Para que funcione correctamente Pequén 9 debe instalarlo. Si usa lector de pantalla silenciarlo. Con teclas de dirección seleccionar una opción y luego pulsar enter";
+      const overlayEl = document.getElementById('install-overlay');
+      if (overlayEl) {
+        overlayEl.style.display = 'flex';
+        console.log("[esPWA] overlay.style.display ahora es:", overlayEl.style.display);
+      }
+      return true;
+    }
+
+    function leerMensajeInstall() {
+      var mensajeInstall = "Se muestra una ventana para instalar Pequén 9. " +
+        "Esta aplicación tiene su propio sistema de voz. Si tiene un lector de pantalla activado, " +
+        "ciérrelo antes de continuar. Use las flechas de dirección para seleccionar una opción, " +
+        "y la tecla Enter para confirmarla.";
+      hablarSeguro(mensajeInstall);
+    }
+
+    function leerMensajeMenu() {
+      var mensaje = "Pequén 9. " + (window.Gres ? Gres.MenuActividadInicio : "") + " para obtener ayuda pulsar F1";  
+      var pulsaTrue = localStorage.getItem("Pulsador");
+
+      if (pulsaTrue == "true" ){    
+        var mensaje2 = "Pequén 9. con pulsador recorrer el menú. para ingresar a una opción mantener pulsado por unos segundos";
+        hablarSeguro(mensaje2);  
+      } else {
+        hablarSeguro(mensaje);  
+      }
+    }
+
+    function instalarApp(esTeclado) {
+      usuarioAceptoInstalar = true;
+
+      if (esTeclado) {
+        const audio = document.getElementById('audioAvisoInstalar');
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        }
+      }
+
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          deferredPrompt = null;
+          cerrarInstallOverlay();
+          mostrarOverlayDescarga();
+          hablarSeguro("Iniciando descarga de recursos para uso sin conexión. Por favor espere.");
+        });
+      } else {
+        cerrarInstallOverlay();
+        mostrarOverlayDescarga();
+        hablarSeguro("Iniciando descarga de recursos para uso sin conexión. Por favor espere.");
+      }
+    }
+
+    function instalarOverlayVisible() {
+      const overlay = document.getElementById('install-overlay');
+      return overlay && window.getComputedStyle(overlay).display !== 'none';
+    }
+
+    function botonesOverlay() {
+      return Array.from(document.querySelectorAll('#install-banner button'));
+    }
+
+    let overlayIndex = 0;
+    function enfocarBotonOverlay() {
+      const botones = botonesOverlay();
+      if (!botones.length) return;
+      const boton = botones[overlayIndex];
+      boton.focus();
+
+      const esInstalar = boton.id === 'btnInstalarAhora';
+
+      if (esInstalar) {
+        hablarSeguro(
+          boton.innerText.trim() +
+          ". Al confirmar, se abrirá un cuadro de diálogo del sistema que ya no lee Pequén 9. " +
+          "Si usa lector de pantalla, actívelo antes de confirmar."
+        );
+      } else {
+        hablarSeguro(boton.innerText.trim());
+      }
+    }
+
+    function activarOverlaySeleccion() {
+      const botones = botonesOverlay();
+      const boton = botones[overlayIndex];
+      if (!boton) return;
+
+      if (boton.id === 'btnInstalarAhora') {
+        hablarSeguro("Instalar", () => instalarApp(true));
+      } else if (boton.id === 'btnContinuarSinInstalar') {
+        cerrarInstallOverlay();
+      }
+    }
+
+    function navegarOverlay(direccion) {
+      const botones = botonesOverlay();
+      if (!botones.length) return;
+      overlayIndex = (overlayIndex + direccion + botones.length) % botones.length;
+      enfocarBotonOverlay();
+    }
+
+    function Abre(n) { 
+      if (n == 1) {
+        window.open("./AppTeclado/index.html","_self"); 
+      } else if (n == 2) {
+        window.open("./AppBraille/index.html","_self");
+      } else if (n == 3) {
+        window.open("./F1/Ayuda.html","_self");
+      } else if (n == 4) {
+        if (typeof instalar === "function") instalar();
+      }
+    }
+
+    var s, p = 0;
+
+    function test(s) {
+      var d = document.getElementById('s' + s);
+      if (d === null || typeof d === 'undefined') return;
+      var dice = d.innerText;
+      hablarSeguro(dice);
+      if (window.$) {
+        $(".itemS").css({"background-color": "white", "color": "black"});
+        $(d).css({"background-color": "black", "color": "white"});
+      }
+      p = s;
+    }
+
+    function adelante() {
+      p++;
+      Cbot = 3;
+      if (p > Cbot) { p = 1; }
+      test(p);
+    }
+
+    function prev() {
+      p--;
+      if (p < 1) { p = 1; } 
+      test(p);
+    }
+
+    document.onkeyup = function(e) {
+      e = e || window.event;
+
+      if (instalarOverlayVisible()) {
+        if (e.keyCode == 37 || e.keyCode == 38) { navegarOverlay(-1); return; }
+        if (e.keyCode == 39 || e.keyCode == 40) { navegarOverlay(1); return; }
+        if (e.keyCode == 13) { activarOverlaySeleccion(); return; }
+        return;
+      }
+
+      if (e.keyCode == 112) { Ayuda(); }
+      if (e.keyCode == 37) { prev(); }
+      if (e.keyCode == 38) { prev(); }
+      if (e.keyCode == 39) { adelante(); }
+      if (e.keyCode == 40) { adelante(); }
+      if (e.keyCode == 27) { Cerrar(); }
+      if (e.keyCode == 120) { if (typeof Navegador === "function") Navegador(); }
+      if (e.keyCode == 13) { Abre(p); }
+    };
+
+    function Cerrar() {     
+      hablarSeguro("Menú principal. Pequén 9");
+    }
+
+    function Ayuda() {
+      const gresMsg = window.Gres ? (Gres.MenuActividadInicio + ". " + Gres.AyudaConfig) : "";
+      hablarSeguro(document.title + ". " + gresMsg);  
+    }
+
+    // Inicialización independiente de la carga de jQuery
+    async function inicializarPequen() {
+      console.log("[ready] DOM cargado. Ejecutando comprobación esPWA()...");
+
+      // Registrar Service Worker
+      await registerServiceWorker();
+
+      let mostrandoInstall = false;
+      try {
+        mostrandoInstall = await esPWA();
+      } catch (e) {
+        console.error("[ready] Error crítico en esPWA(), mostrando modal por defecto:", e);
+        const overlayEl = document.getElementById('install-overlay');
+        if (overlayEl) overlayEl.style.display = 'flex';
+        mostrandoInstall = true;
+      }
+
+      console.log("[ready] Resultado mostrandoInstall:", mostrandoInstall);
+
+      setTimeout(function() { 
+        if (mostrandoInstall) {
+          leerMensajeInstall();
+        } else if (!descargandoRecursos) {
+          leerMensajeMenu();
+        }
+      }, 300); 
+
+      setTimeout(function() {  
+        document.title = "Pequén 9";
+      }, 5000);  
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", inicializarPequen);
     } else {
-      leerMensajeMenu();
+      inicializarPequen();
     }
-             
-       }, 10); 
-
-     var miVar3 = setTimeout(function(){  
-     
-      document.title="Pequén 9"
-
-       }, 5000);  
-       
-  });
-
-  function leerMensajeMenu() {
-    var mensaje = "Pequén 9. " + Gres.MenuActividadInicio + " para obtener ayuda pulsar F1";  
-    var pulsaTrue = localStorage.getItem("Pulsador");
-
-    if (pulsaTrue == "true" ){    
-      var mensaje2 = "Pequén 9. con pulsador recorrer el menú. para ingresar a una opción mantener pulsado por unos segundos " ;
-     DeterminaMotor(mensaje2);  
-    }
-    else{
-      DeterminaMotor(mensaje);  
-    }
-  }
-
-
-function mostrarInstallOverlay() {
-  const overlay = document.getElementById('install-overlay');
-  overlay.style.display = 'flex';
-
-  const contenedor = document.getElementById('contenedor');
-  if (contenedor) contenedor.setAttribute('inert', '');
-
-  overlayIndex = 0;
-}
-
-function cerrarInstallOverlay() {
-  document.getElementById('install-overlay').style.display = 'none';
-
-  const contenedor = document.getElementById('contenedor');
-  if (contenedor) contenedor.removeAttribute('inert');
-
-  leerMensajeMenu();
-}
-
-function instalarApp(esTeclado) {
-  if (!deferredPrompt) {
-    cerrarInstallOverlay();
-    DeterminaMotor("Este navegador no ofrece instalación automática en este momento. " +
-        "Puede intentar instalar la aplicación desde el menú del navegador, " +
-        "buscando la opción Instalar aplicación o Agregar a pantalla de inicio.");
-    return;
-  }
-
-  if (esTeclado) {
-    const audio = document.getElementById('audioAvisoInstalar');
-    audio.currentTime = 0;
-    audio.play().catch(() => {});
-    esperandoDialogoSistema = true;
-  }
-
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.then(() => {
-    deferredPrompt = null;
-    esperandoDialogoSistema = false;
-    cerrarInstallOverlay();
-  });
-}
-
-function hablarYluego(texto, callback) {
-  const utterance = new SpeechSynthesisUtterance(texto);
-  utterance.lang = "es-ES";
-  utterance.onend = callback;
-  utterance.onerror = callback;
-  window.speechSynthesis.speak(utterance);
-}
-
-let overlayIndex = 0;
-
-function instalarOverlayVisible() {
-  const overlay = document.getElementById('install-overlay');
-  return overlay && window.getComputedStyle(overlay).display !== 'none';
-}
-
-function botonesOverlay() {
-  return Array.from(document.querySelectorAll('#install-banner button'));
-}
-
-let avisoInstalarListo = false;
-
-function enfocarBotonOverlay() {
-  const botones = botonesOverlay();
-  if (!botones.length) return;
-  const boton = botones[overlayIndex];
-  boton.focus();
-
-  const esInstalar = boton.id === 'btnInstalarAhora';
-
-  if (esInstalar) {
-    avisoInstalarListo = false;
-    Lee(
-      boton.innerText.trim() +
-      ". Al confirmar, se abrirá un cuadro de diálogo del sistema que ya no lee Pequén 9. " +
-      "Si usa lector de pantalla, actívelo antes de confirmar.",
-      () => { avisoInstalarListo = true; }
-    );
-  } else {
-    avisoInstalarListo = true;
-    Lee(boton.innerText.trim());
-  }
-}
-
-function activarOverlaySeleccion() {
-  const botones = botonesOverlay();
-  const boton = botones[overlayIndex];
-  if (!boton) return;
-
-  if (boton.id === 'btnInstalarAhora') {
-    Lee("Instalar")
-    instalarApp(true);
-  } else if (boton.id === 'btnContinuarSinInstalar') {
-    cerrarInstallOverlay();
-  }
-}
-
-
-function navegarOverlay(direccion) {
-  const botones = botonesOverlay();
-  if (!botones.length) return;
-  overlayIndex = (overlayIndex + direccion + botones.length) % botones.length;
-  enfocarBotonOverlay();
-}
-
-
-  function Abre(n)
-  { 
-    if (n ==1){
-     window.open("./AppTeclado/index.html","_self"); 
-    }
-    else if (n==2){
-     window.open("./AppBraille/index.html","_self");
-     }
-     else if (n==3){
-     window.open("./F1/Ayuda.html","_self");
-     }
-     else if (n==4){
-      instalar();
-     }
-   
-  }
-  
-  var s, p=0;
-  
-  
-  function test(s) {
-  
-  d=document.getElementById('s'+ s);
-  if(d === null || typeof d === 'undefined'){
-      return;}
-  var dice = d.innerText;
-  Lee(dice);
-  $(".itemS").css({"background-color": "white"});
-  $(".itemS").css({"color": "black"});
-  $(d).css({"background-color": "black"});
-  $(d).css({"color": "white"});
-  p=s;
-  }
-  
-  function adelante(){
-     p++;
-    Cbot= 3;
-     if (p > Cbot) {p=1 }
-      test(p)
-  }
-  
-  function prev() {
-    p--;
-    if (p < 1) {p=1} 
-    test(p)
-  }
-  
-
-
-
-  document.onkeyup=function(e) {
-  e = e || window.event;
-
-
-    if (instalarOverlayVisible()) {
-    if (e.keyCode == 37 || e.keyCode == 38) { navegarOverlay(-1); return; }
-    if (e.keyCode == 39 || e.keyCode == 40) { navegarOverlay(1); return; }
-    if (e.keyCode == 13) { activarOverlaySeleccion(); return; }
-    return;
-  }
-
-  const activeTextarea = document.activeElement;
-
-
-  if (e.keyCode == 112) { 
-    movil = 0; 
-    Ayuda();
-  }
-   
-  if (e.keyCode == 37) {prev()}
-  if (e.keyCode == 38) {prev()}
-  if (e.keyCode == 39) {adelante()}
-  if (e.keyCode == 40) {adelante()}
-  if (e.keyCode == 27) {Cerrar()}
-  if (e.keyCode == 120) {Navegador()}
-  if (e.keyCode == 13) {
-     Abre(p)
-  }
-  
-  return;
-  }
-
- 
- function SinMouse(){
-    LeeCGB(Gres.SinRaton);
-  }
-
-  function Cerrar(){     
-  LeeCGB("Menú principal. Pequén 9");
-}
-  
-  function Regresar()
-  {
-  }
-  function Ayuda()
-  {
-    LeeCGB(document.title + ". "  + Gres.MenuActividadInicio + ". Pequén 9 también tiene actividades accesibles a un pulsador. En reemplazo de un pulsador se puede usar: el click del mouse o la barra espaciadora. pulsando brevemente se recorren las opciones de un menú. al mantener pulsado por unos segundos se ingresa a una opción. " + Gres.AyudaConfig);  
-  } 
-  
-  
-  window.addEventListener("orientationchange", ()=> {
-});
-
-function getOrientation() {
-    if (window.matchMedia("(orientation: portrait)").matches) {
-        var current_mode = 'Portrait';
-    }
-    else if (window.matchMedia("(orientation: landscape)").matches) {
-        var current_mode = 'Landscape';
-        LeeCGB("Girar la pantalla");
-    }
-    else {
-        var current_mode = window.innerWidth < window.innerHeight ? "Portrait" : "Landscape";
-    }
-    return current_mode
-};
-
-
-function leerMensajeInstall() {
-  var mensajeInstall = "Se muestra una ventana para instalar Pequén 9. " +
-    "Esta aplicación tiene su propio sistema de voz. Si tiene un lector de pantalla activado, " +
-    "ciérrelo antes de continuar. Use las flechas de dirección para seleccionar una opción, " +
-    "y la tecla Enter para confirmarla.";
-  DeterminaMotor(mensajeInstall);
-}
-
-  </script> 
-  <!-- Cierra SuperC  -->
-  </div>
-  <div  id="aviso-horizontal">Girar la pantalla</div>
-
-
-
-  </body>
- 
-  </html>
+  </script>
+  <div id="aviso-horizontal">Girar la pantalla</div>
+</body>
+</html>
