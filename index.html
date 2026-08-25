@@ -295,9 +295,6 @@ document.addEventListener('keydown', (e) => {
   async function yaEstaInstalada() {
     if ('getInstalledRelatedApps' in navigator) {
       try {
-        // getInstalledRelatedApps() es experimental y en algunos casos
-        // la promesa nunca se resuelve. Le ponemos un tope de 1.5s:
-        // si no respondió para entonces, seguimos como si no hubiera dado info.
         const timeout = new Promise((resolve) => setTimeout(() => resolve([]), 1500));
         const apps = await Promise.race([
           navigator.getInstalledRelatedApps(),
@@ -686,3 +683,4 @@ function leerMensajeInstall() {
   </body>
  
   </html>
+
