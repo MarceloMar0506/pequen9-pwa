@@ -192,7 +192,7 @@ img { width: 35vh; }
     });
 
     document.addEventListener('keydown', (e) => {
-      if (instalarOverlayVisible() && e.keyCode === 13) {
+      if ((instalarOverlayVisible() || descargaOverlayVisible()) && e.keyCode === 13) {
         e.preventDefault();
       }
     });
@@ -262,11 +262,10 @@ img { width: 35vh; }
       navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'SW_PROGRESS') {
           const pct = event.data.porcentaje;
-
           const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
-          // Si el usuario pulsó instalar o la app ya corre instalada, mostramos la barra de progreso
-          if ((usuarioAceptoInstalar || isStandalone) && pct < 100) {
+          // Mostrar overlay solo durante la fase real de instalación inicial
+          if ((usuarioAceptoInstalar || isStandalone) && pct > 0 && pct < 100) {
             mostrarOverlayDescarga();
           }
 
@@ -448,6 +447,11 @@ img { width: 35vh; }
       return overlay && window.getComputedStyle(overlay).display !== 'none';
     }
 
+    function descargaOverlayVisible() {
+      const overlay = document.getElementById('download-overlay');
+      return overlay && window.getComputedStyle(overlay).display !== 'none';
+    }
+
     function botonesOverlay() {
       return Array.from(document.querySelectorAll('#install-banner button'));
     }
@@ -532,6 +536,14 @@ img { width: 35vh; }
 
     document.onkeyup = function(e) {
       e = e || window.event;
+
+      // Si el modal de descarga está visible, bloquear teclas del menú y avisar por voz
+      if (descargaOverlayVisible()) {
+        if (e.keyCode === 13 || (e.keyCode >= 37 && e.keyCode <= 40)) {
+          hablarSeguro("Descargando recursos de Pequén 9. Por favor espere a que finalice la instalación.");
+        }
+        return;
+      }
 
       if (instalarOverlayVisible()) {
         if (e.keyCode == 37 || e.keyCode == 38) { navegarOverlay(-1); return; }
