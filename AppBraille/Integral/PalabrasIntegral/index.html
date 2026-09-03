@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Ingreso de Usuario Pequén</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" type="image/png" href="../../../ResB/favico.png" sizes="32x32"/>
+<link href="./Estilo.css" type="text/css" rel="stylesheet"/>
+<link href="../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../../../ResB/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="UsuarioIngreso.js"></script>
+<script type="text/javascript" src="InputText.js"></script>
+<script type="text/javascript" src="../../../ResB/localforage.js"></script>
+<script type="text/javascript" src="../../../ResB/MotoresEs.js"></script>
+<script type="text/javascript" src="../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="../../../ResB/AnimP.js"></script>
+<script src="../../F1/Generales.js"></script>
+<script>
+  var tocados = 0;
+</script>
+</head>
+
+<body>
+  <div class="f1" ontouchend="Ayuda()" onclick="Ayuda()"><img  class="f1" src="../../../ResB/ayuda.png" alt="Ayuda"></div>
+   <div class="esc" ontouchend="Regresar()" onclick="Regresar()"><img src="../../../ResB/Fiz.png" alt="regresar"></div>
+  
+  <div class="TecladoV">
+    <div class="ingresoNombre">
+      <div class="board"></div>
+     
+   </div>
+  <p></p>
+    <div class="row">
+    <div id="content">
+      <br>
+      <br>
+      <br>
+      <p>
+      <div id="virtual-keyboard">
+  
+            <div class="keyboard-row">
+                <a href="#"  class="Lt" data="Q">Q</a>
+                <a href="#"  class="Lt" data="W">W</a>
+                <a href="#"  class="Lt" data="E">E</a>
+                <a href="#"  class="Lt" data="R">R</a>
+                <a href="#"  class="Lt" data="T">T</a>
+                <a href="#"  class="Lt" data="Y">Y</a>
+                <a href="#"  class="Lt" data="U">U</a>
+                <a href="#"  class="Lt" data="I">I</a>
+                <a href="#"  class="Lt" data="O">O</a>
+                <a href="#"  class="Lt" data="P">P</a>
+            </div>
+            <div class="keyboard-row">
+                <a href="#" id="A" class="Lt" data="A">A</a>
+                <a href="#" id="S" class="Lt" data="S">S</a>
+                <a href="#"  class="Lt" data="D">D</a>
+                <a href="#"  class="Lt" style="text-decoration: underline" data="F">F</a>
+                <a href="#"  class="Lt" data="G">G</a>
+                <a href="#"  class="Lt" data="H">H</a>
+                <a href="#"  class="Lt" style="text-decoration: underline" data="J">J</a>
+                <a href="#"  class="Lt" data="K">K</a>
+                <a href="#"  class="Lt" data="L">L</a>
+                <a href="#"  class="Lt" data="Ñ">Ñ</a>
+            </div>
+            <div class="keyboard-row">
+                <a href="#"  class="Lt" data="Z">Z</a>
+                <a href="#"  class="Lt" data="X">X</a>
+                <a href="#"  class="Lt" data="C">C</a>
+                <a href="#"  class="Lt" data="V">V</a>
+                <a href="#"  class="Lt" data="B">B</a>
+                <a href="#"  class="Lt" data="N">N</a>
+                <a href="#"  class="Lt" data="M">M</a>
+            </div>
+             <div class="keyboard-row">
+                <a href="#"  class="Lt"  data=" ">ESPACIO</a>
+                <a href="#"  class="Lt" data="ELIMINAR">ELIMINAR</a>
+                <a href="#"  class="Lt" data="ENTER">INGRESAR</a>
+            </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 15%;margin-left: 18%;"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG" style="margin-left: 6%;bottom:0%;"></div>
+
+
+  <script>
+
+  $(document).ready(function() {
+      DeterminaMotor(document.title + ". " + Gres.MenuPractica);
+    
+    $(".F1Ayuda").on('touchend', function(e) {
+        e.preventDefault();
+        Ayuda();
+    });
+
+    $("#virtual-keyboard a").on('mouseup', function(e) {
+        e.preventDefault();
+        if ($(this).attr('data') == "ENTER")
+      {
+        Navega();
+      }  
+        
+       else if ($(this).attr('data') == 'ELIMINAR') {
+              board_text = $('.board').text();
+              board_text = board_text.substring(0, board_text.length-1);
+              $('.board').text(board_text);
+            }
+        else {                         
+              $('.board').text($('.board').text() + $(this).attr('data'));              
+          }
+      });
+  });
+
+ 
+
+  $(document).keyup(function(e) {
+    
+    
+    if (e.keyCode == 27)
+    {
+      Regresar();
+    }
+
+    if (e.keyCode == 13)
+      {
+        Navega();
+      } 
+      
+
+
+
+
+    var ev = $('.board');
+
+    if (ev.is(':visible') == false ) {return}      
+ 
+      pulsada = e.key;
+      //console.log(pulsada + "  " + isLetter(pulsada));
+      //si no es una letra retorna
+      if (isLetter(pulsada) == false && pulsada != "ENTER" ){return}
+
+
+      if (e.keyCode !=32)
+       {
+      pulsada = e.key.toUpperCase()
+       }
+
+      if (pulsada == "ENTER")
+      {
+        Navega();
+       
+      }
+      else if (pulsada == "BACKSPACE")
+      {
+          board_text = $('.board').text();
+          Lee(Gres.borro  + board_text.substring(board_text.length-1, board_text.length));
+          board_text = board_text.substring(0, board_text.length-1);
+          $('.board').text(board_text);  
+      } 
+      else if (pulsada == "F7")
+      {
+        return;
+      }
+      else if (pulsada.includes("ARROW") )
+      {
+        Lee($('.board').text());
+      }
+      else 
+      {
+       if (e.keyCode !=32)
+       {
+        Lee(Gres.pulsada.toLowerCase());
+       }
+       if (e.keyCode ==32)
+       {
+        Lee(Gres.espacio);
+       }
+       if ($('.board').text() ==  UsuarioActual)
+       {
+         //UsuarioActual = "";
+         $('.board').text("");
+         $('.board').css('background-color','white');
+       }
+       
+      $('.board').text($('.board').text() + pulsada);    
+       }   
+  
+    });  
+    function Ayuda()
+    {
+      LeeCGB(Gres.F1Inicio);
+    }
+
+function Regresar(){
+  window.open("../index.html","_self");
+}
+
+    function isLetter(str) {
+      return str.length === 1 && str.match(/[a-z]/i);
+    }
+ 
+
+    window.addEventListener('touchstart', function(evt){
+      evt.preventDefault();
+     
+        Lee(evt.touches.item(0).target.getAttribute('data'));
+     
+    });
+    window.addEventListener('touchmove', function(evt){
+      tocados = 1;
+    });
+
+    window.addEventListener('touchend', function(evt){
+
+      if (tocados > 0)
+      {
+        tocados = 0;
+
+      if (evt.target.className === 'Lt'){ 
+ 
+      if (evt.target.getAttribute('data') == "ENTER")
+      {
+        Navega();
+        window.navigator.vibrate(200); 
+      }  
+        
+       else if (evt.target.getAttribute('data') == 'DEL') {
+              board_text = $('.board').text();
+              board_text = board_text.substring(0, board_text.length-1);
+              $('.board').text(board_text);
+              window.navigator.vibrate(200); 
+            }
+        else { 
+                                   
+              $('.board').text($('.board').text() + evt.target.getAttribute('data'));  
+              window.navigator.vibrate(200);   
+                          
+          }
+       } 
+
+
+      }//fin de tocados == 1
+      // tocados = 0;
+    
+     
+    
+
+    }, false);
+
+
+    
+
+
+  </script>  
+
+
+</body>
+
+</html>

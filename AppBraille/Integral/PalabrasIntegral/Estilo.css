@@ -1,0 +1,782 @@
+﻿/* @media only screen and (orientation:portrait){
+  body {
+    width: 100%;
+    height: auto;
+    transform: rotate(90deg);
+  }
+} */
+
+html, body {
+    transition-property: opacity, left, top, height;
+    transition-duration: 2s, 2s;
+    transition: background-color 2s ease;
+    -moz-user-select: none; 
+   -webkit-user-select: none;
+   -ms-user-select: none;
+    user-select: none;   
+    touch-action: none;
+    height: 90%;
+    margin: 0px; 
+    overflow: hidden;
+}
+
+.Nombre{
+	
+	font-size:4vw;
+	text-transform:uppercase;	
+}
+.TecBraille
+{
+-webkit-box-shadow: 0px 0px 27px 12px rgba(88,54,168,0.64);
+-moz-box-shadow: 0px 0px 27px 12px rgba(88,54,168,0.64);
+box-shadow: 0px 0px 27px 12px rgba(88,54,168,0.64);
+z-index:96;
+
+	
+}
+
+
+    
+    /* *#bljaIMGte{float:center;position:relative;}
+    *#bljaIMGte .bljaIMGtex
+    {float:center;position:absolute;top:10%;left:10%;} */
+
+    
+      #tPulsadas
+      {
+        width: 100px; 
+        height: 100px;
+        background-color: #FFFFFF;
+        border: 1px;
+        outline: none;
+      }
+
+
+
+    /* * {
+
+        margin: 0;
+      	padding: 0;
+      	overflow: auto;
+      } */
+      #tabla {
+      	width: 100%;
+      	border-collapse: collapse;
+      	border: 0px;
+
+      }
+
+ @media  (min-width: 300px) {
+   *{
+        font-size: 10px;
+      }
+
+      #word {
+        font-family: "Arial Black", "Arial Bold";
+        /*border-radius: 60px 60px 5px 90px;*/
+        border-radius: 60% 60% 5% 90%; 
+        border: 5px solid; 
+        border-color: rgb(61, 42, 165);
+        /*height: 90px; 
+        width: 360px; */
+        height: 10%;
+        width: 30%;
+        margin: 1%;
+        margin-top: 0%; 
+        background-color:rgba(221, 217, 185, 0.89);
+        font-size: 2rem; 
+        text-align:center; 
+        overflow-y: hidden;  
+        word-wrap: break-word; 
+        padding-top: 1px;
+        text-transform: uppercase;
+        position:absolute;
+        left: 15%;
+        top: 0%;
+        visibility: hidden;
+      }   
+
+   #mtbrai
+      {
+        width: 200px;
+      }
+
+      	label.etiqueta {
+             font-size: 20px;
+       }
+
+      img.Filasuperior {
+        width: 80px; height: 80px;
+      }
+      .celda_dcha {
+      	width: 80px;
+      	border: 0px;
+
+      }
+      .celda_cent {
+      	width: 80px;
+      	border: 0px;
+
+      }
+
+
+      .celda_izqa {
+      	width: 80px;
+      	border: 0px;
+
+      }
+
+
+       .celda_Label {
+      	width: 200px;
+      	border: 0px;
+
+      }
+
+        .celda_Abajo {
+      	width: 200px;
+      	border: 0px;
+
+      }
+
+
+      .celda_brai {
+        width: 30px; height: 30px;
+      }
+      #lImp {
+       font-family: "Arial";
+       font-size: 80px;
+
+      }
+
+      table.TecBrai {
+        width: 50%;
+        
+      }
+      
+
+
+
+}
+
+
+ @media (orientation:landscape){
+   
+      *{
+        font-size: 0.85rem;
+      }
+
+      #word {
+        font-family: "Arial Black", "Arial Bold";
+        /*border-radius: 60px 60px 5px 90px;*/
+        border-radius: 60% 60% 5% 90%; 
+        border: 5px solid; 
+        border-color: rgb(42, 165, 48);
+        /*height: 90px; 
+        width: 360px; */
+        height: 10%;
+        width: 30%;
+        margin: 0%;
+        margin-top: 0%; 
+        background-color:rgba(221, 217, 185, 0.89);
+        font-size: 1rem; 
+        text-align:center; 
+        overflow-y: hidden;  
+        word-wrap: break-word; 
+        padding-top: 1px;
+        text-transform: uppercase;
+        position:absolute;
+        left: 15%;
+        top: 1%;
+        visibility: hidden;
+      }   
+
+       #mtbrai
+      {
+        width: 200px;
+      }
+
+
+
+
+      	label.etiqueta {
+             font-size: 20px;
+       }
+
+
+      img.Filasuperior {
+        width: 80px; height: 80px;
+      }
+       .celda_dcha {
+      	width: 10px;
+      	border: 1px;
+
+      }
+      .celda_cent {
+      	width: 10px;
+      	border: 1px;
+
+      }
+
+
+      .celda_izqa {
+      	width: 10px;
+      	border: 1px;
+
+      }
+
+
+       .celda_Label {
+      	width: 200px;
+      	border: 0px;
+
+
+      }
+
+        .celda_Abajo {
+      	width: 200px;
+      	border: 0px;
+
+      }
+
+      .celda_brai {
+        width: 30px; height: 30px;
+      }
+      
+      #lImp {
+       font-family: "Arial Black", "Arial Bold";
+       font-size: 80px;
+      }
+
+
+}
+
+ @media  (min-width: 800px) and (min-height: 600px) {
+      *{
+        font-size: 1rem;
+      }
+
+      #word {
+        font-family: "Arial Black", "Arial Bold";
+        /*border-radius: 60px 60px 5px 90px;*/
+        border-radius: 60% 60% 5% 90%; 
+        border: 3px solid; 
+        border-color: brown;
+        /*height: 90px; 
+        width: 360px; */
+        height: 10%;
+        width: 30%;
+        margin: 1%;
+        margin-top: 0%; 
+        background-color:rgba(221, 217, 185, 0.89);
+        font-size: 2rem; 
+        text-align:center; 
+        overflow-y: hidden;  
+        word-wrap: break-word; 
+        padding-top: 1px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 15%;
+        top: 0%;
+        visibility: hidden;
+      }   
+
+
+
+
+      #lImp {
+       font-family: "Arial Black", "Arial Bold";
+       font-size: 10rem;
+
+      }
+
+      #mtbrai
+      {
+        width: 50%;
+        height: 100%;
+      }
+
+      label.etiqueta {
+             font-size: 2rem;
+       }
+
+      img.Filasuperior {
+        width: 50%;
+        height: 50%;
+      }
+      .celda_dcha {
+      	width: 33%;
+      	border: 0px;
+      	height: 30%;
+
+      }
+      .celda_cent {
+      	width: 35%;
+      	height: 30%;
+      	border: 0px;
+
+      }
+
+
+      .celda_izqa {
+      	width: 33%;
+      	height: 30%;
+      	border: 0px;
+
+      }
+
+
+      .celda_Label {
+      	width: 600px;
+      	border: 0px;
+
+      }
+
+      .celda_Abajo {
+      	width: 700px;
+      	height: 40%;
+      	border: 0px;
+
+      }
+      
+      .celda_brai {
+        width: 50px; height: 50px;
+      }
+
+    
+      img.tecla_brai {
+       width: 100%; height: 150%;
+      }
+
+      table.TecBrai {
+        width: 40%;
+      }
+
+
+}
+
+  #mtbrai {
+
+    float:center;
+    display:block;
+    margin:auto;
+    z-index:1;
+
+  }
+
+   #EtiquetaUno {
+
+  /*  display:block;*/
+    margin:auto;
+
+    text-align:center;
+    text-transform: uppercase;
+    color:black;
+    font-size:3em;
+
+
+   }
+
+  table.gridtable {
+    width: 100%;
+     border: 1;
+     border-color: #ADCDFF;
+
+  }
+
+ table.gridtable td {
+    width: 30%;
+    border: 0;
+    padding-left: 15px;
+
+  }
+
+ table.gridtable tr:nth-child(odd) {
+    background-color:#ADCDFF;
+}
+table.gridtable tr:nth-child(even) {
+    background-color:#fbfbfb;
+}
+@media   (orientation:portrait)  {
+
+  table.TecBrai {
+    width: 20%;
+   
+  }
+table.TecBrai td{
+   background-color:#000000;   
+   height: 100%;
+  }
+
+
+
+  #word {
+    font-family: "Arial Black", "Arial Bold";
+    /*border-radius: 60px 60px 5px 90px;*/
+    border-radius: 60% 60% 5% 90%; 
+    border: 5px solid; 
+    border-color: brown;
+    /*height: 90px; 
+    width: 360px; */
+    height: 5%;
+    width: 30%;
+    margin: 1%;
+    margin-top: 0%; 
+    background-color:rgba(221, 217, 185, 0.89);
+    font-size: 1rem; 
+    text-align:center; 
+    overflow-y: hidden;  
+    word-wrap: break-word; 
+    padding-top: 1px;
+    text-transform: uppercase;
+    position:relative;
+    left: 15%;
+    top: 5%;
+    visibility: hidden;
+  }   
+
+  .tecla_brai {
+    width: 30px; height: 30px;
+  }
+
+  .N_brai {
+    width: 30px; height: 30px;
+  }
+
+   *{
+        font-size: 10px;
+      }
+   #mtbrai
+      {
+        width: 200px;
+      }
+
+      	label.etiqueta {
+             font-size:4vw;
+       }
+
+      img.Filasuperior {
+        width: 80px; height: 80px;
+      }
+      .celda_dcha {
+      	width: 80px;
+      	border: 0px;
+
+      }
+      .celda_cent {
+      	width: 80px;
+      	border: 0px;
+
+      }
+
+
+      .celda_izqa {
+      	width: 80px;
+      	border: 0px;
+
+      }
+
+
+       .celda_Label {
+      	width: 200px;
+      	border: 0px;
+
+      }
+
+        .celda_Abajo {
+      	width: 200px;
+      	border: 0px;
+
+      }
+
+
+      .celda_brai {
+        width: 100%; height: 100%;
+      }
+      #lImp {
+       font-family: "Arial Black", "Arial Bold";
+       font-size: 80px;
+      }
+}
+
+#ayuda {
+  font-family: "Arial";
+  border: 1px solid; 
+  border-color: rgb(12, 12, 12);
+  height: 35%;
+  width: 25%;
+  margin: 1%;
+  margin-top: 0%; 
+  /*background-color:rgba(221, 217, 185, 0.89);*/
+  font-size: 0.8rem; 
+  text-align:left; 
+  overflow-y: hidden;  
+  word-wrap: break-word; 
+  padding-top: 1px;
+  text-transform: uppercase;
+  position: absolute;
+  left: 0;
+  top: 35%;
+  
+}     
+
+#generador
+    {
+    width:10%;
+    -webkit-box-shadow: 0px 0px 27px 12px rgba(88,54,168,0.64);
+-moz-box-shadow: 0px 0px 27px 12px rgba(88,54,168,0.64);
+box-shadow: 0px 0px 27px 12px rgba(88,54,168,0.64);
+z-index:96;
+
+	
+	}
+	#generador img
+    {
+    width:100%;
+	  height:100%;
+	}
+/*Botones*/
+.myButton {
+display: inline-block;
+                 width:20%;  
+                 left: 0;               
+                 text-align: center;
+	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
+	background:-moz-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:-webkit-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:-o-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
+	background-color:#3d94f6;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:1em;
+	font-weight:bold;
+	padding:3px 3px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+}
+
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6));
+	background:-moz-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+	background:-webkit-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+	background:-o-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+	background:-ms-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6',GradientType=0);
+	background-color:#1e62d0;
+}
+
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+a {
+      /* display: inline-block;  */
+       /*color:red;*/ /* This works but I don't want this */
+       padding:5px; 
+       margin:5px; 
+}
+
+
+.anchor{
+  display: block;
+  height: 115px; /*same height as header*/
+  margin-top: -115px; /*same height as header*/
+  visibility: hidden;
+}
+
+#pie{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;
+ 
+}
+
+#ayudaF1 {
+  display:none
+}
+
+#Label1 {
+     background-color:white;
+     font-size:1vw;    
+}
+
+#Pie {
+     text-align:center;
+     width:100%;
+      /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+     position:fixed;
+     bottom:0;
+     padding:1vw;
+     font-size:1.5vw;
+}
+#formulario
+{
+display: inline-block;
+text-align:right;
+       height:15%;
+       width:100%;
+       clear:both;
+       position: fixed;
+       bottom: 0;
+      display: block;
+margin:0 auto 0 auto 0 auto;  
+
+top: -999em;
+}
+
+.Nombre{
+	
+	font-size:4vw;
+	text-transform:uppercase;	
+}
+
+h2{
+ text-align:center;
+ font-size:2vw;
+}
+
+#progreso
+{	
+    text-align:right;
+     width:100%;
+      /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom:0.1vw;
+    margin-top:0.2vw;
+     position:fixed;
+     bottom:0;
+
+}
+
+.default {
+        
+      font-size:1vw;
+      
+      text-decoration:blink;           
+
+	background:gray ;/* : #292929;*/
+
+	border: 1px solid #111;	
+
+	border-radius: 5px;	
+
+	overflow: hidden;
+
+	box-shadow: 0 0 5px #333;
+	
+      height:1vw;				
+
+}
+
+.default div {
+  
+	background-color: #1a82f7;
+
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0099FF), to(#1a82f7)); 
+
+	background: -webkit-linear-gradient(top, #0099FF, #1a82f7); 
+
+	background: -moz-linear-gradient(top, #0099FF, #1a82f7); 
+
+	background: -ms-linear-gradient(top, #0099FF, #1a82f7); 
+
+	background: -o-linear-gradient(top, #0099FF, #1a82f7);
+
+}
+
+
+/* Teclado qwerty V */
+.TecladoV
+{
+  position: absolute;
+  width: 100%;
+  float: left;
+  margin-top: 3%;
+}
+.ingresoNombre
+{
+  float: left;
+  width: 100%;
+  text-align: center;  
+}
+
+
+.board {
+  border: 0.5vw solid rgb(83, 65, 245); 
+  font-size: 3vw;
+  width: 60%;
+   margin-left: 19%;
+   /* margin-right: 40%;  */
+  height: 4vw;
+  margin-bottom: 1vw; 
+  background-color:  darkgray;
+  /* width: 33%; */
+}
+
+a {text-decoration: none;}
+
+.keyboard-row {
+  text-align: center;
+  margin-bottom: 0.5vw;
+  padding: 1vw;
+}
+
+#virtual-keyboard a {
+  text-transform: uppercase;;
+  font-family: Arial;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #070657;
+  padding:1vw 2vw;
+  font-size: 1.5vw;
+  color:#ffffff;
+  text-align: center;
+  margin-right: 1vw;
+  margin-bottom: 0.5vw;
+  height: 3vw; 
+  justify-content: center;
+  align-items: stretch;
+}
+
+#virtual-keyboard a:hover {
+  /* text-decoration: none; */
+  /* opacity: 0.8; */
+  background-color: cornflowerblue;
+}
+a:hover {
+  text-decoration: none; 
+   opacity: 0.8; 
+  background-color: cornflowerblue!important;;
+}
+
+ 
+
+

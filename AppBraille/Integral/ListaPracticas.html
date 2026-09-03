@@ -98,17 +98,21 @@ var Dice ="";
 	</div>
 	<div></div>
 	<div>
-	 <a id="2" class="itemM" onclick="ingresa(2)"><img src="../../ResB/SignosO.png"/><br><span2 id="s2" class="itemS">OTROS SIGNOS</span2></a>
+	  <a id="2" class="itemM" onclick="ingresa(2)"><img src="../../ResB/alfa.png"/><br><span2 id="s2"  class="itemS">PALABRAS</span2></a>
+	</div>
+	<div></div>
+	<div>
+	 <a id="3" class="itemM" onclick="ingresa(3)"><img src="../../ResB/SignosO.png"/><br><span2 id="s3" class="itemS">OTROS SIGNOS</span2></a>
 	</div>
 	<div></div>
     <div>
-		<a id="3" class="itemM" onclick="ingresa(3)"><img src="../../ResB/Pizarra.png"/><br><span2 id="s3"  class="itemS">PIZARRA</span2></a>
+		<a id="4" class="itemM" onclick="ingresa(4)"><img src="../../ResB/Pizarra.png"/><br><span2 id="s4"  class="itemS">PIZARRA</span2></a>
 	</div>
 		<div></div>
-		<div></div>
-		<div></div>
+		
+		
 	<div>   
-	 <a id="4" class="itemM" onclick="ingresa(4)"><img src="../../ResB/Tacto.png"/><br><span2 id="s4"  class="itemS">LECTURA AL TACTO</span2></a>
+	 <a id="5" class="itemM" onclick="ingresa(5)"><img src="../../ResB/Tacto.png"/><br><span2 id="s5"  class="itemS">LECTURA AL TACTO</span2></a>
 	</div>   
   
    </div>
@@ -125,6 +129,8 @@ var Dice ="";
 	<div class="label" style="bottom: 1vw;"></div>
 
 	<script>
+
+		
 
 function ingresa(valor) {
 
@@ -148,23 +154,26 @@ if (nlec == 0) {
 			window.open("./PracticaAF.html", "_self");
 		}
 		else if (nlec == 2) {
-			window.open("./PracticaSig.html", "_self");
+			window.open("./PalabrasIntegral/Lista.html", "_self");
 		}		
 		else if (nlec == 3) {
+			window.open("./PracticaSig.html", "_self");
+		}		
+		else if (nlec == 4) {
 			window.open("../Pizarra/index.html", "_self");
 		}
-		else if (nlec == 4){
+		else if (nlec == 5){
 		   window.open("./PPalabrasTacto.html", "_self"); 	
 		}
 	},200);
-	//}
-//});
 
 }
 	}, 500);
-
+	
 
 }
+
+
 function Npulsado(event) {
 	event.preventDefault();
 	var number = String.fromCharCode(event.which);
@@ -231,7 +240,7 @@ function atras() {
 	var keys = Array.from( signosT.keys() )
 	nlec--;
 	if (nlec < 1) {
-nlec = 4;
+nlec = 5;
 	}
 
 	if (nlec == 1) {
@@ -286,7 +295,7 @@ LeePractica();
 
 function adelante() {
 	nlec++;
-	if (nlec > 4) {
+	if (nlec > 5) {
 nlec = 1
 	}
 if (nlec == 1) {
@@ -303,7 +312,7 @@ return;
 	}
 else if (nlec == 2) {
 $("#Mleccion").css("text-align", "center");
-Muestrasignos = keys.toString();// [".","c",";",":","?","!","(",")","[","]","{","}","-","_","*","'","/","M"];
+Muestrasignos = keys.toString();
 MLec = Muestrasignos;
 LeePractica();
 $(".itemS").css({"background-color": "white"});

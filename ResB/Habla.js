@@ -305,6 +305,11 @@ var contadorEsp = 0;
 
 function Lee(texto, callback)
 { 
+ if (typeof texto !== "string") {
+        console.warn("Lee(): texto inválido →", texto);
+        texto = "";
+    }
+
 indEs=10000;
 $(".label").html(texto);
 $(".label").css("visibility","visible");

@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+<title>Palabras con pizarra virtual</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<meta content ="Educación" name="RATING" />
+<meta content = "Favorecer el acceso a la lengua escrita" name="DESCRIPTION" />
+<meta content = "Favorecer el acceso a la lengua escrita, ofreciendo accesibilidad para personas con discapacidad visual y o motora" name="ABSTRACT" />
+<meta content ="capacitación, accesibilidad, acceso, lectoescritura, baja visión, entorno inclusivo, concientización social, discapacidad motora, software pequen, braille, braille virtual" name="KEYWORDS" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../../../ResB/favico.png" sizes="32x32"/>
+<link href="../../../ResB/PQEstilo.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="../../../ResB/jquery-3.3.1.min.js"></script>
+<script src="../../../ResB/Idb-Keyval.js"></script>
+<script type="text/javascript" src="UsuarioIngreso.js"></script>
+<script type="text/javascript" src="../../../ResB/Habla.js"></script>
+<script type="text/javascript" src="Lecciones.js"></script>
+<script type="text/javascript" src="../../../ResB/AnimP.js"></script>
+<script src="../../../F1/Practicaes.js"></script>
+<style>
+	.flash{width:100%}
+</style>
+
+
+<script>
+	var Esadelante = true;
+
+window.onload = function()
+{
+
+KEY = 'UsuarioActual';
+        get().then(function (value) {
+            UsuarioActual = value;
+		});
+	}
+
+</script>
+
+
+</head>
+
+<body>
+	
+<div id="contenedor" style="height:100%">
+
+	<div id="titulo3">
+		<div></div> 
+		<div id="Lecc" 	style="text-align: center;"></div>
+		<div></div>
+		</div>
+
+
+<div  id="myList" style="width:100%; height:70%;float:left;top:10vw;overflow:auto;overflow-x: hidden; display: none">
+
+</div>
+<br>
+ <div id="grillaLista" style="padding-bottom: 2%;">
+	<div id="Fiz"><img class="animated flash" src="../../../ResB/Fiz.png" onclick="atras()" alt="" ></div>
+	<div id="Ingresa"  onmouseup="ingresa()" ontouchend="ingresa()" style="visibility: hidden;font-size: 2vw;">INGRESAR</div>
+	<div id="Fder"><img class="animated flash" src="../../../ResB/Fder.png" onclick="adelante()" alt="" ></div>
+</div>
+<div id="Mleccion" style="font-size: 4vw;width: 70%;margin: auto;word-wrap: break-word;"></div>
+
+ <!-- globo -->
+ <div  class="label" style="bottom: 10%;margin-left: 15%"></div>
+ <!-- Pequen -->
+ <div id="pequenG" class="esperaG"></div>
+ <script>
+
+function adelante(){
+	Esadelante = true;
+	$("#Ingresa").css("visibility","visible");
+	nlec++;
+
+	if (nlec > 10) {nlec = 10}	
+	
+	var MLec = " " + eval("Leccion"+ (nlec) );
+	MLec = MLec.toString().replace(/,/g , ", ")
+	$("#Mleccion").text(MLec);
+	LeePractica();	
+	
+
+	
+}
+function atras(){
+	Esadelante = false;
+	$("#Ingresa").css("visibility","visible");
+	nlec--;	
+	if (nlec < 1){
+	 nlec = 1
+	}
+	if (nlec > 0){
+	
+	//$("#Lecc").text(Lec[(nlec + 1)]);
+	var MLec =  " " + eval("Leccion"+ nlec);
+	MLec = MLec.toString().replace(/,/g , ", ")
+	$("#Mleccion").text(MLec);	
+      LeePractica();
+	}
+	
+}
+function ingresa()
+{
+	//console.log("ingresa");
+	
+	sayTimeout = setTimeout(function () {		
+		if (nlec == 0)
+		{
+			Lee(Gres.MenuPractica);
+			return;
+	    }else{
+		  // if (NumLec == 0) {NumLec = 1}
+		   window.speechSynthesis.cancel();
+		 
+		   KEY = 'Practica';
+           VALUE = nlec.toString();   
+		   set();
+		   
+		   window.open("indexBPalabras.html","_self"); 
+	    }
+	}, 500); 
+	
+
+}
+</script>
+
+<script>
+	var primerEnter = true;
+	$(document).ready(function() {
+ 		DeterminaMotor(document.title + ". "  +  Gres.ListaPizarra);
+ 
+	});
+	var nlec =0;
+	var xPosVie =0;
+	var yPosVie;
+	var xPosNew;
+	var yPosNew;
+	var DifX=0;
+	var DifY=0;
+
+document.onkeyup=function(e) {
+
+event.preventDefault();
+
+e = e || window.event;
+
+if (e.keyCode == 27)
+{
+	window.open("../index.html","_self");
+	return;
+}
+if (e.keyCode == 112) {
+      movil = 0;
+	  Ayuda();
+  }
+
+
+if (event.keyCode == 32)
+	{
+		var DiceN = $("#Mleccion").text().trim();
+		DiceN = DiceN.split(' ');
+		if (cuentaErrores > 0  ){
+		   DiceN =valBase;
+    }
+     DiceN = DiceN.toString().replace(/,,/g , ", ");
+	 DiceN = DiceN +". ";
+
+		LeeCGB(DiceN.toString());
+	}
+
+
+if (e.keyCode == 37) {atras()}
+if (e.keyCode == 38) {atras()}
+if (e.keyCode == 39) {adelante()}
+if (e.keyCode == 40) {adelante()}
+
+if (e.keyCode == 13) {
+	if (nlec== 0){
+		return
+	}
+	else{ingresa();}
+	
+}
+
+return;
+}
+function Ayuda()
+    {
+      LeeCGB(document.title + ". " + Gres.ListaPizarra);
+    }
+	function Regresar()
+      {
+        window.open("../index.html","_self");
+	  }
+	  
+	  function LeePractica()
+	  {
+		cuentaErrores = 0;
+		
+		$("#Lecc").text("PRÁCTICA " +  nlec + " de 10 " );
+		
+	//if (nlec == 1){
+		KEY = UsuarioActual + 'PalabrasIntegral';
+        get().then(function (value) {
+			try{				
+				var Nnlec = nlec;				
+
+	  valBase = eval("value.Leccion" + (Nnlec) );
+	  //console.log(valBase + "  " + Nnlec);
+	  if  (valBase == "SR")
+	    {Lee($("#Lecc").text().trim() + ": " + Gres.sinrealizar + ", " + Gres.barraEscuchala);}
+	 else{
+	  FcuentaErroresPP();
+	}
+	}
+	  catch(error){
+		  //console.log(error);
+		Lee($("#Lecc").text().trim() + ": " + Gres.sinrealizar + ", " + Gres.barraEscuchala);
+	  }
+	});
+	//}
+	
+
+ }
+
+ function FcuentaErroresPP()
+ {
+	////console.log(valBase + " error??");
+
+	var vecErrores = valBase;
+	vecErrores = vecErrores.replace(/,/g, "");
+	vecErrores = vecErrores.replace(/" "/g, "");
+
+	vecErrores = vecErrores.split(" ");
+	
+
+	//console.log(vecErrores.length + ">>>>>>>" +  valBase + " ?????   ");
+	
+	vectorE =  valBase.split(',');	
+	cuentaErrores = vecErrores.length -1;
+
+
+
+
+if (cuentaErrores >  1){
+  Lee($("#Lecc").text().trim() + ": " +  Gres.realizadacon + cuentaErrores + Gres.errores +  ". " + Gres.barraEscucharlos);
+}else if (cuentaErrores ==  1){
+  Lee($("#Lecc").text().trim() + ": con un " + Gres.error + ". " + Gres.barraEscuchalo);
+}else if (cuentaErrores ==  0){
+  Lee($("#Lecc").text().trim() +  ": " + Gres.PLrCorr);
+}
+
+
+ }
+
+
+  function hiliterPP(word) {	
+	word = word.trim();
+	repl = '<span>'  + word +  '</span>';	
+	$("#Mleccion").html($("#Mleccion").html().replace(word,repl));
+	
+}
+	
+	</script> 
+
+
+</body>
+
+</html>
