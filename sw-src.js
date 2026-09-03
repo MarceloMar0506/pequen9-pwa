@@ -10,6 +10,7 @@ self._isInstalling = false;
 self.addEventListener('install', function () {
     self._isInstalling = true;
     self._c = 0;
+    console.log('[SW DEBUG] install event, _t =', self._t);
 });
 
 if (!self._isPatched) {
@@ -20,6 +21,7 @@ if (!self._isPatched) {
             if (r && self._isInstalling) {
                 self._c++;
                 var p = Math.min(100, Math.round((self._c / self._t) * 100));
+                console.log('[SW DEBUG] fetch interceptado', self._c, '/', self._t, '->', p + '%');
                 self.clients.matchAll({ includeUncontrolled: true }).then(function (k) {
                     k.forEach(function (c) {
                         c.postMessage({ type: 'SW_PROGRESS', porcentaje: p, descargados: self._c, total: self._t });
