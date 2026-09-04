@@ -352,7 +352,7 @@ HablaAnim();
 
 function LeeCGB(texto)
 {
-// console.log(texto);  
+ console.log(texto);  
 ultimoD=ultimoDialogo;  
 ultimoDialogo = texto; 
 window.speechSynthesis.cancel();

@@ -83,7 +83,9 @@
     RepeticionP : "Con pulsador recorrer los signos que representan a las repeticiones. Para salir mantener pulsado por unos segundos. ",
 
     PracticaMusica :"con el teclado virtual escribir los signos de música dictados. Al concluir se escuchará la melodía. Para imprimir en impresora braille pulsar F6. ",
-
+    
+    PracticaPalabraIntegral :"con el teclado virtual escribir la palabra dictada. Al concluir se escuchará el reporte de tu desempeño. Para salir pulsa escape. ",
+    
     MenuSignos : "Pulsar las teclas de dirección para recorrer otros signos braille. Pequén indica qué signo es y los puntos que lo forman. Para salir pulsar escape.  ",
 
     MenuSignosP : "Con pulsador recorrer otros signos braille. Pequén indica cuál es la letra y los puntos que la forman. Para salir mantener pulsado por unos segundos. ",

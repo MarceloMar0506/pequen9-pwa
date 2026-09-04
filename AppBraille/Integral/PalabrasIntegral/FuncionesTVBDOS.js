@@ -265,11 +265,13 @@ $(document).keyup(function(e) {
       movil = 0;
       
     teclasAbajo--;
-      LeeCGB(Gres.PracticaAf);
+  LeeCGB(Gres.PracticaPalabraIntegral);
+
+ //     LeeCGB(Gres.PracticaAf);
       return;
   }
 else {
-    $(".AyudaV").css("display","none");
+  //  $(".AyudaV").css("display","none");
 }
 
 if (event.keyCode == 27)
