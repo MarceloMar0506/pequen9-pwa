@@ -274,11 +274,20 @@ img { width: 35vh; }
     // Descarga de recursos: la página PREGUNTA el estado real al Service Worker
     // (por MessageChannel). No depende de eventos que pueden no ocurrir nunca.
     // ============================================================
+    // Devuelve el worker que exista, SIN esperar a que esté activo.
+    // Durante la instalación (precaché de ~73 MB) el SW está en 'installing' y
+    // navigator.serviceWorker.ready no se resuelve hasta que termina.
+    async function obtenerWorker() {
+      const reg = await navigator.serviceWorker.getRegistration();
+      if (!reg) throw new Error('No hay Service Worker registrado');
+      const w = reg.installing || reg.waiting || reg.active;
+      if (!w) throw new Error('El Service Worker no tiene ningún worker');
+      if (w.state === 'redundant') throw new Error('La instalación del Service Worker falló (redundant)');
+      return w;
+    }
+
     async function pedirAlSW(tipo, alProgreso, esperaMax = 8000) {
-      const reg = await Promise.race([
-        navigator.serviceWorker.ready,
-        new Promise((_, no) => setTimeout(() => no(new Error('SW no listo')), 10000))
-      ]);
+      const w = await obtenerWorker();
       return new Promise((resolve, reject) => {
         const canal = new MessageChannel();
         let timer;
@@ -289,10 +298,10 @@ img { width: 35vh; }
         canal.port1.onmessage = (ev) => {
           if (ev.data.tipo === 'progreso') { armar(); if (alProgreso) alProgreso(ev.data); return; }
           clearTimeout(timer);
-          resolve(ev.data);
+          resolve(Object.assign({ estadoWorker: w.state }, ev.data));
         };
         armar();
-        reg.active.postMessage({ type: tipo }, [canal.port2]);
+        w.postMessage({ type: tipo }, [canal.port2]);
       });
     }
 
@@ -332,7 +341,17 @@ img { width: 35vh; }
           sinAvance = estado.listos > previo ? 0 : sinAvance + 1;
           previo = estado.listos;
 
-          // 8 s sin avanzar: el SW no está descargando, se descarga lo que falta
+          // Mientras el SW está instalando, Workbox descarga por su cuenta:
+          // solo se espera. Repararlo en paralelo duplicaría la descarga.
+          const instalando = estado.estadoWorker === 'installing' || estado.estadoWorker === 'activating';
+          if (instalando) {
+            if (sinAvance >= 45 && !estado.completo) {
+              throw new Error('La instalación del SW lleva 45 s sin avanzar');
+            }
+            continue;
+          }
+
+          // SW ya instalado y 8 s sin avanzar: se descarga lo que falta
           if (sinAvance >= 8 && !estado.completo) {
             const r = await pedirAlSW('REPARAR', p => anunciar(p.hechos, p.total), 15000);
             if (omitirDescarga) return;
