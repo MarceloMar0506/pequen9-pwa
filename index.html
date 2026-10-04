@@ -129,15 +129,20 @@ img { width: 35vh; }
         <p style="margin: 0 0 26px; font-size: 30px; color: #d0d5db; line-height: 1.6;">
           Instalá la app para acceder más rápido, sin conexión y desde tu pantalla de inicio.
         </p>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <button id="btnInstalarAhora" onclick="instalarApp(false)"
-            style="background:#27ae60;color:white;border:none;padding:16px 24px;border-radius:8px;cursor:pointer;font-size:32px;font-weight:600;width:100%;">
-            ⬇️ Instalar ahora
-          </button>
-          <button id="btnContinuarSinInstalar" onclick="cerrarInstallOverlay()"
-            style="background:transparent;color:#b8c0c9;border:none;padding:10px;cursor:pointer;font-size:32px;width:100%;">
-            Continuar sin instalar
-          </button>
+      <button 
+        id="btnInstalarAhora" 
+        onclick="instalarApp(false)" 
+        style="background:#27ae60; color:#ffffff; border:none; padding:16px 24px; border-radius:8px; cursor:pointer; font-size:32px; font-weight:600; width:100%;"
+        aria-label="Descargar e instalar ahora">
+        <span aria-hidden="true">⬇️</span> Instalar ahora
+      </button>
+       
+    <button 
+      id="btnContinuarSinInstalar" 
+      onclick="cerrarInstallOverlay()" 
+      style="background:transparent; color:#57606a; border:2px solid #57606a; padding:10px; border-radius:8px; cursor:pointer; font-size:32px; width:100%;">
+      Continuar sin instalar
+    </button>
         </div>
     </div>
   </div>
@@ -163,11 +168,15 @@ img { width: 35vh; }
     </p>
     
     <!-- Barra de Progreso Visual -->
-    <div style="width: 80%; max-width: 400px; background: #4a5568; height: 30px; border-radius: 15px; overflow: hidden; margin: 20px 0;">
+    <div id="progresoContenedor" role="progressbar" aria-label="Descarga de recursos" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 80%; max-width: 400px; background: #4a5568; height: 30px; border-radius: 15px; overflow: hidden; margin: 20px 0;">
       <div id="progresoBarra" style="width: 0%; height: 100%; background: #27ae60; transition: width 0.3s;"></div>
     </div>
 
     <span id="txtPorcentaje" style="font-size: 32px; font-weight: bold; color: #2ecc71;">0%</span>
+
+    <p id="txtSalida" style="font-size: 22px; color: #a0aec0; max-width: 500px; margin-top: 20px;">
+      Para continuar sin esperar, pulse Escape.
+    </p>
   </div>
 
   <script src="js/wakelock.js"></script>
@@ -177,7 +186,9 @@ img { width: 35vh; }
     let deferredPrompt = null;
     let usuarioAceptoInstalar = false;
     let descargandoRecursos = false;
-    let ultimoHablado = 0;
+    let omitirDescarga = false;   // el usuario eligió seguir sin esperar la descarga
+    let fallaDescarga = false;    // la descarga y la reparación automática fallaron
+    let ultimoTramo = 0;          // último múltiplo de 25 % anunciado por voz
 
     window.addEventListener("beforeinstallprompt", (e) => {
       console.log("[PWA] Evento beforeinstallprompt capturado");
@@ -185,10 +196,12 @@ img { width: 35vh; }
       deferredPrompt = e;
     });
 
+    // appinstalled solo indica que el navegador registró la app (ícono, ventana propia).
+    // NO significa que los recursos estén descargados: eso se verifica aparte con el SW.
     window.addEventListener("appinstalled", () => {
-      console.log("[PWA] App instalada con éxito");
-      cerrarInstallOverlay();
+      console.log("[PWA] App registrada (appinstalled). Los recursos se verifican aparte.");
       deferredPrompt = null;
+      if (!usuarioAceptoInstalar) cerrarInstallOverlay();
     });
 
     document.addEventListener('keydown', (e) => {
@@ -257,35 +270,173 @@ img { width: 35vh; }
       }
     }
 
-    // Escuchar mensajes provenientes del Service Worker (Progreso 0% -> 100%)
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        if (event.data && event.data.type === 'SW_PROGRESS') {
-          const pct = event.data.porcentaje;
-          const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
-          // Mostrar overlay solo durante la fase real de instalación inicial
-          if ((usuarioAceptoInstalar || isStandalone) && pct > 0 && pct < 100) {
-            mostrarOverlayDescarga();
-          }
-
-          const barra = document.getElementById('progresoBarra');
-          const txtPct = document.getElementById('txtPorcentaje');
-          if (barra) barra.style.width = pct + '%';
-          if (txtPct) txtPct.innerText = pct + '%';
-
-          if ((usuarioAceptoInstalar || isStandalone) && pct >= ultimoHablado + 25 && pct < 100) {
-            ultimoHablado = pct;
-            hablarSeguro("Descarga de recursos al " + pct + " por ciento.");
-          }
-        }
-
-        if (event.data && event.data.type === 'SW_COMPLETE') {
-          if (descargandoRecursos) {
-            ocultarOverlayDescarga();
-          }
-        }
+    // ============================================================
+    // Descarga de recursos: la página PREGUNTA el estado real al Service Worker
+    // (por MessageChannel). No depende de eventos que pueden no ocurrir nunca.
+    // ============================================================
+    async function pedirAlSW(tipo, alProgreso, esperaMax = 8000) {
+      const reg = await Promise.race([
+        navigator.serviceWorker.ready,
+        new Promise((_, no) => setTimeout(() => no(new Error('SW no listo')), 10000))
+      ]);
+      return new Promise((resolve, reject) => {
+        const canal = new MessageChannel();
+        let timer;
+        const armar = () => {
+          clearTimeout(timer);
+          timer = setTimeout(() => reject(new Error('El SW no responde')), esperaMax);
+        };
+        canal.port1.onmessage = (ev) => {
+          if (ev.data.tipo === 'progreso') { armar(); if (alProgreso) alProgreso(ev.data); return; }
+          clearTimeout(timer);
+          resolve(ev.data);
+        };
+        armar();
+        reg.active.postMessage({ type: tipo }, [canal.port2]);
       });
+    }
+
+    function actualizarBarra(pct) {
+      const barra = document.getElementById('progresoBarra');
+      const txtPct = document.getElementById('txtPorcentaje');
+      const cont = document.getElementById('progresoContenedor');
+      if (barra) barra.style.width = pct + '%';
+      if (txtPct) txtPct.innerText = pct + '%';
+      if (cont) cont.setAttribute('aria-valuenow', pct);
+    }
+
+    function anunciar(hechos, total) {
+      if (omitirDescarga) return;
+      const pct = total ? Math.floor(hechos * 100 / total) : 0;
+      actualizarBarra(pct);
+      const tramo = Math.floor(pct / 25) * 25;
+      if (tramo > ultimoTramo && tramo < 100) {
+        ultimoTramo = tramo;
+        hablarSeguro("Descargando, " + tramo + " por ciento.");
+      }
+    }
+
+    async function gestionarDescarga() {
+      try {
+        let estado = await pedirAlSW('GET_ESTADO');
+        let previo = estado.listos;
+        let sinAvance = 0;
+
+        while (!estado.completo) {
+          if (omitirDescarga) return;
+          anunciar(estado.listos, estado.total);
+          await new Promise(r => setTimeout(r, 1000));
+          if (omitirDescarga) return;
+
+          estado = await pedirAlSW('GET_ESTADO');
+          sinAvance = estado.listos > previo ? 0 : sinAvance + 1;
+          previo = estado.listos;
+
+          // 8 s sin avanzar: el SW no está descargando, se descarga lo que falta
+          if (sinAvance >= 8 && !estado.completo) {
+            const r = await pedirAlSW('REPARAR', p => anunciar(p.hechos, p.total), 15000);
+            if (omitirDescarga) return;
+            if (r.fallidos.length) throw new Error('Fallaron ' + r.fallidos.length + ' recursos');
+            estado = await pedirAlSW('GET_ESTADO');
+            sinAvance = 0;
+          }
+        }
+        descargaTerminada();
+      } catch (err) {
+        if (omitirDescarga) return;
+        console.error('[Descarga]', err);
+        await recuperarTotal();
+      }
+    }
+
+    function descargaTerminada() {
+      sessionStorage.removeItem('pq9-reintento');
+      if (omitirDescarga) return;
+      actualizarBarra(100);
+      ocultarOverlayDescarga();
+    }
+
+    // Último recurso: hace automáticamente lo que antes había que hacer a mano
+    // (borrar service worker y caché), una sola vez por sesión.
+    async function recuperarTotal() {
+      if (sessionStorage.getItem('pq9-reintento')) return mostrarFalloDescarga();
+      sessionStorage.setItem('pq9-reintento', '1');
+      hablarSeguro('La descarga se detuvo. Reparando e intentando de nuevo.');
+      try {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(r => r.unregister()));
+        const claves = await caches.keys();
+        await Promise.all(claves.filter(k => k.startsWith('workbox-')).map(k => caches.delete(k)));
+      } catch (e) {
+        console.error('[Descarga] Error limpiando:', e);
+      }
+      location.reload();
+    }
+
+    function mostrarFalloDescarga() {
+      fallaDescarga = true;
+      const msg = 'No se pudo completar la descarga. Pulse Enter para reintentar, o Escape para usar la aplicación con conexión a internet.';
+      const t = document.getElementById('txtDescarga');
+      if (t) t.innerText = msg;
+      const s = document.getElementById('txtSalida');
+      if (s) s.innerText = '';
+      hablarSeguro(msg);
+    }
+
+    function reintentarDescarga() {
+      fallaDescarga = false;
+      sessionStorage.removeItem('pq9-reintento');
+      ultimoTramo = 0;
+      actualizarBarra(0);
+      const t = document.getElementById('txtDescarga');
+      if (t) t.innerText = 'Descargando recursos para uso sin conexión a internet...';
+      const s = document.getElementById('txtSalida');
+      if (s) s.innerText = 'Para continuar sin esperar, pulse Escape.';
+      hablarSeguro('Reintentando la descarga. Para continuar sin esperar, pulse Escape.');
+      gestionarDescarga();
+    }
+
+    function salirSinDescarga() {
+      omitirDescarga = true;
+      fallaDescarga = false;
+      descargandoRecursos = false;
+
+      const overlay = document.getElementById('download-overlay');
+      if (overlay) overlay.style.display = 'none';
+      const contenedor = document.getElementById('contenedor');
+      if (contenedor) contenedor.removeAttribute('inert');
+
+      hablarSeguro('Continuando sin modo sin conexión.');
+      setTimeout(leerMensajeMenu, 2500);
+    }
+
+    function iniciarDescarga() {
+      ultimoTramo = 0;
+      omitirDescarga = false;
+      fallaDescarga = false;
+      actualizarBarra(0);
+      // Primero se marca la descarga en curso: así cerrarInstallOverlay no
+      // desbloquea el menú ni lo lee en voz alta.
+      mostrarOverlayDescarga();
+      cerrarInstallOverlay();
+      hablarSeguro('Iniciando descarga de recursos para uso sin conexión. Para continuar sin esperar, pulse Escape.');
+      gestionarDescarga();
+    }
+
+    // Al abrir la app ya instalada: si el precaché quedó incompleto, completarlo
+    async function verificarPrecacheAlArrancar() {
+      try {
+        const e = await pedirAlSW('GET_ESTADO');
+        if (!e.completo && !descargandoRecursos && !omitirDescarga) {
+          mostrarOverlayDescarga();
+          hablarSeguro('Faltan recursos para usar Pequén 9 sin conexión. Descargando. Para continuar sin esperar, pulse Escape.');
+          gestionarDescarga();
+          return true;
+        }
+      } catch (err) {
+        console.warn('[Arranque] No se pudo consultar el estado del SW:', err);
+      }
+      return false;
     }
 
     // Registro seguro de Service Worker
@@ -354,12 +505,16 @@ img { width: 35vh; }
       return false;
     }
 
+    function esStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches ||
+             window.navigator.standalone === true ||
+             document.referrer.includes('android-app://');
+    }
+
     async function esPWA() {
       console.log("[esPWA] Iniciando chequeo de PWA...");
 
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                           window.navigator.standalone === true ||
-                           document.referrer.includes('android-app://');
+      const isStandalone = esStandalone();
 
       if (isStandalone) {
         console.log("[esPWA] Caso 1: Corriendo en modo standalone (ya instalada)");
@@ -429,16 +584,18 @@ img { width: 35vh; }
 
       if (deferredPrompt) {
         deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
+        deferredPrompt.userChoice.then(({ outcome }) => {
           deferredPrompt = null;
-          cerrarInstallOverlay();
-          mostrarOverlayDescarga();
-          hablarSeguro("Iniciando descarga de recursos para uso sin conexión. Por favor espere.");
+          if (outcome !== 'accepted') {
+            // Canceló el diálogo del sistema: no se bloquea la app, sigue el menú de instalación
+            usuarioAceptoInstalar = false;
+            hablarSeguro('Instalación cancelada. Puede elegir Instalar de nuevo, o continuar sin instalar.');
+            return;
+          }
+          iniciarDescarga();
         });
       } else {
-        cerrarInstallOverlay();
-        mostrarOverlayDescarga();
-        hablarSeguro("Iniciando descarga de recursos para uso sin conexión. Por favor espere.");
+        iniciarDescarga();
       }
     }
 
@@ -537,10 +694,17 @@ img { width: 35vh; }
     document.onkeyup = function(e) {
       e = e || window.event;
 
-      // Si el modal de descarga está visible, bloquear teclas del menú y avisar por voz
+      // Pantalla de descarga: nunca es una trampa. Escape siempre permite salir;
+      // si falló, Enter reintenta.
       if (descargaOverlayVisible()) {
+        if (e.keyCode === 27) { salirSinDescarga(); return; }
+        if (e.keyCode === 13 && fallaDescarga) { reintentarDescarga(); return; }
         if (e.keyCode === 13 || (e.keyCode >= 37 && e.keyCode <= 40)) {
-          hablarSeguro("Descargando recursos de Pequén 9. Por favor espere a que finalice la instalación.");
+          if (fallaDescarga) {
+            hablarSeguro("No se pudo completar la descarga. Pulse Enter para reintentar, o Escape para usar la aplicación con conexión a internet.");
+          } else {
+            hablarSeguro("Descargando recursos de Pequén 9. Para continuar sin esperar, pulse Escape.");
+          }
         }
         return;
       }
@@ -590,10 +754,27 @@ img { width: 35vh; }
 
       console.log("[ready] Resultado mostrandoInstall:", mostrandoInstall);
 
+      let hayDescarga = false;
+
+      if (sessionStorage.getItem('pq9-reintento')) {
+        // Venimos de una reparación automática: continuar la descarga sin pedir nada al usuario
+        mostrarOverlayDescarga();
+        hablarSeguro('Reparación terminada. Descargando recursos de nuevo. Para continuar sin esperar, pulse Escape.');
+        gestionarDescarga();
+        hayDescarga = true;
+        mostrandoInstall = false;
+      } else if (esStandalone()) {
+        // App instalada: si el precaché quedó incompleto, se completa (con tope de espera)
+        hayDescarga = await Promise.race([
+          verificarPrecacheAlArrancar(),
+          new Promise(r => setTimeout(() => r(false), 2500))
+        ]);
+      }
+
       setTimeout(function() { 
         if (mostrandoInstall) {
           leerMensajeInstall();
-        } else if (!descargandoRecursos) {
+        } else if (!descargandoRecursos && !hayDescarga) {
           leerMensajeMenu();
         }
       }, 300); 
